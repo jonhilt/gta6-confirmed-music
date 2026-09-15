@@ -58,16 +58,8 @@
   min-width: 0;
 }
 
-.c-brand-mark {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  display: block;
-  border-radius: 10px;
-}
-
 .c-brand-wordmark {
-  height: 36px;
+  height: 44px;
   width: auto;
   display: block;
 }
@@ -161,12 +153,7 @@
   }
 
   .c-brand-wordmark {
-    height: 26px;
-  }
-
-  .c-brand-mark {
-    width: 30px;
-    height: 30px;
+    height: 36px;
   }
 
   .c-marquee {

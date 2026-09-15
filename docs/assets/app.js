@@ -161,24 +161,52 @@ async function main() {
     return;
   }
   const data = await res.json();
-  const state = { query: "", tier: "all" };
+  const params = new URLSearchParams(location.search);
+  const allowedTiers = ["all", "official_promo", "rockstar_named", "artist_reported"];
+  const tierParam = params.get("tier");
+  const state = {
+    query: params.get("q") || "",
+    tier: allowedTiers.includes(tierParam) ? tierParam : "all",
+  };
 
   $("#entry-pill").textContent =
     `${data.entries.length} entries / updated ${formatUpdated(data.updated)}`;
   fillSnapshot(data);
 
   const search = $("#search");
+  const focus = params.get("focus");
+  if (state.query) search.value = state.query;
+  if (focus === "song") {
+    search.placeholder = "Find that song";
+    search.focus();
+  } else if (focus === "artists") {
+    search.placeholder = "Search artist";
+    search.focus();
+  }
+
+  function syncUrl() {
+    const url = new URL(location.href);
+    if (state.query) url.searchParams.set("q", state.query);
+    else url.searchParams.delete("q");
+    if (state.tier !== "all") url.searchParams.set("tier", state.tier);
+    else url.searchParams.delete("tier");
+    history.replaceState(null, "", url);
+  }
+
   search.addEventListener("input", () => {
     state.query = search.value;
+    syncUrl();
     render(data, state);
   });
 
   document.querySelectorAll(".filter").forEach((btn) => {
+    btn.setAttribute("aria-pressed", String(btn.dataset.tier === state.tier));
     btn.addEventListener("click", () => {
       state.tier = btn.dataset.tier;
       document.querySelectorAll(".filter").forEach((b) => {
         b.setAttribute("aria-pressed", String(b === btn));
       });
+      syncUrl();
       render(data, state);
     });
   });

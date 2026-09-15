@@ -12,23 +12,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Lobster&family=Space+Grotesk:wght@500;600;700&display=swap"
     />
+    <link rel="stylesheet" href="assets/postcard.css" />
     <link rel="stylesheet" href="assets/style.css" />
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="wrap header-inner">
-        <a class="brand" href="./" aria-label="Leonida Needle Drop home">
-          <img class="brand-mark" src="assets/logo-mark.svg" width="40" height="40" alt="" />
-          <img class="brand-wordmark" src="assets/logo-wordmark.svg" height="36" alt="Leonida Needle Drop" />
+  <body class="tool">
+    <header class="c-header">
+      <div class="c-header-inner">
+        <a class="c-brand" href="./">
+          <span class="c-brand-script">Leonida</span>
+          <span class="c-brand-drop">DROP</span>
         </a>
-        <nav>
-          <a href="./">Tracker</a>
-          <a href="./methodology.html" aria-current="page">Methodology</a>
-          <a class="nav-ext" href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
+        <nav class="c-pills" aria-label="Primary">
+          <a href="./">The Drop</a>
+          <a href="./stations.html">Stations</a>
+          <a href="./tracks.html">Tracks</a>
         </nav>
+        <details class="c-sun">
+          <summary aria-label="More links">
+            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+              <circle cx="11" cy="11" r="4.2" fill="currentColor" />
+              <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+                <path d="M11 2.2 v2.1" />
+                <path d="M11 17.7 v2.1" />
+                <path d="M2.2 11 h2.1" />
+                <path d="M17.7 11 h2.1" />
+                <path d="M4.7 4.7 l1.5 1.5" />
+                <path d="M15.8 15.8 l1.5 1.5" />
+                <path d="M17.3 4.7 l-1.5 1.5" />
+                <path d="M6.2 15.8 l-1.5 1.5" />
+              </g>
+            </svg>
+          </summary>
+          <div class="c-sun-panel">
+            <a href="./tracks.html">Music index</a>
+            <a href="./methodology.html" aria-current="page">Methodology</a>
+            <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </details>
       </div>
     </header>
 
@@ -142,14 +165,14 @@
       </ol>
 
       <p class="back-link">
-        <a class="nav-ext" href="./">Back to tracker</a>
+        <a class="nav-ext" href="./tracks.html">Back to the music index</a>
       </p>
     </main>
 
     <footer>
       <div class="wrap footer-split">
         <span>Fan documentation · independent · corrections welcome</span>
-        <a class="nav-ext" href="./">Back to tracker</a>
+        <a class="nav-ext" href="./tracks.html">Back to the music index</a>
       </div>
     </footer>
   </body>

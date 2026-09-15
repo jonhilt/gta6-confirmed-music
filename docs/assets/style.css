@@ -1,15 +1,15 @@
 :root {
-  --asphalt: #0c0c12;
-  --panel: #14141b;
-  --panel-2: #1b1b24;
+  --asphalt: #121116;
+  --panel: #1b1920;
+  --panel-2: #22202a;
   --ink: #f4f3f0;
   --muted: #9a9690;
-  --line: #2a2a34;
+  --line: #2e2c36;
   --teal: #2deecd;
   --orange: #fb783c;
   --magenta: #fb2c93;
-  --yellow: #f3c63c;
-  --cream: #f3ead8;
+  --yellow: #f8e85c;
+  --cream: #f7efd9;
   --cream-ink: #1c1812;
   --max: 70rem;
   --radius: 12px;
@@ -56,7 +56,7 @@ a:hover {
   clip: rect(0 0 0 0);
 }
 
-header {
+.site-header {
   position: sticky;
   top: 0;
   z-index: 8;

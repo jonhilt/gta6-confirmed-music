@@ -135,10 +135,10 @@ function render(data, state) {
     if (state.tier !== "all" && state.tier !== tier) continue;
     const rows = filtered.filter((e) => e.tier === tier);
     if (!rows.length) continue;
-    const noun = rows.length === 1 ? "track" : "tracks";
+    const noun = rows.length === 1 ? "entry" : "entries";
     chunks.push(`
       <section class="section tier-${tier}" id="tier-${tier}">
-        <header class="section-head">
+        <div class="section-head">
           <div>
             <h2>
               <span class="tier-index">${TIER_INDEX[tier]}</span>
@@ -147,7 +147,7 @@ function render(data, state) {
             <p class="section-copy">${TIER_COPY[tier]}</p>
           </div>
           <p class="section-count">${rows.length} ${noun}</p>
-        </header>
+        </div>
         <div class="list">${rows.map(renderRow).join("")}</div>
       </section>
     `);

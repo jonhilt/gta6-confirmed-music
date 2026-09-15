@@ -36,7 +36,7 @@ function sourceList(sources) {
   return (sources || [])
     .map(
       (s) =>
-        `<a href="${escapeHtml(s.url)}" rel="noopener noreferrer">${escapeHtml(s.label)}</a>`
+        `<a class="source-link" href="${escapeHtml(s.url)}" rel="noopener noreferrer"><span aria-hidden="true">↗</span> ${escapeHtml(s.label)}</a>`
     )
     .join("");
 }
@@ -58,7 +58,8 @@ function formatUpdated(iso) {
     "Nov",
     "Dec",
   ];
-  return `${months[d.getMonth()]} ${d.getDate()}`;
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${months[d.getMonth()]} ’${yy}`;
 }
 
 function renderRow(entry) {
@@ -109,11 +110,7 @@ function fillSnapshot(data) {
     return;
   }
   list.innerHTML = waiting
-    .map((e) => {
-      const names = e.artists.map(escapeHtml).join(", ");
-      const track = e.track ? `“${escapeHtml(e.track)}”` : "Track not specified";
-      return `<li><strong>${names}</strong> · ${track}</li>`;
-    })
+    .map((e) => `<li>${e.artists.map(escapeHtml).join(", ")}</li>`)
     .join("");
 }
 
@@ -135,10 +132,10 @@ function render(data, state) {
     if (state.tier !== "all" && state.tier !== tier) continue;
     const rows = filtered.filter((e) => e.tier === tier);
     if (!rows.length) continue;
-    const noun = rows.length === 1 ? "track" : "tracks";
+    const noun = rows.length === 1 ? "entry" : "entries";
     chunks.push(`
       <section class="section tier-${tier}" id="tier-${tier}">
-        <header class="section-head">
+        <div class="section-head">
           <div>
             <h2>
               <span class="tier-index">${TIER_INDEX[tier]}</span>
@@ -147,7 +144,7 @@ function render(data, state) {
             <p class="section-copy">${TIER_COPY[tier]}</p>
           </div>
           <p class="section-count">${rows.length} ${noun}</p>
-        </header>
+        </div>
         <div class="list">${rows.map(renderRow).join("")}</div>
       </section>
     `);
@@ -167,7 +164,7 @@ async function main() {
   const state = { query: "", tier: "all" };
 
   $("#entry-pill").textContent =
-    `${data.entries.length} entries · updated ${formatUpdated(data.updated)}`;
+    `${data.entries.length} entries / updated ${formatUpdated(data.updated)}`;
   fillSnapshot(data);
 
   const search = $("#search");

@@ -659,11 +659,14 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Artist Instagram teaser tagging @rockstargames (Sep 2026); primary IG permalink still needed",
+      "appearance": "Artist Instagram post tagging Rockstar / GTA VI tease (15 Sep 2026)",
       "appearanceKey": "artist_claim",
-      "status": "needs_primary_source",
-      "note": "News outlets quote Scott's Instagram caption tagging @rockstargames. No stable Instagram permalink captured yet. Stay needs_primary_source until the artist IG (or X) URL is linked. Aggregators are discovery only.",
+      "note": "Primary: Travis Scott Instagram. Caption quotes in press include @rockstargames. Track not named.",
       "sources": [
+        {
+          "label": "Travis Scott on Instagram (primary)",
+          "url": "https://www.instagram.com/p/DdT73c5ubnj/"
+        },
         {
           "label": "@videotech (discovery only)",
           "url": "https://x.com/videotech/status/2099888101292216701"
@@ -690,10 +693,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Artist Instagram post with Leonida-plate sports car artwork (Sep 2026); primary IG permalink still needed",
+      "appearance": "Reporting describes artist Instagram with Leonida-plate car artwork (Sep 2026); primary IG permalink not found on @future",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "Reporting describes Future's own Instagram artwork. Primary Instagram permalink not captured yet. Aggregators are discovery only.",
+      "note": "Still needs a primary artist permalink. @future public grid did not show a 15 Sep GTA tease; @futurehendrixx is not the artist. Do not promote aggregator reposts to primary. Aggregators stay discovery only.",
       "sources": [
         {
           "label": "@videotech (discovery only)",
@@ -747,11 +750,14 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Artist Instagram post sharing the same Leonida-plate car artwork as Future (Sep 2026); primary IG permalink still needed",
+      "appearance": "Artist Instagram post with GTA VI–style car / plate artwork (15 Sep 2026)",
       "appearanceKey": "artist_claim",
-      "status": "needs_primary_source",
-      "note": "IGN and others say the artist posted on Instagram. Primary permalink not captured yet. Aggregators are discovery only.",
+      "note": "Primary: Metro Boomin Instagram (@metroboomin). Track not named. Aggregators discovery only.",
       "sources": [
+        {
+          "label": "Metro Boomin on Instagram (primary)",
+          "url": "https://www.instagram.com/p/DdUFwQ5jGDb/"
+        },
         {
           "label": "@Rap / RapTV (discovery only)",
           "url": "https://x.com/Rap/status/2099899450269241403"
@@ -766,11 +772,14 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Artist Instagram post sharing the same Leonida-plate car artwork as Future (Sep 2026); primary IG permalink still needed",
+      "appearance": "Artist Instagram post (@yunglean2001) with GTA VI–style artwork (15 Sep 2026)",
       "appearanceKey": "artist_claim",
-      "status": "needs_primary_source",
-      "note": "IGN and others say the artist posted on Instagram. Primary permalink not captured yet. Aggregators are discovery only.",
+      "note": "Primary: Yung Lean Instagram. Track not named. Aggregators discovery only.",
       "sources": [
+        {
+          "label": "Yung Lean on Instagram (primary)",
+          "url": "https://www.instagram.com/p/DdUD_I0NbBB/"
+        },
         {
           "label": "@Rap / RapTV (discovery only)",
           "url": "https://x.com/Rap/status/2099899450269241403"
@@ -785,11 +794,14 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Artist social post teasing GTA VI collab (Sep 2026); primary permalink still needed",
+      "appearance": "Artist Instagram post with GTA VI–style pool-party artwork (15 Sep 2026)",
       "appearanceKey": "artist_claim",
-      "status": "needs_primary_source",
-      "note": "Listed in roundups as posting artwork. Primary artist post URL not captured yet. Aggregators are discovery only.",
+      "note": "Primary: Rauw Alejandro Instagram. Caption references pool party after the disco. Track not named.",
       "sources": [
+        {
+          "label": "Rauw Alejandro on Instagram (primary)",
+          "url": "https://www.instagram.com/p/DdUFuFeuzOI/"
+        },
         {
           "label": "@Rap / RapTV (discovery only)",
           "url": "https://x.com/Rap/status/2099899450269241403"

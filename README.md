@@ -6,7 +6,7 @@ Public, citeable list of artists and tracks tied to Grand Theft Auto VI marketin
 
 This is fan documentation. It is not affiliated with Rockstar Games or Take-Two Interactive.
 
-The home page is a short landing (Pen Concept C). Confirmed rows live on the **music index** at `docs/tracks.html`.
+The home page (`docs/index.html`) is the catalog: search, tier filters, and source links. Methodology is at `docs/methodology.html`.
 
 ## What belongs on the list
 

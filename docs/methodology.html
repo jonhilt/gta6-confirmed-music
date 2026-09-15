@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Methodology. Leonida Drop</title>
+    <title>Methodology. Leonida Needle Drop</title>
     <meta
       name="description"
-      content="How Leonida Drop labels rows by how close they get to a first-party, citeable source."
+      content="How Leonida Needle Drop labels rows by how close they get to a first-party, citeable source."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Lobster&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap"
     />
     <link rel="stylesheet" href="assets/postcard.css" />
     <link rel="stylesheet" href="assets/style.css" />
@@ -21,70 +21,45 @@
   <body class="postcard">
     <header class="c-header">
       <div class="c-header-inner">
-        <a class="c-brand" href="./">
-          <span class="c-brand-script">Leonida</span>
-          <span class="c-brand-drop">DROP</span>
+        <a class="c-brand" href="./" aria-label="Leonida Needle Drop home">
+          <img class="c-brand-mark" src="assets/logo-mark.svg" width="40" height="40" alt="" />
+          <img class="c-brand-wordmark" src="assets/logo-wordmark.svg" height="36" alt="Leonida Needle Drop" />
         </a>
         <nav class="c-pills" aria-label="Primary">
-          <a href="./">The Drop</a>
-          <a href="./stations.html">Stations</a>
-          <a href="./tracks.html">Tracks</a>
+          <a href="./">List</a>
+          <a href="./methodology.html" aria-current="page">Methodology</a>
+          <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
         </nav>
-        <details class="c-sun">
-          <summary aria-label="More links">
-            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-              <circle cx="11" cy="11" r="4.2" fill="currentColor" />
-              <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-                <path d="M11 2.2 v2.1" />
-                <path d="M11 17.7 v2.1" />
-                <path d="M2.2 11 h2.1" />
-                <path d="M17.7 11 h2.1" />
-                <path d="M4.7 4.7 l1.5 1.5" />
-                <path d="M15.8 15.8 l1.5 1.5" />
-                <path d="M17.3 4.7 l-1.5 1.5" />
-                <path d="M6.2 15.8 l-1.5 1.5" />
-              </g>
-            </svg>
-          </summary>
-          <div class="c-sun-panel">
-            <a href="./tracks.html">Music index</a>
-            <a href="./methodology.html" aria-current="page">Methodology</a>
-            <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
-          </div>
-        </details>
       </div>
     </header>
 
-    <div class="c-marquee">
-      Fan documentation · not affiliated with Rockstar Games or Take-Two · links out only
-    </div>
+    <p class="c-marquee">
+      Fan list. Not affiliated with Rockstar Games or Take-Two.
+    </p>
 
     <section class="hero hero-method">
       <div class="wrap hero-inner">
-        <p class="kicker kicker-orange">How the tracker decides what counts</p>
         <div class="hero-split">
-          <h1>Show us<br />the receipts.</h1>
+          <h1>Methodology</h1>
           <div class="hero-copy">
             <p class="lede">
-              This is documentation, not prediction. Every row is labelled by how close it gets
-              to a first-party, citeable source.
+              This is a list with sources, not a soundtrack leak. Every row is labelled by how
+              close it gets to a first-party, citeable source.
             </p>
-            <p class="speech-pill">Plain speech / zero rumour mills</p>
           </div>
         </div>
       </div>
-    
     </section>
 
     <div class="wrap">
       <article class="policy-card">
-        <p class="eyebrow">Artist-reported rule</p>
-        <h2>Cite the artist first.</h2>
+        <p class="eyebrow">Artist-reported rows</p>
+        <h2>Link the artist’s own post first</h2>
         <p>
-          For artist-reported rows, always try to link the artist&rsquo;s own post
-          (Instagram, X, official site, or interview on their channel). Aggregators and
-          news roundups are discovery only until that primary permalink is attached.
-          Rows without it stay marked as needing a primary source.
+          For artist-reported rows, try to link the artist’s own post (Instagram, X, official
+          site, or an interview on their channel). Aggregators and news roundups are discovery
+          only until that primary permalink is attached. Rows without it stay marked as needing
+          a primary source.
         </p>
       </article>
     </div>
@@ -92,7 +67,7 @@
     <main class="wrap method-page">
       <div class="section-head method-head">
         <h2 class="display-h">The three tiers</h2>
-        <p class="scale-line">Strongest evidence ↔ weakest evidence</p>
+        <p class="scale-line">Strongest evidence to weakest</p>
       </div>
 
       <div class="tier-grid">
@@ -127,7 +102,7 @@
             <p class="badge badge-artist_reported">Artist-reported</p>
           </div>
           <p>
-            An artist or representative says they are involved, and we can tie that claim.
+            An artist or representative says they are involved, and we can cite that claim.
           </p>
           <p class="muted">
             Link a primary post or interview they gave. Aggregators stay as discovery until that
@@ -138,10 +113,10 @@
 
       <div class="method-split">
         <section class="receipts-card refuse-card">
-          <p class="card-kicker">The hard no list</p>
-          <h2>What we refuse</h2>
+          <p class="card-kicker">Off the list</p>
+          <h2>What does not go in</h2>
           <ul class="refuse-list">
-            <li>Rumours dressed up as reporting</li>
+            <li>Rumours presented as reporting</li>
             <li>Aggregators used as proof</li>
             <li>Anonymous “insider” screenshots</li>
             <li>A soundtrack credit without a link</li>
@@ -149,8 +124,8 @@
         </section>
 
         <section class="policy-card">
-          <p class="card-kicker">Editorial rules</p>
-          <h2>Link out. Don't lift.</h2>
+          <p class="card-kicker">Hosting</p>
+          <h2>Link out. Do not host files.</h2>
           <p>
             Cite official media and interviews. Link out. Do not host Rockstar media, lyrics, or
             copied bios.
@@ -167,14 +142,14 @@
       </ol>
 
       <p class="back-link">
-        <a class="nav-ext" href="./tracks.html">Back to the music index</a>
+        <a href="./">Back to the list</a>
       </p>
     </main>
 
     <footer class="c-foot">
       <div class="c-foot-row">
-        <span>Fan documentation · independent · corrections welcome</span>
-        <a href="./tracks.html">Back to the music index</a>
+        <span>Fan documentation. Corrections welcome.</span>
+        <a href="./">Back to the list</a>
       </div>
     </footer>
   </body>

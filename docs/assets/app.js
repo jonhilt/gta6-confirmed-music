@@ -153,65 +153,67 @@ function render(data, state) {
   root.innerHTML = chunks.join("");
 }
 
-async function main() {
+function showLoadError(message) {
   const catalog = $("#catalog");
-  const res = await fetch("data/entries.json");
-  if (!res.ok) {
-    catalog.innerHTML = `<p class="empty">Could not load the dataset (${res.status}).</p>`;
-    return;
-  }
-  const data = await res.json();
-  const params = new URLSearchParams(location.search);
-  const allowedTiers = ["all", "official_promo", "rockstar_named", "artist_reported"];
-  const tierParam = params.get("tier");
-  const state = {
-    query: params.get("q") || "",
-    tier: allowedTiers.includes(tierParam) ? tierParam : "all",
-  };
+  if (catalog) catalog.innerHTML = `<p class="empty">${escapeHtml(message)}</p>`;
+  const pill = $("#entry-pill");
+  if (pill) pill.textContent = "Could not load entries";
+}
 
-  $("#entry-pill").textContent =
-    `${data.entries.length} entries / updated ${formatUpdated(data.updated)}`;
-  fillSnapshot(data);
+async function main() {
+  try {
+    const res = await fetch("data/entries.json");
+    if (!res.ok) {
+      showLoadError(`Could not load the dataset (${res.status}).`);
+      return;
+    }
+    const data = await res.json();
+    const params = new URLSearchParams(location.search);
+    const allowedTiers = ["all", "official_promo", "rockstar_named", "artist_reported"];
+    const tierParam = params.get("tier");
+    const state = {
+      query: params.get("q") || "",
+      tier: allowedTiers.includes(tierParam) ? tierParam : "all",
+    };
 
-  const search = $("#search");
-  const focus = params.get("focus");
-  if (state.query) search.value = state.query;
-  if (focus === "song") {
-    search.placeholder = "Find that song";
-    search.focus();
-  } else if (focus === "artists") {
-    search.placeholder = "Search artist";
-    search.focus();
-  }
+    $("#entry-pill").textContent =
+      `${data.entries.length} entries / updated ${formatUpdated(data.updated)}`;
+    fillSnapshot(data);
 
-  function syncUrl() {
-    const url = new URL(location.href);
-    if (state.query) url.searchParams.set("q", state.query);
-    else url.searchParams.delete("q");
-    if (state.tier !== "all") url.searchParams.set("tier", state.tier);
-    else url.searchParams.delete("tier");
-    history.replaceState(null, "", url);
-  }
+    const search = $("#search");
+    if (state.query) search.value = state.query;
 
-  search.addEventListener("input", () => {
-    state.query = search.value;
-    syncUrl();
-    render(data, state);
-  });
+    function syncUrl() {
+      const url = new URL(location.href);
+      if (state.query) url.searchParams.set("q", state.query);
+      else url.searchParams.delete("q");
+      if (state.tier !== "all") url.searchParams.set("tier", state.tier);
+      else url.searchParams.delete("tier");
+      history.replaceState(null, "", url);
+    }
 
-  document.querySelectorAll(".filter").forEach((btn) => {
-    btn.setAttribute("aria-pressed", String(btn.dataset.tier === state.tier));
-    btn.addEventListener("click", () => {
-      state.tier = btn.dataset.tier;
-      document.querySelectorAll(".filter").forEach((b) => {
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
+    search.addEventListener("input", () => {
+      state.query = search.value;
       syncUrl();
       render(data, state);
     });
-  });
 
-  render(data, state);
+    document.querySelectorAll(".filter").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(btn.dataset.tier === state.tier));
+      btn.addEventListener("click", () => {
+        state.tier = btn.dataset.tier;
+        document.querySelectorAll(".filter").forEach((b) => {
+          b.setAttribute("aria-pressed", String(b === btn));
+        });
+        syncUrl();
+        render(data, state);
+      });
+    });
+
+    render(data, state);
+  } catch {
+    showLoadError("Could not load the dataset.");
+  }
 }
 
 main();

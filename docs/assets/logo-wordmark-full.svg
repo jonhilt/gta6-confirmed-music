@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="Leonida Needle Drop">
+  <rect width="640" height="160" fill="#0B0B0F"/>
+  <!-- mini mark -->
+  <g transform="translate(24,36)">
+    <circle cx="36" cy="44" r="28" fill="#1A1A22" stroke="#FF2D95" stroke-width="2.5"/>
+    <circle cx="36" cy="44" r="5" fill="#FF2D95"/>
+    <path d="M68 12 L68 30 L42 42" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <circle cx="68" cy="12" r="4" fill="#F5A623"/>
+  </g>
+  <text x="120" y="78" font-family="Arial Black, Helvetica Neue, Arial, sans-serif" font-size="42" font-style="italic" font-weight="900" fill="#FF2D95" letter-spacing="1">LEONIDA</text>
+  <text x="124" y="118" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" fill="#2DE2C5" letter-spacing="6">NEEDLE DROP</text>
+</svg>

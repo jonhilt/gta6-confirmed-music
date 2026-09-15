@@ -167,7 +167,7 @@ async function main() {
   const state = { query: "", tier: "all" };
 
   $("#entry-pill").textContent =
-    `${data.entries.length} entries · updated ${formatUpdated(data.updated)}`;
+    `${data.entries.length} entries / updated ${formatUpdated(data.updated)}`;
   fillSnapshot(data);
 
   const search = $("#search");

@@ -36,7 +36,7 @@ function sourceList(sources) {
   return (sources || [])
     .map(
       (s) =>
-        `<a href="${escapeHtml(s.url)}" rel="noopener noreferrer">${escapeHtml(s.label)}</a>`
+        `<a class="source-link" href="${escapeHtml(s.url)}" rel="noopener noreferrer"><span aria-hidden="true">↗</span> ${escapeHtml(s.label)}</a>`
     )
     .join("");
 }
@@ -58,7 +58,8 @@ function formatUpdated(iso) {
     "Nov",
     "Dec",
   ];
-  return `${months[d.getMonth()]} ${d.getDate()}`;
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${months[d.getMonth()]} ’${yy}`;
 }
 
 function renderRow(entry) {
@@ -109,11 +110,7 @@ function fillSnapshot(data) {
     return;
   }
   list.innerHTML = waiting
-    .map((e) => {
-      const names = e.artists.map(escapeHtml).join(", ");
-      const track = e.track ? `“${escapeHtml(e.track)}”` : "Track not specified";
-      return `<li><strong>${names}</strong> · ${track}</li>`;
-    })
+    .map((e) => `<li>${e.artists.map(escapeHtml).join(", ")}</li>`)
     .join("");
 }
 

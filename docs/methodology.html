@@ -3,117 +3,132 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Methodology — Leonida Needle Drop</title>
+    <title>Methodology. Leonida Needle Drop</title>
+    <meta
+      name="description"
+      content="How Leonida Needle Drop labels rows by how close they get to a first-party, citeable source."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap"
+    />
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
     <header>
       <div class="wrap header-inner">
-                <a class="brand" href="./" aria-label="Leonida Needle Drop home">
+        <a class="brand" href="./" aria-label="Leonida Needle Drop home">
           <img class="brand-mark" src="assets/logo-mark.svg" width="40" height="40" alt="" />
           <img class="brand-wordmark" src="assets/logo-wordmark.svg" height="36" alt="Leonida Needle Drop" />
         </a>
         <nav>
           <a href="./">Tracker</a>
           <a href="./methodology.html" aria-current="page">Methodology</a>
-          <a href="https://github.com/jonhilt/gta6-confirmed-music">GitHub</a>
+          <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
         </nav>
       </div>
     </header>
 
-    <main class="wrap prose">
-      <h1>How confirmation works</h1>
-      <p>
-        This tracker only lists involvements we can point at. “Confirmed” here means
-        <em>citeable</em>, not “will ship on a radio station at launch.” Promo audio is not a full
-        soundtrack announcement.
+    <p class="fan-banner">
+      Fan documentation · not affiliated with Rockstar Games or Take-Two · links out only
+    </p>
+
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="kicker">How the tracker decides what counts</p>
+        <div class="hero-split">
+          <h1>Show us the receipts.</h1>
+          <div class="hero-copy">
+            <p class="lede">
+              This is documentation, not prediction. Every row is labelled by how close it gets
+              to a first-party, citeable source.
+            </p>
+            <p class="count-pill">Plain speech / zero rumour mills</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="wrap method-page">
+      <div class="section-head">
+        <h2 class="display-h">The three tiers</h2>
+        <p class="scale-line">Strongest evidence ↔ weakest evidence</p>
+      </div>
+
+      <div class="tier-grid">
+        <article class="tier-card">
+          <p class="tier-num cyan">01</p>
+          <p class="badge badge-official_promo">Official promo</p>
+          <p>
+            You can hear the track in a trailer or extended look posted by the publisher.
+          </p>
+          <p class="muted">
+            Prefer the official video. Polygon, Music Ally, GTA Wiki, and NME help name the
+            song. Fan compilations and unnamed Discord lists are not enough on their own.
+          </p>
+        </article>
+        <article class="tier-card">
+          <p class="tier-num orange">02</p>
+          <p class="badge badge-rockstar_named">Rockstar-named</p>
+          <p>
+            A Rockstar staff member names an artist in an interview, but not necessarily a song.
+          </p>
+          <p class="muted">
+            Stronger than a rumour. Weaker than hearing the record in a trailer.
+          </p>
+        </article>
+        <article class="tier-card">
+          <p class="tier-num magenta">03</p>
+          <p class="badge badge-artist_reported">Artist-reported</p>
+          <p>
+            An artist or representative says they are involved, and we can tie that claim.
+          </p>
+          <p class="muted">
+            Link a primary post or interview they gave. Aggregators stay as discovery until that
+            URL exists. This is not Rockstar-verified.
+          </p>
+        </article>
+      </div>
+
+      <div class="method-split">
+        <section class="receipts-card refuse-card">
+          <p class="card-kicker">The hard no list</p>
+          <h2>What we refuse</h2>
+          <ul class="refuse-list">
+            <li>Rumours.</li>
+            <li>Aggregators as proof.</li>
+            <li>Anonymous screenshots.</li>
+            <li>Credits with no link.</li>
+          </ul>
+        </section>
+
+        <section class="policy-card">
+          <p class="card-kicker">Editorial rules</p>
+          <h2>Link out, don't lift.</h2>
+          <p>
+            Cite official media and interviews. Link out. Do not host Rockstar media, lyrics, or
+            copied bios.
+          </p>
+        </section>
+      </div>
+
+      <p class="process-line">
+        Claim → find primary link → check context → label tier → publish with sources
       </p>
 
-      <h2>1. Official promo</h2>
-      <p>
-        A track or artist is heard in a Rockstar-published Trailer 1, Trailer 2, or Extended Look
-        (Rockstar YouTube, Netflix premiere, or other official Rockstar channel).
+      <p class="back-link">
+        <a href="./">Back to tracker</a>
       </p>
-      <p>
-        We prefer the Rockstar video as the first source. Identification of <em>which</em> song it
-        is comes from that video plus reputable secondaries: Polygon’s Extended Look list, Music
-        Ally, GTA Wiki’s trailer notes, and NME for Trailer 2. We do not treat fan compilations or
-        unnamed Discord IDs as enough on their own.
-      </p>
-      <p>
-        Current promo set: Trailer 1 (1 track), Trailer 2 (5 tracks), Extended Look (14 IDs from
-        Polygon, matching IGN). A few titles (Captain &amp; Tennille; the exact “Se Me Nota”
-        billing) are kept as the outlets printed them, with a note.
-      </p>
-
-      <h2>2. Rockstar-named</h2>
-      <p>
-        Rockstar staff named the artist in an interview. There may be no specific track. That is
-        still a stronger statement than a fan rumor, and weaker than hearing the record in a
-        trailer.
-      </p>
-      <p>
-        Source of record: Rupert Humphries, SVP of narrative, in
-        <a href="https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
-          >Dazed</a
-        >
-        (also quoted by Music Ally). Kodak Black and Sexyy Red are named that way
-        <em>and</em> appear as promo audio in separate rows. Real Dimez are an in-universe duo,
-        not a real-world act.
-      </p>
-
-      <h2>3. Artist-reported</h2>
-      <p>
-        The artist, or a verified channel they control, claims involvement. The row must link a
-        <strong>primary</strong> source: their own post, a label post they control, or an interview
-        they gave. Until that URL exists, the row sits under “Awaiting primary source.”
-      </p>
-      <p>
-        Aggregators (including @videotech) are discovery only. News stories that paraphrase an
-        Instagram screenshot are still secondary. They can stay as breadcrumbs; they do not
-        graduate the row.
-      </p>
-      <p>
-        Artist-reported is <strong>not</strong> Rockstar-verified. The UI says so.
-      </p>
-
-      <h2>What is kept off the main list</h2>
-      <ul>
-        <li>Anonymous leaks and “trust me” Discord lists</li>
-        <li>Unnamed radio-station rumors</li>
-        <li>Tracks heard only in unofficial recuts</li>
-        <li>Joan Jett / other disputed Trailer 2 IDs that GTA Wiki does not carry as the five-song set</li>
-      </ul>
-      <p>No Claims/Rumors section yet. If one is added later, it will be a separate page.</p>
-
-      <h2>Copyright limits</h2>
-      <ul>
-        <li>No lyrics</li>
-        <li>No pasted copyrighted bios</li>
-        <li>At most one or two factual sentences per artist, with a citeable URL</li>
-        <li>Track titles and artist names are listed</li>
-      </ul>
-
-      <h2>Official videos we treat as promo</h2>
-      <ul>
-        <li>
-          <a href="https://www.youtube.com/watch?v=QdBZY2fkU-0">Trailer 1</a> (4 Dec 2023)
-        </li>
-        <li>
-          <a href="https://www.youtube.com/watch?v=VQRLujxTm3c">Trailer 2</a> (6 May 2025)
-        </li>
-        <li>
-          <a href="https://www.youtube.com/watch?v=tJbzMqJGH4k">Extended Look</a> (27 Aug 2026)
-        </li>
-      </ul>
     </main>
 
     <footer>
-      <div class="wrap">
-        Fan documentation, not affiliated with Rockstar Games or Take-Two Interactive.
+      <div class="wrap footer-split">
+        <span>Fan documentation · independent · corrections welcome</span>
+        <a href="./">Back to tracker</a>
       </div>
     </footer>
   </body>
 </html>
-

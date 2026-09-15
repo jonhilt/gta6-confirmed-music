@@ -3,10 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Leonida Needle Drop — GTA VI confirmed music tracker</title>
+    <title>Leonida Needle Drop. Confirmed music tracker</title>
     <meta
       name="description"
-      content="Citeable list of artists and tracks heard in Rockstar GTA VI marketing, plus Rockstar-named and artist-reported involvement."
+      content="A source-first log of tracks heard in official GTA VI promo, artists named in interviews, and claims that still need a primary link."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,800;1,900&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap"
     />
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -14,42 +20,54 @@
   <body>
     <header>
       <div class="wrap header-inner">
-                <a class="brand" href="./" aria-label="Leonida Needle Drop home">
+        <a class="brand" href="./" aria-label="Leonida Needle Drop home">
           <img class="brand-mark" src="assets/logo-mark.svg" width="40" height="40" alt="" />
           <img class="brand-wordmark" src="assets/logo-wordmark.svg" height="36" alt="Leonida Needle Drop" />
         </a>
         <nav>
           <a href="./" aria-current="page">Tracker</a>
           <a href="./methodology.html">Methodology</a>
-          <a href="https://github.com/jonhilt/gta6-confirmed-music">GitHub</a>
+          <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
         </nav>
       </div>
     </header>
 
-    <main class="wrap">
-      <section class="hero">
-        <h1>What we can actually cite.</h1>
-        <p class="lede">
-          A public log of music tied to Grand Theft Auto VI marketing and, where a source exists,
-          soundtrack talk. Rows are tracks heard in official promo, artists named by Rockstar staff,
-          or claims from artists that still need a primary link.
-        </p>
-        <p class="disclaimer">
-          Fan documentation. Not affiliated with Rockstar Games, Take-Two Interactive, or any
-          listed artist. Grand Theft Auto and related names belong to their owners. This site does
-          not reproduce lyrics or copied bios.
-        </p>
-      </section>
+    <p class="fan-banner">
+      Fan documentation · not affiliated with Rockstar Games or Take-Two · links out only
+    </p>
 
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="kicker">Confirmed music tracker / public log</p>
+        <div class="hero-split">
+          <h1>What we can actually cite.</h1>
+          <div class="hero-copy">
+            <p class="lede">
+              A source-first log of tracks heard in official promo, artists named in interviews,
+              and claims that still need a primary link.
+            </p>
+            <p class="count-pill" id="entry-pill">Loading entries</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="wrap">
       <div class="controls">
-        <label class="visually-hidden" for="search">Search artists and tracks</label>
-        <input
-          id="search"
-          class="search"
-          type="search"
-          placeholder="Search artist or track"
-          autocomplete="off"
-        />
+        <label class="visually-hidden" for="search">Search artist or track</label>
+        <div class="search-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M10.4 10.4 L13.5 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+          <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="Search artist or track"
+            autocomplete="off"
+          />
+        </div>
         <div class="filters" role="group" aria-label="Confirmation tier">
           <button class="filter" type="button" data-tier="all" aria-pressed="true">All</button>
           <button class="filter" type="button" data-tier="official_promo" aria-pressed="false">
@@ -64,31 +82,59 @@
         </div>
       </div>
 
-      <div class="meta-row">
-        <span id="count">Loading…</span>
-        <span id="updated"></span>
-        <a href="data/entries.json">Raw JSON</a>
-      </div>
+      <div class="layout">
+        <div id="catalog"></div>
 
-      <div id="catalog"></div>
+        <aside class="sidebar" aria-label="Receipts and dataset">
+          <section class="receipts-card">
+            <p class="card-kicker">The receipts scale</p>
+            <h2>Three tiers. No vibes-based proof.</h2>
+            <ul class="scale-list">
+              <li>
+                <span class="dot dot-cyan" aria-hidden="true"></span>
+                Heard in official promo
+              </li>
+              <li>
+                <span class="dot dot-orange" aria-hidden="true"></span>
+                Named by Rockstar staff
+              </li>
+              <li>
+                <span class="dot dot-magenta" aria-hidden="true"></span>
+                Claimed by the artist
+              </li>
+            </ul>
+          </section>
+
+          <section class="snapshot-card">
+            <p class="card-kicker">Dataset snapshot</p>
+            <ul class="snapshot-list" id="snapshot">
+              <li>Official promo <strong id="count-official">0</strong></li>
+              <li>Rockstar-named <strong id="count-named">0</strong></li>
+              <li>Artist-reported <strong id="count-reported">0</strong></li>
+            </ul>
+          </section>
+
+          <section class="awaiting-card">
+            <p class="card-kicker">Awaiting primary source</p>
+            <ul class="awaiting-list" id="awaiting-list"></ul>
+            <p class="awaiting-note">
+              Listed for discovery. Not soundtrack credits until a primary link lands.
+            </p>
+          </section>
+
+          <p class="raw-json">
+            <a href="data/entries.json">View raw JSON</a>
+          </p>
+        </aside>
+      </div>
     </main>
 
     <footer>
       <div class="wrap">
-        Dataset is versioned in <code>docs/data/entries.json</code>. How to add a row is in the
-        README. Code is MIT; the list is a factual compilation with source links.
+        Dataset lives in <code>docs/data/entries.json</code>. How to add a row is in the README.
+        Code is MIT. The list is a factual compilation with source links.
       </div>
     </footer>
-    <style>
-      .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-      }
-    </style>
     <script src="assets/app.js"></script>
   </body>
 </html>
-

@@ -4,15 +4,20 @@ const TIER_LABEL = {
   artist_reported: "Artist-reported",
 };
 
+const TIER_INDEX = {
+  official_promo: "01",
+  rockstar_named: "02",
+  artist_reported: "03",
+};
+
 const TIER_ORDER = ["official_promo", "rockstar_named", "artist_reported"];
 
 const TIER_COPY = {
-  official_promo:
-    "Audio heard in a Rockstar-published Trailer 1, Trailer 2, or Extended Look. Track IDs come from that video plus reputable write-ups (Polygon, Music Ally, GTA Wiki, NME).",
+  official_promo: "Audio heard in a publisher-posted trailer or extended look.",
   rockstar_named:
-    "A Rockstar staffer named the artist (or in-universe act) in an interview. That is not the same as a confirmed radio track unless a promo also used a specific song.",
+    "A Rockstar staff member named the artist in an interview. Not always a specific song.",
   artist_reported:
-    "The artist or a verified channel is said to have claimed involvement. These rows are not Rockstar-verified. Aggregator posts are discovery only until a primary artist link exists.",
+    "The artist or a channel they control claims involvement. Not Rockstar-verified.",
 };
 
 function $(sel, root = document) {
@@ -36,45 +41,45 @@ function sourceList(sources) {
     .join("");
 }
 
-function artistBlurbs(entry, artists) {
-  const seen = new Set();
-  const bits = [];
-  for (const name of entry.artists) {
-    if (seen.has(name)) continue;
-    seen.add(name);
-    const rec = artists[name];
-    if (!rec) continue;
-    bits.push(
-      `<p class="blurb">${escapeHtml(rec.blurb)} <a href="${escapeHtml(rec.cite)}" rel="noopener noreferrer">cite</a></p>`
-    );
-  }
-  return bits.slice(0, 1).join("");
+function formatUpdated(iso) {
+  const d = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(d.getTime())) return iso;
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  return `${months[d.getMonth()]} ${d.getDate()}`;
 }
 
-function renderRow(entry, artists) {
+function renderRow(entry) {
   const track = entry.track
-    ? `<p class="track">“${escapeHtml(entry.track)}”${entry.year ? ` <span>(${entry.year})</span>` : ""}</p>`
-    : `<p class="track no-track">No specific track attached</p>`;
+    ? `<p class="track">“${escapeHtml(entry.track)}”</p>`
+    : `<p class="track no-track">Track not specified</p>`;
   const awaiting = entry.status === "needs_primary_source";
-  const badges = [
-    `<span class="badge badge-${entry.tier}">${TIER_LABEL[entry.tier]}</span>`,
-  ];
-  if (awaiting) {
-    badges.push(`<span class="badge badge-awaiting">Awaiting primary source</span>`);
-  }
+  const badges = [`<span class="badge badge-${entry.tier}">${TIER_LABEL[entry.tier]}</span>`];
   if (entry.inUniverse) {
-    badges.push(`<span class="badge badge-rockstar_named">In-universe</span>`);
+    badges.push(`<span class="badge badge-universe">In-universe</span>`);
   }
   return `
-    <article class="row" data-id="${escapeHtml(entry.id)}">
+    <article class="row${awaiting ? " row-awaiting" : ""}" data-id="${escapeHtml(entry.id)}">
       <div class="row-top">
-        <h3 class="artists">${entry.artists.map(escapeHtml).join(", ")}</h3>
-        <div>${badges.join(" ")}</div>
+        <p class="artists">${entry.artists.map(escapeHtml).join(", ")}</p>
+        <div class="badges">${badges.join("")}</div>
       </div>
       ${track}
       <p class="appearance">${escapeHtml(entry.appearance)}</p>
       ${entry.note ? `<p class="note">${escapeHtml(entry.note)}</p>` : ""}
-      ${artistBlurbs(entry, artists)}
+      ${awaiting ? `<p class="needs-flag">Needs primary source</p>` : ""}
       <div class="sources">${sourceList(entry.sources)}</div>
     </article>
   `;
@@ -88,6 +93,30 @@ function matchesQuery(entry, q) {
   return hay.includes(q);
 }
 
+function fillSnapshot(data) {
+  const counts = { official_promo: 0, rockstar_named: 0, artist_reported: 0 };
+  for (const e of data.entries) {
+    if (counts[e.tier] !== undefined) counts[e.tier] += 1;
+  }
+  $("#count-official").textContent = String(counts.official_promo);
+  $("#count-named").textContent = String(counts.rockstar_named);
+  $("#count-reported").textContent = String(counts.artist_reported);
+
+  const waiting = data.entries.filter((e) => e.status === "needs_primary_source");
+  const list = $("#awaiting-list");
+  if (!waiting.length) {
+    list.innerHTML = `<li>No waiting rows.</li>`;
+    return;
+  }
+  list.innerHTML = waiting
+    .map((e) => {
+      const names = e.artists.map(escapeHtml).join(", ");
+      const track = e.track ? `“${escapeHtml(e.track)}”` : "Track not specified";
+      return `<li><strong>${names}</strong> · ${track}</li>`;
+    })
+    .join("");
+}
+
 function render(data, state) {
   const root = $("#catalog");
   const q = state.query.trim().toLowerCase();
@@ -95,9 +124,6 @@ function render(data, state) {
     if (state.tier !== "all" && e.tier !== state.tier) return false;
     return matchesQuery(e, q);
   });
-
-  $("#count").textContent = `${filtered.length} shown / ${data.entries.length} in dataset`;
-  $("#updated").textContent = `Dataset ${data.updated}`;
 
   if (!filtered.length) {
     root.innerHTML = `<p class="empty">No rows match that search.</p>`;
@@ -109,38 +135,20 @@ function render(data, state) {
     if (state.tier !== "all" && state.tier !== tier) continue;
     const rows = filtered.filter((e) => e.tier === tier);
     if (!rows.length) continue;
-
-    if (tier === "artist_reported") {
-      const solid = rows.filter((e) => e.status !== "needs_primary_source");
-      const waiting = rows.filter((e) => e.status === "needs_primary_source");
-      chunks.push(`
-        <section class="section" id="tier-${tier}">
-          <h2>${TIER_LABEL[tier]}</h2>
-          <p class="section-copy">${TIER_COPY[tier]}</p>
-          ${
-            solid.length
-              ? `<div class="list">${solid.map((e) => renderRow(e, data.artists)).join("")}</div>`
-              : `<p class="empty">No artist-reported rows with a primary source yet.</p>`
-          }
-          ${
-            waiting.length
-              ? `<div class="subsection">
-                  <h3>Awaiting primary source</h3>
-                  <p class="section-copy">Discovery breadcrumbs only. Do not treat these as Rockstar-verified soundtrack credits.</p>
-                  <div class="list">${waiting.map((e) => renderRow(e, data.artists)).join("")}</div>
-                </div>`
-              : ""
-          }
-        </section>
-      `);
-      continue;
-    }
-
+    const noun = rows.length === 1 ? "track" : "tracks";
     chunks.push(`
-      <section class="section" id="tier-${tier}">
-        <h2>${TIER_LABEL[tier]}</h2>
-        <p class="section-copy">${TIER_COPY[tier]}</p>
-        <div class="list">${rows.map((e) => renderRow(e, data.artists)).join("")}</div>
+      <section class="section tier-${tier}" id="tier-${tier}">
+        <header class="section-head">
+          <div>
+            <h2>
+              <span class="tier-index">${TIER_INDEX[tier]}</span>
+              ${TIER_LABEL[tier]}
+            </h2>
+            <p class="section-copy">${TIER_COPY[tier]}</p>
+          </div>
+          <p class="section-count">${rows.length} ${noun}</p>
+        </header>
+        <div class="list">${rows.map(renderRow).join("")}</div>
       </section>
     `);
   }
@@ -149,13 +157,18 @@ function render(data, state) {
 }
 
 async function main() {
+  const catalog = $("#catalog");
   const res = await fetch("data/entries.json");
   if (!res.ok) {
-    $("#catalog").innerHTML = `<p class="empty">Could not load data/entries.json (${res.status}).</p>`;
+    catalog.innerHTML = `<p class="empty">Could not load the dataset (${res.status}).</p>`;
     return;
   }
   const data = await res.json();
   const state = { query: "", tier: "all" };
+
+  $("#entry-pill").textContent =
+    `${data.entries.length} entries · updated ${formatUpdated(data.updated)}`;
+  fillSnapshot(data);
 
   const search = $("#search");
   search.addEventListener("input", () => {

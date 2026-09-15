@@ -121,7 +121,10 @@ a:hover {
   color: var(--navy);
 }
 
-.hero-tracker h1,
+.hero-tracker h1 {
+  max-width: 11ch;
+}
+
 .hero-method h1 {
   max-width: 12ch;
 }

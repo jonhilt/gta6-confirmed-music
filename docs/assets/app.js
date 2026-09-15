@@ -174,15 +174,7 @@ async function main() {
   fillSnapshot(data);
 
   const search = $("#search");
-  const focus = params.get("focus");
   if (state.query) search.value = state.query;
-  if (focus === "song") {
-    search.placeholder = "Find that song";
-    search.focus();
-  } else if (focus === "artists") {
-    search.placeholder = "Search artist";
-    search.focus();
-  }
 
   function syncUrl() {
     const url = new URL(location.href);

@@ -659,10 +659,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Aggregator and news reports of an Instagram teaser tagging Rockstar (Sep 2026)",
+      "appearance": "Artist Instagram teaser tagging @rockstargames (Sep 2026); primary IG permalink still needed",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "Push Square quotes a caption tagging @rockstargames. That is still a secondary report. This row stays in “awaiting primary source” until a permalink to Scott’s own account is attached.",
+      "note": "News outlets quote Scott's Instagram caption tagging @rockstargames. No stable Instagram permalink captured yet. Stay needs_primary_source until the artist IG (or X) URL is linked. Aggregators are discovery only.",
       "sources": [
         {
           "label": "@videotech (discovery only)",
@@ -690,10 +690,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Aggregator and news reports of GTA VI–style artwork posted by the artist (Sep 2026)",
+      "appearance": "Artist Instagram post with Leonida-plate sports car artwork (Sep 2026); primary IG permalink still needed",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "IGN says Future posted a sports car with a Leonida plate. No primary artist URL is in this dataset.",
+      "note": "Reporting describes Future's own Instagram artwork. Primary Instagram permalink not captured yet. Aggregators are discovery only.",
       "sources": [
         {
           "label": "@videotech (discovery only)",
@@ -717,11 +717,14 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Aggregator and news reports of GTA VI–style artwork posted by the artist (Sep 2026)",
+      "appearance": "Artist posted GTA VI–style artwork on X (15 Sep 2026)",
       "appearanceKey": "artist_claim",
-      "status": "needs_primary_source",
-      "note": "IGN and Holler describe a pool/sun-lounger still. No primary artist URL is in this dataset.",
+      "note": "Artist's own X post with GTA VI–style pool artwork. Track not named. Aggregator links kept as discovery context only.",
       "sources": [
+        {
+          "label": "Morgan Wallen on X (primary)",
+          "url": "https://x.com/MorganWallen/status/2099880521727635464"
+        },
         {
           "label": "@videotech (discovery only)",
           "url": "https://x.com/videotech/status/2099888101292216701"
@@ -744,10 +747,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Listed in RapTV roundup of artists teasing GTA VI collabs (Sep 2026)",
+      "appearance": "Artist Instagram post sharing the same Leonida-plate car artwork as Future (Sep 2026); primary IG permalink still needed",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "RapTV is an aggregator. Discovery only until a primary post or interview from Metro Boomin (or Rockstar) is linked.",
+      "note": "IGN and others say the artist posted on Instagram. Primary permalink not captured yet. Aggregators are discovery only.",
       "sources": [
         {
           "label": "@Rap / RapTV (discovery only)",
@@ -763,10 +766,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Listed in RapTV roundup of artists teasing GTA VI collabs (Sep 2026)",
+      "appearance": "Artist Instagram post sharing the same Leonida-plate car artwork as Future (Sep 2026); primary IG permalink still needed",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "RapTV is an aggregator. Discovery only until a primary post or interview from Yung Lean (or Rockstar) is linked.",
+      "note": "IGN and others say the artist posted on Instagram. Primary permalink not captured yet. Aggregators are discovery only.",
       "sources": [
         {
           "label": "@Rap / RapTV (discovery only)",
@@ -782,10 +785,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Listed in RapTV roundup of artists teasing GTA VI collabs (Sep 2026)",
+      "appearance": "Artist social post teasing GTA VI collab (Sep 2026); primary permalink still needed",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "RapTV is an aggregator. Discovery only until a primary post or interview from Rauw Alejandro (or Rockstar) is linked.",
+      "note": "Listed in roundups as posting artwork. Primary artist post URL not captured yet. Aggregators are discovery only.",
       "sources": [
         {
           "label": "@Rap / RapTV (discovery only)",

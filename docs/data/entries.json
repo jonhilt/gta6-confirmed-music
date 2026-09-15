@@ -140,7 +140,9 @@
   "entries": [
     {
       "id": "t1-love-is-a-long-road",
-      "artists": ["Tom Petty"],
+      "artists": [
+        "Tom Petty"
+      ],
       "track": "Love Is a Long Road",
       "year": 1989,
       "tier": "official_promo",
@@ -159,7 +161,9 @@
     },
     {
       "id": "t2-thunder-island",
-      "artists": ["Jay Ferguson"],
+      "artists": [
+        "Jay Ferguson"
+      ],
       "track": "Thunder Island",
       "year": 1977,
       "tier": "official_promo",
@@ -178,7 +182,9 @@
     },
     {
       "id": "t2-child-support",
-      "artists": ["Zenglen"],
+      "artists": [
+        "Zenglen"
+      ],
       "track": "Child Support",
       "year": 2004,
       "tier": "official_promo",
@@ -198,7 +204,9 @@
     },
     {
       "id": "t2-everybody-have-fun-tonight",
-      "artists": ["Wang Chung"],
+      "artists": [
+        "Wang Chung"
+      ],
       "track": "Everybody Have Fun Tonight",
       "year": 1986,
       "tier": "official_promo",
@@ -217,7 +225,9 @@
     },
     {
       "id": "t2-talkin-to-myself-again",
-      "artists": ["Tammy Wynette"],
+      "artists": [
+        "Tammy Wynette"
+      ],
       "track": "Talkin' to Myself Again",
       "year": 1987,
       "tier": "official_promo",
@@ -236,7 +246,9 @@
     },
     {
       "id": "t2-hot-together",
-      "artists": ["The Pointer Sisters"],
+      "artists": [
+        "The Pointer Sisters"
+      ],
       "track": "Hot Together",
       "year": 1986,
       "tier": "official_promo",
@@ -255,7 +267,10 @@
     },
     {
       "id": "el-pop-bottles",
-      "artists": ["Birdman", "Lil Wayne"],
+      "artists": [
+        "Birdman",
+        "Lil Wayne"
+      ],
       "track": "Pop Bottles",
       "year": 2007,
       "tier": "official_promo",
@@ -278,7 +293,10 @@
     },
     {
       "id": "el-pound-town",
-      "artists": ["Sexyy Red", "Tay Keith"],
+      "artists": [
+        "Sexyy Red",
+        "Tay Keith"
+      ],
       "track": "Pound Town",
       "year": 2022,
       "tier": "official_promo",
@@ -301,7 +319,9 @@
     },
     {
       "id": "el-skrilla",
-      "artists": ["Kodak Black"],
+      "artists": [
+        "Kodak Black"
+      ],
       "track": "Skrilla",
       "year": 2024,
       "tier": "official_promo",
@@ -320,7 +340,9 @@
     },
     {
       "id": "el-let-your-love-flow",
-      "artists": ["The Bellamy Brothers"],
+      "artists": [
+        "The Bellamy Brothers"
+      ],
       "track": "Let Your Love Flow",
       "year": 1976,
       "tier": "official_promo",
@@ -339,7 +361,9 @@
     },
     {
       "id": "el-love-bites",
-      "artists": ["Def Leppard"],
+      "artists": [
+        "Def Leppard"
+      ],
       "track": "Love Bites",
       "year": 1987,
       "tier": "official_promo",
@@ -358,7 +382,9 @@
     },
     {
       "id": "el-people-are-people",
-      "artists": ["Depeche Mode"],
+      "artists": [
+        "Depeche Mode"
+      ],
       "track": "People Are People",
       "year": 1984,
       "tier": "official_promo",
@@ -377,7 +403,9 @@
     },
     {
       "id": "el-but-i-think-its-a-dream",
-      "artists": ["Captain & Tennille"],
+      "artists": [
+        "Captain & Tennille"
+      ],
       "track": "But I Think It's a Dream",
       "year": null,
       "tier": "official_promo",
@@ -401,7 +429,9 @@
     },
     {
       "id": "el-cars-and-girls",
-      "artists": ["Prefab Sprout"],
+      "artists": [
+        "Prefab Sprout"
+      ],
       "track": "Cars and Girls",
       "year": 1988,
       "tier": "official_promo",
@@ -420,7 +450,10 @@
     },
     {
       "id": "el-off-the-grid",
-      "artists": ["!!!", "Meah Pace"],
+      "artists": [
+        "!!!",
+        "Meah Pace"
+      ],
       "track": "Off The Grid",
       "year": 2013,
       "tier": "official_promo",
@@ -439,7 +472,9 @@
     },
     {
       "id": "el-devil-woman",
-      "artists": ["Cliff Richard"],
+      "artists": [
+        "Cliff Richard"
+      ],
       "track": "Devil Woman",
       "year": 1976,
       "tier": "official_promo",
@@ -462,7 +497,10 @@
     },
     {
       "id": "el-se-me-nota",
-      "artists": ["Chimbala", "Omega"],
+      "artists": [
+        "Chimbala",
+        "Omega"
+      ],
       "track": "Se Me Nota",
       "year": null,
       "tier": "official_promo",
@@ -482,7 +520,9 @@
     },
     {
       "id": "el-against-all-odds",
-      "artists": ["Phil Collins"],
+      "artists": [
+        "Phil Collins"
+      ],
       "track": "Against All Odds",
       "year": 1984,
       "tier": "official_promo",
@@ -502,7 +542,10 @@
     },
     {
       "id": "el-mine-o-mine",
-      "artists": ["Aluna", "Jayda G"],
+      "artists": [
+        "Aluna",
+        "Jayda G"
+      ],
       "track": "Mine O' Mine",
       "year": null,
       "tier": "official_promo",
@@ -521,7 +564,10 @@
     },
     {
       "id": "el-inner-light",
-      "artists": ["Elderbrook", "Bob Moses"],
+      "artists": [
+        "Elderbrook",
+        "Bob Moses"
+      ],
       "track": "Inner Light",
       "year": 2020,
       "tier": "official_promo",
@@ -540,7 +586,9 @@
     },
     {
       "id": "rs-kodak-black",
-      "artists": ["Kodak Black"],
+      "artists": [
+        "Kodak Black"
+      ],
       "track": null,
       "year": null,
       "tier": "rockstar_named",
@@ -560,7 +608,9 @@
     },
     {
       "id": "rs-sexyy-red",
-      "artists": ["Sexyy Red"],
+      "artists": [
+        "Sexyy Red"
+      ],
       "track": null,
       "year": null,
       "tier": "rockstar_named",
@@ -580,7 +630,9 @@
     },
     {
       "id": "rs-real-dimez",
-      "artists": ["Real Dimez"],
+      "artists": [
+        "Real Dimez"
+      ],
       "track": null,
       "year": null,
       "tier": "rockstar_named",
@@ -601,7 +653,9 @@
     },
     {
       "id": "ar-travis-scott",
-      "artists": ["Travis Scott"],
+      "artists": [
+        "Travis Scott"
+      ],
       "track": null,
       "year": null,
       "tier": "artist_reported",
@@ -621,12 +675,18 @@
         {
           "label": "IGN (news roundup)",
           "url": "https://www.ign.com/articles/rockstar-games-begins-teasing-gta-6s-soundtrack-with-travis-scott-future-morgan-wallen-and-more"
+        },
+        {
+          "label": "@Rap / RapTV (discovery only)",
+          "url": "https://x.com/Rap/status/2099899450269241403"
         }
       ]
     },
     {
       "id": "ar-future",
-      "artists": ["Future"],
+      "artists": [
+        "Future"
+      ],
       "track": null,
       "year": null,
       "tier": "artist_reported",
@@ -642,12 +702,18 @@
         {
           "label": "IGN (news roundup)",
           "url": "https://www.ign.com/articles/rockstar-games-begins-teasing-gta-6s-soundtrack-with-travis-scott-future-morgan-wallen-and-more"
+        },
+        {
+          "label": "@Rap / RapTV (discovery only)",
+          "url": "https://x.com/Rap/status/2099899450269241403"
         }
       ]
     },
     {
       "id": "ar-morgan-wallen",
-      "artists": ["Morgan Wallen"],
+      "artists": [
+        "Morgan Wallen"
+      ],
       "track": null,
       "year": null,
       "tier": "artist_reported",
@@ -663,6 +729,67 @@
         {
           "label": "IGN (news roundup)",
           "url": "https://www.ign.com/articles/rockstar-games-begins-teasing-gta-6s-soundtrack-with-travis-scott-future-morgan-wallen-and-more"
+        },
+        {
+          "label": "@Rap / RapTV (discovery only)",
+          "url": "https://x.com/Rap/status/2099899450269241403"
+        }
+      ]
+    },
+    {
+      "id": "ar-metro-boomin",
+      "artists": [
+        "Metro Boomin"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Listed in RapTV roundup of artists teasing GTA VI collabs (Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "status": "needs_primary_source",
+      "note": "RapTV is an aggregator. Discovery only until a primary post or interview from Metro Boomin (or Rockstar) is linked.",
+      "sources": [
+        {
+          "label": "@Rap / RapTV (discovery only)",
+          "url": "https://x.com/Rap/status/2099899450269241403"
+        }
+      ]
+    },
+    {
+      "id": "ar-yung-lean",
+      "artists": [
+        "Yung Lean"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Listed in RapTV roundup of artists teasing GTA VI collabs (Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "status": "needs_primary_source",
+      "note": "RapTV is an aggregator. Discovery only until a primary post or interview from Yung Lean (or Rockstar) is linked.",
+      "sources": [
+        {
+          "label": "@Rap / RapTV (discovery only)",
+          "url": "https://x.com/Rap/status/2099899450269241403"
+        }
+      ]
+    },
+    {
+      "id": "ar-rauw-alejandro",
+      "artists": [
+        "Rauw Alejandro"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Listed in RapTV roundup of artists teasing GTA VI collabs (Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "status": "needs_primary_source",
+      "note": "RapTV is an aggregator. Discovery only until a primary post or interview from Rauw Alejandro (or Rockstar) is linked.",
+      "sources": [
+        {
+          "label": "@Rap / RapTV (discovery only)",
+          "url": "https://x.com/Rap/status/2099899450269241403"
         }
       ]
     }

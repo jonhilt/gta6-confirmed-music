@@ -308,3 +308,39 @@ footer {
     gap: 0.35rem;
   }
 }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: block;
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  gap: 0.15rem;
+}
+.brand-name {
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: #ff2d95;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+}
+.brand-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2de2c5;
+}
+.site-title { display: none; }

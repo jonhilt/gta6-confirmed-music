@@ -2,8 +2,7 @@
 
 Public, citeable list of artists and tracks tied to Grand Theft Auto VI marketing, plus a smaller set of Rockstar-named and artist-reported names.
 
-Live Pages URL (after you flip the switch below):
-**https://jonhilt.github.io/gta6-confirmed-music/**
+**Live site:** https://jonhilt.github.io/gta6-confirmed-music/
 
 This is fan documentation. It is not affiliated with Rockstar Games or Take-Two Interactive.
 
@@ -17,7 +16,7 @@ Three tiers. Nothing else goes on the home page.
 
 Aggregators such as @videotech are discovery only. Keep them as a breadcrumb until you have the artist’s own post. Anonymous rumors stay off the main UI.
 
-Copyright: no lyrics, no pasted bios. One or two factual sentences per artist with a citeable URL. Track titles and artist names are fine.
+Copyright: no lyrics, no pasted bios. One or two factual sentences per artist with a citeable URL. Track titles and artist names are fine. Linking to official Rockstar media with a citation is fine. Do not host their video or audio files, or scrape logos and box art into the site chrome.
 
 ## Data file
 
@@ -53,25 +52,6 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 3. Append the object to `entries` and, if needed, a blurb in `artists`.
 4. Bump `updated` (ISO date).
 5. Open a PR. Do not paste lyrics.
-
-## GitHub Pages (one dashboard click)
-
-The site is already in `docs/`. Jekyll is skipped via `docs/.nojekyll`.
-
-1. Repo **Settings → Pages**.
-2. **Build and deployment → Source:** Deploy from a branch.
-3. **Branch:** `main`, folder **`/docs`**.
-4. Save.
-
-GitHub then serves https://jonhilt.github.io/gta6-confirmed-music/
-
-Local preview:
-
-```bash
-python3 -m http.server 8080 --directory docs
-```
-
-Open http://127.0.0.1:8080/
 
 ## Current coverage (2026-09-15)
 

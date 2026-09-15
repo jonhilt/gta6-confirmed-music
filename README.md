@@ -60,6 +60,12 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 - Rockstar-named: Kodak Black, Sexyy Red, Real Dimez (Dazed).
 - Artist-reported awaiting a primary URL: Travis Scott, Future, Morgan Wallen.
 
+
+
+### Artist-reported primary cite
+
+For `artist_reported` rows, always attempt to cite the artist's own source (Instagram, X, official site). Aggregators are discovery only until a primary permalink is attached.
+
 ## License
 
 Code: MIT (`LICENSE`). The dataset is a factual compilation with source links, not copied marketing copy.

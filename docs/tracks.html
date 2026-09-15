@@ -12,13 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Lobster&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Lobster&display=swap"
     />
     <link rel="stylesheet" href="assets/postcard.css" />
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   </head>
-  <body class="tool">
+  <body class="postcard">
     <header class="c-header">
       <div class="c-header-inner">
         <a class="c-brand" href="./">
@@ -55,9 +55,9 @@
       </div>
     </header>
 
-    <p class="fan-banner">
+    <div class="c-marquee">
       Fan documentation · not affiliated with Rockstar Games or Take-Two · links out only
-    </p>
+    </div>
 
     <section class="hero hero-tracker">
       <div class="wrap hero-inner">
@@ -158,13 +158,17 @@
       </div>
     </main>
 
-    <footer>
-      <div class="wrap">
-        Dataset lives in <code>docs/data/entries.json</code>. How to add a row is in the README.
-        Code is MIT. The list is a factual compilation with source links.
-        <a href="./methodology.html">Methodology</a>
-        ·
-        <a href="./">Back to the drop</a>
+    <footer class="c-foot">
+      <div class="c-foot-row">
+        <span>
+          Dataset lives in <code>docs/data/entries.json</code>. How to add a row is in the README.
+          Code is MIT.
+        </span>
+        <span>
+          <a href="./methodology.html">Methodology</a>
+          ·
+          <a href="./">Back to the drop</a>
+        </span>
       </div>
     </footer>
     <script src="assets/app.js"></script>

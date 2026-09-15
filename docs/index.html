@@ -3,142 +3,195 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Leonida Needle Drop. The music of GTA VI</title>
+    <title>Leonida Drop. An unofficial music guide to GTA VI</title>
     <meta
       name="description"
-      content="A fan-made tracker of songs heard in official trailers, artists named by Rockstar staff, and artist claims still awaiting proof."
+      content="A source-first archive of songs, artists and radio heard across official GTA VI media."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Lobster&display=swap"
     />
-    <link rel="stylesheet" href="assets/style.css" />
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/postcard.css" />
+    <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="wrap header-inner">
-        <a class="brand" href="./" aria-label="Leonida Needle Drop home">
-          <img class="brand-mark" src="assets/logo-mark.svg" width="40" height="40" alt="" />
-          <img class="brand-wordmark" src="assets/logo-wordmark.svg" height="36" alt="Leonida Needle Drop" />
+  <body class="postcard">
+    <header class="c-header">
+      <div class="c-header-inner">
+        <a class="c-brand" href="./">
+          <span class="c-brand-script">Leonida</span>
+          <span class="c-brand-drop">DROP</span>
         </a>
-        <nav>
-          <a href="./" aria-current="page">Tracker</a>
-          <a href="./methodology.html">Methodology</a>
-          <a class="nav-ext" href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
+        <nav class="c-pills" aria-label="Primary">
+          <a href="./" aria-current="page">The Drop</a>
+          <a href="./stations.html">Stations</a>
+          <a href="./tracks.html">Tracks</a>
         </nav>
+        <details class="c-sun">
+          <summary aria-label="More links">
+            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+              <circle cx="11" cy="11" r="4.2" fill="currentColor" />
+              <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+                <path d="M11 2.2 v2.1" />
+                <path d="M11 17.7 v2.1" />
+                <path d="M2.2 11 h2.1" />
+                <path d="M17.7 11 h2.1" />
+                <path d="M4.7 4.7 l1.5 1.5" />
+                <path d="M15.8 15.8 l1.5 1.5" />
+                <path d="M17.3 4.7 l-1.5 1.5" />
+                <path d="M6.2 15.8 l-1.5 1.5" />
+              </g>
+            </svg>
+          </summary>
+          <div class="c-sun-panel">
+            <a href="./tracks.html">Music index</a>
+            <a href="./methodology.html">Methodology</a>
+            <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </details>
       </div>
     </header>
 
-    <p class="fan-banner">
-      Fan documentation · not affiliated with Rockstar Games or Take-Two · links out only
-    </p>
-
-    <section class="hero hero-tracker">
-      <div class="wrap hero-inner">
-        <p class="kicker chips">
-          <span>Source-first</span>
-          <span>Independent</span>
-          <span>Updated as evidence changes</span>
+    <section class="c-hero">
+      <div>
+        <p class="c-eyebrow">An unofficial music guide to GTA VI</p>
+        <h1>Sunshine.<br />Static.<br />The truth.</h1>
+        <p class="c-deck">
+          A breezy, source-first archive of songs, artists and radio heard across official GTA VI
+          media.
         </p>
-        <div class="hero-split">
-          <h1>The music of GTA VI</h1>
-          <div class="hero-copy">
-            <p class="lede">
-              A fan-made tracker of songs heard in official trailers, artists named by Rockstar
-              staff, and artist claims still awaiting proof.
-            </p>
-            <p class="count-pill" id="entry-pill">Loading entries</p>
-          </div>
+        <div class="c-cta-row">
+          <a class="c-cta" href="./tracks.html">Hear today’s drop <span aria-hidden="true">→</span></a>
+          <p class="c-support">
+            <a href="./tracks.html">Track links</a>
+            ·
+            <a href="./tracks.html?focus=artists">Artist credits</a>
+            ·
+            <a href="./methodology.html">No spoilers</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="c-collage" aria-hidden="false">
+        <div class="c-polaroid">
+          <img
+            src="assets/postcard-hotel.svg"
+            alt="Original fan drawing of a cream Art Deco hotel and palms. Not a Rockstar screenshot."
+            width="800"
+            height="520"
+          />
+        </div>
+        <p class="c-stamp">
+          <strong>Track checked</strong>
+          <span>Music links only</span>
+        </p>
+        <div class="c-fm">
+          <svg width="28" height="20" viewBox="0 0 28 20" aria-hidden="true">
+            <path
+              d="M4 10 h3 l3-6 4 12 3-8 2 2 h5"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <p>Tape love on</p>
+          <strong>Leonida FM</strong>
         </div>
       </div>
     </section>
 
-    <main class="wrap">
-      <div class="controls">
-        <label class="visually-hidden" for="search">Search artist or track</label>
-        <div class="search-wrap">
-          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-            <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6" />
-            <path d="M10.4 10.4 L13.5 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-          </svg>
-          <input
-            id="search"
-            class="search"
-            type="search"
-            placeholder="Search artist or track…"
-            autocomplete="off"
-          />
+    <div class="c-marquee">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <circle cx="8" cy="8" r="3" fill="currentColor" />
+        <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <path d="M8 1.5 v1.6" />
+          <path d="M8 12.9 v1.6" />
+          <path d="M1.5 8 h1.6" />
+          <path d="M12.9 8 h1.6" />
+        </g>
+      </svg>
+      Trailer tracks + radio stations + artists + song IDs + official links
+    </div>
+
+    <section class="c-browse" id="browse">
+      <div class="c-browse-head">
+        <div>
+          <p class="c-kicker">Tune in</p>
+          <h2>Find your frequency.</h2>
         </div>
-        <div class="filters" role="group" aria-label="Confirmation tier">
-          <button class="filter" type="button" data-tier="all" aria-pressed="true">All tiers</button>
-          <button class="filter" type="button" data-tier="official_promo" aria-pressed="false">
-            Official promo
-          </button>
-          <button class="filter" type="button" data-tier="rockstar_named" aria-pressed="false">
-            Rockstar-named
-          </button>
-          <button class="filter" type="button" data-tier="artist_reported" aria-pressed="false">
-            Artist-reported
-          </button>
-        </div>
+        <a class="c-index-link" href="./tracks.html">Open the music index ↗</a>
       </div>
-
-      <div class="layout">
-        <div id="catalog"></div>
-
-        <aside class="sidebar" aria-label="Receipts and dataset">
-          <section class="receipts-card">
-            <p class="card-kicker">The receipts scale</p>
-            <h2>Three tiers. No vibes-based proof.</h2>
-            <ul class="scale-list">
-              <li>
-                <span class="dot dot-cyan" aria-hidden="true"></span>
-                Heard in official promo
-              </li>
-              <li>
-                <span class="dot dot-orange" aria-hidden="true"></span>
-                Named by Rockstar staff
-              </li>
-              <li>
-                <span class="dot dot-magenta" aria-hidden="true"></span>
-                Claimed by the artist
-              </li>
-            </ul>
-          </section>
-
-          <section class="snapshot-card">
-            <p class="card-kicker">Dataset snapshot</p>
-            <ul class="snapshot-list" id="snapshot">
-              <li>Official promo <strong id="count-official">0</strong></li>
-              <li>Rockstar-named <strong id="count-named">0</strong></li>
-              <li>Artist-reported <strong id="count-reported">0</strong></li>
-            </ul>
-          </section>
-
-          <section class="awaiting-card">
-            <p class="card-kicker">Awaiting primary source</p>
-            <ul class="awaiting-list" id="awaiting-list"></ul>
-            <p class="awaiting-note">
-              Listed for discovery. Not soundtrack credits until a primary link lands.
-            </p>
-          </section>
-
-          <p class="raw-json">
-            <a href="data/entries.json">View raw JSON</a>
-          </p>
-        </aside>
+      <div class="c-cards">
+        <a class="c-card c-card-pink" href="./tracks.html?tier=official_promo">
+          <div class="c-card-top">
+            <span>01</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+              <circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M9 5.5 v3.6 l2.4 1.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3>Latest tracks</h3>
+          <span class="c-card-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="c-card c-card-teal" href="./stations.html">
+          <div class="c-card-top">
+            <span>02</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+              <rect x="2" y="5" width="14" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M5 13 v2 M13 13 v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3>Radio stations</h3>
+          <span class="c-card-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="c-card c-card-peri" href="./tracks.html?focus=artists">
+          <div class="c-card-top">
+            <span>03</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+              <path
+                d="M4 12.5 a5 5 0 0 1 10 0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              />
+              <circle cx="9" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </div>
+          <h3>Artists &amp; hosts</h3>
+          <span class="c-card-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="c-card c-card-orange" href="./tracks.html?focus=song">
+          <div class="c-card-top">
+            <span>04</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+              <circle cx="6.5" cy="13" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path d="M8.7 13 V4.5 l6-1.2 V11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="14.7" cy="11" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </div>
+          <h3>Find that song</h3>
+          <span class="c-card-arrow" aria-hidden="true">↗</span>
+        </a>
       </div>
-    </main>
+    </section>
 
-    <footer>
-      <div class="wrap">
-        Dataset lives in <code>docs/data/entries.json</code>. How to add a row is in the README.
-        Code is MIT. The list is a factual compilation with source links.
+    <footer class="c-foot">
+      <div class="c-foot-row">
+        <span>
+          Fan documentation. Not affiliated with Rockstar Games or Take-Two. Links out only.
+        </span>
+        <span>
+          <a href="./methodology.html">Methodology</a>
+          ·
+          <a href="./tracks.html">Music index</a>
+          ·
+          <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
+        </span>
       </div>
     </footer>
-    <script src="assets/app.js"></script>
   </body>
 </html>

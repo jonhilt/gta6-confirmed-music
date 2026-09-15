@@ -95,7 +95,7 @@ body > header.site-header {
   display: block;
 }
 
-nav {
+.site-header nav {
   display: flex;
   gap: 1.25rem;
   font-size: 0.72rem;
@@ -104,13 +104,13 @@ nav {
   font-weight: 600;
 }
 
-nav a {
+.site-header nav a {
   color: #b8b4ae;
   text-decoration: none;
 }
 
-nav a:hover,
-nav a[aria-current="page"] {
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
   color: var(--teal);
 }
 

@@ -2,13 +2,15 @@
 
 Public, citeable list of artists and tracks tied to Grand Theft Auto VI marketing, plus a smaller set of Rockstar-named and artist-reported names.
 
-**Live site:** https://jonhilt.github.io/gta6-confirmed-music/
+**Live site:** https://leonidadrop.com (GitHub Pages from `docs/`)
 
 This is fan documentation. It is not affiliated with Rockstar Games or Take-Two Interactive.
 
+The home page is a short landing (Pen Concept C). Confirmed rows live on the **music index** at `docs/tracks.html`.
+
 ## What belongs on the list
 
-Three tiers. Nothing else goes on the home page.
+Three tiers. Nothing else goes in the catalog.
 
 1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, or Extended Look.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.

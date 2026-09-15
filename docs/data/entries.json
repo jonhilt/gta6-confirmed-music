@@ -1,0 +1,670 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-15",
+  "officialVideos": {
+    "trailer1": {
+      "label": "Rockstar — Trailer 1",
+      "url": "https://www.youtube.com/watch?v=QdBZY2fkU-0"
+    },
+    "trailer2": {
+      "label": "Rockstar — Trailer 2",
+      "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+    },
+    "extendedLook": {
+      "label": "Rockstar — Extended Look",
+      "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+    }
+  },
+  "artists": {
+    "Tom Petty": {
+      "blurb": "American rock musician (1950–2017). “Love Is a Long Road” is from the 1989 album Full Moon Fever.",
+      "cite": "https://en.wikipedia.org/wiki/Tom_Petty"
+    },
+    "The Pointer Sisters": {
+      "blurb": "American vocal group formed in Oakland in 1969; “Hot Together” is a 1986 single.",
+      "cite": "https://en.wikipedia.org/wiki/The_Pointer_Sisters"
+    },
+    "Wang Chung": {
+      "blurb": "English new wave band; “Everybody Have Fun Tonight” was a 1986 hit from Mosaic.",
+      "cite": "https://en.wikipedia.org/wiki/Wang_Chung_(band)"
+    },
+    "Tammy Wynette": {
+      "blurb": "American country singer (1942–1998). “Talkin’ to Myself Again” is from her 1987 album Higher Ground.",
+      "cite": "https://en.wikipedia.org/wiki/Tammy_Wynette"
+    },
+    "Zenglen": {
+      "blurb": "Haitian kompa band. Trailer 2 uses “Child Support” (2004), often billed with 5 Etwal / 5 Etwel.",
+      "cite": "https://www.chokarella.com/2025/05/06/la-chanson-child-support-du-groupe-haitien-zenglen-integree-dans-la-bande-annonce-de-gta-6/"
+    },
+    "Jay Ferguson": {
+      "blurb": "American rock musician; “Thunder Island” was a 1977 solo hit.",
+      "cite": "https://en.wikipedia.org/wiki/Jay_Ferguson_(American_musician)"
+    },
+    "Birdman": {
+      "blurb": "American rapper and Cash Money Records co-founder. “Pop Bottles” (with Lil Wayne) is from 2007.",
+      "cite": "https://en.wikipedia.org/wiki/Birdman_(rapper)"
+    },
+    "Lil Wayne": {
+      "blurb": "American rapper; appears on Birdman’s 2007 single “Pop Bottles.”",
+      "cite": "https://en.wikipedia.org/wiki/Lil_Wayne"
+    },
+    "Sexyy Red": {
+      "blurb": "American rapper from St. Louis. Rockstar named her in a 2026 Dazed interview; “Pound Town” is heard in the Extended Look.",
+      "cite": "https://en.wikipedia.org/wiki/Sexyy_Red"
+    },
+    "Tay Keith": {
+      "blurb": "American record producer; credited on Sexyy Red’s “Pound Town.”",
+      "cite": "https://en.wikipedia.org/wiki/Tay_Keith"
+    },
+    "Kodak Black": {
+      "blurb": "American rapper from Pompano Beach, Florida. Named by Rockstar in Dazed; “Skrilla” is heard in the Extended Look.",
+      "cite": "https://en.wikipedia.org/wiki/Kodak_Black"
+    },
+    "The Bellamy Brothers": {
+      "blurb": "American country duo; “Let Your Love Flow” was a 1976 hit.",
+      "cite": "https://en.wikipedia.org/wiki/The_Bellamy_Brothers"
+    },
+    "Def Leppard": {
+      "blurb": "English rock band; “Love Bites” is from the 1987 album Hysteria.",
+      "cite": "https://en.wikipedia.org/wiki/Def_Leppard"
+    },
+    "Depeche Mode": {
+      "blurb": "English electronic band; “People Are People” was released in 1984.",
+      "cite": "https://en.wikipedia.org/wiki/Depeche_Mode"
+    },
+    "Captain & Tennille": {
+      "blurb": "American pop duo (Daryl Dragon and Toni Tennille). Polygon and IGN list “But I Think It’s a Dream” in the Extended Look.",
+      "cite": "https://en.wikipedia.org/wiki/Captain_%26_Tennille"
+    },
+    "Prefab Sprout": {
+      "blurb": "English pop band; “Cars and Girls” is from 1988’s From Langley Park to Memphis.",
+      "cite": "https://en.wikipedia.org/wiki/Prefab_Sprout"
+    },
+    "!!!": {
+      "blurb": "American dance-punk band (pronounced “chk chk chk”). “Off the Grid” features Meah Pace.",
+      "cite": "https://en.wikipedia.org/wiki/!!!"
+    },
+    "Meah Pace": {
+      "blurb": "Vocalist credited on !!!’s “Off the Grid,” listed in Polygon’s Extended Look IDs.",
+      "cite": "https://en.wikipedia.org/wiki/!!!"
+    },
+    "Cliff Richard": {
+      "blurb": "English singer; “Devil Woman” was a 1976 single. Music Ally notes it as one of the more prominent Extended Look cues.",
+      "cite": "https://en.wikipedia.org/wiki/Cliff_Richard"
+    },
+    "Chimbala": {
+      "blurb": "Dominican urban/dembow artist. Extended Look listings pair him with Omega on “Se Me Nota.”",
+      "cite": "https://en.wikipedia.org/wiki/Chimbala"
+    },
+    "Omega": {
+      "blurb": "Dominican merengue/urban singer (Omega El Fuerte), credited with Chimbala on “Se Me Nota.”",
+      "cite": "https://en.wikipedia.org/wiki/Omega_(singer)"
+    },
+    "Phil Collins": {
+      "blurb": "English singer-songwriter; “Against All Odds (Take a Look at Me Now)” is from 1984.",
+      "cite": "https://en.wikipedia.org/wiki/Phil_Collins"
+    },
+    "Aluna": {
+      "blurb": "British singer-songwriter (Aluna Francis). Listed with Jayda G on “Mine O’ Mine” in the Extended Look.",
+      "cite": "https://en.wikipedia.org/wiki/Aluna"
+    },
+    "Jayda G": {
+      "blurb": "Canadian DJ and producer; listed with Aluna on “Mine O’ Mine” in Extended Look IDs.",
+      "cite": "https://en.wikipedia.org/wiki/Jayda_G"
+    },
+    "Elderbrook": {
+      "blurb": "English electronic musician; “Inner Light” is a collaboration with Bob Moses.",
+      "cite": "https://en.wikipedia.org/wiki/Elderbrook"
+    },
+    "Bob Moses": {
+      "blurb": "Canadian electronic duo; listed with Elderbrook on “Inner Light” in the Extended Look.",
+      "cite": "https://en.wikipedia.org/wiki/Bob_Moses_(band)"
+    },
+    "Real Dimez": {
+      "blurb": "Fictional in-game duo described by Rockstar as rising stars whose story plays out on in-game social media. Not a real-world act.",
+      "cite": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
+    },
+    "Travis Scott": {
+      "blurb": "American rapper and producer. News outlets reported Instagram teasers tagging Rockstar in September 2026; no primary post URL is in this dataset yet.",
+      "cite": "https://en.wikipedia.org/wiki/Travis_Scott"
+    },
+    "Future": {
+      "blurb": "American rapper. September 2026 news roundups say he posted GTA VI–style artwork; no primary post URL is in this dataset yet.",
+      "cite": "https://en.wikipedia.org/wiki/Future_(rapper)"
+    },
+    "Morgan Wallen": {
+      "blurb": "American country singer. September 2026 reports say he posted GTA VI–style artwork; no primary post URL is in this dataset yet.",
+      "cite": "https://en.wikipedia.org/wiki/Morgan_Wallen"
+    }
+  },
+  "entries": [
+    {
+      "id": "t1-love-is-a-long-road",
+      "artists": ["Tom Petty"],
+      "track": "Love Is a Long Road",
+      "year": 1989,
+      "tier": "official_promo",
+      "appearance": "Trailer 1 (4 Dec 2023)",
+      "appearanceKey": "trailer1",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Trailer 1",
+          "url": "https://www.youtube.com/watch?v=QdBZY2fkU-0"
+        },
+        {
+          "label": "Tom Petty official site",
+          "url": "https://www.tompetty.com/blogs/news/tom-petty-s-love-is-a-long-road-from-full-moon-fever-featured-in-trailer-1-of-grand-theft-auto-vi"
+        }
+      ]
+    },
+    {
+      "id": "t2-thunder-island",
+      "artists": ["Jay Ferguson"],
+      "track": "Thunder Island",
+      "year": 1977,
+      "tier": "official_promo",
+      "appearance": "Trailer 2 (6 May 2025)",
+      "appearanceKey": "trailer2",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Trailer 2",
+          "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+        },
+        {
+          "label": "GTA Wiki trailer breakdown",
+          "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        }
+      ]
+    },
+    {
+      "id": "t2-child-support",
+      "artists": ["Zenglen"],
+      "track": "Child Support",
+      "year": 2004,
+      "tier": "official_promo",
+      "appearance": "Trailer 2 (6 May 2025)",
+      "appearanceKey": "trailer2",
+      "note": "Often credited as Zenglen & 5 Etwal / 5 Etwel. NME lists that billing.",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Trailer 2",
+          "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+        },
+        {
+          "label": "NME (Trailer 2 songs)",
+          "url": "https://www.nme.com/news/gaming-news/what-song-grand-theft-auto-6-trailer-2-3860654"
+        }
+      ]
+    },
+    {
+      "id": "t2-everybody-have-fun-tonight",
+      "artists": ["Wang Chung"],
+      "track": "Everybody Have Fun Tonight",
+      "year": 1986,
+      "tier": "official_promo",
+      "appearance": "Trailer 2 (6 May 2025)",
+      "appearanceKey": "trailer2",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Trailer 2",
+          "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+        },
+        {
+          "label": "GTA Wiki trailer breakdown",
+          "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        }
+      ]
+    },
+    {
+      "id": "t2-talkin-to-myself-again",
+      "artists": ["Tammy Wynette"],
+      "track": "Talkin' to Myself Again",
+      "year": 1987,
+      "tier": "official_promo",
+      "appearance": "Trailer 2 (6 May 2025)",
+      "appearanceKey": "trailer2",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Trailer 2",
+          "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+        },
+        {
+          "label": "GTA Wiki trailer breakdown",
+          "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        }
+      ]
+    },
+    {
+      "id": "t2-hot-together",
+      "artists": ["The Pointer Sisters"],
+      "track": "Hot Together",
+      "year": 1986,
+      "tier": "official_promo",
+      "appearance": "Trailer 2 (6 May 2025)",
+      "appearanceKey": "trailer2",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Trailer 2",
+          "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+        },
+        {
+          "label": "GTA Wiki trailer breakdown",
+          "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        }
+      ]
+    },
+    {
+      "id": "el-pop-bottles",
+      "artists": ["Birdman", "Lil Wayne"],
+      "track": "Pop Bottles",
+      "year": 2007,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Music Ally",
+          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        }
+      ]
+    },
+    {
+      "id": "el-pound-town",
+      "artists": ["Sexyy Red", "Tay Keith"],
+      "track": "Pound Town",
+      "year": 2022,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Music Ally",
+          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        }
+      ]
+    },
+    {
+      "id": "el-skrilla",
+      "artists": ["Kodak Black"],
+      "track": "Skrilla",
+      "year": 2024,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-let-your-love-flow",
+      "artists": ["The Bellamy Brothers"],
+      "track": "Let Your Love Flow",
+      "year": 1976,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-love-bites",
+      "artists": ["Def Leppard"],
+      "track": "Love Bites",
+      "year": 1987,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-people-are-people",
+      "artists": ["Depeche Mode"],
+      "track": "People Are People",
+      "year": 1984,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-but-i-think-its-a-dream",
+      "artists": ["Captain & Tennille"],
+      "track": "But I Think It's a Dream",
+      "year": null,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "note": "Title as listed by Polygon, IGN, and Kotaku. Not independently verified against a label catalog.",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "IGN Extended Look track list",
+          "url": "https://www.ign.com/articles/heres-every-song-featured-in-rockstars-gta-6-extended-look"
+        }
+      ]
+    },
+    {
+      "id": "el-cars-and-girls",
+      "artists": ["Prefab Sprout"],
+      "track": "Cars and Girls",
+      "year": 1988,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-off-the-grid",
+      "artists": ["!!!", "Meah Pace"],
+      "track": "Off The Grid",
+      "year": 2013,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-devil-woman",
+      "artists": ["Cliff Richard"],
+      "track": "Devil Woman",
+      "year": 1976,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Music Ally",
+          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        }
+      ]
+    },
+    {
+      "id": "el-se-me-nota",
+      "artists": ["Chimbala", "Omega"],
+      "track": "Se Me Nota",
+      "year": null,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "note": "IGN and Rolling Stone Canada list a longer billing: “Se Me Nota (Agarrame)” (prod. B-One).",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-against-all-odds",
+      "artists": ["Phil Collins"],
+      "track": "Against All Odds",
+      "year": 1984,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "note": "Full title is “Against All Odds (Take a Look at Me Now).”",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-mine-o-mine",
+      "artists": ["Aluna", "Jayda G"],
+      "track": "Mine O' Mine",
+      "year": null,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "el-inner-light",
+      "artists": ["Elderbrook", "Bob Moses"],
+      "track": "Inner Light",
+      "year": 2020,
+      "tier": "official_promo",
+      "appearance": "Extended Look (27 Aug 2026)",
+      "appearanceKey": "extendedLook",
+      "sources": [
+        {
+          "label": "Rockstar YouTube — Extended Look",
+          "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+        },
+        {
+          "label": "Polygon ID list",
+          "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "rs-kodak-black",
+      "artists": ["Kodak Black"],
+      "track": null,
+      "year": null,
+      "tier": "rockstar_named",
+      "appearance": "Named by Rockstar SVP of narrative Rupert Humphries (Dazed, Aug 2026)",
+      "appearanceKey": "interview",
+      "note": "Humphries cited Kodak as part of the Miami music the team loves. Separate from the “Skrilla” Extended Look cue.",
+      "sources": [
+        {
+          "label": "Dazed interview (primary quote)",
+          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
+        },
+        {
+          "label": "Music Ally (quotes Dazed)",
+          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        }
+      ]
+    },
+    {
+      "id": "rs-sexyy-red",
+      "artists": ["Sexyy Red"],
+      "track": null,
+      "year": null,
+      "tier": "rockstar_named",
+      "appearance": "Named by Rockstar SVP of narrative Rupert Humphries (Dazed, Aug 2026)",
+      "appearanceKey": "interview",
+      "note": "Humphries grouped her with Miami artists Rockstar loves. Separate from the “Pound Town” Extended Look cue.",
+      "sources": [
+        {
+          "label": "Dazed interview (primary quote)",
+          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
+        },
+        {
+          "label": "Music Ally (quotes Dazed)",
+          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        }
+      ]
+    },
+    {
+      "id": "rs-real-dimez",
+      "artists": ["Real Dimez"],
+      "track": null,
+      "year": null,
+      "tier": "rockstar_named",
+      "appearance": "In-universe virtual duo described by Rockstar (Dazed / Music Ally)",
+      "appearanceKey": "interview",
+      "inUniverse": true,
+      "note": "In-game fictional artists, not a real-world recording act. No licensed real-world track is attached to this row.",
+      "sources": [
+        {
+          "label": "Dazed interview",
+          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
+        },
+        {
+          "label": "Music Ally",
+          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        }
+      ]
+    },
+    {
+      "id": "ar-travis-scott",
+      "artists": ["Travis Scott"],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Aggregator and news reports of an Instagram teaser tagging Rockstar (Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "status": "needs_primary_source",
+      "note": "Push Square quotes a caption tagging @rockstargames. That is still a secondary report. This row stays in “awaiting primary source” until a permalink to Scott’s own account is attached.",
+      "sources": [
+        {
+          "label": "@videotech (discovery only)",
+          "url": "https://x.com/videotech/status/2099888101292216701"
+        },
+        {
+          "label": "Push Square (quotes Instagram caption)",
+          "url": "https://www.pushsquare.com/news/2026/09/multiple-music-artists-tease-gta-6-collaborations"
+        },
+        {
+          "label": "IGN (news roundup)",
+          "url": "https://www.ign.com/articles/rockstar-games-begins-teasing-gta-6s-soundtrack-with-travis-scott-future-morgan-wallen-and-more"
+        }
+      ]
+    },
+    {
+      "id": "ar-future",
+      "artists": ["Future"],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Aggregator and news reports of GTA VI–style artwork posted by the artist (Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "status": "needs_primary_source",
+      "note": "IGN says Future posted a sports car with a Leonida plate. No primary artist URL is in this dataset.",
+      "sources": [
+        {
+          "label": "@videotech (discovery only)",
+          "url": "https://x.com/videotech/status/2099888101292216701"
+        },
+        {
+          "label": "IGN (news roundup)",
+          "url": "https://www.ign.com/articles/rockstar-games-begins-teasing-gta-6s-soundtrack-with-travis-scott-future-morgan-wallen-and-more"
+        }
+      ]
+    },
+    {
+      "id": "ar-morgan-wallen",
+      "artists": ["Morgan Wallen"],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Aggregator and news reports of GTA VI–style artwork posted by the artist (Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "status": "needs_primary_source",
+      "note": "IGN and Holler describe a pool/sun-lounger still. No primary artist URL is in this dataset.",
+      "sources": [
+        {
+          "label": "@videotech (discovery only)",
+          "url": "https://x.com/videotech/status/2099888101292216701"
+        },
+        {
+          "label": "IGN (news roundup)",
+          "url": "https://www.ign.com/articles/rockstar-games-begins-teasing-gta-6s-soundtrack-with-travis-scott-future-morgan-wallen-and-more"
+        }
+      ]
+    }
+  ]
+}

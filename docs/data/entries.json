@@ -180,10 +180,6 @@
     "RushDee": {
       "blurb": "Producer/engineer. Tagged on Hendrix Smoke Instagram Story with Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); own primary not yet attached.",
       "cite": ""
-    },
-    "Karan Kanchan": {
-      "blurb": "Music producer. Reporting shows @karankanchanmusic Instagram with GTA VI–style helicopter artwork (Sep 2026); durable primary permalink not yet verified.",
-      "cite": ""
     }
   },
   "entries": [
@@ -1117,25 +1113,6 @@
         {
           "label": "GTAVice (discovery)",
           "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
-        }
-      ],
-      "status": "needs_primary_source"
-    },
-    {
-      "id": "ar-karan-kanchan",
-      "artists": [
-        "Karan Kanchan"
-      ],
-      "track": null,
-      "year": null,
-      "tier": "artist_reported",
-      "appearance": "Reporting shows @karankanchanmusic Instagram with GTA VI–style helicopter artwork (Sep 2026); durable primary permalink not verified in this scout",
-      "appearanceKey": "artist_claim",
-      "note": "Discovery screenshot via @_GTAVI_; confirm exact IG permalink before clearing needs_primary.",
-      "sources": [
-        {
-          "label": "_GTAVI_ (discovery screenshot)",
-          "url": "https://x.com/_GTAVI_/status/2100088440775672251"
         }
       ],
       "status": "needs_primary_source"

@@ -224,12 +224,28 @@ a {
   }
 }
 
+.intro-text {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 40rem;
+}
+
 .intro-copy {
   margin: 0;
   color: #554d59;
   font-size: 1rem;
   line-height: 1.5;
-  max-width: 40rem;
+}
+
+.intro-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.intro-meta:empty {
+  display: none;
 }
 
 /* Listing layout */

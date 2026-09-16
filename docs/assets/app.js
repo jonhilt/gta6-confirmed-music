@@ -14,10 +14,10 @@ const TIER_SECTION_NUM = {
 
 const TIER_COPY = {
   official_promo:
-    "Heard in official trailers and extended looks. Play the source video or inspect the supporting links.",
-  rockstar_named: "Artists named by Rockstar staff; track may be unspecified.",
+    "Audio from Rockstar trailers and the Extended Look. Play jumps to that moment in the official video.",
+  rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
-    "Discovery leads only until a primary artist or Rockstar source is attached.",
+    "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
 };
 
 const EVIDENCE_HEADLINE = {
@@ -370,7 +370,7 @@ function render(data, state, options = {}) {
   const total = data.entries.length;
   const scrollY = options.preserveScroll ? window.scrollY : null;
 
-  $("#hero-kicker").textContent = `${total} entries / updated ${data.updated} / source-first`;
+  $("#hero-kicker").textContent = `${total} entries · updated ${data.updated}`;
 
   if (!filtered.length) {
     root.innerHTML = `<p class="empty">No rows match that filter.</p>`;

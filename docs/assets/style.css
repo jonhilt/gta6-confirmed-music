@@ -204,22 +204,28 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 38rem) 1fr;
   gap: 2.5rem;
-  align-items: start;
+  align-items: center;
   padding: 1.875rem 0;
 }
 
 .intro-title {
   margin: 0;
   font-family: var(--track);
-  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
   font-weight: 900;
   font-style: italic;
   line-height: 1.08;
   text-transform: uppercase;
 }
 
+@media (min-width: 48rem) {
+  .intro-title {
+    white-space: nowrap;
+  }
+}
+
 .intro-copy {
-  margin: 0.15rem 0 0;
+  margin: 0;
   color: #554d59;
   font-size: 1rem;
   line-height: 1.5;

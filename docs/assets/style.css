@@ -857,8 +857,12 @@ a {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #a89daa;
-  max-width: 28rem;
+  flex-shrink: 0;
   text-align: right;
+}
+
+.footer-note-line {
+  display: block;
 }
 
 /* Methodology */

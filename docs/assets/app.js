@@ -370,7 +370,17 @@ function render(data, state, options = {}) {
   const total = data.entries.length;
   const scrollY = options.preserveScroll ? window.scrollY : null;
 
-  $("#hero-kicker").textContent = `${total} entries · updated ${data.updated}`;
+  const awaitingPrimary = data.entries.filter(
+    (e) => e.status === "needs_primary_source"
+  ).length;
+  $("#hero-kicker").textContent = `${total} entries · Updated ${data.updated}`;
+  const introMeta = $("#intro-meta");
+  if (introMeta) {
+    introMeta.textContent =
+      awaitingPrimary > 0
+        ? `${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`
+        : "";
+  }
 
   if (!filtered.length) {
     root.innerHTML = `<p class="empty">No rows match that filter.</p>`;

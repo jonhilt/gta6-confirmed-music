@@ -58,7 +58,7 @@
       "cite": "https://en.wikipedia.org/wiki/Tay_Keith"
     },
     "Kodak Black": {
-      "blurb": "American rapper from Pompano Beach, Florida. Named by Rockstar in Dazed; “Skrilla” is heard in the Extended Look.",
+      "blurb": "American rapper. Tagged on Hendrix Smoke Instagram Story with Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); own primary not yet attached.",
       "cite": "https://en.wikipedia.org/wiki/Kodak_Black"
     },
     "The Bellamy Brothers": {
@@ -164,6 +164,26 @@
     "Rauw Alejandro": {
       "blurb": "Puerto Rican singer. Posted GTA VI–style artwork on Instagram (@rauwalejandro), 15 Sep 2026.",
       "cite": "https://en.wikipedia.org/wiki/Rauw_Alejandro"
+    },
+    "Don Toliver": {
+      "blurb": "American rapper/singer. Tagged on Hendrix Smoke Instagram Story with Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); own primary not yet attached.",
+      "cite": "https://en.wikipedia.org/wiki/Don_Toliver"
+    },
+    "Hendrix Smoke": {
+      "blurb": "Producer. Instagram Story (@hendrixsmoke) reshared Travis Scott Phase 1 artwork with “Let's Ride” and tagged Don Toliver, Kodak Black, ATL Jacob, RushDee (15 Sep 2026); durable story permalink unavailable.",
+      "cite": ""
+    },
+    "ATL Jacob": {
+      "blurb": "American producer. Tagged on Hendrix Smoke Instagram Story with Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); own primary not yet attached.",
+      "cite": "https://en.wikipedia.org/wiki/ATL_Jacob"
+    },
+    "RushDee": {
+      "blurb": "Producer/engineer. Tagged on Hendrix Smoke Instagram Story with Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); own primary not yet attached.",
+      "cite": ""
+    },
+    "Karan Kanchan": {
+      "blurb": "Music producer. Reporting shows @karankanchanmusic Instagram with GTA VI–style helicopter artwork (Sep 2026); durable primary permalink not yet verified.",
+      "cite": ""
     }
   },
   "entries": [
@@ -970,6 +990,152 @@
         {
           "label": "PopBase on X (discovery only)",
           "url": "https://x.com/PopBase/status/2099901089004863653"
+        }
+      ],
+      "status": "needs_primary_source"
+    },
+    {
+      "id": "ar-don-toliver",
+      "artists": [
+        "Don Toliver"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Tagged by producer Hendrix Smoke on Instagram Story resharing Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); no Don Toliver primary post found",
+      "appearanceKey": "artist_claim",
+      "note": "Discovery via Hendrix Smoke story tags (@dontoliver). Story expired; keep aggregators as discovery until Don’s own IG/X permalink.",
+      "sources": [
+        {
+          "label": "TexFunz2 (story screenshot, discovery)",
+          "url": "https://x.com/TexFunz2/status/2099964919672115286"
+        },
+        {
+          "label": "GTAVice (discovery)",
+          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
+        },
+        {
+          "label": "GTA BOOM (discovery)",
+          "url": "https://www.gtaboom.com/travis-scott-future-artists-share-new-gta-6-artwork-5c10"
+        }
+      ],
+      "status": "needs_primary_source"
+    },
+    {
+      "id": "ar-kodak-black",
+      "artists": [
+        "Kodak Black"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Tagged by producer Hendrix Smoke on Instagram Story resharing Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); no Kodak Black primary post found",
+      "appearanceKey": "artist_claim",
+      "note": "Discovery via Hendrix Smoke story tags (@kodakblack). Story expired; aggregators discovery only.",
+      "sources": [
+        {
+          "label": "TexFunz2 (story screenshot, discovery)",
+          "url": "https://x.com/TexFunz2/status/2099964919672115286"
+        },
+        {
+          "label": "GTAVice (discovery)",
+          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
+        },
+        {
+          "label": "iGrandTheftAuto (discovery)",
+          "url": "https://x.com/iGrandTheftAuto/status/2099959092450296053"
+        }
+      ],
+      "status": "needs_primary_source"
+    },
+    {
+      "id": "ar-hendrix-smoke",
+      "artists": [
+        "Hendrix Smoke"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Producer Instagram Story (@hendrixsmoke) reshared Travis Scott Phase 1 artwork with “Let's Ride” and tagged Don Toliver, Kodak Black, ATL Jacob, RushDee (15 Sep 2026); durable story permalink not available",
+      "appearanceKey": "artist_claim",
+      "note": "Story is the claimed primary but Stories expire. Screenshot + roundups only until a durable Hendrix feed/X post exists.",
+      "sources": [
+        {
+          "label": "TexFunz2 (story screenshot, discovery)",
+          "url": "https://x.com/TexFunz2/status/2099964919672115286"
+        },
+        {
+          "label": "iGrandTheftAuto (discovery)",
+          "url": "https://x.com/iGrandTheftAuto/status/2099959092450296053"
+        },
+        {
+          "label": "GTAVice (discovery)",
+          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
+        }
+      ],
+      "status": "needs_primary_source"
+    },
+    {
+      "id": "ar-atl-jacob",
+      "artists": [
+        "ATL Jacob"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Tagged as producer on Hendrix Smoke Instagram Story with Travis Scott GTA VI artwork (15 Sep 2026); no ATL Jacob primary post found",
+      "appearanceKey": "artist_claim",
+      "note": "Discovery via @atljacob tag on expired Story. Aggregators only.",
+      "sources": [
+        {
+          "label": "TexFunz2 (story screenshot, discovery)",
+          "url": "https://x.com/TexFunz2/status/2099964919672115286"
+        },
+        {
+          "label": "GTAVice (discovery)",
+          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
+        }
+      ],
+      "status": "needs_primary_source"
+    },
+    {
+      "id": "ar-rushdee",
+      "artists": [
+        "RushDee"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Tagged as producer on Hendrix Smoke Instagram Story with Travis Scott GTA VI artwork (15 Sep 2026); no RushDee primary post found",
+      "appearanceKey": "artist_claim",
+      "note": "Discovery via @rushdee tag on expired Story. Aggregators only.",
+      "sources": [
+        {
+          "label": "TexFunz2 (story screenshot, discovery)",
+          "url": "https://x.com/TexFunz2/status/2099964919672115286"
+        },
+        {
+          "label": "GTAVice (discovery)",
+          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
+        }
+      ],
+      "status": "needs_primary_source"
+    },
+    {
+      "id": "ar-karan-kanchan",
+      "artists": [
+        "Karan Kanchan"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Reporting shows @karankanchanmusic Instagram with GTA VI–style helicopter artwork (Sep 2026); durable primary permalink not verified in this scout",
+      "appearanceKey": "artist_claim",
+      "note": "Discovery screenshot via @_GTAVI_; confirm exact IG permalink before clearing needs_primary.",
+      "sources": [
+        {
+          "label": "_GTAVI_ (discovery screenshot)",
+          "url": "https://x.com/_GTAVI_/status/2100088440775672251"
         }
       ],
       "status": "needs_primary_source"

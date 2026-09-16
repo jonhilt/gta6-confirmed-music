@@ -3,61 +3,108 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Leonida Needle Drop</title>
+    <title>Leonida Needle Drop — GTA VI confirmed music</title>
     <meta
       name="description"
-      content="Fan-made citeable list of tracks and artists tied to official GTA VI promo, plus artist claims that still need a primary link."
+      content="Source-first tracker of artists and tracks tied to Grand Theft Auto VI marketing and soundtrack talk."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,900;1,900&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@800&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap"
     />
-    <link rel="stylesheet" href="assets/postcard.css" />
     <link rel="stylesheet" href="assets/style.css" />
-    <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/leonida-needle-mark.svg" type="image/svg+xml" />
   </head>
-  <body class="postcard">
-    <header class="c-header">
-      <div class="c-header-inner">
-        <a class="c-brand" href="./" aria-label="Leonida Needle Drop home">
-          <img class="c-brand-wordmark" src="assets/logo-wordmark.png" height="44" alt="Leonida Needle Drop" />
-        </a>
-        <nav class="c-pills" aria-label="Primary">
-          <a href="./" aria-current="page">List</a>
-          <a href="./methodology.html">Methodology</a>
-          <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
+  <body>
+    <header class="site-nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="./">Leonida Needle Drop</a>
+        <nav aria-label="Site">
+          <a href="./" aria-current="page">Full list</a>
+          <a href="./methodology.html">How we verify</a>
+          <a href="data/entries.json">Data ↗</a>
         </nav>
       </div>
     </header>
 
-    <p class="c-marquee">
-      Fan list. Not affiliated with Rockstar Games or Take-Two.
-    </p>
-
-    <section class="hero hero-tracker">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-inner">
-        <div class="hero-split">
-          <h1>Leonida Needle Drop</h1>
-          <div class="hero-copy">
-            <p class="lede">
-              Fan-made citeable list of tracks and artists tied to official GTA VI promo (and
-              artist claims that still need a primary link).
-            </p>
-            <p class="count-pill" id="entry-pill">Loading entries</p>
+        <p class="hero-kicker" id="hero-kicker">Loading…</p>
+        <h1 id="hero-title">The full<br />needle drop</h1>
+        <div class="hero-graphic" aria-hidden="true">
+          <div class="eq-bars">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
           </div>
         </div>
       </div>
     </section>
 
-    <main class="wrap">
-      <div class="controls">
-        <label class="visually-hidden" for="search">Search artist or track</label>
-        <div class="search-wrap">
-          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-            <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6" />
-            <path d="M10.4 10.4 L13.5 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    <section class="index-intro">
+      <div class="wrap intro-inner">
+        <h2 class="intro-title">The music of GTA VI.<br />The sources behind it.</h2>
+        <p class="intro-copy">
+          Explore every entry, grouped by evidence—not speculation. Official promo audio, Rockstar
+          mentions, and unverified reports stay clearly separated.
+        </p>
+      </div>
+    </section>
+
+    <main class="wrap listing-body">
+      <aside class="evidence-sidebar" aria-label="Evidence tiers">
+        <h2 class="sidebar-label">The receipts scale</h2>
+
+        <button type="button" class="tier-key tier-key--official" data-tier="official_promo">
+          <span class="tier-key-num">01</span>
+          <span class="tier-key-body">
+            <span class="tier-key-title">Official promo</span>
+            <span class="tier-key-copy">Heard in publisher-posted video.</span>
+          </span>
+        </button>
+
+        <button type="button" class="tier-key tier-key--named" data-tier="rockstar_named">
+          <span class="tier-key-num">02</span>
+          <span class="tier-key-body">
+            <span class="tier-key-title">Rockstar-named</span>
+            <span class="tier-key-copy">Named by Rockstar staff; track may be unspecified.</span>
+          </span>
+        </button>
+
+        <button type="button" class="tier-key tier-key--reported" data-tier="artist_reported">
+          <span class="tier-key-num">03</span>
+          <span class="tier-key-body">
+            <span class="tier-key-title">Artist-reported</span>
+            <span class="tier-key-copy">Artist claim; needs a primary source link.</span>
+          </span>
+        </button>
+
+        <div class="sidebar-note">
+          <p class="sidebar-note-heading">Evidence scope</p>
+          <p class="sidebar-note-copy">
+            Promo rows link to official Rockstar videos. Named and reported rows open citation
+            details—no trailer footage reproduced here.
+          </p>
+        </div>
+
+        <div class="sidebar-note">
+          <p class="sidebar-note-heading">Playback</p>
+          <p class="sidebar-note-copy">
+            Play expands the panel. Trailers load inline; Extended Look shows a YouTube link at the
+            verified cue because that upload is age-restricted and cannot embed here.
+          </p>
+        </div>
+      </aside>
+
+      <div class="index-main">
+        <label class="search-wrap" for="search">
+          <span class="visually-hidden">Search artists and tracks</span>
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M10.5 3a7.5 7.5 0 0 1 5.92 12.1l4.38 4.38-1.42 1.42-4.38-4.38A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"
+            />
           </svg>
           <input
             id="search"
@@ -66,81 +113,21 @@
             placeholder="Search artist or track"
             autocomplete="off"
           />
-        </div>
-        <div class="filters" role="group" aria-label="Confirmation tier">
-          <button class="filter" type="button" data-tier="all" aria-pressed="true">All tiers</button>
-          <button class="filter" type="button" data-tier="official_promo" aria-pressed="false">
-            Official promo
-          </button>
-          <button class="filter" type="button" data-tier="rockstar_named" aria-pressed="false">
-            Rockstar-named
-          </button>
-          <button class="filter" type="button" data-tier="artist_reported" aria-pressed="false">
-            Artist-reported
-          </button>
-        </div>
-      </div>
+        </label>
 
-      <div class="layout">
         <div id="catalog"></div>
-
-        <aside class="sidebar" aria-label="Tiers and dataset">
-          <section class="receipts-card">
-            <p class="card-kicker">Evidence</p>
-            <h2>Three tiers</h2>
-            <ul class="scale-list">
-              <li>
-                <span class="dot dot-cyan" aria-hidden="true"></span>
-                Heard in official promo
-              </li>
-              <li>
-                <span class="dot dot-orange" aria-hidden="true"></span>
-                Named by Rockstar staff
-              </li>
-              <li>
-                <span class="dot dot-magenta" aria-hidden="true"></span>
-                Claimed by the artist
-              </li>
-            </ul>
-          </section>
-
-          <section class="snapshot-card">
-            <p class="card-kicker">Counts</p>
-            <ul class="snapshot-list" id="snapshot">
-              <li>Official promo <strong id="count-official">0</strong></li>
-              <li>Rockstar-named <strong id="count-named">0</strong></li>
-              <li>Artist-reported <strong id="count-reported">0</strong></li>
-            </ul>
-          </section>
-
-          <section class="awaiting-card">
-            <p class="card-kicker">Awaiting primary source</p>
-            <ul class="awaiting-list" id="awaiting-list"></ul>
-            <p class="awaiting-note">
-              On the list for discovery. Not soundtrack credits until a primary link is attached.
-            </p>
-          </section>
-
-          <p class="raw-json">
-            <a href="data/entries.json">Raw JSON</a>
-          </p>
-        </aside>
       </div>
     </main>
 
-    <footer class="c-foot">
-      <div class="c-foot-row">
-        <span>
-          Dataset is <code>docs/data/entries.json</code>. How to add a row is in the README.
-          Code is MIT.
-        </span>
-        <span>
-          <a href="./methodology.html">Methodology</a>
-          ·
-          <a href="https://github.com/jonhilt/gta6-confirmed-music" rel="noopener noreferrer">GitHub</a>
-        </span>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p class="footer-brand">Leonida / Needle Drop</p>
+        <p class="footer-note">
+          Fan documentation · not affiliated with Rockstar Games or Take-Two
+        </p>
       </div>
     </footer>
+
     <script src="assets/app.js"></script>
   </body>
 </html>

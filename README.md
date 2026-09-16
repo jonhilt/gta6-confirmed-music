@@ -6,11 +6,9 @@ Public, citeable list of artists and tracks tied to Grand Theft Auto VI marketin
 
 This is fan documentation. It is not affiliated with Rockstar Games or Take-Two Interactive.
 
-The home page (`docs/index.html`) is the catalog: search, tier filters, and source links. Methodology is at `docs/methodology.html`.
-
 ## What belongs on the list
 
-Three tiers. Nothing else goes in the catalog.
+Three tiers. Nothing else goes on the home page.
 
 1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, or Extended Look.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
@@ -40,7 +38,11 @@ The site is static HTML. It reads:
 | `sources` | yes | `{ "label", "url" }[]` — first link should be the strongest |
 | `status` | no | `needs_primary_source` for artist-reported rows without a primary URL |
 | `note` | no | one factual caveat |
+| `cueSeconds` | no | integer start time on the Rockstar YouTube upload; Play uses this |
 | `inUniverse` | no | `true` for fictional in-game acts |
+
+`officialVideos` entries may set `embedRestricted: true` when YouTube blocks third-party embeds
+(Extended Look). Those rows link out at `cueSeconds` instead of loading an iframe.
 
 Artist blurbs live under `artists` in the same file (not inside each row). Keep them to two sentences and a `cite` URL.
 
@@ -61,12 +63,6 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
 - Rockstar-named: Kodak Black, Sexyy Red, Real Dimez (Dazed).
 - Artist-reported awaiting a primary URL: Travis Scott, Future, Morgan Wallen.
-
-
-
-### Artist-reported primary cite
-
-For `artist_reported` rows, always attempt to cite the artist's own source (Instagram, X, official site). Aggregators are discovery only until a primary permalink is attached.
 
 ## License
 

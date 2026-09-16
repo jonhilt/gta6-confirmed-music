@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-15",
+  "updated": "2026-09-16",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar — Trailer 1",
@@ -12,7 +12,8 @@
     },
     "extendedLook": {
       "label": "Rockstar — Extended Look",
-      "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+      "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
+      "embedRestricted": true
     }
   },
   "artists": {
@@ -157,7 +158,8 @@
           "label": "Tom Petty official site",
           "url": "https://www.tompetty.com/blogs/news/tom-petty-s-love-is-a-long-road-from-full-moon-fever-featured-in-trailer-1-of-grand-theft-auto-vi"
         }
-      ]
+      ],
+      "cueSeconds": 2
     },
     {
       "id": "t2-thunder-island",
@@ -178,7 +180,8 @@
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
         }
-      ]
+      ],
+      "cueSeconds": 6
     },
     {
       "id": "t2-child-support",
@@ -200,7 +203,8 @@
           "label": "NME (Trailer 2 songs)",
           "url": "https://www.nme.com/news/gaming-news/what-song-grand-theft-auto-6-trailer-2-3860654"
         }
-      ]
+      ],
+      "cueSeconds": 27
     },
     {
       "id": "t2-everybody-have-fun-tonight",
@@ -221,7 +225,8 @@
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
         }
-      ]
+      ],
+      "cueSeconds": 34
     },
     {
       "id": "t2-talkin-to-myself-again",
@@ -242,7 +247,8 @@
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
         }
-      ]
+      ],
+      "cueSeconds": 41
     },
     {
       "id": "t2-hot-together",
@@ -263,7 +269,8 @@
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
         }
-      ]
+      ],
+      "cueSeconds": 64
     },
     {
       "id": "el-pop-bottles",
@@ -289,7 +296,8 @@
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
         }
-      ]
+      ],
+      "cueSeconds": 6
     },
     {
       "id": "el-pound-town",
@@ -315,7 +323,8 @@
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
         }
-      ]
+      ],
+      "cueSeconds": 46
     },
     {
       "id": "el-skrilla",
@@ -336,7 +345,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 105
     },
     {
       "id": "el-let-your-love-flow",
@@ -357,7 +367,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 360
     },
     {
       "id": "el-love-bites",
@@ -378,7 +389,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 403
     },
     {
       "id": "el-people-are-people",
@@ -399,7 +411,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 501
     },
     {
       "id": "el-but-i-think-its-a-dream",
@@ -425,7 +438,8 @@
           "label": "IGN Extended Look track list",
           "url": "https://www.ign.com/articles/heres-every-song-featured-in-rockstars-gta-6-extended-look"
         }
-      ]
+      ],
+      "cueSeconds": 589
     },
     {
       "id": "el-cars-and-girls",
@@ -446,7 +460,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 639
     },
     {
       "id": "el-off-the-grid",
@@ -468,7 +483,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 745
     },
     {
       "id": "el-devil-woman",
@@ -493,7 +509,8 @@
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
         }
-      ]
+      ],
+      "cueSeconds": 1009
     },
     {
       "id": "el-se-me-nota",
@@ -516,7 +533,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 1207
     },
     {
       "id": "el-against-all-odds",
@@ -538,7 +556,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 1293
     },
     {
       "id": "el-mine-o-mine",
@@ -560,7 +579,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 1315
     },
     {
       "id": "el-inner-light",
@@ -582,7 +602,8 @@
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
         }
-      ]
+      ],
+      "cueSeconds": 1544
     },
     {
       "id": "rs-kodak-black",

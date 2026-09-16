@@ -126,16 +126,44 @@
       "cite": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
     },
     "Travis Scott": {
-      "blurb": "American rapper and producer. News outlets reported Instagram teasers tagging Rockstar in September 2026; no primary post URL is in this dataset yet.",
+      "blurb": "American rapper and producer. Posted GTA VI–style artwork on Instagram (@travisscott), 15 Sep 2026.",
       "cite": "https://en.wikipedia.org/wiki/Travis_Scott"
     },
     "Future": {
-      "blurb": "American rapper. September 2026 news roundups say he posted GTA VI–style artwork; no primary post URL is in this dataset yet.",
+      "blurb": "American rapper. September 2026 teasers via Freebandz label IG; personal @future primary still missing.",
       "cite": "https://en.wikipedia.org/wiki/Future_(rapper)"
     },
     "Morgan Wallen": {
-      "blurb": "American country singer. September 2026 reports say he posted GTA VI–style artwork; no primary post URL is in this dataset yet.",
+      "blurb": "American country singer. Posted GTA VI–style artwork on X (@MorganWallen), 15 Sep 2026.",
       "cite": "https://en.wikipedia.org/wiki/Morgan_Wallen"
+    },
+    "Keith Richards": {
+      "blurb": "English guitarist (The Rolling Stones). Posted GTA VI–style iguana artwork on Instagram (@officialkeef), 15 Sep 2026.",
+      "cite": "https://en.wikipedia.org/wiki/Keith_Richards"
+    },
+    "CA7RIEL & Paco Amoroso": {
+      "blurb": "Argentine duo. Posted GTA VI–style yacht artwork on Instagram, 15 Sep 2026.",
+      "cite": "https://en.wikipedia.org/wiki/Ca7riel_%26_Paco_Amoroso"
+    },
+    "Fred again..": {
+      "blurb": "English producer/DJ. Team-run Instagram (@fredagainfeed) posted GTA VI–style yacht artwork, 15 Sep 2026.",
+      "cite": "https://en.wikipedia.org/wiki/Fred_Again"
+    },
+    "PinkPantheress": {
+      "blurb": "English singer-songwriter. Linked/HQ Instagram shared yacht artwork, 15 Sep 2026; official @pinkpantheress primary not yet attached.",
+      "cite": "https://en.wikipedia.org/wiki/PinkPantheress"
+    },
+    "Metro Boomin": {
+      "blurb": "American producer/rapper. Posted GTA VI–style artwork on Instagram (@metroboomin), 15 Sep 2026.",
+      "cite": "https://en.wikipedia.org/wiki/Metro_Boomin"
+    },
+    "Yung Lean": {
+      "blurb": "Swedish rapper. Posted GTA VI–style artwork on Instagram (@yunglean2001), 15 Sep 2026.",
+      "cite": "https://en.wikipedia.org/wiki/Yung_Lean"
+    },
+    "Rauw Alejandro": {
+      "blurb": "Puerto Rican singer. Posted GTA VI–style artwork on Instagram (@rauwalejandro), 15 Sep 2026.",
+      "cite": "https://en.wikipedia.org/wiki/Rauw_Alejandro"
     }
   },
   "entries": [
@@ -714,10 +742,10 @@
       "track": null,
       "year": null,
       "tier": "artist_reported",
-      "appearance": "Reporting describes artist Instagram with Leonida-plate car artwork (Sep 2026); primary IG permalink not found on @future",
+      "appearance": "Reporting + Freebandz label IG with Leonida-plate Coquette artwork (15 Sep 2026); Future personal IG/X primary still missing",
       "appearanceKey": "artist_claim",
       "status": "needs_primary_source",
-      "note": "Still needs a primary artist permalink. @future public grid did not show a 15 Sep GTA tease; @futurehendrixx is not the artist. Do not promote aggregator reposts to primary. Aggregators stay discovery only.",
+      "note": "Still needs Future's own @future IG or X permalink. Freebandz is Future's label (discovery/label only), not personal primary. @futurehendrixx is not the artist. Aggregators stay discovery only.",
       "sources": [
         {
           "label": "@videotech (discovery only)",
@@ -730,6 +758,14 @@
         {
           "label": "@Rap / RapTV (discovery only)",
           "url": "https://x.com/Rap/status/2099899450269241403"
+        },
+        {
+          "label": "Freebandz on Instagram (label / discovery — not Future personal)",
+          "url": "https://www.instagram.com/p/DdUC6hqtkEI/"
+        },
+        {
+          "label": "Mixmag (notes Freebandz posted, not Future personal)",
+          "url": "https://mixmag.net/read/fred-again-pinkpantheress-teased-gta-6-soundtrack-news"
         }
       ]
     },
@@ -828,6 +864,115 @@
           "url": "https://x.com/Rap/status/2099899450269241403"
         }
       ]
+    },
+    {
+      "id": "ar-keith-richards",
+      "artists": [
+        "Keith Richards"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Artist Instagram post (@officialkeef) with GTA VI–style iguana artwork (15 Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "note": "Primary: Keith Richards Instagram (@officialkeef). Track not named. Aggregators discovery only.",
+      "sources": [
+        {
+          "label": "Keith Richards on Instagram (primary)",
+          "url": "https://www.instagram.com/p/DdUFptdRWBp/"
+        },
+        {
+          "label": "Metro (embeds same IG)",
+          "url": "https://metro.co.uk/2026/09/16/travis-scott-fred-confirm-gta-6-soundtrack-songs-via-new-artwork-29619990/"
+        },
+        {
+          "label": "Mixmag (embeds @officialkeef)",
+          "url": "https://mixmag.net/read/fred-again-pinkpantheress-teased-gta-6-soundtrack-news"
+        }
+      ]
+    },
+    {
+      "id": "ar-ca7riel-paco-amoroso",
+      "artists": [
+        "CA7RIEL & Paco Amoroso"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Duo Instagram post (@ca7rielypacoamoroso) with GTA VI–style yacht artwork (15 Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "note": "Primary: CA7RIEL & Paco Amoroso Instagram. Same yacht crop later appeared on Fred again team feed and PinkPantheress-linked account. Track not named.",
+      "sources": [
+        {
+          "label": "CA7RIEL & Paco Amoroso on Instagram (primary)",
+          "url": "https://www.instagram.com/p/DdUChWhs0t6/"
+        },
+        {
+          "label": "Metro (lists duo + embeds)",
+          "url": "https://metro.co.uk/2026/09/16/travis-scott-fred-confirm-gta-6-soundtrack-songs-via-new-artwork-29619990/"
+        },
+        {
+          "label": "Mixmag (yacht group context)",
+          "url": "https://mixmag.net/read/fred-again-pinkpantheress-teased-gta-6-soundtrack-news"
+        }
+      ]
+    },
+    {
+      "id": "ar-fred-again",
+      "artists": [
+        "Fred again.."
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "Team-run Instagram (@fredagainfeed) posted GTA VI–style yacht artwork (15 Sep 2026)",
+      "appearanceKey": "artist_claim",
+      "note": "Primary proposed: @fredagainfeed (official team-run feed per Mixmag), not personal @fredagainagainagainagainagain. Same yacht as CA7RIEL & Paco Amoroso. Track not named. If Jon wants stricter personal-only rule, demote to needs_primary_source.",
+      "sources": [
+        {
+          "label": "fred again.. feed on Instagram (team-run primary)",
+          "url": "https://www.instagram.com/p/DdUQD9TiMlQ/"
+        },
+        {
+          "label": "Mixmag (identifies team-run feed)",
+          "url": "https://mixmag.net/read/fred-again-pinkpantheress-teased-gta-6-soundtrack-news"
+        },
+        {
+          "label": "Metro (lists Fred Again)",
+          "url": "https://metro.co.uk/2026/09/16/travis-scott-fred-confirm-gta-6-soundtrack-songs-via-new-artwork-29619990/"
+        }
+      ]
+    },
+    {
+      "id": "ar-pinkpantheress",
+      "artists": [
+        "PinkPantheress"
+      ],
+      "track": null,
+      "year": null,
+      "tier": "artist_reported",
+      "appearance": "PinkPantheress-linked / HQ Instagram shared yacht crop (15 Sep 2026); official @pinkpantheress primary not found",
+      "appearanceKey": "artist_claim",
+      "note": "needs_primary_source. @pinkpantheressworld (palm 🌴 + yacht) is fan/HQ — Mixmag says management/linked, not official artist page. Do not promote to primary until @pinkpantheress (or artist X / official site) permalink exists.",
+      "sources": [
+        {
+          "label": "@pinkpantheressworld on Instagram (discovery only — not official artist)",
+          "url": "https://www.instagram.com/p/DdUGoHsyecI/"
+        },
+        {
+          "label": "Mixmag (notes not on official page)",
+          "url": "https://mixmag.net/read/fred-again-pinkpantheress-teased-gta-6-soundtrack-news"
+        },
+        {
+          "label": "NME (roundup)",
+          "url": "https://www.nme.com/news/gaming-news/grand-theft-auto-6-soundtrack-travis-scott-pinkpantheress-keith-richards-3969155"
+        },
+        {
+          "label": "PopBase on X (discovery only)",
+          "url": "https://x.com/PopBase/status/2099901089004863653"
+        }
+      ],
+      "status": "needs_primary_source"
     }
   ]
 }

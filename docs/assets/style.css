@@ -433,13 +433,20 @@ a {
 }
 
 /* Index rows */
+.index-main {
+  min-width: 0;
+}
+
 .index-list {
   display: grid;
+  min-width: 0;
 }
 
 .index-row {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
   padding: 0 var(--space-row-inset);
   border-bottom: 2px solid var(--line);
   background: transparent;
@@ -450,6 +457,7 @@ a {
   grid-template-columns: 1.75rem minmax(8rem, 18.125rem) minmax(0, 1fr) 9.25rem;
   gap: var(--space-row-gap);
   align-items: center;
+  min-width: 0;
   min-height: 5.5rem;
 }
 
@@ -556,10 +564,13 @@ a {
 .row-panel {
   display: grid;
   gap: 1.125rem;
+  min-width: 0;
+  max-width: 100%;
   margin: 0 calc(-1 * var(--space-row-inset));
   padding: 1.75rem var(--space-row-inset) 1.875rem;
   background: var(--cream-panel);
   border-top: 1px solid var(--line);
+  overflow-x: clip;
 }
 
 .row-panel-inner {
@@ -579,11 +590,15 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 38rem) minmax(0, 1fr);
   gap: var(--space-panel);
+  min-width: 0;
+  max-width: 100%;
 }
-
 
 .video-shell {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   aspect-ratio: 16 / 9;
   background: var(--nav);
   color: var(--cream);
@@ -591,6 +606,7 @@ a {
   place-items: center;
   text-align: center;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .video-shell iframe {
@@ -621,6 +637,16 @@ a {
   display: grid;
   gap: 0.75rem;
   justify-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding-inline: 0.5rem;
+  box-sizing: border-box;
+}
+
+.video-placeholder-title,
+.video-placeholder-copy {
+  max-width: 100%;
 }
 
 .video-open-cta {
@@ -671,6 +697,7 @@ a {
   display: grid;
   gap: 1rem;
   align-content: start;
+  min-width: 0;
 }
 
 .panel-eyebrow {
@@ -1022,7 +1049,7 @@ a {
     grid-template-columns: 1.75rem minmax(0, 1fr) auto;
     grid-template-areas:
       "num identity actions"
-      "track track track";
+      ". track track";
     align-items: start;
     gap: 0.375rem var(--space-row-gap);
     min-height: auto;
@@ -1044,6 +1071,7 @@ a {
     font-size: 1.25rem;
     line-height: 1.1;
     padding-top: 0.125rem;
+    min-width: 0;
   }
 
   .row-actions {

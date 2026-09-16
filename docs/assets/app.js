@@ -507,7 +507,7 @@ function bindCatalog(data, state) {
 }
 
 async function main() {
-  const res = await fetch("data/entries.json");
+  const res = await fetch("data/entries.json", { cache: "no-store" });
   if (!res.ok) {
     $("#catalog").innerHTML = `<p class="empty">Could not load data/entries.json (${res.status}).</p>`;
     return;

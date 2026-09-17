@@ -14,7 +14,7 @@ const TIER_SECTION_NUM = {
 
 const TIER_COPY = {
   official_promo:
-    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Trailer cues play in the official video. Album debut singles play in Spotify or the official Atlantic YouTube video.",
+    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Radio cycles official YouTube videos. Album debut singles also offer Spotify.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
@@ -60,12 +60,12 @@ function formatCueLine(entry) {
   const key = entry.appearanceKey;
   let slot;
   if (key === "trailer1") slot = "Trailer 1 · 04 Dec 2023";
-  else if (key === "trailer2") slot = "Trailer 2 · 06 May 2025";
-  else if (key === "extendedLook") slot = "Extended Look · 27 Aug 2026";
-  else if (key === "the_album") slot = "The Album · 17 Sep 2026";
-  else if (key === "interview") slot = "Named by Rockstar · Aug 2026";
-  else if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
-  else slot = entry.appearance;
+  if (key === "trailer2") slot = "Trailer 2 · 06 May 2025";
+  if (key === "extendedLook") slot = "Extended Look · 27 Aug 2026";
+  if (key === "the_album") slot = "The Album · 17 Sep 2026";
+  if (key === "interview") slot = "Named by Rockstar · Aug 2026";
+  if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
+  if (!slot) slot = entry.appearance;
 
   if (entry.tier === "official_promo" && entry.cueSeconds != null) {
     return `${slot} · ${formatTimestamp(entry.cueSeconds)}`;
@@ -97,8 +97,10 @@ function youtubeVideoId(entry) {
   return trimmed;
 }
 
-function youtubeWatchFromId(id) {
-  return `https://www.youtube.com/watch?v=${id}`;
+function youtubeWatchFromId(id, startSeconds) {
+  const url = new URL(`https://www.youtube.com/watch?v=${id}`);
+  if (startSeconds) url.searchParams.set("t", String(Math.floor(startSeconds)));
+  return url.toString();
 }
 
 function sharedSourcesFor(entry, data) {
@@ -111,51 +113,6 @@ function sourceCount(entry, data) {
   return (entry.sources || []).length + sharedSourcesFor(entry, data).length;
 }
 
-function playVariant(entry, data) {
-  const trailer = Boolean(videoMeta(data, entry));
-  const sp = Boolean(spotifyTrackId(entry));
-  const yt = Boolean(youtubeVideoId(entry));
-  if (sp && (yt || trailer)) return "play-both";
-  if (sp && !yt && !trailer) return "play-audio";
-  return "play-video";
-}
-
-function defaultPlayerSource(entry, data) {
-  if (videoMeta(data, entry)) return "trailer";
-  if (spotifyTrackId(entry)) return "spotify";
-  if (youtubeVideoId(entry)) return "youtube";
-  return "trailer";
-}
-
-function youtubeWatchUrl(url, startSeconds) {
-  if (!url || startSeconds == null || startSeconds < 0) return url;
-  try {
-    const u = new URL(url);
-    u.searchParams.set("t", String(Math.floor(startSeconds)));
-    return u.toString();
-  } catch {
-    return url;
-  }
-}
-
-function formatPanelEyebrow(entry) {
-  const tier = TIER_LABEL[entry.tier].toUpperCase();
-  if (entry.tier === "official_promo") {
-    const slot =
-      entry.appearanceKey === "trailer1"
-        ? "Trailer 1"
-        : entry.appearanceKey === "trailer2"
-          ? "Trailer 2"
-          : entry.appearanceKey === "extendedLook"
-            ? "Extended Look"
-            : entry.appearanceKey === "the_album"
-              ? "The Album"
-              : entry.appearance;
-    return `${tier} / ${slot}`;
-  }
-  return tier;
-}
-
 function videoMeta(data, entry) {
   const key = entry.appearanceKey;
   if (!key || !data.officialVideos?.[key]) return null;
@@ -164,6 +121,76 @@ function videoMeta(data, entry) {
   if (!id) return null;
   const start = entry.cueSeconds ?? 0;
   return { ...rec, id, start, embedRestricted: Boolean(rec.embedRestricted) };
+}
+
+function ytSource(entry, data, source = "trailer") {
+  const trailer = videoMeta(data, entry);
+  if (trailer && (source === "trailer" || !youtubeVideoId(entry))) {
+    return {
+      videoId: trailer.id,
+      start: trailer.start,
+      label: trailer.label,
+      url: trailer.url,
+      embedRestricted: Boolean(trailer.embedRestricted),
+    };
+  }
+  const id = youtubeVideoId(entry);
+  if (!id) return null;
+  return {
+    videoId: id,
+    start: 0,
+    label: "Official full track on YouTube",
+    url: youtubeWatchFromId(id),
+    embedRestricted: false,
+  };
+}
+
+function canPlay(entry, data) {
+  return Boolean(ytSource(entry, data) || spotifyTrackId(entry));
+}
+
+function playVariant(entry, data) {
+  const yt = ytSource(entry, data);
+  const sp = Boolean(spotifyTrackId(entry));
+  if (sp && yt) return "play-both";
+  if (sp && !yt) return "play-audio";
+  return "play-video";
+}
+
+function radioVideos(data, source = "full") {
+  const seen = new Set();
+  const list = [];
+  for (const entry of data.entries) {
+    const yt = ytSource(entry, data, source);
+    if (!yt || yt.embedRestricted) continue;
+    if (seen.has(yt.videoId)) continue;
+    seen.add(yt.videoId);
+    list.push({
+      videoId: yt.videoId,
+      start: yt.start || 0,
+      label: yt.label,
+      url: yt.url,
+      firstEntryId: entry.id,
+    });
+  }
+  return list;
+}
+
+function entriesForVideo(data, videoId) {
+  return data.entries
+    .filter((entry) => ytSource(entry, data)?.videoId === videoId)
+    .sort((a, b) => (ytSource(a, data).start || 0) - (ytSource(b, data).start || 0));
+}
+
+function entryAtTime(data, videoId, seconds) {
+  const rows = entriesForVideo(data, videoId);
+  if (!rows.length) return null;
+  let current = rows[0];
+  for (const row of rows) {
+    const start = ytSource(row, data).start || 0;
+    if (seconds + 0.35 >= start) current = row;
+  }
+  return current;
 }
 
 function sourceRole(label, entry) {
@@ -209,13 +236,8 @@ function lucideIcon(name, size = 16) {
     "chevron-up": `<path d="m18 15-6-6-6 6"/>`,
     "arrow-up-right": `<path d="M7 7h10v10"/><path d="M7 17 17 7"/>`,
     "clock-3": `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16.5 12"/>`,
-    "circle-play": `<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>`,
   }[name];
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
-}
-
-function playIcon() {
-  return lucideIcon("circle-play", 14);
 }
 
 function renderSourceItems(sources, entry) {
@@ -242,242 +264,29 @@ function renderSourceList(entry, data) {
     ${renderSourceItems(shared, entry)}`;
 }
 
-function rowActionButton({ action, id, expanded, variant, label }) {
-  const open = Boolean(expanded);
-  const isPlay = variant === "play-video" || variant === "play-audio" || variant === "play-both";
-  const classes = ["row-action"];
-  if (isPlay) {
-    classes.push(
-      "row-action--play",
-      variant === "play-audio" ? "row-action--audio" : variant === "play-both" ? "row-action--both" : "row-action--video"
-    );
-  } else {
-    classes.push("row-action--sources");
-    if (variant === "awaiting") classes.push("row-action--awaiting");
-  }
-  if (open) classes.push("is-open");
-
-  let icon;
-  let visible;
-  if (isPlay) {
-    const closedLabel = variant === "play-audio" ? "PLAY AUDIO" : variant === "play-both" ? "PLAY" : "PLAY VIDEO";
-    icon = lucideIcon(open ? "chevron-up" : variant === "play-audio" ? "headphones" : "play", 16);
-    visible = open ? "HIDE PLAYER" : closedLabel;
-  } else {
-    icon = lucideIcon(open ? "chevron-up" : variant === "awaiting" ? "clock-3" : "arrow-up-right", 14);
-    visible = label;
-  }
-
-  const ariaLabel = open ? (isPlay ? "Hide player" : "Hide sources") : label;
-  const labelEl = `<span class="row-action-label">${escapeHtml(visible)}</span>`;
-  const inner = isPlay ? `${icon}${labelEl}` : `${labelEl}${icon}`;
-
-  return `
-    <button
-      type="button"
-      class="${classes.join(" ")}"
-      data-action="${escapeHtml(action)}"
-      data-id="${escapeHtml(id)}"
-      aria-expanded="${String(open)}"
-      aria-label="${escapeHtml(ariaLabel)}"
-      title="${escapeHtml(ariaLabel)}"
-    >
-      ${inner}
-    </button>`;
-}
-
-function renderSpotifyShell(entry, trackId, loaded) {
-  const title = entry.track ? `Spotify Embed: ${entry.track}` : "Spotify Embed: Official track";
-
-  if (loaded) {
-    return `<div class="video-shell video-shell--spotify" data-video-shell="${escapeHtml(entry.id)}">
-      <iframe
-        title="${escapeHtml(title)}"
-        src="${escapeHtml(spotifyEmbedUrl(trackId))}?utm_source=generator"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-      ></iframe>
-    </div>`;
-  }
-
-  return `<div class="video-shell video-shell--spotify" data-video-shell="${escapeHtml(entry.id)}">
-    <div class="video-placeholder">
-      <div class="video-placeholder-icon">${playIcon()}</div>
-      <p class="video-placeholder-title">Spotify</p>
-      <p class="video-placeholder-copy">Official Spotify player loads here</p>
-    </div>
-  </div>`;
-}
-
-function renderEmbeddedVideoShell(video, entry, loaded) {
-  const videoLabel = video.label.replace(/^Rockstar /, "GTA VI · ");
-
-  if (loaded) {
-    return `<div class="video-shell" data-video-shell="${escapeHtml(entry.id)}">
-      <iframe
-        title="${escapeHtml(video.label)}"
-        src="https://www.youtube-nocookie.com/embed/${escapeHtml(video.id)}?autoplay=1&start=${video.start}"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>`;
-  }
-
-  return `<div class="video-shell" data-video-shell="${escapeHtml(entry.id)}">
-    <div class="video-placeholder">
-      <div class="video-placeholder-icon">${playIcon()}</div>
-      <p class="video-placeholder-title">${escapeHtml(videoLabel)}</p>
-      <p class="video-placeholder-copy">Official YouTube player loads here</p>
-    </div>
-  </div>`;
-}
-
-function renderExternalVideoShell(video, entry) {
-  const videoLabel = video.label.replace(/^Rockstar /, "GTA VI · ");
-  const watchUrl = youtubeWatchUrl(video.url, video.start);
-  const cta =
-    entry.cueSeconds != null
-      ? `Play on YouTube at ${formatTimestamp(entry.cueSeconds)}`
-      : "Play on YouTube";
-
-  return `<a
-      class="video-shell video-shell--external"
-      data-video-shell="${escapeHtml(entry.id)}"
-      href="${escapeHtml(watchUrl)}"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <div class="video-placeholder">
-        <div class="video-placeholder-icon">${playIcon()}</div>
-        <p class="video-placeholder-title">${escapeHtml(videoLabel)}</p>
-        <span class="video-open-cta">${escapeHtml(cta)} ${externalIcon()}</span>
-        <p class="video-placeholder-copy">Age-restricted on YouTube. Opens on youtube.com at the verified cue.</p>
-      </div>
-    </a>`;
-}
-
-function renderPlayerSourceSwitch(entry, hasSpotify, hasYouTube, source) {
-  if (!(hasSpotify && hasYouTube)) return "";
-  const btn = (id, label, active) => `
-    <button
-      type="button"
-      class="player-source${active ? " is-active" : ""}"
-      data-action="set-player-source"
-      data-id="${escapeHtml(entry.id)}"
-      data-source="${id}"
-      aria-pressed="${String(active)}"
-    >
-      ${escapeHtml(label)}
-    </button>`;
-  return `<div class="player-source-switch" role="group" aria-label="Playback source">
-    ${btn("spotify", "Spotify", source === "spotify")}
-    ${btn("youtube", "YouTube", source === "youtube")}
-  </div>`;
-}
-
-function atlanticVideoMeta(entry) {
-  const id = youtubeVideoId(entry);
-  if (!id) return null;
-  return {
-    id,
-    url: youtubeWatchFromId(id),
-    label: "Atlantic Records YouTube",
-    start: 0,
-    embedRestricted: false,
-  };
-}
-
-function renderPlayerPanel(entry, data, artists, loaded, playerSource) {
-  const trailer = videoMeta(data, entry);
-  const trackId = spotifyTrackId(entry);
-  const atlantic = atlanticVideoMeta(entry);
-  const hasSpotify = Boolean(trackId);
-  const hasYouTube = Boolean(atlantic);
-  let source = playerSource;
-  if (trailer) source = "trailer";
-  else if (source === "spotify" && hasSpotify) source = "spotify";
-  else if (source === "youtube" && hasYouTube) source = "youtube";
-  else source = defaultPlayerSource(entry, data);
-
-  const useSpotify = source === "spotify" && hasSpotify;
-  const video = trailer || (source === "youtube" ? atlantic : null);
-  const trackTitle = entry.track ? escapeHtml(entry.track) : "Track not specified";
-  const artistLine = escapeHtml(entry.artists.join(", "));
-  const cueVerified = entry.cueSeconds != null;
-  const external = Boolean(video?.embedRestricted);
-  const cueNote = useSpotify
-    ? "Official Atlantic/Rockstar debut single. Spotify's player, not a file we host."
-    : source === "youtube"
-      ? "Official Atlantic Records video. YouTube's player, not a file we host."
-      : cueVerified
-        ? `Verified cue at ${formatTimestamp(entry.cueSeconds)} on Rockstar YouTube.`
-        : "Cue time awaiting verification.\nOpens from the beginning for now.";
-  const videoShell = useSpotify
-    ? renderSpotifyShell(entry, trackId, loaded)
-    : video
-      ? external
-        ? renderExternalVideoShell(video, entry)
-        : renderEmbeddedVideoShell(video, entry, loaded)
-      : "";
-  const outbound = useSpotify
-    ? `<a class="panel-youtube-link" href="${escapeHtml(spotifyOpenUrl(trackId))}" rel="noopener noreferrer" target="_blank">
-        Listen on Spotify ${externalIcon()}
-      </a>`
-    : video && !external
-      ? `<a class="panel-youtube-link" href="${escapeHtml(youtubeWatchUrl(video.url, video.start))}" rel="noopener noreferrer" target="_blank">
-          Watch on YouTube ${externalIcon()}
-        </a>`
-      : "";
-  const playbackCopy = hasSpotify && hasYouTube
-    ? "Spotify or official Atlantic YouTube. Expanding another row closes this panel."
-    : useSpotify
-      ? "Official Spotify player. Expanding another row closes this panel."
-      : external
-        ? "Extended Look plays on YouTube. Expanding another track closes this panel."
-        : "One video at a time. Playing another track closes this player.";
-
-  return `
-    <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
-      <div class="player-layout${useSpotify ? " player-layout--spotify" : ""}">
-        ${videoShell}
-        <div class="panel-context">
-          <p class="panel-eyebrow">${escapeHtml(formatPanelEyebrow(entry))}</p>
-          <p class="panel-track-title">${trackTitle}${entry.year ? ` (${entry.year})` : ""}</p>
-          <p class="panel-artist">${artistLine}</p>
-          <p class="panel-meta">${escapeHtml(video?.label || entry.appearance)}</p>
-          <p class="panel-cue-note">${escapeHtml(cueNote)}</p>
-          ${renderPlayerSourceSwitch(entry, hasSpotify, hasYouTube && !trailer, source)}
-          ${outbound}
-        </div>
-      </div>
-      <p class="playback-note">
-        <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 14h-2v-2h2Zm0-4h-2V6h2Z"/></svg>
-        ${playbackCopy}
-      </p>
-    </div>`;
-}
-
 function renderDetailsPanel(entry, data, artists) {
   const headline = evidenceHeadline(entry);
   const body = evidenceSummary(entry, artists);
-  const blurb = entry.artists
+  const artist = entry.artists
     .map((name) => artists[name])
-    .filter(Boolean)
-    .slice(0, 1)
-    .map(
-      (rec) =>
-        `<p class="evidence-body">${escapeHtml(rec.blurb)} <a href="${escapeHtml(rec.cite)}" rel="noopener noreferrer">cite</a></p>`
-    )
-    .join("");
+    .find((rec) => rec?.blurb);
+  const summary = body && body !== artist?.blurb
+    ? `<p class="evidence-body">${escapeHtml(body)}</p>`
+    : "";
+  const citation = artist?.cite
+    ? ` <a href="${escapeHtml(artist.cite)}" rel="noopener noreferrer">cite</a>`
+    : "";
+  const blurb = artist
+    ? `<p class="evidence-body">${escapeHtml(artist.blurb)}${citation}</p>`
+    : "";
 
   return `
     <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
       <div class="row-panel-inner">
         <div>
-          <p class="panel-eyebrow">Evidence summary</p>
+          <p class="panel-eyebrow">The source / ${escapeHtml(TIER_LABEL[entry.tier])}</p>
           <h3 class="evidence-headline">${escapeHtml(headline)}</h3>
-          <p class="evidence-body">${escapeHtml(body)}</p>
+          ${summary}
           ${blurb}
           <p class="evidence-disclosure">Summary of the linked reporting, not a direct quotation.</p>
         </div>
@@ -489,72 +298,80 @@ function renderDetailsPanel(entry, data, artists) {
     </div>`;
 }
 
-function rowActions(entry, expanded, mode) {
-  const data = window.__catalogData;
-  const canPlay =
-    Boolean(videoMeta(data, entry) || spotifyTrackId(entry) || youtubeVideoId(entry));
-  const count = sourceCount(entry, data);
-  const official = entry.tier === "official_promo";
-  const parts = [];
+function playButton(entry, state) {
+  if (!canPlay(entry, state.data)) return "";
+  const playing = state.playingId === entry.id;
+  const restricted = playing && state.provider === "youtube" && ytSource(entry, state.data, state.videoSource)?.embedRestricted;
+  const variant = playVariant(entry, state.data);
+  const label = playing
+    ? restricted ? "Selected" : "Playing"
+    : variant === "play-audio"
+      ? "Play audio"
+      : variant === "play-both"
+        ? "Play"
+        : "Play video";
+  const icon = lucideIcon(playing ? "headphones" : variant === "play-audio" ? "headphones" : "play", 14);
+  return `
+    <button
+      type="button"
+      class="row-action row-action--play${playing ? " is-playing" : ""}"
+      data-action="play-entry"
+      data-id="${escapeHtml(entry.id)}"
+      aria-pressed="${String(playing)}"
+      aria-label="${escapeHtml(playing ? restricted ? "Selected in player. Open on YouTube to watch." : "Now playing in Leonida Radio" : label)}"
+    >
+      ${icon}<span class="row-action-label">${escapeHtml(label)}</span>
+    </button>`;
+}
 
-  if (official && canPlay) {
-    const variant = playVariant(entry, data);
-    const label =
-      variant === "play-audio" ? "Play audio" : variant === "play-both" ? "Play" : "Play video";
-    parts.push(
-      rowActionButton({
-        action: "toggle-player",
-        id: entry.id,
-        expanded: expanded && mode === "player",
-        variant,
-        label,
-      })
-    );
-  }
-
-  if (count) {
-    const awaiting = entry.status === "needs_primary_source";
-    parts.push(
-      rowActionButton({
-        action: "toggle-details",
-        id: entry.id,
-        expanded: expanded && mode === "details",
-        variant: awaiting ? "awaiting" : "sources",
-        label: awaiting ? "Awaiting proof" : `${count} source${count === 1 ? "" : "s"}`,
-      })
-    );
-  }
-
-  return parts.join("");
+function sourceButton(entry, state) {
+  const count = sourceCount(entry, state.data);
+  if (!count) return "";
+  const open = state.expandedId === entry.id;
+  const awaiting = entry.status === "needs_primary_source";
+  const label = awaiting ? "Awaiting" : "Sources";
+  return `
+    <button
+      type="button"
+      class="row-action row-action--sources${open ? " is-open" : ""}"
+      data-action="toggle-details"
+      data-id="${escapeHtml(entry.id)}"
+      aria-expanded="${String(open)}"
+    >
+      <span class="row-action-label">${escapeHtml(label)}</span>
+      ${lucideIcon(open ? "chevron-up" : awaiting ? "clock-3" : "arrow-up-right", 12)}
+    </button>`;
 }
 
 function renderRow(entry, indexNum, state) {
   const expanded = state.expandedId === entry.id;
-  const mode = state.expandedMode;
+  const playing = state.playingId === entry.id;
   const track = entry.track
     ? `<p class="row-track">“${escapeHtml(entry.track)}”</p>`
     : `<p class="row-track is-empty">Track not specified</p>`;
-
-  const activeClass = expanded ? " is-active" : "";
-  const panel =
-    expanded && mode === "player"
-      ? renderPlayerPanel(entry, state.data, state.data.artists, state.playerLoaded, state.playerSource)
-      : expanded && mode === "details"
-        ? renderDetailsPanel(entry, state.data, state.data.artists)
-        : "";
+  const classes = [
+    "index-row",
+    `index-row--${entry.tier}`,
+    expanded ? "is-active" : "",
+    playing ? "is-playing" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return `
-    <article class="index-row index-row--${entry.tier}${activeClass}" data-id="${escapeHtml(entry.id)}">
+    <article class="${classes}" data-id="${escapeHtml(entry.id)}">
       <div class="row-summary">
         <span class="row-num">${String(indexNum).padStart(2, "0")}</span>
         <div class="row-identity">
           <h3 class="row-artist">${entry.artists.map(escapeHtml).join(", ")}</h3>
+          ${track}
           <p class="row-cue">${escapeHtml(formatCueLine(entry))}</p>
         </div>
-        ${track}
-        <div class="row-actions">${rowActions(entry, expanded, mode)}</div>
+        <p class="row-evidence">${escapeHtml(TIER_LABEL[entry.tier])}</p>
+        <div class="row-actions">${playButton(entry, state)}</div>
+        <div class="row-source">${sourceButton(entry, state)}</div>
       </div>
-      ${panel}
+      ${expanded ? renderDetailsPanel(entry, state.data, state.data.artists) : ""}
     </article>`;
 }
 
@@ -577,14 +394,16 @@ function render(data, state, options = {}) {
   state.data = data;
   window.__catalogData = data;
   const root = $("#catalog");
+  if (!root) return;
   const filtered = filteredEntries(data, state);
   const total = data.entries.length;
   const scrollY = options.preserveScroll ? window.scrollY : null;
 
-  const awaitingPrimary = data.entries.filter(
-    (e) => e.status === "needs_primary_source"
-  ).length;
-  $("#hero-kicker").textContent = `${total} entries · Updated ${data.updated}`;
+  const awaitingPrimary = data.entries.filter((e) => e.status === "needs_primary_source").length;
+  const kicker = $("#hero-kicker");
+  if (kicker) {
+    kicker.textContent = `The sound of Leonida / ${total} entries · updated ${data.updated}`;
+  }
   const introMeta = $("#intro-meta");
   if (introMeta) {
     introMeta.textContent =
@@ -600,67 +419,40 @@ function render(data, state, options = {}) {
 
   let globalNum = 0;
   const chunks = [];
+  const head = `<div class="table-head" aria-hidden="true">
+    <span>#</span><span>Artist / track</span><span>Evidence</span><span>Play</span><span>Source</span>
+  </div>`;
 
   for (const tier of TIER_ORDER) {
     if (state.tier !== "all" && state.tier !== tier) continue;
     const rows = filtered.filter((e) => e.tier === tier);
     if (!rows.length) continue;
 
-    const sectionRows = [];
+    const renderRows = (list) =>
+      list
+        .map((entry) => {
+          globalNum += 1;
+          return renderRow(entry, globalNum, state);
+        })
+        .join("");
 
+    let bodyHtml = "";
     if (tier === "artist_reported") {
       const solid = rows.filter((e) => e.status !== "needs_primary_source");
       const waiting = rows.filter((e) => e.status === "needs_primary_source");
-
-      const renderWaitingRows = () =>
-        waiting
-          .map((entry) => {
-            globalNum += 1;
-            return renderRow(entry, globalNum, state);
-          })
-          .join("");
-
-      let bodyHtml = "";
-      if (solid.length) {
-        bodyHtml = `<div class="index-list">${solid
-          .map((entry) => {
-            globalNum += 1;
-            return renderRow(entry, globalNum, state);
-          })
-          .join("")}</div>`;
-      }
-
+      if (solid.length) bodyHtml = `<div class="index-list">${head}${renderRows(solid)}</div>`;
       if (waiting.length) {
-        if (solid.length) {
-          bodyHtml += `
-            <div class="subsection">
+        const waitingBlock = `<div class="index-list">${solid.length ? "" : head}${renderRows(waiting)}</div>`;
+        bodyHtml += solid.length
+          ? `<div class="subsection">
               <h3 class="subsection-title">Awaiting primary source</h3>
               <p class="subsection-copy">Discovery breadcrumbs only. Not Rockstar-verified soundtrack credits.</p>
-              <div class="index-list">${renderWaitingRows()}</div>
-            </div>`;
-        } else {
-          bodyHtml = `<div class="index-list">${renderWaitingRows()}</div>`;
-        }
+              ${waitingBlock}
+            </div>`
+          : waitingBlock;
       }
-
-      chunks.push(`
-        <section class="tier-section tier-section--${tier}" id="tier-${tier}">
-          <div class="tier-header">
-            <div class="tier-header-title">
-              <span class="tier-header-num">${TIER_SECTION_NUM[tier]}</span>
-              <h2 class="tier-header-name">${TIER_LABEL[tier]}</h2>
-            </div>
-            <span class="tier-header-count">${rows.length} ${rows.length === 1 ? "entry" : "entries"}</span>
-          </div>
-          <p class="tier-description">${TIER_COPY[tier]}</p>
-          ${bodyHtml}
-        </section>`);
-      continue;
-    }
-
-    for (const entry of rows) {
-      globalNum += 1;
-      sectionRows.push(renderRow(entry, globalNum, state));
+    } else {
+      bodyHtml = `<div class="index-list">${head}${renderRows(rows)}</div>`;
     }
 
     chunks.push(`
@@ -673,65 +465,379 @@ function render(data, state, options = {}) {
           <span class="tier-header-count">${rows.length} ${rows.length === 1 ? "entry" : "entries"}</span>
         </div>
         <p class="tier-description">${TIER_COPY[tier]}</p>
-        <div class="index-list">${sectionRows.join("")}</div>
+        ${bodyHtml}
       </section>`);
   }
 
   root.innerHTML = chunks.join("");
+  if (scrollY != null) window.scrollTo(0, scrollY);
+}
 
-  if (scrollY != null) {
-    window.scrollTo(0, scrollY);
+function loadYouTubeApi() {
+  if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+  if (window.__ytApiPromise) return window.__ytApiPromise;
+  window.__ytApiPromise = new Promise((resolve) => {
+    const existing = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+    if (!existing) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof prev === "function") prev();
+      resolve(window.YT);
+    };
+  });
+  return window.__ytApiPromise;
+}
+
+function playerController(state) {
+  const ytHost = $("#yt-host");
+  const spotifyHost = $("#spotify-host");
+  const empty = $("#dock-empty");
+  const providers = $("#dock-providers");
+  const outbound = $("#dock-outbound");
+  const startBtn = $("#dock-start");
+  if (!ytHost) return { sync() {}, playEntry() {}, startRadio() {} };
+
+  let ytPlayer = null;
+  let playerReady = null;
+  let playbackRequest = 0;
+  let playbackError = false;
+  let cueTimer = null;
+  let ignoreEnded = false;
+
+  function selectedYoutube(entry) {
+    return ytSource(entry, state.data, state.videoSource);
   }
-}
 
-function closeExpanded(state) {
-  state.expandedId = null;
-  state.expandedMode = null;
-  state.playerLoaded = false;
-  state.playerSource = null;
-}
-
-function openEntry(state, id, mode, data) {
-  if (state.expandedId === id && state.expandedMode === mode) {
-    closeExpanded(state);
-    return;
+  function videos() {
+    return radioVideos(state.data, state.sourcePreference === "trailer" ? "trailer" : "full");
   }
-  state.expandedId = id;
-  state.expandedMode = mode;
-  state.playerLoaded = mode === "player";
-  const entry = data.entries.find((e) => e.id === id);
-  state.playerSource = mode === "player" && entry ? defaultPlayerSource(entry, data) : null;
+
+  function currentEntry() {
+    return state.data.entries.find((e) => e.id === state.playingId) || null;
+  }
+
+  function setPlaying(id, opts = {}) {
+    state.playingId = id;
+    if (!opts.keepMode) state.radioMode = opts.radioMode ?? state.radioMode;
+    render(state.data, state, { preserveScroll: true });
+    syncDock();
+  }
+
+  function nextVideoIndex(videoId) {
+    const list = videos();
+    const idx = list.findIndex((v) => v.videoId === videoId);
+    if (idx < 0) {
+      const currentIndex = state.data.entries.findIndex((entry) => entry.id === state.playingId);
+      const nextIndex = list.findIndex((video) => state.data.entries.findIndex((entry) => entry.id === video.firstEntryId) > currentIndex);
+      return nextIndex < 0 ? 0 : nextIndex;
+    }
+    return (idx + 1) % list.length;
+  }
+
+  function syncDock() {
+    const entry = currentEntry();
+    const yt = entry ? selectedYoutube(entry) : null;
+    const sp = entry ? spotifyTrackId(entry) : null;
+    const kicker = $("#dock-kicker");
+    const status = $("#dock-status");
+    const track = $("#dock-track");
+    const artist = $("#dock-artist");
+    const note = $("#dock-note");
+    const navStatus = $("#nav-radio-status");
+    const radioEntry = document.querySelector(".radio-entry");
+
+    const inRadio = state.provider === "youtube" && state.radioMode;
+    if (kicker) kicker.textContent = inRadio ? "Leonida Radio" : "From the list";
+    if (status) {
+      status.textContent = inRadio
+        ? "Playlist mode / auto-advance on"
+        : state.provider === "spotify"
+          ? "Spotify · this track only"
+          : "Single video · return to radio to auto-advance";
+    }
+    if (track) {
+      track.textContent = entry?.track || (inRadio ? "Known tracks. On rotation." : "Select a track");
+    }
+    if (artist) {
+      artist.textContent = entry
+        ? `${entry.artists.join(", ")}${yt ? ` / ${yt.label}` : ""}`
+        : "YouTube radio · official uploads only";
+    }
+    if (note) {
+      note.textContent = yt?.embedRestricted
+        ? "Open on YouTube to watch at the verified cue. Radio skips this upload."
+        : inRadio
+          ? "Radio plays official YouTube videos in list order. When a video ends, the next one starts."
+          : state.provider === "spotify"
+            ? "Listening to the full track on Spotify."
+            : "Playing in the shared dock. We do not host the file.";
+    }
+    if (navStatus) {
+      navStatus.textContent = state.playingId ? (inRadio ? "● Radio open" : "From the list") : "YouTube playlist";
+    }
+    if (radioEntry && radioEntry.tagName === "BUTTON") {
+      radioEntry.classList.toggle("is-live", Boolean(state.playingId) && inRadio);
+    }
+    if (startBtn) startBtn.textContent = state.playingId && state.provider === "youtube" ? "Next video" : "Start radio";
+
+    if (providers) {
+      const trailer = entry && videoMeta(state.data, entry);
+      const options = [
+        entry && youtubeVideoId(entry) && { id: "full", label: "Full track", detail: "YouTube" },
+        trailer && { id: "trailer", label: trailer.label.replace("Rockstar ", ""), detail: `${Math.floor(trailer.start / 60)}:${String(trailer.start % 60).padStart(2, "0")} · Trailer cue` },
+        sp && { id: "spotify", label: "Spotify", detail: "Full track" },
+      ].filter(Boolean);
+      const active = state.provider === "spotify" ? "spotify" : state.videoSource;
+      providers.hidden = options.length < 2;
+      providers.innerHTML = options.map((option) => `
+        <button type="button" class="provider-tab${active === option.id ? " is-active" : ""}" aria-pressed="${active === option.id}" data-action="set-provider" data-source="${option.id}">
+          ${escapeHtml(option.label)} <small>${escapeHtml(option.detail)}</small>
+        </button>`).join("");
+    }
+
+    if (outbound) {
+      if (state.provider === "spotify" && sp) {
+        outbound.hidden = false;
+        outbound.href = spotifyOpenUrl(sp);
+        outbound.textContent = "Open on Spotify";
+      } else if (yt) {
+        outbound.hidden = false;
+        outbound.href = youtubeWatchFromId(yt.videoId, yt.start);
+        outbound.textContent = "Open on YouTube";
+      } else {
+        outbound.hidden = true;
+      }
+    }
+
+    const showSpotify = Boolean(entry && state.provider === "spotify" && sp);
+    const showYt = Boolean(entry && state.provider === "youtube" && yt && !yt.embedRestricted && ytPlayer && !playbackError);
+    if (spotifyHost) {
+      spotifyHost.hidden = !showSpotify;
+      if (showSpotify) {
+        const src = `${spotifyEmbedUrl(sp)}?utm_source=generator`;
+        if (spotifyHost.dataset.track !== sp) {
+          spotifyHost.dataset.track = sp;
+          spotifyHost.innerHTML = `<iframe title="Spotify Embed: ${escapeHtml(entry.track || "Official track")}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+        }
+      } else {
+        spotifyHost.replaceChildren();
+        delete spotifyHost.dataset.track;
+      }
+    }
+    ytHost.hidden = !showYt;
+    if (empty) {
+      empty.hidden = showSpotify || showYt;
+      empty.innerHTML = playbackError && yt && state.provider === "youtube"
+        ? `<div class="dock-restricted">
+            <strong>Video unavailable here</strong>
+            <p>Playback stopped. Open this video on YouTube or choose the next video.</p>
+            <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+          </div>`
+        : yt?.embedRestricted && state.provider === "youtube"
+        ? `<div class="dock-restricted">
+            <strong>Age-restricted video</strong>
+            <p>${escapeHtml(yt.label)} can only be watched on YouTube. You may need to sign in to verify your age.</p>
+            <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+          </div>`
+        : entry ? "<p>Loading YouTube video…</p>" : "<p>Start radio to cycle official YouTube videos.</p>";
+    }
+  }
+
+  function stopCueTimer() {
+    if (cueTimer) {
+      clearInterval(cueTimer);
+      cueTimer = null;
+    }
+  }
+
+  function startCueTimer(videoId) {
+    stopCueTimer();
+    cueTimer = setInterval(() => {
+      if (!ytPlayer || typeof ytPlayer.getCurrentTime !== "function") return;
+      if (state.provider !== "youtube" || state.videoSource !== "trailer") return;
+      const t = ytPlayer.getCurrentTime();
+      const match = entryAtTime(state.data, videoId, t);
+      if (match && match.id !== state.playingId) {
+        setPlaying(match.id, { radioMode: state.radioMode });
+      }
+    }, 800);
+  }
+
+  function ensurePlayer() {
+    if (playerReady) return playerReady;
+    playerReady = (async () => {
+      await loadYouTubeApi();
+      ytHost.replaceChildren();
+      const mount = document.createElement("div");
+      mount.id = "yt-player-mount";
+      ytHost.appendChild(mount);
+      await new Promise((resolve) => {
+        ytPlayer = new window.YT.Player("yt-player-mount", {
+          width: "100%",
+          height: "100%",
+          playerVars: {
+            autoplay: 1,
+            rel: 0,
+            modestbranding: 1,
+            origin: location.origin,
+          },
+          events: {
+            onReady() {
+              resolve();
+            },
+            onStateChange(event) {
+              if (state.provider !== "youtube" || playbackError) return;
+              if (event.data === window.YT.PlayerState.ENDED) {
+                if (ignoreEnded) return;
+                if (state.provider === "youtube" && state.radioMode) {
+                  playNextVideo();
+                }
+              }
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                const id = ytPlayer.getVideoData?.().video_id;
+                if (id) startCueTimer(id);
+              }
+            },
+            onError() {
+              if (state.provider !== "youtube") return;
+              playbackError = true;
+              state.radioMode = false;
+              playbackRequest++;
+              stopCueTimer();
+              if (typeof ytPlayer?.pauseVideo === "function") ytPlayer.pauseVideo();
+              syncDock();
+            },
+          },
+        });
+      });
+      return ytPlayer;
+    })();
+    return playerReady;
+  }
+
+  async function loadVideo(videoId, start, request) {
+    ignoreEnded = true;
+    await ensurePlayer();
+    if (request !== playbackRequest || state.provider !== "youtube") return;
+    ytPlayer.loadVideoById({ videoId, startSeconds: start || 0 });
+    startCueTimer(videoId);
+    setTimeout(() => {
+      if (request === playbackRequest) ignoreEnded = false;
+    }, 1200);
+  }
+
+  async function playVideoForEntry(entry, { radioMode }) {
+    const request = ++playbackRequest;
+    playbackError = false;
+    stopCueTimer();
+    const preferred = state.sourcePreference;
+    const hasFull = Boolean(youtubeVideoId(entry));
+    const hasTrailer = Boolean(videoMeta(state.data, entry));
+    state.provider = preferred === "spotify" && spotifyTrackId(entry) ? "spotify" : "youtube";
+    state.videoSource = preferred === "trailer" && hasTrailer ? "trailer" : hasFull ? "full" : "trailer";
+    const yt = selectedYoutube(entry);
+    const sp = spotifyTrackId(entry);
+    state.radioMode = radioMode;
+    if (state.provider !== "spotify" && yt?.embedRestricted) {
+      state.provider = "youtube";
+      setPlaying(entry.id, { radioMode: false });
+      if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
+      stopCueTimer();
+      return;
+    }
+    if (state.provider === "spotify" && sp) {
+      if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
+      stopCueTimer();
+      setPlaying(entry.id, { radioMode: false });
+      return;
+    }
+    state.provider = "youtube";
+    if (!yt) {
+      if (sp) {
+        state.provider = "spotify";
+        if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
+        setPlaying(entry.id, { radioMode: false });
+      }
+      return;
+    }
+    setPlaying(entry.id, { radioMode });
+    await loadVideo(yt.videoId, yt.start, request);
+    syncDock();
+  }
+
+  async function playNextVideo() {
+    const list = videos();
+    if (!list.length) return;
+    const entry = currentEntry();
+    const currentYt = entry ? selectedYoutube(entry) : null;
+    const next = list[nextVideoIndex(currentYt?.videoId)];
+    const nextEntry = state.data.entries.find((e) => e.id === next.firstEntryId);
+    if (state.sourcePreference === "spotify") state.sourcePreference = "full";
+    if (nextEntry) await playVideoForEntry(nextEntry, { radioMode: true });
+  }
+
+  async function startRadio() {
+    if (state.sourcePreference === "spotify") state.sourcePreference = "full";
+    state.provider = "youtube";
+    state.radioMode = true;
+    if (state.playingId) {
+      await playNextVideo();
+      return;
+    }
+    const list = videos();
+    const first = list[0] && state.data.entries.find((e) => e.id === list[0].firstEntryId);
+    if (first) await playVideoForEntry(first, { radioMode: true });
+  }
+
+  async function playEntry(id) {
+    const entry = state.data.entries.find((e) => e.id === id);
+    if (!entry) return;
+    const yt = ytSource(entry, state.data, state.sourcePreference);
+    const continueRadio = Boolean(yt && !yt.embedRestricted);
+    await playVideoForEntry(entry, { radioMode: continueRadio });
+  }
+
+  async function setProvider(source) {
+    const entry = currentEntry();
+    if (!entry) return;
+    if (!["full", "trailer", "spotify"].includes(source)) return;
+    if (source === "full" && !youtubeVideoId(entry)) return;
+    if (source === "trailer" && !videoMeta(state.data, entry)) return;
+    if (source === "spotify" && !spotifyTrackId(entry)) return;
+    state.sourcePreference = source;
+    await playVideoForEntry(entry, { radioMode: source !== "spotify" });
+  }
+
+  syncDock();
+  return { sync: syncDock, playEntry, startRadio, setProvider, playNextVideo };
 }
 
-function bindCatalog(data, state) {
+function bindCatalog(data, state, player) {
   const root = $("#catalog");
-
+  if (!root) return;
   root.addEventListener("click", (event) => {
     const btn = event.target.closest("[data-action]");
     if (!btn) return;
     const id = btn.dataset.id;
     const action = btn.dataset.action;
-    if (action === "toggle-player") {
-      openEntry(state, id, "player", data);
-    } else if (action === "toggle-details") {
-      openEntry(state, id, "details", data);
-    } else if (action === "set-player-source") {
-      const next = btn.dataset.source;
-      if (next === "spotify" || next === "youtube") {
-        state.expandedId = id;
-        state.expandedMode = "player";
-        state.playerLoaded = true;
-        state.playerSource = next;
-      }
+    if (action === "toggle-details") {
+      state.expandedId = state.expandedId === id ? null : id;
+      render(data, state, { preserveScroll: true });
+    } else if (action === "play-entry") {
+      player.playEntry(id);
     }
-    render(data, state, { preserveScroll: true });
   });
 }
 
 async function main() {
+  const catalog = $("#catalog");
   const res = await fetch("data/entries.json", { cache: "no-store" });
   if (!res.ok) {
-    $("#catalog").innerHTML = `<p class="empty">Could not load data/entries.json (${res.status}).</p>`;
+    if (catalog) catalog.innerHTML = `<p class="empty">Could not load data/entries.json (${res.status}).</p>`;
     return;
   }
 
@@ -740,18 +846,24 @@ async function main() {
     query: "",
     tier: "all",
     expandedId: null,
-    expandedMode: null,
-    playerLoaded: false,
-    playerSource: null,
+    playingId: null,
+    provider: "youtube",
+    sourcePreference: "full",
+    videoSource: "full",
+    radioMode: true,
     data,
   };
 
+  const player = playerController(state);
+
   const search = $("#search");
-  search.addEventListener("input", () => {
-    state.query = search.value;
-    closeExpanded(state);
-    render(data, state);
-  });
+  if (search) {
+    search.addEventListener("input", () => {
+      state.query = search.value;
+      render(data, state);
+      player.sync();
+    });
+  }
 
   document.querySelectorAll(".tier-key").forEach((btn) => {
     btn.setAttribute("aria-pressed", "false");
@@ -759,19 +871,28 @@ async function main() {
       const tier = btn.dataset.tier;
       const next = state.tier === tier ? "all" : tier;
       state.tier = next;
-      closeExpanded(state);
       document.querySelectorAll(".tier-key").forEach((b) => {
         b.setAttribute("aria-pressed", String(b.dataset.tier === next));
       });
       render(data, state);
-      if (next !== "all") {
-        document.getElementById(`tier-${next}`)?.scrollIntoView({ behavior: "smooth" });
-      }
+      if (next !== "all") document.getElementById(`tier-${next}`)?.scrollIntoView({ behavior: "smooth" });
     });
   });
 
-  bindCatalog(data, state);
+  document.addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-action]");
+    if (!btn) return;
+    if (btn.closest("#catalog")) return;
+    const action = btn.dataset.action;
+    if (action === "start-radio") player.startRadio();
+    if (action === "set-provider") player.setProvider(btn.dataset.source);
+  });
+
+  bindCatalog(data, state, player);
   render(data, state);
+  player.sync();
+
+  if (location.hash === "#radio") player.startRadio();
 }
 
 main();

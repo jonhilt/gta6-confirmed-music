@@ -40,13 +40,13 @@ The site is static HTML. It reads:
 | `note` | no | one factual caveat |
 | `cueSeconds` | no | integer start time on the Rockstar YouTube upload; Play uses this |
 | `spotifyTrackId` | no | 22-character Spotify track ID. Play loads the official Spotify track embed |
-| `youtubeVideoId` | no | 11-character official YouTube video ID (Atlantic Records uploads for The Album singles) |
+| `youtubeVideoId` | no | 11-character official full-track YouTube upload ID. Can coexist with a trailer cue |
 | `inUniverse` | no | `true` for fictional in-game acts |
 
 `sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel.
 
 `officialVideos` entries may set `embedRestricted: true` when YouTube blocks third-party embeds
-(Extended Look). Those rows link out at `cueSeconds` instead of loading an iframe.
+(Extended Look). Those rows show an age restriction message in the player, with a YouTube link at `cueSeconds`.
 
 Artist blurbs live under `artists` in the same file (not inside each row). Keep them to two sentences and a `cite` URL.
 
@@ -72,3 +72,9 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 ## License
 
 Code: MIT (`LICENSE`). The dataset is a factual compilation with source links, not copied marketing copy.
+
+## Player sources
+
+The player offers Full track, a named trailer with its cue time, and Spotify when available. Full track on YouTube is the default, falling back to the trailer. A source choice stays selected while browsing, with unavailable sources falling back without changing the preference. Trailer playback follows the current song as cue times pass. Full-track radio follows all 26 tracks in catalog and playlist order, then wraps to the first track. Trailer mode advances between distinct uploads and skips restricted trailers. Switching modes keeps the current song selected.
+
+Run player regression checks with `node --test tests/player.test.cjs`.

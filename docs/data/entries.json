@@ -233,9 +233,14 @@
         {
           "label": "Tom Petty official site",
           "url": "https://www.tompetty.com/blogs/news/tom-petty-s-love-is-a-long-road-from-full-moon-fever-featured-in-trailer-1-of-grand-theft-auto-vi"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=xAgUYyosqVM"
         }
       ],
-      "cueSeconds": 2
+      "cueSeconds": 2,
+      "youtubeVideoId": "xAgUYyosqVM"
     },
     {
       "id": "t2-thunder-island",
@@ -255,9 +260,14 @@
         {
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=EI0Tt3UZ5jc"
         }
       ],
-      "cueSeconds": 6
+      "cueSeconds": 6,
+      "youtubeVideoId": "EI0Tt3UZ5jc"
     },
     {
       "id": "t2-child-support",
@@ -278,9 +288,14 @@
         {
           "label": "NME (Trailer 2 songs)",
           "url": "https://www.nme.com/news/gaming-news/what-song-grand-theft-auto-6-trailer-2-3860654"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=IBOvixP6JlU"
         }
       ],
-      "cueSeconds": 27
+      "cueSeconds": 27,
+      "youtubeVideoId": "IBOvixP6JlU"
     },
     {
       "id": "t2-everybody-have-fun-tonight",
@@ -300,9 +315,14 @@
         {
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=BoXu6QmxpJE"
         }
       ],
-      "cueSeconds": 34
+      "cueSeconds": 34,
+      "youtubeVideoId": "BoXu6QmxpJE"
     },
     {
       "id": "t2-talkin-to-myself-again",
@@ -322,9 +342,14 @@
         {
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=QG52v7AOVVU"
         }
       ],
-      "cueSeconds": 41
+      "cueSeconds": 41,
+      "youtubeVideoId": "QG52v7AOVVU"
     },
     {
       "id": "t2-hot-together",
@@ -344,9 +369,14 @@
         {
           "label": "GTA Wiki trailer breakdown",
           "url": "https://gta.wiki/w/Grand_Theft_Auto_VI/Trailers"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=H3Aay-47ZT0"
         }
       ],
-      "cueSeconds": 64
+      "cueSeconds": 64,
+      "youtubeVideoId": "H3Aay-47ZT0"
     },
     {
       "id": "el-pop-bottles",
@@ -371,9 +401,14 @@
         {
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=_K6MoWuAXjQ"
         }
       ],
-      "cueSeconds": 6
+      "cueSeconds": 6,
+      "youtubeVideoId": "_K6MoWuAXjQ"
     },
     {
       "id": "el-pound-town",
@@ -402,10 +437,15 @@
         {
           "label": "Dazed interview (Humphries names Sexyy Red)",
           "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=8GyvXrxOYK4"
         }
       ],
       "cueSeconds": 46,
-      "note": "Humphries named Sexyy Red in the Dazed interview (Aug 2026) with Miami artists Rockstar loves. Kept on this Extended Look Pound Town cue instead of a separate Rockstar-named row."
+      "note": "Humphries named Sexyy Red in the Dazed interview (Aug 2026) with Miami artists Rockstar loves. Kept on this Extended Look Pound Town cue instead of a separate Rockstar-named row.",
+      "youtubeVideoId": "8GyvXrxOYK4"
     },
     {
       "id": "el-skrilla",
@@ -429,10 +469,15 @@
         {
           "label": "Dazed interview (Humphries names Kodak)",
           "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=SmwmZfMooSo"
         }
       ],
       "cueSeconds": 105,
-      "note": "Humphries named Kodak in the Dazed interview (Aug 2026) as Miami music Rockstar loves. Kept on this Extended Look Skrilla cue instead of a separate Rockstar-named row."
+      "note": "Humphries named Kodak in the Dazed interview (Aug 2026) as Miami music Rockstar loves. Kept on this Extended Look Skrilla cue instead of a separate Rockstar-named row.",
+      "youtubeVideoId": "SmwmZfMooSo"
     },
     {
       "id": "el-let-your-love-flow",
@@ -452,9 +497,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=Pvs3hcr7kGI"
         }
       ],
-      "cueSeconds": 360
+      "cueSeconds": 360,
+      "youtubeVideoId": "Pvs3hcr7kGI"
     },
     {
       "id": "el-love-bites",
@@ -474,9 +524,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=W4XiSFyYRE8"
         }
       ],
-      "cueSeconds": 403
+      "cueSeconds": 403,
+      "youtubeVideoId": "W4XiSFyYRE8"
     },
     {
       "id": "el-people-are-people",
@@ -496,9 +551,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=DTYsElEGswc"
         }
       ],
-      "cueSeconds": 501
+      "cueSeconds": 501,
+      "youtubeVideoId": "DTYsElEGswc"
     },
     {
       "id": "el-but-i-think-its-a-dream",
@@ -523,9 +583,14 @@
         {
           "label": "IGN Extended Look track list",
           "url": "https://www.ign.com/articles/heres-every-song-featured-in-rockstars-gta-6-extended-look"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=2KLlvQuVNfU"
         }
       ],
-      "cueSeconds": 589
+      "cueSeconds": 589,
+      "youtubeVideoId": "2KLlvQuVNfU"
     },
     {
       "id": "el-cars-and-girls",
@@ -545,9 +610,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=jEJdfDD4dVg"
         }
       ],
-      "cueSeconds": 639
+      "cueSeconds": 639,
+      "youtubeVideoId": "jEJdfDD4dVg"
     },
     {
       "id": "el-off-the-grid",
@@ -568,9 +638,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=gTR8tTbzjMc"
         }
       ],
-      "cueSeconds": 745
+      "cueSeconds": 745,
+      "youtubeVideoId": "gTR8tTbzjMc"
     },
     {
       "id": "el-devil-woman",
@@ -594,9 +669,14 @@
         {
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=IgomTOOgl8M"
         }
       ],
-      "cueSeconds": 1009
+      "cueSeconds": 1009,
+      "youtubeVideoId": "IgomTOOgl8M"
     },
     {
       "id": "el-se-me-nota",
@@ -618,9 +698,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=yxlE4alDecE"
         }
       ],
-      "cueSeconds": 1207
+      "cueSeconds": 1207,
+      "youtubeVideoId": "yxlE4alDecE"
     },
     {
       "id": "el-against-all-odds",
@@ -641,9 +726,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=wuvtoyVi7vY"
         }
       ],
-      "cueSeconds": 1293
+      "cueSeconds": 1293,
+      "youtubeVideoId": "wuvtoyVi7vY"
     },
     {
       "id": "el-mine-o-mine",
@@ -664,9 +754,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=qBMePC_Xndk"
         }
       ],
-      "cueSeconds": 1315
+      "cueSeconds": 1315,
+      "youtubeVideoId": "qBMePC_Xndk"
     },
     {
       "id": "el-inner-light",
@@ -687,9 +782,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Official full track on YouTube",
+          "url": "https://www.youtube.com/watch?v=4DPCHufDWJQ"
         }
       ],
-      "cueSeconds": 1544
+      "cueSeconds": 1544,
+      "youtubeVideoId": "4DPCHufDWJQ"
     },
     {
       "id": "album-gta-vi-the-album",

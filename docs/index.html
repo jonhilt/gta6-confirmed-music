@@ -26,131 +26,124 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20260917yt" />
+    <link rel="stylesheet" href="assets/style.css?v=20260917mf" />
     <link rel="icon" href="assets/leonida-needle-mark.svg" type="image/svg+xml" />
   </head>
   <body>
-    <header class="site-nav">
-      <div class="wrap nav-inner">
-        <a class="brand" href="./">Leonida Needle Drop</a>
-        <nav aria-label="Site">
-          <a href="./" aria-current="page">Full list</a>
+    <div class="app-shell">
+      <aside class="archive-nav" aria-label="Archive">
+        <a class="nav-brand" href="./">
+          <span class="nav-brand-leonida">L E O N I D A</span>
+          <span class="nav-brand-drop">Needle Drop</span>
+          <span class="nav-brand-sub">Fan archive / GTA VI</span>
+        </a>
+
+        <nav class="nav-links">
+          <a href="./" aria-current="page">Tracks</a>
           <a href="./methodology.html">How we verify</a>
         </nav>
-      </div>
-    </header>
 
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="wrap hero-inner">
-        <p class="hero-kicker" id="hero-kicker">Loading…</p>
-        <h1 id="hero-title">The full<br />needle drop</h1>
-        <div class="hero-graphic" aria-hidden="true">
-          <div class="eq-bars">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
-    </section>
+        <button type="button" class="radio-entry" data-action="start-radio">
+          <span class="radio-entry-title">Leonida Radio</span>
+          <span class="radio-entry-copy">Known tracks. On rotation.</span>
+          <span class="radio-entry-status" id="nav-radio-status">YouTube playlist</span>
+        </button>
 
-    <section class="index-intro">
-      <div class="wrap intro-inner">
-        <h2 class="intro-title">The music of GTA VI. The sources behind it.</h2>
-        <div class="intro-text">
-          <p class="intro-copy">
-            Rows are sorted by how good the proof is. Trailer audio, Rockstar quotes, and artist posts
+        <p class="nav-disclaimer">Fan made. Not affiliated with Rockstar Games.</p>
+      </aside>
+
+      <div class="archive-main">
+        <header class="archive-hero">
+          <p class="hero-kicker" id="hero-kicker">The sound of Leonida / source-first archive</p>
+          <h1 id="hero-title">The music of GTA VI</h1>
+          <p class="hero-copy">
+            The tracks. The sources. No guesswork. Trailer audio, Rockstar quotes, and artist posts
             that still need a primary link each sit in their own section.
           </p>
           <p class="intro-meta" id="intro-meta"></p>
-        </div>
+        </header>
+
+        <main class="listing-body">
+          <label class="search-wrap" for="search">
+            <span class="visually-hidden">Search artists and tracks</span>
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M10.5 3a7.5 7.5 0 0 1 5.92 12.1l4.38 4.38-1.42 1.42-4.38-4.38A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"
+              />
+            </svg>
+            <input
+              id="search"
+              class="search"
+              type="search"
+              placeholder="Search artist or track"
+              autocomplete="off"
+            />
+          </label>
+
+          <div class="evidence-key" aria-label="Evidence tiers">
+            <button type="button" class="tier-key tier-key--official" data-tier="official_promo">
+              Official promo
+            </button>
+            <button type="button" class="tier-key tier-key--named" data-tier="rockstar_named">
+              Rockstar-named
+            </button>
+            <button type="button" class="tier-key tier-key--reported" data-tier="artist_reported">
+              Artist-reported
+            </button>
+          </div>
+
+          <div id="catalog"></div>
+        </main>
+
+        <footer class="site-footer">
+          <p class="footer-brand">Leonida / Needle Drop</p>
+          <p class="footer-note">
+            <span class="footer-note-line">Artist-reported rows are claims until a primary artist link</span>
+            <span class="footer-note-line">Unofficial fan documentation · not affiliated with Rockstar Games or Take-Two</span>
+            <span class="footer-note-line">Cookieless pageview analytics via Cloudflare</span>
+          </p>
+        </footer>
       </div>
-    </section>
 
-    <main class="wrap listing-body">
-      <aside class="evidence-sidebar" aria-label="Evidence tiers">
-        <h2 class="sidebar-label">Proof tiers</h2>
-
-        <button type="button" class="tier-key tier-key--official" data-tier="official_promo">
-          <span class="tier-key-num">01</span>
-          <span class="tier-key-body">
-            <span class="tier-key-title">Official promo</span>
-            <span class="tier-key-copy">Heard in a Rockstar trailer, Extended Look, or The Album.</span>
-          </span>
-        </button>
-
-        <button type="button" class="tier-key tier-key--named" data-tier="rockstar_named">
-          <span class="tier-key-num">02</span>
-          <span class="tier-key-body">
-            <span class="tier-key-title">Rockstar-named</span>
-            <span class="tier-key-copy">Rockstar staff named the artist. Track optional.</span>
-          </span>
-        </button>
-
-        <button type="button" class="tier-key tier-key--reported" data-tier="artist_reported">
-          <span class="tier-key-num">03</span>
-          <span class="tier-key-body">
-            <span class="tier-key-title">Artist-reported</span>
-            <span class="tier-key-copy">Artist claim. Needs their own post or page.</span>
-          </span>
-        </button>
-
-        <div class="sidebar-note">
-          <p class="sidebar-note-heading">Evidence scope</p>
-          <p class="sidebar-note-copy">
-            Trailer promo rows link to Rockstar on YouTube. Album debut singles play in Spotify or
-            the official Atlantic YouTube video. Official rows keep citations behind a source count.
-            Shared album press sits on The Album rows once. We do not host trailer footage or audio
-            files on this site.
-          </p>
+      <aside class="player-dock" id="player-dock" aria-label="Leonida player">
+        <div class="dock-header">
+          <p class="dock-kicker" id="dock-kicker">Leonida Radio</p>
+          <p class="dock-status" id="dock-status">Playlist mode / auto-advance on</p>
         </div>
-
-        <div class="sidebar-note">
-          <p class="sidebar-note-heading">Playback</p>
-          <p class="sidebar-note-copy">
-            Play opens the panel. Trailers run inline. Album singles offer Spotify and official
-            Atlantic YouTube. Extended Look sends you to YouTube at the cue; that upload is
-            age-restricted and will not embed here.
+        <div class="dock-identity">
+          <h2 class="dock-track" id="dock-track">Known tracks. On rotation.</h2>
+          <p class="dock-artist" id="dock-artist">YouTube radio · official uploads only</p>
+        </div>
+        <div class="dock-providers" id="dock-providers" hidden></div>
+        <div class="dock-stage">
+          <div id="yt-host" class="yt-host"></div>
+          <div id="spotify-host" class="spotify-host" hidden></div>
+          <div class="dock-empty" id="dock-empty">
+            <p>Start radio to cycle official YouTube videos.</p>
+          </div>
+        </div>
+        <div class="dock-footer">
+          <p class="dock-note" id="dock-note">
+            Radio plays official YouTube videos in list order. When a video ends, the next one starts.
+            Extended Look is age-restricted and will not embed.
           </p>
+          <div class="dock-actions">
+            <button type="button" class="dock-cta" data-action="start-radio" id="dock-start">
+              Start radio
+            </button>
+            <a class="dock-outbound" id="dock-outbound" hidden rel="noopener noreferrer" target="_blank">
+              Open on YouTube
+            </a>
+          </div>
         </div>
       </aside>
+    </div>
 
-      <div class="index-main">
-        <label class="search-wrap" for="search">
-          <span class="visually-hidden">Search artists and tracks</span>
-          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M10.5 3a7.5 7.5 0 0 1 5.92 12.1l4.38 4.38-1.42 1.42-4.38-4.38A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"
-            />
-          </svg>
-          <input
-            id="search"
-            class="search"
-            type="search"
-            placeholder="Search artist or track"
-            autocomplete="off"
-          />
-        </label>
-
-        <div id="catalog"></div>
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <div class="wrap footer-inner">
-        <p class="footer-brand">Leonida / Needle Drop</p>
-        <p class="footer-note">
-          <span class="footer-note-line">Artist-reported rows are claims until a primary artist link</span>
-          <span class="footer-note-line">Unofficial fan documentation · not affiliated with Rockstar Games or Take-Two</span>
-          <span class="footer-note-line">Cookieless pageview analytics via Cloudflare</span>
-        </p>
-      </div>
-    </footer>
-
-    <script src="assets/app.js?v=20260917yt"></script>
+    <script src="assets/app.js?v=20260917mf"></script>
     <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "36ca547414b54089a4cac3e3b336f02d"}'></script><!-- End Cloudflare Web Analytics -->
   </body>
 </html>

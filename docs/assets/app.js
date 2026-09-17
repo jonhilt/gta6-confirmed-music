@@ -1,20 +1,23 @@
 const TIER_LABEL = {
   official_promo: "Official promo",
+  the_album: "GTA VI: The Album",
   rockstar_named: "Rockstar-named",
   artist_reported: "Artist-reported",
 };
 
-const TIER_ORDER = ["official_promo", "rockstar_named", "artist_reported"];
+const TIER_ORDER = ["official_promo", "the_album", "rockstar_named", "artist_reported"];
 
 const TIER_SECTION_NUM = {
   official_promo: "01",
-  rockstar_named: "02",
-  artist_reported: "03",
+  the_album: "02",
+  rockstar_named: "03",
+  artist_reported: "04",
 };
 
 const TIER_COPY = {
   official_promo:
-    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Radio cycles official YouTube videos. Album debut singles also offer Spotify.",
+    "Music heard in Rockstar trailers and the Extended Look. Choose a full track or jump to its trailer cue.",
+  the_album: "Original music from Grand Theft Auto VI: The Album. Listen to the debut singles on YouTube or Spotify, and check the album announcement below.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
@@ -383,9 +386,15 @@ function matchesQuery(entry, q) {
   return hay.includes(q);
 }
 
+function catalogSection(entry) {
+  return entry.tier === "official_promo" && entry.appearanceKey === "the_album"
+    ? "the_album"
+    : entry.tier;
+}
+
 function filteredEntries(data, state) {
   return data.entries.filter((e) => {
-    if (state.tier !== "all" && e.tier !== state.tier) return false;
+    if (state.tier !== "all" && catalogSection(e) !== state.tier) return false;
     return matchesQuery(e, state.query.trim().toLowerCase());
   });
 }
@@ -425,7 +434,7 @@ function render(data, state, options = {}) {
 
   for (const tier of TIER_ORDER) {
     if (state.tier !== "all" && state.tier !== tier) continue;
-    const rows = filtered.filter((e) => e.tier === tier);
+    const rows = filtered.filter((e) => catalogSection(e) === tier);
     if (!rows.length) continue;
 
     const renderRows = (list) =>
@@ -492,6 +501,18 @@ function loadYouTubeApi() {
   return window.__ytApiPromise;
 }
 
+function loadSpotifyApi() {
+  if (window.__spotifyApiPromise) return window.__spotifyApiPromise;
+  window.__spotifyApiPromise = new Promise((resolve) => {
+    window.onSpotifyIframeApiReady = resolve;
+    const script = document.createElement("script");
+    script.src = "https://open.spotify.com/embed/iframe-api/v1";
+    script.onerror = () => resolve(null);
+    document.head.appendChild(script);
+  });
+  return window.__spotifyApiPromise;
+}
+
 function playerController(state) {
   const ytHost = $("#yt-host");
   const spotifyHost = $("#spotify-host");
@@ -501,6 +522,12 @@ function playerController(state) {
   const startBtn = $("#dock-start");
   if (!ytHost) return { sync() {}, playEntry() {}, startRadio() {} };
 
+  function setVisualizerPlaying(playing) {
+    $(".hero-graphic")?.classList.toggle("is-playing", playing);
+  }
+
+  let spotifyController = null;
+  let spotifyGeneration = 0;
   let ytPlayer = null;
   let playerReady = null;
   let playbackRequest = 0;
@@ -540,6 +567,7 @@ function playerController(state) {
 
   function syncDock() {
     const entry = currentEntry();
+    $("#player-dock")?.classList.toggle("has-selection", Boolean(entry));
     const yt = entry ? selectedYoutube(entry) : null;
     const sp = entry ? spotifyTrackId(entry) : null;
     const kicker = $("#dock-kicker");
@@ -620,10 +648,32 @@ function playerController(state) {
       if (showSpotify) {
         const src = `${spotifyEmbedUrl(sp)}?utm_source=generator`;
         if (spotifyHost.dataset.track !== sp) {
+          const generation = ++spotifyGeneration;
+          spotifyController?.destroy();
+          spotifyController = null;
           spotifyHost.dataset.track = sp;
           spotifyHost.innerHTML = `<iframe title="Spotify Embed: ${escapeHtml(entry.track || "Official track")}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+          loadSpotifyApi().then((api) => {
+            if (!api || generation !== spotifyGeneration || state.provider !== "spotify") return;
+            const mount = document.createElement("div");
+            spotifyHost.replaceChildren(mount);
+            api.createController(mount, { uri: `spotify:track:${sp}`, width: "100%", height: "100%" }, (controller) => {
+              if (generation !== spotifyGeneration || state.provider !== "spotify") {
+                controller.destroy();
+                return;
+              }
+              spotifyController = controller;
+              controller.addListener("playback_update", ({ data }) => {
+                if (generation !== spotifyGeneration || state.provider !== "spotify") return;
+                setVisualizerPlaying(data.isPaused === false && data.isBuffering === false);
+              });
+            });
+          });
         }
       } else {
+        spotifyGeneration++;
+        spotifyController?.destroy();
+        spotifyController = null;
         spotifyHost.replaceChildren();
         delete spotifyHost.dataset.track;
       }
@@ -691,6 +741,7 @@ function playerController(state) {
             },
             onStateChange(event) {
               if (state.provider !== "youtube" || playbackError) return;
+              setVisualizerPlaying(event.data === window.YT.PlayerState.PLAYING);
               if (event.data === window.YT.PlayerState.ENDED) {
                 if (ignoreEnded) return;
                 if (state.provider === "youtube" && state.radioMode) {
@@ -704,6 +755,7 @@ function playerController(state) {
             },
             onError() {
               if (state.provider !== "youtube") return;
+              setVisualizerPlaying(false);
               playbackError = true;
               state.radioMode = false;
               playbackRequest++;
@@ -732,6 +784,7 @@ function playerController(state) {
 
   async function playVideoForEntry(entry, { radioMode }) {
     const request = ++playbackRequest;
+    setVisualizerPlaying(false);
     playbackError = false;
     stopCueTimer();
     const preferred = state.sourcePreference;
@@ -865,17 +918,27 @@ async function main() {
     });
   }
 
-  document.querySelectorAll(".tier-key").forEach((btn) => {
-    btn.setAttribute("aria-pressed", "false");
-    btn.addEventListener("click", () => {
-      const tier = btn.dataset.tier;
-      const next = state.tier === tier ? "all" : tier;
-      state.tier = next;
-      document.querySelectorAll(".tier-key").forEach((b) => {
-        b.setAttribute("aria-pressed", String(b.dataset.tier === next));
-      });
-      render(data, state);
-      if (next !== "all") document.getElementById(`tier-${next}`)?.scrollIntoView({ behavior: "smooth" });
+  const header = $(".archive-hero");
+  const nav = $(".archive-nav");
+  const updateStickyOffsets = () => {
+    const navHeight = window.matchMedia("(max-width: 1100px)").matches ? nav?.getBoundingClientRect().height || 0 : 0;
+    document.documentElement.style.setProperty("--sticky-nav-height", `${navHeight}px`);
+    document.documentElement.style.setProperty("--sticky-header-height", `${header?.getBoundingClientRect().height || 0}px`);
+  };
+  const headerObserver = new ResizeObserver(updateStickyOffsets);
+  if (header) headerObserver.observe(header);
+  if (nav) headerObserver.observe(nav);
+  window.addEventListener("resize", updateStickyOffsets);
+  updateStickyOffsets();
+
+  document.querySelectorAll(".tier-key").forEach((link) => {
+    link.addEventListener("click", () => {
+      // Restore searched-out sections before the anchor's default navigation.
+      if (state.query) {
+        state.query = "";
+        if (search) search.value = "";
+        render(data, state);
+      }
     });
   });
 

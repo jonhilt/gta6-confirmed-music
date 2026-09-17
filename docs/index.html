@@ -58,12 +58,35 @@
       <div class="archive-main">
         <header class="archive-hero">
           <p class="hero-kicker" id="hero-kicker">The sound of Leonida / source-first archive</p>
-          <h1 id="hero-title">The music of GTA VI</h1>
+          <div class="hero-heading">
+            <h1 id="hero-title">The music of GTA VI</h1>
+            <div class="hero-graphic" aria-hidden="true">
+              <div class="eq-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
           <p class="hero-copy">
             The tracks. The sources. No guesswork. Trailer audio, Rockstar quotes, and artist posts
             that still need a primary link each sit in their own section.
           </p>
           <p class="intro-meta" id="intro-meta"></p>
+          <nav class="evidence-key" aria-label="Catalog sections">
+            <a class="tier-key tier-key--official" href="#tier-official_promo">
+              Official promo
+            </a>
+            <a class="tier-key tier-key--album" href="#tier-the_album">
+              GTA VI album
+            </a>
+            <a class="tier-key tier-key--named" href="#tier-rockstar_named">
+              Rockstar-named
+            </a>
+            <a class="tier-key tier-key--reported" href="#tier-artist_reported">
+              Artist-reported
+            </a>
+          </nav>
+
         </header>
 
         <main class="listing-body">
@@ -83,18 +106,6 @@
               autocomplete="off"
             />
           </label>
-
-          <div class="evidence-key" aria-label="Evidence tiers">
-            <button type="button" class="tier-key tier-key--official" data-tier="official_promo">
-              Official promo
-            </button>
-            <button type="button" class="tier-key tier-key--named" data-tier="rockstar_named">
-              Rockstar-named
-            </button>
-            <button type="button" class="tier-key tier-key--reported" data-tier="artist_reported">
-              Artist-reported
-            </button>
-          </div>
 
           <div id="catalog"></div>
         </main>

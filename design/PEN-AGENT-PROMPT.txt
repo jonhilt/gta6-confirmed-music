@@ -1,0 +1,19 @@
+Design two desktop pages (and a mobile List) for a fan GTA VI confirmed-music tracker.
+
+Vibe: sun-bleached Miami / Leonida nights, neon magenta + teal + sunset orange on deep asphalt, chunky display type, bootleg-flyer confidence. Clearly a fan site — put a persistent banner: "fan documentation · not affiliated with Rockstar / Take-Two".
+
+Hard rules: no Rockstar, GTA, or Take-Two logos, wordmarks, key art, box art, or official UI chrome. Original type and shapes only. Do not make it look official.
+
+Page 1 — List (desktop ~1440 and mobile ~390):
+- Title + short lede
+- Filters for tiers: official promo / Rockstar-named / artist-reported
+- Text search
+- Cards or rows showing artists, track (if any), appearance (Trailer 1/2, Extended Look, interview, claim), tier badge, source links
+- Flag rows that need a primary source
+
+Page 2 — Methodology (desktop):
+- Three tiers explained in plain speech
+- What we refuse (rumors; aggregators as sole proof)
+- Copyright note: no lyrics or pasted bios; linking official media with citation is fine
+
+Use realistic sample content (e.g. Tom Petty — Love Is a Long Road — Trailer 1; Cliff Richard — Devil Woman — Extended Look; Travis Scott — artist-reported / needs primary source). Name the frames clearly.

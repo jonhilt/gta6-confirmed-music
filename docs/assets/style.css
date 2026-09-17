@@ -74,6 +74,12 @@ input {
 
 /* Sidebar */
 .archive-nav {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
+  overflow-y: auto;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
@@ -673,6 +679,10 @@ input {
 
 .dock-header {
   display: grid;
+  align-content: start;
+  height: 5rem;
+  flex-shrink: 0;
+  overflow-y: auto;
   gap: 0.15rem;
   padding: 0.9rem 1rem;
   border-bottom: 1px solid var(--magenta);
@@ -698,6 +708,9 @@ input {
 }
 
 .dock-identity {
+  height: 8rem;
+  flex-shrink: 0;
+  overflow-y: auto;
   padding: 0.85rem 1rem 0.7rem;
 }
 
@@ -721,6 +734,8 @@ input {
 
 .dock-providers {
   display: flex;
+  height: 4.25rem;
+  flex-shrink: 0;
   gap: 0.5rem;
   padding: 0 1rem 0.75rem;
 }
@@ -759,6 +774,7 @@ input {
 
 .dock-stage {
   position: relative;
+  flex-shrink: 0;
   background: var(--stage);
   min-height: 12.5rem;
   aspect-ratio: 16 / 10;
@@ -794,9 +810,28 @@ input {
 .dock-empty[hidden],
 .spotify-host[hidden],
 .yt-host[hidden],
-.dock-providers[hidden],
 .dock-outbound[hidden] {
   display: none;
+}
+
+.dock-providers[hidden] {
+  visibility: hidden;
+}
+
+.dock-restricted strong {
+  color: var(--teal);
+  font-size: 1rem;
+}
+
+.dock-restricted p {
+  line-height: 1.5;
+  margin: 0.75rem 0 1rem;
+}
+
+.dock-restricted .dock-outbound {
+  display: inline-block;
+  border: 1px solid currentColor;
+  padding: 0.65rem 0.9rem;
 }
 
 .dock-footer {
@@ -958,6 +993,8 @@ code {
   }
 
   .archive-nav {
+    height: auto;
+    max-height: 100dvh;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;

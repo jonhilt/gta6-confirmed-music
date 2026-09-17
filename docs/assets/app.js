@@ -123,9 +123,9 @@ function videoMeta(data, entry) {
   return { ...rec, id, start, embedRestricted: Boolean(rec.embedRestricted) };
 }
 
-function ytSource(entry, data) {
+function ytSource(entry, data, source = "trailer") {
   const trailer = videoMeta(data, entry);
-  if (trailer) {
+  if (trailer && (source === "trailer" || !youtubeVideoId(entry))) {
     return {
       videoId: trailer.id,
       start: trailer.start,
@@ -139,7 +139,7 @@ function ytSource(entry, data) {
   return {
     videoId: id,
     start: 0,
-    label: "Atlantic Records YouTube",
+    label: "Official full track on YouTube",
     url: youtubeWatchFromId(id),
     embedRestricted: false,
   };
@@ -157,11 +157,11 @@ function playVariant(entry, data) {
   return "play-video";
 }
 
-function radioVideos(data) {
+function radioVideos(data, source = "full") {
   const seen = new Set();
   const list = [];
   for (const entry of data.entries) {
-    const yt = ytSource(entry, data);
+    const yt = ytSource(entry, data, source);
     if (!yt || yt.embedRestricted) continue;
     if (seen.has(yt.videoId)) continue;
     seen.add(yt.videoId);
@@ -298,9 +298,10 @@ function renderDetailsPanel(entry, data, artists) {
 function playButton(entry, state) {
   if (!canPlay(entry, state.data)) return "";
   const playing = state.playingId === entry.id;
+  const restricted = playing && state.provider === "youtube" && ytSource(entry, state.data, state.videoSource)?.embedRestricted;
   const variant = playVariant(entry, state.data);
   const label = playing
-    ? "Playing"
+    ? restricted ? "Selected" : "Playing"
     : variant === "play-audio"
       ? "Play audio"
       : variant === "play-both"
@@ -314,7 +315,7 @@ function playButton(entry, state) {
       data-action="play-entry"
       data-id="${escapeHtml(entry.id)}"
       aria-pressed="${String(playing)}"
-      aria-label="${escapeHtml(playing ? "Now playing in Leonida Radio" : label)}"
+      aria-label="${escapeHtml(playing ? restricted ? "Selected in player. Open on YouTube to watch." : "Now playing in Leonida Radio" : label)}"
     >
       ${icon}<span class="row-action-label">${escapeHtml(label)}</span>
     </button>`;
@@ -501,8 +502,12 @@ function playerController(state) {
   let cueTimer = null;
   let ignoreEnded = false;
 
+  function selectedYoutube(entry) {
+    return ytSource(entry, state.data, state.videoSource);
+  }
+
   function videos() {
-    return radioVideos(state.data);
+    return radioVideos(state.data, state.sourcePreference === "trailer" ? "trailer" : "full");
   }
 
   function currentEntry() {
@@ -519,13 +524,17 @@ function playerController(state) {
   function nextVideoIndex(videoId) {
     const list = videos();
     const idx = list.findIndex((v) => v.videoId === videoId);
-    if (idx < 0) return 0;
+    if (idx < 0) {
+      const currentIndex = state.data.entries.findIndex((entry) => entry.id === state.playingId);
+      const nextIndex = list.findIndex((video) => state.data.entries.findIndex((entry) => entry.id === video.firstEntryId) > currentIndex);
+      return nextIndex < 0 ? 0 : nextIndex;
+    }
     return (idx + 1) % list.length;
   }
 
   function syncDock() {
     const entry = currentEntry();
-    const yt = entry ? ytSource(entry, state.data) : null;
+    const yt = entry ? selectedYoutube(entry) : null;
     const sp = entry ? spotifyTrackId(entry) : null;
     const kicker = $("#dock-kicker");
     const status = $("#dock-status");
@@ -554,11 +563,11 @@ function playerController(state) {
     }
     if (note) {
       note.textContent = yt?.embedRestricted
-        ? "Age-restricted on YouTube. Opens on youtube.com at the verified cue. Radio skips this upload."
+        ? "Open on YouTube to watch at the verified cue. Radio skips this upload."
         : inRadio
           ? "Radio plays official YouTube videos in list order. When a video ends, the next one starts."
-          : sp && yt
-            ? "This debut single has official YouTube and Spotify. Radio stays on YouTube."
+          : state.provider === "spotify"
+            ? "Listening to the full track on Spotify."
             : "Playing in the shared dock. We do not host the file.";
     }
     if (navStatus) {
@@ -567,20 +576,21 @@ function playerController(state) {
     if (radioEntry && radioEntry.tagName === "BUTTON") {
       radioEntry.classList.toggle("is-live", Boolean(state.playingId) && inRadio);
     }
-    if (startBtn) startBtn.textContent = state.playingId && inRadio ? "Next video" : "Start radio";
+    if (startBtn) startBtn.textContent = state.playingId && state.provider === "youtube" ? "Next video" : "Start radio";
 
-    const both = Boolean(entry && sp && yt && !yt.embedRestricted);
     if (providers) {
-      providers.hidden = !both;
-      if (both) {
-        providers.innerHTML = `
-          <button type="button" class="provider-tab${state.provider === "youtube" ? " is-active" : ""}" data-action="set-provider" data-source="youtube">
-            YouTube <small>${yt.start ? "Trailer cue" : "Official video"}</small>
-          </button>
-          <button type="button" class="provider-tab${state.provider === "spotify" ? " is-active" : ""}" data-action="set-provider" data-source="spotify">
-            Spotify <small>Full track</small>
-          </button>`;
-      }
+      const trailer = entry && videoMeta(state.data, entry);
+      const options = [
+        entry && youtubeVideoId(entry) && { id: "full", label: "Full track", detail: "YouTube" },
+        trailer && { id: "trailer", label: trailer.label.replace("Rockstar ", ""), detail: `${Math.floor(trailer.start / 60)}:${String(trailer.start % 60).padStart(2, "0")} · Trailer cue` },
+        sp && { id: "spotify", label: "Spotify", detail: "Full track" },
+      ].filter(Boolean);
+      const active = state.provider === "spotify" ? "spotify" : state.videoSource;
+      providers.hidden = options.length < 2;
+      providers.innerHTML = options.map((option) => `
+        <button type="button" class="provider-tab${active === option.id ? " is-active" : ""}" aria-pressed="${active === option.id}" data-action="set-provider" data-source="${option.id}">
+          ${escapeHtml(option.label)} <small>${escapeHtml(option.detail)}</small>
+        </button>`).join("");
     }
 
     if (outbound) {
@@ -613,7 +623,16 @@ function playerController(state) {
       }
     }
     ytHost.hidden = !showYt;
-    if (empty) empty.hidden = showSpotify || showYt;
+    if (empty) {
+      empty.hidden = showSpotify || showYt;
+      empty.innerHTML = yt?.embedRestricted && state.provider === "youtube"
+        ? `<div class="dock-restricted">
+            <strong>Age-restricted video</strong>
+            <p>${escapeHtml(yt.label)} can only be watched on YouTube. You may need to sign in to verify your age.</p>
+            <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+          </div>`
+        : entry ? "<p>Loading YouTube video…</p>" : "<p>Start radio to cycle official YouTube videos.</p>";
+    }
   }
 
   function stopCueTimer() {
@@ -627,7 +646,7 @@ function playerController(state) {
     stopCueTimer();
     cueTimer = setInterval(() => {
       if (!ytPlayer || typeof ytPlayer.getCurrentTime !== "function") return;
-      if (state.provider !== "youtube") return;
+      if (state.provider !== "youtube" || state.videoSource !== "trailer") return;
       const t = ytPlayer.getCurrentTime();
       const match = entryAtTime(state.data, videoId, t);
       if (match && match.id !== state.playingId) {
@@ -691,15 +710,19 @@ function playerController(state) {
   }
 
   async function playVideoForEntry(entry, { radioMode }) {
-    const yt = ytSource(entry, state.data);
+    const preferred = state.sourcePreference;
+    const hasFull = Boolean(youtubeVideoId(entry));
+    const hasTrailer = Boolean(videoMeta(state.data, entry));
+    state.provider = preferred === "spotify" && spotifyTrackId(entry) ? "spotify" : "youtube";
+    state.videoSource = preferred === "trailer" && hasTrailer ? "trailer" : hasFull ? "full" : "trailer";
+    const yt = selectedYoutube(entry);
     const sp = spotifyTrackId(entry);
     state.radioMode = radioMode;
-    if (yt?.embedRestricted) {
+    if (state.provider !== "spotify" && yt?.embedRestricted) {
       state.provider = "youtube";
       setPlaying(entry.id, { radioMode: false });
       if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
       stopCueTimer();
-      window.open(youtubeWatchFromId(yt.videoId, yt.start), "_blank", "noopener,noreferrer");
       return;
     }
     if (state.provider === "spotify" && sp) {
@@ -726,13 +749,15 @@ function playerController(state) {
     const list = videos();
     if (!list.length) return;
     const entry = currentEntry();
-    const currentYt = entry ? ytSource(entry, state.data) : null;
+    const currentYt = entry ? selectedYoutube(entry) : null;
     const next = list[nextVideoIndex(currentYt?.videoId)];
     const nextEntry = state.data.entries.find((e) => e.id === next.firstEntryId);
+    if (state.sourcePreference === "spotify") state.sourcePreference = "full";
     if (nextEntry) await playVideoForEntry(nextEntry, { radioMode: true });
   }
 
   async function startRadio() {
+    if (state.sourcePreference === "spotify") state.sourcePreference = "full";
     state.provider = "youtube";
     state.radioMode = true;
     if (state.playingId) {
@@ -747,7 +772,7 @@ function playerController(state) {
   async function playEntry(id) {
     const entry = state.data.entries.find((e) => e.id === id);
     if (!entry) return;
-    const yt = ytSource(entry, state.data);
+    const yt = ytSource(entry, state.data, state.sourcePreference);
     const continueRadio = Boolean(yt && !yt.embedRestricted);
     await playVideoForEntry(entry, { radioMode: continueRadio });
   }
@@ -755,20 +780,12 @@ function playerController(state) {
   async function setProvider(source) {
     const entry = currentEntry();
     if (!entry) return;
-    if (source === "spotify" && spotifyTrackId(entry)) {
-      state.provider = "spotify";
-      state.radioMode = false;
-      if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
-      stopCueTimer();
-      syncDock();
-      render(state.data, state, { preserveScroll: true });
-      return;
-    }
-    if (source === "youtube") {
-      state.provider = "youtube";
-      state.radioMode = true;
-      await playVideoForEntry(entry, { radioMode: true });
-    }
+    if (!["full", "trailer", "spotify"].includes(source)) return;
+    if (source === "full" && !youtubeVideoId(entry)) return;
+    if (source === "trailer" && !videoMeta(state.data, entry)) return;
+    if (source === "spotify" && !spotifyTrackId(entry)) return;
+    state.sourcePreference = source;
+    await playVideoForEntry(entry, { radioMode: source !== "spotify" });
   }
 
   syncDock();
@@ -807,6 +824,8 @@ async function main() {
     expandedId: null,
     playingId: null,
     provider: "youtube",
+    sourcePreference: "full",
+    videoSource: "full",
     radioMode: true,
     data,
   };

@@ -58,7 +58,15 @@
       <div class="archive-main">
         <header class="archive-hero">
           <p class="hero-kicker" id="hero-kicker">The sound of Leonida / source-first archive</p>
-          <h1 id="hero-title">The music of GTA VI</h1>
+          <div class="hero-heading">
+            <h1 id="hero-title">The music of GTA VI</h1>
+            <div class="hero-graphic" aria-hidden="true">
+              <div class="eq-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
           <p class="hero-copy">
             The tracks. The sources. No guesswork. Trailer audio, Rockstar quotes, and artist posts
             that still need a primary link each sit in their own section.
@@ -84,9 +92,12 @@
             />
           </label>
 
-          <div class="evidence-key" aria-label="Evidence tiers">
+          <div class="evidence-key" aria-label="Catalog sections">
             <button type="button" class="tier-key tier-key--official" data-tier="official_promo">
               Official promo
+            </button>
+            <button type="button" class="tier-key tier-key--album" data-tier="the_album">
+              GTA VI album
             </button>
             <button type="button" class="tier-key tier-key--named" data-tier="rockstar_named">
               Rockstar-named

@@ -5,7 +5,7 @@ const vm = require('node:vm');
 
 function setup({ manualReady = false } = {}) {
   const nodes = new Map();
-  const node = () => ({ dataset: {}, classList: { toggle() {} }, replaceChildren() {}, appendChild() {} });
+  const node = () => ({ dataset: {}, classList: { values: new Set(), toggle(name, on) { on ? this.values.add(name) : this.values.delete(name); } }, replaceChildren() {}, appendChild() {} });
   const context = {
     queueMicrotask, URL, console, loads: [], location: { origin: 'http://localhost:8000' },
     setInterval: () => 1, clearInterval() {}, setTimeout: (fn) => fn(),
@@ -24,7 +24,7 @@ function setup({ manualReady = false } = {}) {
   context.nodes = nodes;
   vm.createContext(context);
   vm.runInContext(fs.readFileSync('docs/assets/app.js', 'utf8').replace(/main\(\);\s*$/, ''), context);
-  vm.runInContext('render = () => {}; loadYouTubeApi = async () => {};', context);
+  vm.runInContext('render = () => {}; loadYouTubeApi = async () => {}; loadSpotifyApi = async () => null;', context);
   context.state = { data: context.data, provider: 'youtube', sourcePreference: 'full', videoSource: 'full', radioMode: false };
   context.player = vm.runInContext('playerController(state)', context);
   return context;
@@ -109,4 +109,35 @@ test('YouTube errors stop radio and expose a fallback instead of retrying foreve
   assert.equal(c.loads.length, 1);
   assert.match(c.nodes.get('#dock-empty').innerHTML, /Open on YouTube/);
   assert.equal(c.nodes.get('#dock-empty').hidden, false);
+});
+
+test('visualiser only animates during YouTube playback and stops on pause or error', async () => {
+  const c = setup();
+  await c.player.playEntry('t1-love-is-a-long-road');
+  const graphic = c.nodes.get('.hero-graphic');
+  assert.equal(graphic.classList.values.has('is-playing'), false);
+  c.events.onStateChange({ data: 1 });
+  assert.equal(graphic.classList.values.has('is-playing'), true);
+  c.events.onStateChange({ data: 2 });
+  assert.equal(graphic.classList.values.has('is-playing'), false);
+  c.events.onStateChange({ data: 1 });
+  c.events.onError({ data: 150 });
+  assert.equal(graphic.classList.values.has('is-playing'), false);
+});
+
+test('visualiser follows Spotify playback and ignores events after switching away', async () => {
+  const c = setup();
+  c.spotifyEvents = {};
+  vm.runInContext('loadSpotifyApi = async () => ({ createController(mount, options, callback) { callback({ destroy() {}, addListener(name, fn) { spotifyEvents[name] = fn; } }); } });', c);
+  await c.player.playEntry('ar-travis-scott');
+  await c.player.setProvider('spotify');
+  const graphic = c.nodes.get('.hero-graphic');
+  assert.equal(graphic.classList.values.has('is-playing'), false);
+  c.spotifyEvents.playback_update({ data: { isPaused: false, isBuffering: false } });
+  assert.equal(graphic.classList.values.has('is-playing'), true);
+  c.spotifyEvents.playback_update({ data: { isPaused: true, isBuffering: false } });
+  assert.equal(graphic.classList.values.has('is-playing'), false);
+  await c.player.setProvider('full');
+  c.spotifyEvents.playback_update({ data: { isPaused: false, isBuffering: false } });
+  assert.equal(graphic.classList.values.has('is-playing'), false);
 });

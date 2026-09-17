@@ -10,7 +10,7 @@ This is fan documentation. It is not affiliated with Rockstar Games or Take-Two 
 
 Three tiers. Nothing else goes on the home page.
 
-1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, or Extended Look.
+1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, or Extended Look, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
 3. **artist_reported** — the artist (or a channel they control) claims involvement. Link a **primary** source. Flag it as not Rockstar-verified.
 
@@ -34,7 +34,7 @@ The site is static HTML. It reads:
 | `year` | no | original release year if known |
 | `tier` | yes | `official_promo` \| `rockstar_named` \| `artist_reported` |
 | `appearance` | yes | short human sentence |
-| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `interview` \| `artist_claim` |
+| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` |
 | `sources` | yes | `{ "label", "url" }[]` — first link should be the strongest |
 | `status` | no | `needs_primary_source` for artist-reported rows without a primary URL |
 | `note` | no | one factual caveat |
@@ -57,12 +57,13 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 4. Bump `updated` (ISO date).
 5. Open a PR. Do not paste lyrics.
 
-## Current coverage (2026-09-15)
+## Current coverage (2026-09-17)
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
+- The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It).
 - Rockstar-named: Kodak Black, Sexyy Red, Real Dimez (Dazed).
-- Artist-reported awaiting a primary URL: Travis Scott, Future, Morgan Wallen.
+- Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
 
 ## License
 

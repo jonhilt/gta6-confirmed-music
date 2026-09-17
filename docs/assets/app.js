@@ -14,13 +14,14 @@ const TIER_SECTION_NUM = {
 
 const TIER_COPY = {
   official_promo:
-    "Audio from Rockstar trailers and the Extended Look. Play jumps to that moment in the official video.",
+    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Trailer cues play in the official video; album rows open the source list.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
 };
 
 const EVIDENCE_HEADLINE = {
+  official_promo: "Publisher-backed promo credit, with linked sources.",
   rockstar_named: "An artist mention. Not a song credit.",
   artist_reported_needs: "A reported teaser. Proof still pending.",
   artist_reported: "Artist-reported claim with linked sources.",
@@ -61,6 +62,7 @@ function formatCueLine(entry) {
   if (key === "trailer1") slot = "Trailer 1 · 04 Dec 2023";
   else if (key === "trailer2") slot = "Trailer 2 · 06 May 2025";
   else if (key === "extendedLook") slot = "Extended Look · 27 Aug 2026";
+  else if (key === "the_album") slot = "The Album · 17 Sep 2026";
   else if (key === "interview") slot = "Named by Rockstar · Aug 2026";
   else if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
   else slot = entry.appearance;
@@ -92,7 +94,9 @@ function formatPanelEyebrow(entry) {
           ? "Trailer 2"
           : entry.appearanceKey === "extendedLook"
             ? "Extended Look"
-            : entry.appearance;
+            : entry.appearanceKey === "the_album"
+              ? "The Album"
+              : entry.appearance;
     return `${tier} / ${slot}`;
   }
   return tier;
@@ -115,6 +119,10 @@ function sourceRole(label, entry) {
   }
   if (lower.includes("dazed")) return "Primary interview source.";
   if (lower.includes("rockstar youtube")) return "Official publisher video.";
+  if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
+    return "Official publisher announcement.";
+  }
+  if (lower.includes("atlantic records")) return "Label announcement (track titles).";
   if (lower.includes("push square") || lower.includes("ign")) return "Secondary news report.";
   return "Supporting citation.";
 }
@@ -127,6 +135,7 @@ function evidenceSummary(entry, artists) {
 }
 
 function evidenceHeadline(entry) {
+  if (entry.tier === "official_promo") return EVIDENCE_HEADLINE.official_promo;
   if (entry.tier === "rockstar_named") return EVIDENCE_HEADLINE.rockstar_named;
   if (entry.status === "needs_primary_source") return EVIDENCE_HEADLINE.artist_reported_needs;
   return EVIDENCE_HEADLINE.artist_reported;

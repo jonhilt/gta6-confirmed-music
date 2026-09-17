@@ -226,6 +226,73 @@ input {
   color: var(--ink);
 }
 
+.hero-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10rem;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.hero-graphic {
+  display: grid;
+  place-items: center;
+  height: 5.5rem;
+  border: 1px solid var(--line-strong);
+  background: var(--stage);
+  overflow: hidden;
+}
+
+.eq-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 60%;
+}
+
+.eq-bars span {
+  display: block;
+  width: 0.3rem;
+  border-radius: 2px;
+  animation: eq-pulse 1.1s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.hero-graphic.is-playing .eq-bars span {
+  animation-play-state: running;
+}
+
+.eq-bars span:nth-child(odd) {
+  background: var(--teal);
+  height: 2.2rem;
+}
+
+.eq-bars span:nth-child(even) {
+  background: #f52fc0;
+  height: 3.4rem;
+}
+
+.eq-bars span:nth-child(2) { animation-delay: 0.1s; }
+.eq-bars span:nth-child(3) { animation-delay: 0.2s; }
+.eq-bars span:nth-child(4) { animation-delay: 0.3s; }
+.eq-bars span:nth-child(5) { animation-delay: 0.4s; }
+.eq-bars span:nth-child(6) { animation-delay: 0.5s; }
+.eq-bars span:nth-child(7) { animation-delay: 0.6s; }
+.eq-bars span:nth-child(8) { animation-delay: 0.7s; }
+.eq-bars span:nth-child(9) { animation-delay: 0.8s; }
+.eq-bars span:nth-child(10) { animation-delay: 0.9s; }
+
+@keyframes eq-pulse {
+  from { transform: scaleY(0.55); }
+  to { transform: scaleY(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eq-bars span {
+    animation: none;
+  }
+}
+
 .hero-copy {
   margin: 0.85rem 0 0;
   max-width: 38rem;
@@ -269,6 +336,7 @@ input {
 }
 
 .tier-key--official { color: var(--promo); }
+.tier-key--album { color: var(--magenta); }
 .tier-key--named { color: var(--named); }
 .tier-key--reported { color: var(--reported); }
 
@@ -349,6 +417,7 @@ input {
 }
 
 .tier-section--official_promo .tier-header-num { color: var(--promo); }
+.tier-section--the_album .tier-header-num { color: var(--magenta); }
 .tier-section--rockstar_named .tier-header-num { color: var(--named); }
 .tier-section--artist_reported .tier-header-num { color: var(--reported); }
 
@@ -1099,6 +1168,11 @@ code {
 }
 
 @media (max-width: 640px) {
+  .hero-heading {
+    grid-template-columns: minmax(0, 1fr) 8rem;
+    gap: 0.75rem;
+  }
+
   .nav-brand-drop {
     font-size: 1.5rem;
   }

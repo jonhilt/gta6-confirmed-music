@@ -920,6 +920,15 @@ async function main() {
 
   const header = $(".archive-hero");
   const nav = $(".archive-nav");
+  let compactHeader = false;
+  const updateHeaderCompactness = () => {
+    const next = compactHeader ? window.scrollY > 32 : window.scrollY > 160;
+    if (next === compactHeader) return;
+    compactHeader = next;
+    header?.classList.toggle("is-compact", next);
+  };
+  window.addEventListener("scroll", updateHeaderCompactness, { passive: true });
+  updateHeaderCompactness();
   const updateStickyOffsets = () => {
     const navHeight = window.matchMedia("(max-width: 1100px)").matches ? nav?.getBoundingClientRect().height || 0 : 0;
     document.documentElement.style.setProperty("--sticky-nav-height", `${navHeight}px`);

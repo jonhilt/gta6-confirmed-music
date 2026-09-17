@@ -196,6 +196,7 @@ input {
 /* Main column */
 .archive-main {
   min-width: 0;
+  overflow-anchor: none;
   display: flex;
   flex-direction: column;
   padding: 1.9rem 2.25rem 2.5rem 2.1rem;
@@ -219,6 +220,23 @@ input {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--teal);
+}
+
+.hero-explainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows 220ms ease, opacity 160ms ease;
+}
+
+.hero-explainer-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.archive-hero.is-compact .hero-explainer {
+  grid-template-rows: 0fr;
+  opacity: 0;
 }
 
 .archive-hero h1 {
@@ -294,6 +312,10 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-explainer {
+    transition: none;
+  }
+
   .eq-bars span {
     animation: none;
   }

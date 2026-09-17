@@ -141,3 +141,15 @@ test('visualiser follows Spotify playback and ignores events after switching awa
   c.spotifyEvents.playback_update({ data: { isPaused: false, isBuffering: false } });
   assert.equal(graphic.classList.values.has('is-playing'), false);
 });
+
+test('album grouping preserves evidence labels in the row and source panel', () => {
+  const c = setup();
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'ar-travis-scott');
+    state.expandedId = entry.id;
+    return renderRow(entry, 22, state);
+  })()`, c);
+  assert.match(html, /class="row-evidence">Official promo</);
+  assert.match(html, /The source \/ Official promo/);
+  assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 'ar-travis-scott'))", c), 'the_album');
+});

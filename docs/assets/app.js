@@ -287,7 +287,7 @@ function renderDetailsPanel(entry, data, artists) {
     <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
       <div class="row-panel-inner">
         <div>
-          <p class="panel-eyebrow">The source / ${escapeHtml(TIER_LABEL[catalogSection(entry)])}</p>
+          <p class="panel-eyebrow">The source / ${escapeHtml(TIER_LABEL[entry.tier])}</p>
           <h3 class="evidence-headline">${escapeHtml(headline)}</h3>
           ${summary}
           ${blurb}
@@ -370,7 +370,7 @@ function renderRow(entry, indexNum, state) {
           ${track}
           <p class="row-cue">${escapeHtml(formatCueLine(entry))}</p>
         </div>
-        <p class="row-evidence">${escapeHtml(TIER_LABEL[catalogSection(entry)])}</p>
+        <p class="row-evidence">${escapeHtml(TIER_LABEL[entry.tier])}</p>
         <div class="row-actions">${playButton(entry, state)}</div>
         <div class="row-source">${sourceButton(entry, state)}</div>
       </div>
@@ -567,6 +567,7 @@ function playerController(state) {
 
   function syncDock() {
     const entry = currentEntry();
+    $("#player-dock")?.classList.toggle("has-selection", Boolean(entry));
     const yt = entry ? selectedYoutube(entry) : null;
     const sp = entry ? spotifyTrackId(entry) : null;
     const kicker = $("#dock-kicker");
@@ -917,17 +918,27 @@ async function main() {
     });
   }
 
-  document.querySelectorAll(".tier-key").forEach((btn) => {
-    btn.setAttribute("aria-pressed", "false");
-    btn.addEventListener("click", () => {
-      const tier = btn.dataset.tier;
-      const next = state.tier === tier ? "all" : tier;
-      state.tier = next;
-      document.querySelectorAll(".tier-key").forEach((b) => {
-        b.setAttribute("aria-pressed", String(b.dataset.tier === next));
-      });
-      render(data, state);
-      if (next !== "all") document.getElementById(`tier-${next}`)?.scrollIntoView({ behavior: "smooth" });
+  const header = $(".archive-hero");
+  const nav = $(".archive-nav");
+  const updateStickyOffsets = () => {
+    const navHeight = window.matchMedia("(max-width: 1100px)").matches ? nav?.getBoundingClientRect().height || 0 : 0;
+    document.documentElement.style.setProperty("--sticky-nav-height", `${navHeight}px`);
+    document.documentElement.style.setProperty("--sticky-header-height", `${header?.getBoundingClientRect().height || 0}px`);
+  };
+  const headerObserver = new ResizeObserver(updateStickyOffsets);
+  if (header) headerObserver.observe(header);
+  if (nav) headerObserver.observe(nav);
+  window.addEventListener("resize", updateStickyOffsets);
+  updateStickyOffsets();
+
+  document.querySelectorAll(".tier-key").forEach((link) => {
+    link.addEventListener("click", () => {
+      // Restore searched-out sections before the anchor's default navigation.
+      if (state.query) {
+        state.query = "";
+        if (search) search.value = "";
+        render(data, state);
+      }
     });
   });
 

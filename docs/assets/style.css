@@ -202,6 +202,12 @@ input {
 }
 
 .archive-hero {
+  position: sticky;
+  top: var(--sticky-nav-height, 0px);
+  z-index: 10;
+  background: var(--asphalt);
+  padding: 0.75rem 0 1rem;
+  border-bottom: 1px solid var(--line);
   margin-bottom: 1.5rem;
 }
 
@@ -316,12 +322,14 @@ input {
 }
 
 .evidence-key {
+  margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.25rem;
 }
 
 .tier-key {
+  text-decoration: none;
   margin: 0;
   padding: 0;
   border: 0;
@@ -370,6 +378,7 @@ input {
 }
 
 .tier-section {
+  scroll-margin-top: calc(var(--sticky-nav-height, 0px) + var(--sticky-header-height, 0px) + 1rem);
   display: grid;
   gap: 0.75rem;
   margin-bottom: 2rem;
@@ -1058,7 +1067,11 @@ code {
 
 @media (max-width: 1100px) {
   :root {
-    --mobile-dock-height: min(60dvh, 24rem);
+    --mobile-dock-height: min(45dvh, 20rem);
+  }
+
+  :root:has(.player-dock:not(.has-selection)) {
+    --mobile-dock-height: 4.5rem;
   }
 
   .app-shell {
@@ -1085,10 +1098,36 @@ code {
     padding: 1rem 1.25rem;
   }
 
-  .nav-disclaimer {
-    margin: 0;
-    width: 100%;
+  .archive-nav {
+    padding: 0.65rem 1rem;
+    gap: 0.5rem 1rem;
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
+
+  .archive-nav .radio-entry,
+  .archive-nav .nav-disclaimer,
+  .archive-nav .nav-brand-sub {
+    display: none;
+  }
+
+  .nav-brand-leonida { font-size: 0.75rem; }
+  .nav-brand-drop { font-size: 1.3rem; }
+  .nav-links { gap: 0.15rem; }
+  .nav-links a { font-size: 0.9rem; }
+
+  .archive-hero {
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  .archive-hero h1 { font-size: 2.6rem; }
+  .archive-hero .hero-kicker,
+  .archive-hero .hero-copy,
+  .archive-hero .intro-meta { display: none; }
+  .hero-heading { grid-template-columns: minmax(0, 1fr) 8rem; }
+  .hero-graphic { height: 3.5rem; }
+  .eq-bars { transform: scaleY(0.65); }
+  .evidence-key { gap: 0.4rem 0.8rem; margin-top: 0.6rem; }
 
   .player-dock {
     position: fixed;
@@ -1112,6 +1151,18 @@ code {
     display: none;
   }
 
+  .player-dock:not(.has-selection) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+  }
+
+  .player-dock:not(.has-selection) .dock-providers,
+  .player-dock:not(.has-selection) .dock-stage,
+  .player-dock:not(.has-selection) .dock-artist {
+    display: none;
+  }
+
   .dock-identity,
   .dock-providers {
     height: auto;
@@ -1120,6 +1171,11 @@ code {
 
   .dock-track {
     font-size: 1.15rem;
+  }
+
+  .dock-artist {
+    font-size: 0.55rem;
+    line-height: 1.25;
   }
 
   .dock-stage {
@@ -1178,10 +1234,20 @@ code {
   }
 
   .archive-hero h1 {
-    font-size: 2.6rem;
+    font-size: 2rem;
   }
 
   .radio-entry {
     flex: 1;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-heading {
+    grid-template-columns: minmax(0, 1fr) 6rem;
+  }
+
+  .eq-bars {
+    gap: 0.25rem;
   }
 }

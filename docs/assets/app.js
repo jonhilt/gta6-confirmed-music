@@ -14,7 +14,7 @@ const TIER_SECTION_NUM = {
 
 const TIER_COPY = {
   official_promo:
-    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Trailer cues play in the official video. Album debut singles play in Spotify's official track embed.",
+    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Trailer cues play in the official video. Album debut singles play in Spotify or the official Atlantic YouTube video.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
@@ -89,6 +89,44 @@ function spotifyOpenUrl(trackId) {
   return `https://open.spotify.com/track/${trackId}`;
 }
 
+function youtubeVideoId(entry) {
+  const id = entry?.youtubeVideoId;
+  if (typeof id !== "string") return null;
+  const trimmed = id.trim();
+  if (!/^[A-Za-z0-9_-]{11}$/.test(trimmed)) return null;
+  return trimmed;
+}
+
+function youtubeWatchFromId(id) {
+  return `https://www.youtube.com/watch?v=${id}`;
+}
+
+function sharedSourcesFor(entry, data) {
+  const key = entry?.appearanceKey;
+  const list = data?.sharedSources?.[key];
+  return Array.isArray(list) ? list : [];
+}
+
+function sourceCount(entry, data) {
+  return (entry.sources || []).length + sharedSourcesFor(entry, data).length;
+}
+
+function playVariant(entry, data) {
+  const trailer = Boolean(videoMeta(data, entry));
+  const sp = Boolean(spotifyTrackId(entry));
+  const yt = Boolean(youtubeVideoId(entry));
+  if (sp && (yt || trailer)) return "play-both";
+  if (sp && !yt && !trailer) return "play-audio";
+  return "play-video";
+}
+
+function defaultPlayerSource(entry, data) {
+  if (videoMeta(data, entry)) return "trailer";
+  if (spotifyTrackId(entry)) return "spotify";
+  if (youtubeVideoId(entry)) return "youtube";
+  return "trailer";
+}
+
 function youtubeWatchUrl(url, startSeconds) {
   if (!url || startSeconds == null || startSeconds < 0) return url;
   try {
@@ -139,6 +177,8 @@ function sourceRole(label, entry) {
     return "Official publisher announcement.";
   }
   if (lower.includes("official spotify track")) return "Official streaming page for this debut single.";
+  if (lower.includes("atlantic records youtube")) return "Official label video for this debut single.";
+  if (lower.includes("linkfire hub")) return "Official smart link for this debut single.";
   if (lower.includes("atlantic records")) return "Label announcement (track titles).";
   if (lower.includes("push square") || lower.includes("ign")) return "Secondary news report.";
   return "Supporting citation.";
@@ -178,8 +218,8 @@ function playIcon() {
   return lucideIcon("circle-play", 14);
 }
 
-function renderSourceList(entry) {
-  return (entry.sources || [])
+function renderSourceItems(sources, entry) {
+  return (sources || [])
     .map(
       (s) => `
         <div class="source-item">
@@ -193,12 +233,24 @@ function renderSourceList(entry) {
     .join("");
 }
 
+function renderSourceList(entry, data) {
+  const own = renderSourceItems(entry.sources || [], entry);
+  const shared = sharedSourcesFor(entry, data);
+  if (!shared.length) return own;
+  return `${own}
+    <p class="panel-eyebrow source-shared-label">Shared album press</p>
+    ${renderSourceItems(shared, entry)}`;
+}
+
 function rowActionButton({ action, id, expanded, variant, label }) {
   const open = Boolean(expanded);
-  const isPlay = variant === "play-video" || variant === "play-audio";
+  const isPlay = variant === "play-video" || variant === "play-audio" || variant === "play-both";
   const classes = ["row-action"];
   if (isPlay) {
-    classes.push("row-action--play", variant === "play-audio" ? "row-action--audio" : "row-action--video");
+    classes.push(
+      "row-action--play",
+      variant === "play-audio" ? "row-action--audio" : variant === "play-both" ? "row-action--both" : "row-action--video"
+    );
   } else {
     classes.push("row-action--sources");
     if (variant === "awaiting") classes.push("row-action--awaiting");
@@ -208,8 +260,9 @@ function rowActionButton({ action, id, expanded, variant, label }) {
   let icon;
   let visible;
   if (isPlay) {
+    const closedLabel = variant === "play-audio" ? "PLAY AUDIO" : variant === "play-both" ? "PLAY" : "PLAY VIDEO";
     icon = lucideIcon(open ? "chevron-up" : variant === "play-audio" ? "headphones" : "play", 16);
-    visible = open ? "HIDE PLAYER" : variant === "play-audio" ? "PLAY AUDIO" : "PLAY VIDEO";
+    visible = open ? "HIDE PLAYER" : closedLabel;
   } else {
     icon = lucideIcon(open ? "chevron-up" : variant === "awaiting" ? "clock-3" : "arrow-up-right", 14);
     visible = label;
@@ -304,19 +357,62 @@ function renderExternalVideoShell(video, entry) {
     </a>`;
 }
 
-function renderPlayerPanel(entry, data, artists, loaded) {
-  const video = videoMeta(data, entry);
+function renderPlayerSourceSwitch(entry, hasSpotify, hasYouTube, source) {
+  if (!(hasSpotify && hasYouTube)) return "";
+  const btn = (id, label, active) => `
+    <button
+      type="button"
+      class="player-source${active ? " is-active" : ""}"
+      data-action="set-player-source"
+      data-id="${escapeHtml(entry.id)}"
+      data-source="${id}"
+      aria-pressed="${String(active)}"
+    >
+      ${escapeHtml(label)}
+    </button>`;
+  return `<div class="player-source-switch" role="group" aria-label="Playback source">
+    ${btn("spotify", "Spotify", source === "spotify")}
+    ${btn("youtube", "YouTube", source === "youtube")}
+  </div>`;
+}
+
+function atlanticVideoMeta(entry) {
+  const id = youtubeVideoId(entry);
+  if (!id) return null;
+  return {
+    id,
+    url: youtubeWatchFromId(id),
+    label: "Atlantic Records YouTube",
+    start: 0,
+    embedRestricted: false,
+  };
+}
+
+function renderPlayerPanel(entry, data, artists, loaded, playerSource) {
+  const trailer = videoMeta(data, entry);
   const trackId = spotifyTrackId(entry);
+  const atlantic = atlanticVideoMeta(entry);
+  const hasSpotify = Boolean(trackId);
+  const hasYouTube = Boolean(atlantic);
+  let source = playerSource;
+  if (trailer) source = "trailer";
+  else if (source === "spotify" && hasSpotify) source = "spotify";
+  else if (source === "youtube" && hasYouTube) source = "youtube";
+  else source = defaultPlayerSource(entry, data);
+
+  const useSpotify = source === "spotify" && hasSpotify;
+  const video = trailer || (source === "youtube" ? atlantic : null);
   const trackTitle = entry.track ? escapeHtml(entry.track) : "Track not specified";
   const artistLine = escapeHtml(entry.artists.join(", "));
   const cueVerified = entry.cueSeconds != null;
   const external = Boolean(video?.embedRestricted);
-  const useSpotify = Boolean(trackId) && !video;
   const cueNote = useSpotify
     ? "Official Atlantic/Rockstar debut single. Spotify's player, not a file we host."
-    : cueVerified
-      ? `Verified cue at ${formatTimestamp(entry.cueSeconds)} on Rockstar YouTube.`
-      : "Cue time awaiting verification.\nOpens from the beginning for now.";
+    : source === "youtube"
+      ? "Official Atlantic Records video. YouTube's player, not a file we host."
+      : cueVerified
+        ? `Verified cue at ${formatTimestamp(entry.cueSeconds)} on Rockstar YouTube.`
+        : "Cue time awaiting verification.\nOpens from the beginning for now.";
   const videoShell = useSpotify
     ? renderSpotifyShell(entry, trackId, loaded)
     : video
@@ -333,11 +429,13 @@ function renderPlayerPanel(entry, data, artists, loaded) {
           Watch on YouTube ${externalIcon()}
         </a>`
       : "";
-  const playbackCopy = useSpotify
-    ? "Official Spotify player. Expanding another row closes this panel."
-    : external
-      ? "Extended Look plays on YouTube. Expanding another track closes this panel."
-      : "One video at a time. Playing another track closes this player.";
+  const playbackCopy = hasSpotify && hasYouTube
+    ? "Spotify or official Atlantic YouTube. Expanding another row closes this panel."
+    : useSpotify
+      ? "Official Spotify player. Expanding another row closes this panel."
+      : external
+        ? "Extended Look plays on YouTube. Expanding another track closes this panel."
+        : "One video at a time. Playing another track closes this player.";
 
   return `
     <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
@@ -349,6 +447,7 @@ function renderPlayerPanel(entry, data, artists, loaded) {
           <p class="panel-artist">${artistLine}</p>
           <p class="panel-meta">${escapeHtml(video?.label || entry.appearance)}</p>
           <p class="panel-cue-note">${escapeHtml(cueNote)}</p>
+          ${renderPlayerSourceSwitch(entry, hasSpotify, hasYouTube && !trailer, source)}
           ${outbound}
         </div>
       </div>
@@ -384,28 +483,31 @@ function renderDetailsPanel(entry, data, artists) {
         </div>
         <div class="source-list-wrap">
           <p class="panel-eyebrow">Source references</p>
-          <div class="source-list">${renderSourceList(entry)}</div>
+          <div class="source-list">${renderSourceList(entry, data)}</div>
         </div>
       </div>
     </div>`;
 }
 
 function rowActions(entry, expanded, mode) {
-  const video = videoMeta(window.__catalogData, entry);
-  const trackId = spotifyTrackId(entry);
-  const count = (entry.sources || []).length;
+  const data = window.__catalogData;
+  const canPlay =
+    Boolean(videoMeta(data, entry) || spotifyTrackId(entry) || youtubeVideoId(entry));
+  const count = sourceCount(entry, data);
   const official = entry.tier === "official_promo";
   const parts = [];
 
-  if (official && (video || trackId)) {
-    const audio = Boolean(trackId) && !video;
+  if (official && canPlay) {
+    const variant = playVariant(entry, data);
+    const label =
+      variant === "play-audio" ? "Play audio" : variant === "play-both" ? "Play" : "Play video";
     parts.push(
       rowActionButton({
         action: "toggle-player",
         id: entry.id,
         expanded: expanded && mode === "player",
-        variant: audio ? "play-audio" : "play-video",
-        label: audio ? "Play audio" : "Play video",
+        variant,
+        label,
       })
     );
   }
@@ -436,7 +538,7 @@ function renderRow(entry, indexNum, state) {
   const activeClass = expanded ? " is-active" : "";
   const panel =
     expanded && mode === "player"
-      ? renderPlayerPanel(entry, state.data, state.data.artists, state.playerLoaded)
+      ? renderPlayerPanel(entry, state.data, state.data.artists, state.playerLoaded, state.playerSource)
       : expanded && mode === "details"
         ? renderDetailsPanel(entry, state.data, state.data.artists)
         : "";
@@ -586,9 +688,10 @@ function closeExpanded(state) {
   state.expandedId = null;
   state.expandedMode = null;
   state.playerLoaded = false;
+  state.playerSource = null;
 }
 
-function openEntry(state, id, mode) {
+function openEntry(state, id, mode, data) {
   if (state.expandedId === id && state.expandedMode === mode) {
     closeExpanded(state);
     return;
@@ -596,6 +699,8 @@ function openEntry(state, id, mode) {
   state.expandedId = id;
   state.expandedMode = mode;
   state.playerLoaded = mode === "player";
+  const entry = data.entries.find((e) => e.id === id);
+  state.playerSource = mode === "player" && entry ? defaultPlayerSource(entry, data) : null;
 }
 
 function bindCatalog(data, state) {
@@ -607,9 +712,17 @@ function bindCatalog(data, state) {
     const id = btn.dataset.id;
     const action = btn.dataset.action;
     if (action === "toggle-player") {
-      openEntry(state, id, "player");
+      openEntry(state, id, "player", data);
     } else if (action === "toggle-details") {
-      openEntry(state, id, "details");
+      openEntry(state, id, "details", data);
+    } else if (action === "set-player-source") {
+      const next = btn.dataset.source;
+      if (next === "spotify" || next === "youtube") {
+        state.expandedId = id;
+        state.expandedMode = "player";
+        state.playerLoaded = true;
+        state.playerSource = next;
+      }
     }
     render(data, state, { preserveScroll: true });
   });
@@ -629,6 +742,7 @@ async function main() {
     expandedId: null,
     expandedMode: null,
     playerLoaded: false,
+    playerSource: null,
     data,
   };
 

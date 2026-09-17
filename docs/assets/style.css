@@ -691,6 +691,41 @@ a {
   grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
 }
 
+.player-source-switch {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--line);
+  width: max-content;
+}
+
+.player-source {
+  margin: 0;
+  padding: 0.4rem 0.85rem;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.player-source.is-active {
+  background: var(--nav);
+  color: var(--cream);
+}
+
+.player-source:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.source-shared-label {
+  margin-top: 0.5rem;
+}
+
 .video-shell--external {
   text-decoration: none;
   color: var(--cream);

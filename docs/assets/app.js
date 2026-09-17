@@ -162,39 +162,20 @@ function externalIcon() {
   return `<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h6V3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-6h-2v6H5V5Z"/></svg>`;
 }
 
-function chevronIcon(up) {
-  const d = up ? "M6 15l6-6 6 6" : "M6 9l6 6 6-6";
-  return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="${d}"/></svg>`;
+function lucideIcon(name, size = 16) {
+  const inner = {
+    play: `<polygon points="6 3 20 12 6 21 6 3"/>`,
+    headphones: `<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>`,
+    "chevron-up": `<path d="m18 15-6-6-6 6"/>`,
+    "arrow-up-right": `<path d="M7 7h10v10"/><path d="M7 17 17 7"/>`,
+    "clock-3": `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16.5 12"/>`,
+    "circle-play": `<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>`,
+  }[name];
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
 }
 
 function playIcon() {
-  return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.25 5.53a1.2 1.2 0 0 1 1.82-1.03l10.12 6.47a1.2 1.2 0 0 1 0 2.06L10.07 19.5a1.2 1.2 0 0 1-1.82-1.03V5.53Z"/></svg>`;
-}
-
-function closeIcon() {
-  return `<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" d="M7 7l10 10M17 7 7 17"/></svg>`;
-}
-
-function infoIcon() {
-  return `<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="12" cy="6.35" r="1.85" fill="currentColor"/>
-    <path fill="currentColor" d="M10.45 10.15c0-.7.57-1.27 1.27-1.27h.56c.7 0 1.27.57 1.27 1.27v8.05c0 .7-.57 1.27-1.27 1.27h-.56c-.7 0-1.27-.57-1.27-1.27v-8.05Z"/>
-  </svg>`;
-}
-
-function videoPlayIcon() {
-  return `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-    <path fill="currentColor" d="M3.6 6.4A2.9 2.9 0 0 1 6.5 3.5h8.2A2.9 2.9 0 0 1 17.6 6.4v11.2a2.9 2.9 0 0 1-2.9 2.9H6.5a2.9 2.9 0 0 1-2.9-2.9V6.4Z"/>
-    <path fill="currentColor" d="M18.35 8.05v7.9l3.05 2.12c.85.6 2.05-.02 2.05-1.06V7c0-1.04-1.2-1.65-2.05-1.06l-3.05 2.11Z"/>
-  </svg>`;
-}
-
-function audioPlayIcon() {
-  return `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-    <path fill="currentColor" d="M13.2 3.85c0-1.12-1.36-1.68-2.15-.89L7.2 6.8H4.7A1.95 1.95 0 0 0 2.75 8.75v6.5A1.95 1.95 0 0 0 4.7 17.2h2.5l3.85 3.84c.79.79 2.15.23 2.15-.89V3.85Z"/>
-    <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M16.35 9.05a3.6 3.6 0 0 1 0 5.9"/>
-    <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M18.85 7.15a6.35 6.35 0 0 1 0 9.7"/>
-  </svg>`;
+  return lucideIcon("circle-play", 14);
 }
 
 function renderSourceList(entry) {
@@ -215,29 +196,28 @@ function renderSourceList(entry) {
 function rowActionButton({ action, id, expanded, variant, label }) {
   const open = Boolean(expanded);
   const isPlay = variant === "play-video" || variant === "play-audio";
-  const isInfo = variant === "info";
   const classes = ["row-action"];
   if (isPlay) {
     classes.push("row-action--play", variant === "play-audio" ? "row-action--audio" : "row-action--video");
-  } else if (isInfo) {
-    classes.push("row-action--info");
   } else {
-    classes.push("row-action--text");
+    classes.push("row-action--sources");
+    if (variant === "awaiting") classes.push("row-action--awaiting");
   }
   if (open) classes.push("is-open");
 
   let icon;
-  if (open && (isPlay || isInfo)) icon = closeIcon();
-  else if (variant === "play-video") icon = videoPlayIcon();
-  else if (variant === "play-audio") icon = audioPlayIcon();
-  else if (variant === "info") icon = infoIcon();
-  else icon = open ? chevronIcon(true) : chevronIcon(false);
+  let visible;
+  if (isPlay) {
+    icon = lucideIcon(open ? "chevron-up" : variant === "play-audio" ? "headphones" : "play", 16);
+    visible = open ? "HIDE PLAYER" : variant === "play-audio" ? "PLAY AUDIO" : "PLAY VIDEO";
+  } else {
+    icon = lucideIcon(open ? "chevron-up" : variant === "awaiting" ? "clock-3" : "arrow-up-right", 14);
+    visible = label;
+  }
 
-  const ariaLabel = open ? (isPlay ? "Close player" : isInfo ? "Close sources" : "Close") : label;
-  const visibleLabel =
-    variant === "text"
-      ? `<span class="row-action-label">${escapeHtml(open ? "Close" : label)}</span>`
-      : `<span class="visually-hidden">${escapeHtml(ariaLabel)}</span>`;
+  const ariaLabel = open ? (isPlay ? "Hide player" : "Hide sources") : label;
+  const labelEl = `<span class="row-action-label">${escapeHtml(visible)}</span>`;
+  const inner = isPlay ? `${icon}${labelEl}` : `${labelEl}${icon}`;
 
   return `
     <button
@@ -249,7 +229,7 @@ function rowActionButton({ action, id, expanded, variant, label }) {
       aria-label="${escapeHtml(ariaLabel)}"
       title="${escapeHtml(ariaLabel)}"
     >
-      ${icon}${visibleLabel}
+      ${inner}
     </button>`;
 }
 
@@ -431,27 +411,16 @@ function rowActions(entry, expanded, mode) {
   }
 
   if (count) {
-    if (official) {
-      parts.push(
-        rowActionButton({
-          action: "toggle-details",
-          id: entry.id,
-          expanded: expanded && mode === "details",
-          variant: "info",
-          label: "Sources",
-        })
-      );
-    } else {
-      parts.push(
-        rowActionButton({
-          action: "toggle-details",
-          id: entry.id,
-          expanded: expanded && mode === "details",
-          variant: "text",
-          label: `${count} source${count === 1 ? "" : "s"}`,
-        })
-      );
-    }
+    const awaiting = entry.status === "needs_primary_source";
+    parts.push(
+      rowActionButton({
+        action: "toggle-details",
+        id: entry.id,
+        expanded: expanded && mode === "details",
+        variant: awaiting ? "awaiting" : "sources",
+        label: awaiting ? "Awaiting proof" : `${count} source${count === 1 ? "" : "s"}`,
+      })
+    );
   }
 
   return parts.join("");

@@ -186,6 +186,22 @@ function renderSourceList(entry) {
     .join("");
 }
 
+function rowActionButton({ action, id, expanded, labelOpen, iconOpen }) {
+  const closed = !expanded;
+  const label = closed ? labelOpen : "Close";
+  const icon = closed ? iconOpen : chevronIcon(true);
+  return `
+    <button
+      type="button"
+      class="row-action"
+      data-action="${escapeHtml(action)}"
+      data-id="${escapeHtml(id)}"
+      aria-expanded="${String(!closed)}"
+    >
+      ${icon}<span class="row-action-label">${escapeHtml(label)}</span>
+    </button>`;
+}
+
 function renderSpotifyShell(entry, trackId, loaded) {
   const title = entry.track ? `Spotify Embed: ${entry.track}` : "Spotify Embed: Official track";
 
@@ -291,12 +307,6 @@ function renderPlayerPanel(entry, data, artists, loaded) {
     : external
       ? "Extended Look plays on YouTube. Expanding another track closes this panel."
       : "One video at a time. Playing another track closes this player.";
-  const sources = useSpotify
-    ? `<div class="source-list-wrap">
-        <p class="panel-eyebrow">Source references</p>
-        <div class="source-list">${renderSourceList(entry)}</div>
-      </div>`
-    : "";
 
   return `
     <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
@@ -315,7 +325,6 @@ function renderPlayerPanel(entry, data, artists, loaded) {
         <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 14h-2v-2h2Zm0-4h-2V6h2Z"/></svg>
         ${playbackCopy}
       </p>
-      ${sources}
     </div>`;
 }
 
@@ -353,36 +362,36 @@ function renderDetailsPanel(entry, data, artists) {
 function rowActions(entry, expanded, mode) {
   const video = videoMeta(window.__catalogData, entry);
   const trackId = spotifyTrackId(entry);
-  if (entry.tier === "official_promo" && (video || trackId)) {
-    const open = !(expanded && mode === "player");
-    const label = open ? (trackId && !video ? "Play track" : "Play video") : "Close";
-    const icon = open ? playIcon() : chevronIcon(true);
-    return `
-      <button
-        type="button"
-        class="row-action"
-        data-action="toggle-player"
-        data-id="${escapeHtml(entry.id)}"
-        aria-expanded="${String(!open)}"
-      >
-        ${icon}<span class="row-action-label">${label}</span>
-      </button>`;
+  const count = (entry.sources || []).length;
+  const official = entry.tier === "official_promo";
+  const parts = [];
+
+  if (official && (video || trackId)) {
+    parts.push(
+      rowActionButton({
+        action: "toggle-player",
+        id: entry.id,
+        expanded: expanded && mode === "player",
+        labelOpen: trackId && !video ? "Play track" : "Play video",
+        iconOpen: playIcon(),
+      })
+    );
   }
 
-  const count = (entry.sources || []).length;
-  const open = !(expanded && mode === "details");
-  const label = open ? `${count} source${count === 1 ? "" : "s"}` : "Close";
-  const icon = open ? chevronIcon(false) : chevronIcon(true);
-  return `
-    <button
-      type="button"
-      class="row-action"
-      data-action="toggle-details"
-      data-id="${escapeHtml(entry.id)}"
-      aria-expanded="${String(!open)}"
-    >
-      ${icon}<span class="row-action-label">${label}</span>
-    </button>`;
+  if (count) {
+    const labelOpen = official ? "Sources" : `${count} source${count === 1 ? "" : "s"}`;
+    parts.push(
+      rowActionButton({
+        action: "toggle-details",
+        id: entry.id,
+        expanded: expanded && mode === "details",
+        labelOpen,
+        iconOpen: chevronIcon(false),
+      })
+    );
+  }
+
+  return parts.join("");
 }
 
 function renderRow(entry, indexNum, state) {

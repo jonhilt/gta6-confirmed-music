@@ -267,15 +267,18 @@ function renderSourceList(entry, data) {
 function renderDetailsPanel(entry, data, artists) {
   const headline = evidenceHeadline(entry);
   const body = evidenceSummary(entry, artists);
-  const blurb = entry.artists
+  const artist = entry.artists
     .map((name) => artists[name])
-    .filter(Boolean)
-    .slice(0, 1)
-    .map(
-      (rec) =>
-        `<p class="evidence-body">${escapeHtml(rec.blurb)} <a href="${escapeHtml(rec.cite)}" rel="noopener noreferrer">cite</a></p>`
-    )
-    .join("");
+    .find((rec) => rec?.blurb);
+  const summary = body && body !== artist?.blurb
+    ? `<p class="evidence-body">${escapeHtml(body)}</p>`
+    : "";
+  const citation = artist?.cite
+    ? ` <a href="${escapeHtml(artist.cite)}" rel="noopener noreferrer">cite</a>`
+    : "";
+  const blurb = artist
+    ? `<p class="evidence-body">${escapeHtml(artist.blurb)}${citation}</p>`
+    : "";
 
   return `
     <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
@@ -283,7 +286,7 @@ function renderDetailsPanel(entry, data, artists) {
         <div>
           <p class="panel-eyebrow">The source / ${escapeHtml(TIER_LABEL[entry.tier])}</p>
           <h3 class="evidence-headline">${escapeHtml(headline)}</h3>
-          <p class="evidence-body">${escapeHtml(body)}</p>
+          ${summary}
           ${blurb}
           <p class="evidence-disclosure">Summary of the linked reporting, not a direct quotation.</p>
         </div>

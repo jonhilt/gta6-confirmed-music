@@ -988,7 +988,19 @@ code {
 }
 
 @media (max-width: 1100px) {
+  :root {
+    --mobile-dock-height: min(60dvh, 24rem);
+  }
+
   .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .app-shell:has(.player-dock) {
+    padding-bottom: var(--mobile-dock-height);
+  }
+
+  .app-shell:has(.archive-main):not(:has(.player-dock)) {
     grid-template-columns: 1fr;
   }
 
@@ -1010,14 +1022,44 @@ code {
   }
 
   .player-dock {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     top: auto;
-    height: auto;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-rows: 4.5rem 3.5rem minmax(6rem, 1fr) 3.5rem;
+    height: var(--mobile-dock-height);
+    overflow-y: auto;
     min-height: 0;
     border-left: 0;
     border-top: 1px solid var(--line-strong);
     order: 3;
+  }
+
+  .dock-header,
+  .dock-note {
+    display: none;
+  }
+
+  .dock-identity,
+  .dock-providers {
+    height: auto;
+    min-height: 0;
+  }
+
+  .dock-track {
+    font-size: 1.15rem;
+  }
+
+  .dock-stage {
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .dock-footer {
+    padding: 0.5rem 1rem;
   }
 
   .archive-main {

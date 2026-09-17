@@ -3,16 +3,25 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-function setup() {
+function setup({ manualReady = false } = {}) {
   const nodes = new Map();
   const node = () => ({ dataset: {}, classList: { toggle() {} }, replaceChildren() {}, appendChild() {} });
   const context = {
-    URL, console, location: { origin: 'http://localhost:8000' },
+    queueMicrotask, URL, console, loads: [], location: { origin: 'http://localhost:8000' },
     setInterval: () => 1, clearInterval() {}, setTimeout: (fn) => fn(),
     document: { querySelector(selector) { if (!nodes.has(selector)) nodes.set(selector, node()); return nodes.get(selector); }, createElement: node },
     data: JSON.parse(fs.readFileSync('docs/data/entries.json', 'utf8')),
   };
-  context.window = { YT: { PlayerState: { ENDED: 0, PLAYING: 1 }, Player: class { loadVideoById(video) { context.loaded = video; } pauseVideo() {} } } };
+  context.window = { YT: { PlayerState: { ENDED: 0, PLAYING: 1 }, Player: class {
+    constructor(id, options) {
+      context.events = options.events;
+      context.ready = () => { this.isReady = true; options.events.onReady(); };
+      if (!manualReady) queueMicrotask(context.ready);
+    }
+    loadVideoById(video) { assert.ok(this.isReady, 'must wait for onReady'); context.loaded = video; context.loads.push(video); }
+    pauseVideo() {}
+  } } };
+  context.nodes = nodes;
   vm.createContext(context);
   vm.runInContext(fs.readFileSync('docs/assets/app.js', 'utf8').replace(/main\(\);\s*$/, ''), context);
   vm.runInContext('render = () => {}; loadYouTubeApi = async () => {};', context);
@@ -63,4 +72,41 @@ test('trailer choice persists and Extended Look keeps its restriction overlay', 
   await c.player.playNextVideo();
   assert.equal(c.state.playingId, 'ar-travis-scott');
   assert.equal(c.state.sourcePreference, 'trailer');
+});
+
+async function initialized(context) {
+  for (let i = 0; i < 20 && !context.ready; i++) await Promise.resolve();
+  assert.ok(context.ready, 'player was constructed');
+}
+
+test('concurrent selections wait for readiness and only load the latest track', async () => {
+  const c = setup({ manualReady: true });
+  const first = c.player.playEntry('t1-love-is-a-long-road');
+  await initialized(c);
+  const second = c.player.playEntry('t2-thunder-island');
+  c.ready();
+  await Promise.all([first, second]);
+  assert.deepEqual(c.loads.map(v => v.videoId), ['EI0Tt3UZ5jc']);
+});
+
+test('Spotify selection invalidates a pending YouTube load', async () => {
+  const c = setup({ manualReady: true });
+  const pending = c.player.playEntry('ar-travis-scott');
+  await initialized(c);
+  await c.player.setProvider('spotify');
+  c.ready();
+  await pending;
+  assert.equal(c.loads.length, 0);
+  assert.equal(c.state.provider, 'spotify');
+});
+
+test('YouTube errors stop radio and expose a fallback instead of retrying forever', async () => {
+  const c = setup();
+  await c.player.startRadio();
+  c.events.onError({ data: 150 });
+  await Promise.resolve();
+  assert.equal(c.state.radioMode, false);
+  assert.equal(c.loads.length, 1);
+  assert.match(c.nodes.get('#dock-empty').innerHTML, /Open on YouTube/);
+  assert.equal(c.nodes.get('#dock-empty').hidden, false);
 });

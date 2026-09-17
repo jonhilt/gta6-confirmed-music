@@ -502,6 +502,9 @@ function playerController(state) {
   if (!ytHost) return { sync() {}, playEntry() {}, startRadio() {} };
 
   let ytPlayer = null;
+  let playerReady = null;
+  let playbackRequest = 0;
+  let playbackError = false;
   let cueTimer = null;
   let ignoreEnded = false;
 
@@ -611,7 +614,7 @@ function playerController(state) {
     }
 
     const showSpotify = Boolean(entry && state.provider === "spotify" && sp);
-    const showYt = Boolean(entry && state.provider === "youtube" && yt && !yt.embedRestricted && ytPlayer);
+    const showYt = Boolean(entry && state.provider === "youtube" && yt && !yt.embedRestricted && ytPlayer && !playbackError);
     if (spotifyHost) {
       spotifyHost.hidden = !showSpotify;
       if (showSpotify) {
@@ -628,7 +631,13 @@ function playerController(state) {
     ytHost.hidden = !showYt;
     if (empty) {
       empty.hidden = showSpotify || showYt;
-      empty.innerHTML = yt?.embedRestricted && state.provider === "youtube"
+      empty.innerHTML = playbackError && yt && state.provider === "youtube"
+        ? `<div class="dock-restricted">
+            <strong>Video unavailable here</strong>
+            <p>Playback stopped. Open this video on YouTube or choose the next video.</p>
+            <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+          </div>`
+        : yt?.embedRestricted && state.provider === "youtube"
         ? `<div class="dock-restricted">
             <strong>Age-restricted video</strong>
             <p>${escapeHtml(yt.label)} can only be watched on YouTube. You may need to sign in to verify your age.</p>
@@ -658,61 +667,73 @@ function playerController(state) {
     }, 800);
   }
 
-  async function ensurePlayer() {
-    await loadYouTubeApi();
-    if (ytPlayer) return ytPlayer;
-    ytHost.replaceChildren();
-    const mount = document.createElement("div");
-    mount.id = "yt-player-mount";
-    ytHost.appendChild(mount);
-    await new Promise((resolve) => {
-      const done = () => resolve();
-      ytPlayer = new window.YT.Player("yt-player-mount", {
-        width: "100%",
-        height: "100%",
-        playerVars: {
-          autoplay: 1,
-          rel: 0,
-          modestbranding: 1,
-          origin: location.origin,
-        },
-        events: {
-          onReady() {
-            done();
+  function ensurePlayer() {
+    if (playerReady) return playerReady;
+    playerReady = (async () => {
+      await loadYouTubeApi();
+      ytHost.replaceChildren();
+      const mount = document.createElement("div");
+      mount.id = "yt-player-mount";
+      ytHost.appendChild(mount);
+      await new Promise((resolve) => {
+        ytPlayer = new window.YT.Player("yt-player-mount", {
+          width: "100%",
+          height: "100%",
+          playerVars: {
+            autoplay: 1,
+            rel: 0,
+            modestbranding: 1,
+            origin: location.origin,
           },
-          onStateChange(event) {
-            if (event.data === window.YT.PlayerState.ENDED) {
-              if (ignoreEnded) return;
-              if (state.provider === "youtube" && state.radioMode) {
-                playNextVideo();
+          events: {
+            onReady() {
+              resolve();
+            },
+            onStateChange(event) {
+              if (state.provider !== "youtube" || playbackError) return;
+              if (event.data === window.YT.PlayerState.ENDED) {
+                if (ignoreEnded) return;
+                if (state.provider === "youtube" && state.radioMode) {
+                  playNextVideo();
+                }
               }
-            }
-            if (event.data === window.YT.PlayerState.PLAYING) {
-              const id = ytPlayer.getVideoData?.().video_id;
-              if (id) startCueTimer(id);
-            }
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                const id = ytPlayer.getVideoData?.().video_id;
+                if (id) startCueTimer(id);
+              }
+            },
+            onError() {
+              if (state.provider !== "youtube") return;
+              playbackError = true;
+              state.radioMode = false;
+              playbackRequest++;
+              stopCueTimer();
+              if (typeof ytPlayer?.pauseVideo === "function") ytPlayer.pauseVideo();
+              syncDock();
+            },
           },
-          onError() {
-            if (state.radioMode) playNextVideo();
-          },
-        },
+        });
       });
-      setTimeout(done, 2500);
-    });
-    return ytPlayer;
+      return ytPlayer;
+    })();
+    return playerReady;
   }
 
-  async function loadVideo(videoId, start) {
+  async function loadVideo(videoId, start, request) {
     ignoreEnded = true;
     await ensurePlayer();
+    if (request !== playbackRequest || state.provider !== "youtube") return;
     ytPlayer.loadVideoById({ videoId, startSeconds: start || 0 });
     startCueTimer(videoId);
     setTimeout(() => {
-      ignoreEnded = false;
+      if (request === playbackRequest) ignoreEnded = false;
     }, 1200);
   }
 
   async function playVideoForEntry(entry, { radioMode }) {
+    const request = ++playbackRequest;
+    playbackError = false;
+    stopCueTimer();
     const preferred = state.sourcePreference;
     const hasFull = Boolean(youtubeVideoId(entry));
     const hasTrailer = Boolean(videoMeta(state.data, entry));
@@ -744,7 +765,7 @@ function playerController(state) {
       return;
     }
     setPlaying(entry.id, { radioMode });
-    await loadVideo(yt.videoId, yt.start);
+    await loadVideo(yt.videoId, yt.start, request);
     syncDock();
   }
 

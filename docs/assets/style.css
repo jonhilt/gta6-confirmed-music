@@ -535,7 +535,10 @@ a {
 
 .row-actions {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
   width: 9.25rem;
 }
 

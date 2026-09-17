@@ -16,6 +16,22 @@
       "embedRestricted": true
     }
   },
+  "sharedSources": {
+    "the_album": [
+      {
+        "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
+        "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+      },
+      {
+        "label": "Gematsu (lists six debut singles)",
+        "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
+      },
+      {
+        "label": "GAMINGbible (verifies six singles on Spotify)",
+        "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+      }
+    ]
+  },
   "artists": {
     "Tom Petty": {
       "blurb": "American rock musician (1950–2017). “Love Is a Long Road” is from the 1989 album Full Moon Fever.",
@@ -382,9 +398,14 @@
         {
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        },
+        {
+          "label": "Dazed interview (Humphries names Sexyy Red)",
+          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
         }
       ],
-      "cueSeconds": 46
+      "cueSeconds": 46,
+      "note": "Humphries named Sexyy Red in the Dazed interview (Aug 2026) with Miami artists Rockstar loves. Kept on this Extended Look Pound Town cue instead of a separate Rockstar-named row."
     },
     {
       "id": "el-skrilla",
@@ -404,9 +425,14 @@
         {
           "label": "Polygon ID list",
           "url": "https://www.polygon.com/gta-6-gameplay-trailer-all-music-artists-tracks/"
+        },
+        {
+          "label": "Dazed interview (Humphries names Kodak)",
+          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
         }
       ],
-      "cueSeconds": 105
+      "cueSeconds": 105,
+      "note": "Humphries named Kodak in the Dazed interview (Aug 2026) as Miami music Rockstar loves. Kept on this Extended Look Skrilla cue instead of a separate Rockstar-named row."
     },
     {
       "id": "el-let-your-love-flow",
@@ -685,18 +711,6 @@
         {
           "label": "Grand Theft Auto VI: The Album official store (primary)",
           "url": "https://www.gtavi-thealbum.com/"
-        },
-        {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
-        },
-        {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
         }
       ]
     },
@@ -711,6 +725,7 @@
       "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
       "appearanceKey": "the_album",
       "spotifyTrackId": "2QrLrUqdSg5njDVEqq5QFp",
+      "youtubeVideoId": "3Ev1PQEm7ns",
       "note": "Was artist_reported (IG 15 Sep). Rockstar announced The Album; Atlantic press + press verifying Spotify name this debut single. Producer: Guy-Manuel de Homem-Christo.",
       "sources": [
         {
@@ -730,16 +745,12 @@
           "url": "https://open.spotify.com/track/2QrLrUqdSg5njDVEqq5QFp"
         },
         {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=3Ev1PQEm7ns"
         },
         {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/rhyno"
         }
       ]
     },
@@ -756,6 +767,7 @@
       "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
       "appearanceKey": "the_album",
       "spotifyTrackId": "45TB2WNxWu2X4MmqmCAJnF",
+      "youtubeVideoId": "joMjcNtxuTU",
       "note": "Canonical collab row. Album debut single names Yung Lean with Future & Metro Boomin. Duplicate solo rows ar-future and ar-metro-boomin removed.",
       "sources": [
         {
@@ -779,16 +791,12 @@
           "url": "https://open.spotify.com/track/45TB2WNxWu2X4MmqmCAJnF"
         },
         {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=joMjcNtxuTU"
         },
         {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/thatsit"
         }
       ]
     },
@@ -803,6 +811,7 @@
       "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
       "appearanceKey": "the_album",
       "spotifyTrackId": "5qGziX9216V8hKJjGg8RtH",
+      "youtubeVideoId": "9leAwpph-xs",
       "note": "Was artist_reported (X 15 Sep). Album debut single named in Atlantic/Rockstar press.",
       "sources": [
         {
@@ -822,16 +831,12 @@
           "url": "https://open.spotify.com/track/5qGziX9216V8hKJjGg8RtH"
         },
         {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=9leAwpph-xs"
         },
         {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/lastthingyouneed"
         }
       ]
     },
@@ -846,6 +851,7 @@
       "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
       "appearanceKey": "the_album",
       "spotifyTrackId": "7GtO6G2Iue3yfIYhx36JZn",
+      "youtubeVideoId": "76R2Q9vObqI",
       "note": "Was artist_reported (IG 15 Sep). Album debut single named in Atlantic/Rockstar press.",
       "sources": [
         {
@@ -865,16 +871,12 @@
           "url": "https://open.spotify.com/track/7GtO6G2Iue3yfIYhx36JZn"
         },
         {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=76R2Q9vObqI"
         },
         {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/macacoa2000"
         }
       ]
     },
@@ -889,6 +891,7 @@
       "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
       "appearanceKey": "the_album",
       "spotifyTrackId": "2X67K1KTLBg9EU2dMUQC42",
+      "youtubeVideoId": "e2z4tuS4Mbo",
       "note": "Was artist_reported (IG 15 Sep). Album debut single named in Atlantic/Rockstar press.",
       "sources": [
         {
@@ -908,16 +911,12 @@
           "url": "https://open.spotify.com/track/2X67K1KTLBg9EU2dMUQC42"
         },
         {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=e2z4tuS4Mbo"
         },
         {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/brightlightsbigcity"
         }
       ]
     },
@@ -935,6 +934,7 @@
       "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
       "appearanceKey": "the_album",
       "spotifyTrackId": "62hqNk13CuFLOpCw1cPMAF",
+      "youtubeVideoId": "G59iOfClrVo",
       "note": "Canonical collab row. Album debut single credits CA7RIEL & Paco Amoroso, PinkPantheress, Fred again.., and Etienne de Crécy. Duplicate solo rows ar-fred-again and ar-pinkpantheress removed; PinkPantheress needs_primary_source cleared via this Rockstar/Atlantic credit.",
       "sources": [
         {
@@ -958,60 +958,12 @@
           "url": "https://open.spotify.com/track/62hqNk13CuFLOpCw1cPMAF"
         },
         {
-          "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-          "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=G59iOfClrVo"
         },
         {
-          "label": "Gematsu (lists six debut singles)",
-          "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
-        },
-        {
-          "label": "GAMINGbible (verifies six singles on Spotify)",
-          "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
-        }
-      ]
-    },
-    {
-      "id": "rs-kodak-black",
-      "artists": [
-        "Kodak Black"
-      ],
-      "track": null,
-      "year": null,
-      "tier": "rockstar_named",
-      "appearance": "Named by Rockstar SVP of narrative Rupert Humphries (Dazed, Aug 2026)",
-      "appearanceKey": "interview",
-      "note": "Humphries cited Kodak as part of the Miami music the team loves. Separate from the “Skrilla” Extended Look cue.",
-      "sources": [
-        {
-          "label": "Dazed interview (primary quote)",
-          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
-        },
-        {
-          "label": "Music Ally (quotes Dazed)",
-          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
-        }
-      ]
-    },
-    {
-      "id": "rs-sexyy-red",
-      "artists": [
-        "Sexyy Red"
-      ],
-      "track": null,
-      "year": null,
-      "tier": "rockstar_named",
-      "appearance": "Named by Rockstar SVP of narrative Rupert Humphries (Dazed, Aug 2026)",
-      "appearanceKey": "interview",
-      "note": "Humphries grouped her with Miami artists Rockstar loves. Separate from the “Pound Town” Extended Look cue.",
-      "sources": [
-        {
-          "label": "Dazed interview (primary quote)",
-          "url": "https://www.dazeddigital.com/life-culture/article/70859/1/gta-6-grand-theft-auto-vi-rockstar-exclusive-deep-dive-game-unparalleled-world"
-        },
-        {
-          "label": "Music Ally (quotes Dazed)",
-          "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/sexymagic"
         }
       ]
     },

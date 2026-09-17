@@ -40,7 +40,10 @@ The site is static HTML. It reads:
 | `note` | no | one factual caveat |
 | `cueSeconds` | no | integer start time on the Rockstar YouTube upload; Play uses this |
 | `spotifyTrackId` | no | 22-character Spotify track ID. Play loads the official Spotify track embed |
+| `youtubeVideoId` | no | 11-character official YouTube video ID (Atlantic Records uploads for The Album singles) |
 | `inUniverse` | no | `true` for fictional in-game acts |
+
+`sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel.
 
 `officialVideos` entries may set `embedRestricted: true` when YouTube blocks third-party embeds
 (Extended Look). Those rows link out at `cueSeconds` instead of loading an iframe.
@@ -62,8 +65,8 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
-- The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` for the official Atlantic/Rockstar singles.
-- Rockstar-named: Kodak Black, Sexyy Red, Real Dimez (Dazed).
+- The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles.
+- Rockstar-named: Real Dimez (Dazed). Kodak Black and Sexyy Red Dazed mentions are notes on the Extended Look Skrilla and Pound Town rows.
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
 
 ## License

@@ -14,7 +14,7 @@ const TIER_SECTION_NUM = {
 
 const TIER_COPY = {
   official_promo:
-    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Trailer cues play in the official video; album rows open the source list.",
+    "Audio from Rockstar trailers, the Extended Look, and Grand Theft Auto VI: The Album. Trailer cues play in the official video. Album debut singles play in Spotify's official track embed.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
@@ -73,6 +73,22 @@ function formatCueLine(entry) {
   return slot;
 }
 
+function spotifyTrackId(entry) {
+  const id = entry?.spotifyTrackId;
+  if (typeof id !== "string") return null;
+  const trimmed = id.trim();
+  if (!/^[A-Za-z0-9]{22}$/.test(trimmed)) return null;
+  return trimmed;
+}
+
+function spotifyEmbedUrl(trackId) {
+  return `https://open.spotify.com/embed/track/${trackId}`;
+}
+
+function spotifyOpenUrl(trackId) {
+  return `https://open.spotify.com/track/${trackId}`;
+}
+
 function youtubeWatchUrl(url, startSeconds) {
   if (!url || startSeconds == null || startSeconds < 0) return url;
   try {
@@ -122,6 +138,7 @@ function sourceRole(label, entry) {
   if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
     return "Official publisher announcement.";
   }
+  if (lower.includes("official spotify track")) return "Official streaming page for this debut single.";
   if (lower.includes("atlantic records")) return "Label announcement (track titles).";
   if (lower.includes("push square") || lower.includes("ign")) return "Secondary news report.";
   return "Supporting citation.";
@@ -167,6 +184,30 @@ function renderSourceList(entry) {
         </div>`
     )
     .join("");
+}
+
+function renderSpotifyShell(entry, trackId, loaded) {
+  const title = entry.track ? `Spotify Embed: ${entry.track}` : "Spotify Embed: Official track";
+
+  if (loaded) {
+    return `<div class="video-shell video-shell--spotify" data-video-shell="${escapeHtml(entry.id)}">
+      <iframe
+        title="${escapeHtml(title)}"
+        src="${escapeHtml(spotifyEmbedUrl(trackId))}?utm_source=generator"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>`;
+  }
+
+  return `<div class="video-shell video-shell--spotify" data-video-shell="${escapeHtml(entry.id)}">
+    <div class="video-placeholder">
+      <div class="video-placeholder-icon">${playIcon()}</div>
+      <p class="video-placeholder-title">Spotify</p>
+      <p class="video-placeholder-copy">Official Spotify player loads here</p>
+    </div>
+  </div>`;
 }
 
 function renderEmbeddedVideoShell(video, entry, loaded) {
@@ -218,22 +259,48 @@ function renderExternalVideoShell(video, entry) {
 
 function renderPlayerPanel(entry, data, artists, loaded) {
   const video = videoMeta(data, entry);
+  const trackId = spotifyTrackId(entry);
   const trackTitle = entry.track ? escapeHtml(entry.track) : "Track not specified";
   const artistLine = escapeHtml(entry.artists.join(", "));
   const cueVerified = entry.cueSeconds != null;
-  const cueNote = cueVerified
-    ? `Verified cue at ${formatTimestamp(entry.cueSeconds)} on Rockstar YouTube.`
-    : "Cue time awaiting verification.\nOpens from the beginning for now.";
   const external = Boolean(video?.embedRestricted);
-  const videoShell = video
-    ? external
-      ? renderExternalVideoShell(video, entry)
-      : renderEmbeddedVideoShell(video, entry, loaded)
+  const useSpotify = Boolean(trackId) && !video;
+  const cueNote = useSpotify
+    ? "Official Atlantic/Rockstar debut single. Spotify's player, not a file we host."
+    : cueVerified
+      ? `Verified cue at ${formatTimestamp(entry.cueSeconds)} on Rockstar YouTube.`
+      : "Cue time awaiting verification.\nOpens from the beginning for now.";
+  const videoShell = useSpotify
+    ? renderSpotifyShell(entry, trackId, loaded)
+    : video
+      ? external
+        ? renderExternalVideoShell(video, entry)
+        : renderEmbeddedVideoShell(video, entry, loaded)
+      : "";
+  const outbound = useSpotify
+    ? `<a class="panel-youtube-link" href="${escapeHtml(spotifyOpenUrl(trackId))}" rel="noopener noreferrer" target="_blank">
+        Listen on Spotify ${externalIcon()}
+      </a>`
+    : video && !external
+      ? `<a class="panel-youtube-link" href="${escapeHtml(youtubeWatchUrl(video.url, video.start))}" rel="noopener noreferrer" target="_blank">
+          Watch on YouTube ${externalIcon()}
+        </a>`
+      : "";
+  const playbackCopy = useSpotify
+    ? "Official Spotify player. Expanding another row closes this panel."
+    : external
+      ? "Extended Look plays on YouTube. Expanding another track closes this panel."
+      : "One video at a time. Playing another track closes this player.";
+  const sources = useSpotify
+    ? `<div class="source-list-wrap">
+        <p class="panel-eyebrow">Source references</p>
+        <div class="source-list">${renderSourceList(entry)}</div>
+      </div>`
     : "";
 
   return `
     <div class="row-panel" id="panel-${escapeHtml(entry.id)}" data-panel-for="${escapeHtml(entry.id)}">
-      <div class="player-layout">
+      <div class="player-layout${useSpotify ? " player-layout--spotify" : ""}">
         ${videoShell}
         <div class="panel-context">
           <p class="panel-eyebrow">${escapeHtml(formatPanelEyebrow(entry))}</p>
@@ -241,23 +308,14 @@ function renderPlayerPanel(entry, data, artists, loaded) {
           <p class="panel-artist">${artistLine}</p>
           <p class="panel-meta">${escapeHtml(video?.label || entry.appearance)}</p>
           <p class="panel-cue-note">${escapeHtml(cueNote)}</p>
-          ${
-            video && !external
-              ? `<a class="panel-youtube-link" href="${escapeHtml(youtubeWatchUrl(video.url, video.start))}" rel="noopener noreferrer" target="_blank">
-                  Watch on YouTube ${externalIcon()}
-                </a>`
-              : ""
-          }
+          ${outbound}
         </div>
       </div>
       <p class="playback-note">
         <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 14h-2v-2h2Zm0-4h-2V6h2Z"/></svg>
-        ${
-          external
-            ? "Extended Look plays on YouTube. Expanding another track closes this panel."
-            : "One video at a time. Playing another track closes this player."
-        }
+        ${playbackCopy}
       </p>
+      ${sources}
     </div>`;
 }
 
@@ -294,9 +352,10 @@ function renderDetailsPanel(entry, data, artists) {
 
 function rowActions(entry, expanded, mode) {
   const video = videoMeta(window.__catalogData, entry);
-  if (entry.tier === "official_promo" && video) {
+  const trackId = spotifyTrackId(entry);
+  if (entry.tier === "official_promo" && (video || trackId)) {
     const open = !(expanded && mode === "player");
-    const label = open ? "Play video" : "Close";
+    const label = open ? (trackId && !video ? "Play track" : "Play video") : "Close";
     const icon = open ? playIcon() : chevronIcon(true);
     return `
       <button

@@ -633,6 +633,18 @@ a {
   border: 0;
 }
 
+.video-shell--spotify {
+  aspect-ratio: auto;
+  height: 352px;
+  max-height: 352px;
+  padding: 0;
+  background: #121212;
+}
+
+.player-layout--spotify {
+  grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+}
+
 .video-shell--external {
   text-decoration: none;
   color: var(--cream);

@@ -39,6 +39,7 @@ The site is static HTML. It reads:
 | `status` | no | `needs_primary_source` for artist-reported rows without a primary URL |
 | `note` | no | one factual caveat |
 | `cueSeconds` | no | integer start time on the Rockstar YouTube upload; Play uses this |
+| `spotifyTrackId` | no | 22-character Spotify track ID. Play loads the official Spotify track embed |
 | `inUniverse` | no | `true` for fictional in-game acts |
 
 `officialVideos` entries may set `embedRestricted: true` when YouTube blocks third-party embeds
@@ -61,7 +62,7 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
-- The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It).
+- The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` for the official Atlantic/Rockstar singles.
 - Rockstar-named: Kodak Black, Sexyy Red, Real Dimez (Dazed).
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
 

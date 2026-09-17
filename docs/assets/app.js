@@ -171,6 +171,31 @@ function playIcon() {
   return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>`;
 }
 
+function closeIcon() {
+  return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>`;
+}
+
+function infoIcon() {
+  return `<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="12" cy="7.25" r="1.15" fill="currentColor"/>
+    <path fill="currentColor" d="M11 10.25h2V18h-2z"/>
+  </svg>`;
+}
+
+function videoPlayIcon() {
+  return `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="2.5" y="6" width="19" height="12" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path fill="currentColor" d="M10 9.2v5.6L15.6 12z"/>
+  </svg>`;
+}
+
+function audioPlayIcon() {
+  return `<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="currentColor" d="M8 5.2v13.6L20 12z"/>
+  </svg>`;
+}
+
 function renderSourceList(entry) {
   return (entry.sources || [])
     .map(
@@ -186,19 +211,44 @@ function renderSourceList(entry) {
     .join("");
 }
 
-function rowActionButton({ action, id, expanded, labelOpen, iconOpen }) {
-  const closed = !expanded;
-  const label = closed ? labelOpen : "Close";
-  const icon = closed ? iconOpen : chevronIcon(true);
+function rowActionButton({ action, id, expanded, variant, label }) {
+  const open = Boolean(expanded);
+  const isPlay = variant === "play-video" || variant === "play-audio";
+  const isInfo = variant === "info";
+  const classes = ["row-action"];
+  if (isPlay) {
+    classes.push("row-action--play", variant === "play-audio" ? "row-action--audio" : "row-action--video");
+  } else if (isInfo) {
+    classes.push("row-action--info");
+  } else {
+    classes.push("row-action--text");
+  }
+  if (open) classes.push("is-open");
+
+  let icon;
+  if (open && (isPlay || isInfo)) icon = closeIcon();
+  else if (variant === "play-video") icon = videoPlayIcon();
+  else if (variant === "play-audio") icon = audioPlayIcon();
+  else if (variant === "info") icon = infoIcon();
+  else icon = open ? chevronIcon(true) : chevronIcon(false);
+
+  const ariaLabel = open ? (isPlay ? "Close player" : isInfo ? "Close sources" : "Close") : label;
+  const visibleLabel =
+    variant === "text"
+      ? `<span class="row-action-label">${escapeHtml(open ? "Close" : label)}</span>`
+      : `<span class="visually-hidden">${escapeHtml(ariaLabel)}</span>`;
+
   return `
     <button
       type="button"
-      class="row-action"
+      class="${classes.join(" ")}"
       data-action="${escapeHtml(action)}"
       data-id="${escapeHtml(id)}"
-      aria-expanded="${String(!closed)}"
+      aria-expanded="${String(open)}"
+      aria-label="${escapeHtml(ariaLabel)}"
+      title="${escapeHtml(ariaLabel)}"
     >
-      ${icon}<span class="row-action-label">${escapeHtml(label)}</span>
+      ${icon}${visibleLabel}
     </button>`;
 }
 
@@ -367,28 +417,40 @@ function rowActions(entry, expanded, mode) {
   const parts = [];
 
   if (official && (video || trackId)) {
+    const audio = Boolean(trackId) && !video;
     parts.push(
       rowActionButton({
         action: "toggle-player",
         id: entry.id,
         expanded: expanded && mode === "player",
-        labelOpen: trackId && !video ? "Play track" : "Play video",
-        iconOpen: playIcon(),
+        variant: audio ? "play-audio" : "play-video",
+        label: audio ? "Play audio" : "Play video",
       })
     );
   }
 
   if (count) {
-    const labelOpen = official ? "Sources" : `${count} source${count === 1 ? "" : "s"}`;
-    parts.push(
-      rowActionButton({
-        action: "toggle-details",
-        id: entry.id,
-        expanded: expanded && mode === "details",
-        labelOpen,
-        iconOpen: chevronIcon(false),
-      })
-    );
+    if (official) {
+      parts.push(
+        rowActionButton({
+          action: "toggle-details",
+          id: entry.id,
+          expanded: expanded && mode === "details",
+          variant: "info",
+          label: "Sources",
+        })
+      );
+    } else {
+      parts.push(
+        rowActionButton({
+          action: "toggle-details",
+          id: entry.id,
+          expanded: expanded && mode === "details",
+          variant: "text",
+          label: `${count} source${count === 1 ? "" : "s"}`,
+        })
+      );
+    }
   }
 
   return parts.join("");

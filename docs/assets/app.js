@@ -131,7 +131,7 @@ function videoMeta(data, entry) {
 function sourceRole(label, entry) {
   const lower = label.toLowerCase();
   if (entry.status === "needs_primary_source" && lower.includes("videotech")) {
-    return "Discovery only—not proof.";
+    return "Discovery only. Not proof.";
   }
   if (lower.includes("dazed")) return "Primary interview source.";
   if (lower.includes("rockstar youtube")) return "Official publisher video.";
@@ -227,7 +227,7 @@ function renderSpotifyShell(entry, trackId, loaded) {
 }
 
 function renderEmbeddedVideoShell(video, entry, loaded) {
-  const videoLabel = video.label.replace(/^Rockstar — /, "GTA VI · ");
+  const videoLabel = video.label.replace(/^Rockstar /, "GTA VI · ");
 
   if (loaded) {
     return `<div class="video-shell" data-video-shell="${escapeHtml(entry.id)}">
@@ -250,7 +250,7 @@ function renderEmbeddedVideoShell(video, entry, loaded) {
 }
 
 function renderExternalVideoShell(video, entry) {
-  const videoLabel = video.label.replace(/^Rockstar — /, "GTA VI · ");
+  const videoLabel = video.label.replace(/^Rockstar /, "GTA VI · ");
   const watchUrl = youtubeWatchUrl(video.url, video.start);
   const cta =
     entry.cueSeconds != null
@@ -268,7 +268,7 @@ function renderExternalVideoShell(video, entry) {
         <div class="video-placeholder-icon">${playIcon()}</div>
         <p class="video-placeholder-title">${escapeHtml(videoLabel)}</p>
         <span class="video-open-cta">${escapeHtml(cta)} ${externalIcon()}</span>
-        <p class="video-placeholder-copy">Age-restricted on YouTube — opens on youtube.com at the verified cue.</p>
+        <p class="video-placeholder-copy">Age-restricted on YouTube. Opens on youtube.com at the verified cue.</p>
       </div>
     </a>`;
 }
@@ -349,7 +349,7 @@ function renderDetailsPanel(entry, data, artists) {
           <h3 class="evidence-headline">${escapeHtml(headline)}</h3>
           <p class="evidence-body">${escapeHtml(body)}</p>
           ${blurb}
-          <p class="evidence-disclosure">Summary of the linked reporting—not a direct quotation.</p>
+          <p class="evidence-disclosure">Summary of the linked reporting, not a direct quotation.</p>
         </div>
         <div class="source-list-wrap">
           <p class="panel-eyebrow">Source references</p>

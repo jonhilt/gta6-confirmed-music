@@ -168,31 +168,32 @@ function chevronIcon(up) {
 }
 
 function playIcon() {
-  return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>`;
+  return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.25 5.53a1.2 1.2 0 0 1 1.82-1.03l10.12 6.47a1.2 1.2 0 0 1 0 2.06L10.07 19.5a1.2 1.2 0 0 1-1.82-1.03V5.53Z"/></svg>`;
 }
 
 function closeIcon() {
-  return `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>`;
+  return `<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" d="M7 7l10 10M17 7 7 17"/></svg>`;
 }
 
 function infoIcon() {
-  return `<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
-    <circle cx="12" cy="7.25" r="1.15" fill="currentColor"/>
-    <path fill="currentColor" d="M11 10.25h2V18h-2z"/>
+  return `<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="6.35" r="1.85" fill="currentColor"/>
+    <path fill="currentColor" d="M10.45 10.15c0-.7.57-1.27 1.27-1.27h.56c.7 0 1.27.57 1.27 1.27v8.05c0 .7-.57 1.27-1.27 1.27h-.56c-.7 0-1.27-.57-1.27-1.27v-8.05Z"/>
   </svg>`;
 }
 
 function videoPlayIcon() {
   return `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="2.5" y="6" width="19" height="12" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path fill="currentColor" d="M10 9.2v5.6L15.6 12z"/>
+    <path fill="currentColor" d="M3.6 6.4A2.9 2.9 0 0 1 6.5 3.5h8.2A2.9 2.9 0 0 1 17.6 6.4v11.2a2.9 2.9 0 0 1-2.9 2.9H6.5a2.9 2.9 0 0 1-2.9-2.9V6.4Z"/>
+    <path fill="currentColor" d="M18.35 8.05v7.9l3.05 2.12c.85.6 2.05-.02 2.05-1.06V7c0-1.04-1.2-1.65-2.05-1.06l-3.05 2.11Z"/>
   </svg>`;
 }
 
 function audioPlayIcon() {
-  return `<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-    <path fill="currentColor" d="M8 5.2v13.6L20 12z"/>
+  return `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="currentColor" d="M13.2 3.85c0-1.12-1.36-1.68-2.15-.89L7.2 6.8H4.7A1.95 1.95 0 0 0 2.75 8.75v6.5A1.95 1.95 0 0 0 4.7 17.2h2.5l3.85 3.84c.79.79 2.15.23 2.15-.89V3.85Z"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M16.35 9.05a3.6 3.6 0 0 1 0 5.9"/>
+    <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M18.85 7.15a6.35 6.35 0 0 1 0 9.7"/>
   </svg>`;
 }
 

@@ -452,6 +452,14 @@ input {
 .tier-section--rockstar_named .tier-header-num { color: var(--named); }
 .tier-section--artist_reported .tier-header-num { color: var(--reported); }
 
+.tier-section--official_promo .subsection {
+  margin-top: 1.35rem;
+}
+
+.tier-section--official_promo .subsection-title {
+  color: var(--promo);
+}
+
 .tier-description {
   margin: 0;
   color: var(--muted);
@@ -502,6 +510,7 @@ input {
 
 .index-row {
   border-bottom: 1px solid #1c2a2d;
+  scroll-margin-top: calc(var(--sticky-header-height, 0px) + var(--sticky-nav-height, 0px) + 0.75rem);
 }
 
 .row-summary {
@@ -515,6 +524,12 @@ input {
 
 .index-row.is-active:not(.is-playing) .row-summary {
   background: #101b1e;
+}
+
+.index-row.is-anchor .row-summary {
+  outline: 1px solid var(--teal);
+  outline-offset: -1px;
+  background: var(--row-active);
 }
 
 .row-num {

@@ -10,7 +10,7 @@ This is fan documentation. It is not affiliated with Rockstar Games or Take-Two 
 
 Three tiers. Nothing else goes on the home page.
 
-1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, or Extended Look, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
+1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
 3. **artist_reported** — the artist (or a channel they control) claims involvement. Link a **primary** source. Flag it as not Rockstar-verified.
 
@@ -34,16 +34,21 @@ The site is static HTML. It reads:
 | `year` | no | original release year if known |
 | `tier` | yes | `official_promo` \| `rockstar_named` \| `artist_reported` |
 | `appearance` | yes | short human sentence |
-| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` |
+| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` \| `radio_cocoteo_fm` \| `radio_back_country` \| `radio_afrobank_fm` \| `radio_the_chamber` \| `radio_flash_fm` \| `radio_dirty_south_classics` |
 | `sources` | yes | `{ "label", "url" }[]` — first link should be the strongest |
 | `status` | no | `needs_primary_source` for artist-reported rows without a primary URL |
 | `note` | no | one factual caveat |
 | `cueSeconds` | no | integer start time on the Rockstar YouTube upload; Play uses this |
+| `previewCueSeconds` | no | integer start time of the track in Rockstar's station preview mp3 (display only; we do not host or embed those files) |
 | `spotifyTrackId` | no | 22-character Spotify track ID. Play loads the official Spotify track embed |
 | `youtubeVideoId` | no | 11-character official full-track YouTube upload ID. Can coexist with a trailer cue |
 | `inUniverse` | no | `true` for fictional in-game acts |
 
-`sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel.
+`sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel. Radio preview rows share the station page, the station's @RockstarGames post, and the Newswire article under `sharedSources.<stationKey>`.
+
+`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, and `previewPage`. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog.
+
+Each catalog row's `id` is also its page anchor (`https://leonidadrop.com/#<id>`). Visiting that hash scrolls to the row and opens Sources.
 
 `officialVideos` entries may set `embedRestricted: true` when YouTube blocks third-party embeds
 (Extended Look). Those rows show an age restriction message in the player, with a YouTube link at `cueSeconds`.
@@ -61,10 +66,11 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 4. Bump `updated` (ISO date).
 5. Open a PR. Do not paste lyrics.
 
-## Current coverage (2026-09-17)
+## Current coverage (2026-10-08)
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
+- Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Rows cite Rockstar's station page, the matching @RockstarGames post, and the Newswire article. Only Flash FM's Midnight Sun (Girls Trip) currently has `spotifyTrackId` / `youtubeVideoId`.
 - The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles.
 - Rockstar-named: Real Dimez (Dazed). Kodak Black and Sexyy Red Dazed mentions are notes on the Extended Look Skrilla and Pound Town rows.
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
@@ -75,6 +81,6 @@ Code: MIT (`LICENSE`). The dataset is a factual compilation with source links, n
 
 ## Player sources
 
-The player offers Full track, a named trailer with its cue time, and Spotify when available. Full track on YouTube is the default, falling back to the trailer. A source choice stays selected while browsing, with unavailable sources falling back without changing the preference. Trailer playback follows the current song as cue times pass. Full-track radio follows all 26 tracks in catalog and playlist order, then wraps to the first track. Trailer mode advances between distinct uploads and skips restricted trailers. Switching modes keeps the current song selected.
+The player offers Full track, a named trailer with its cue time, and Spotify when available. Full track on YouTube is the default, falling back to the trailer. A source choice stays selected while browsing, with unavailable sources falling back without changing the preference. Trailer playback follows the current song as cue times pass. Full-track radio follows every catalog row that has an official YouTube id, in list order, then wraps to the first track. Trailer mode advances between distinct uploads and skips restricted trailers. Switching modes keeps the current song selected.
 
 Run player regression checks with `node --test tests/player.test.cjs`.

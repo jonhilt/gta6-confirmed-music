@@ -16,7 +16,7 @@ const TIER_SECTION_NUM = {
 
 const TIER_COPY = {
   official_promo:
-    "Music heard in Rockstar trailers and the Extended Look. Choose a full track or jump to its trailer cue.",
+    "Music heard in Rockstar trailers, the Extended Look, and Rockstar's radio station previews. Choose a full track or jump to a trailer cue when one exists.",
   the_album: "Original music from Grand Theft Auto VI: The Album. Listen to the debut singles on YouTube or Spotify, and check the album announcement below.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
@@ -59,8 +59,14 @@ function formatTimestamp(seconds) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-function formatCueLine(entry) {
+function stationFor(entry, data) {
+  const key = entry?.appearanceKey;
+  return data?.stations?.[key] || null;
+}
+
+function formatCueLine(entry, data) {
   const key = entry.appearanceKey;
+  const station = stationFor(entry, data);
   let slot;
   if (key === "trailer1") slot = "Trailer 1 · 04 Dec 2023";
   if (key === "trailer2") slot = "Trailer 2 · 06 May 2025";
@@ -68,10 +74,12 @@ function formatCueLine(entry) {
   if (key === "the_album") slot = "The Album · 17 Sep 2026";
   if (key === "interview") slot = "Named by Rockstar · Aug 2026";
   if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
+  if (station) slot = `${station.name} · Radio preview · 8 Oct 2026`;
   if (!slot) slot = entry.appearance;
 
-  if (entry.tier === "official_promo" && entry.cueSeconds != null) {
-    return `${slot} · ${formatTimestamp(entry.cueSeconds)}`;
+  const cue = entry.cueSeconds ?? entry.previewCueSeconds;
+  if (entry.tier === "official_promo" && cue != null) {
+    return `${slot} · ${formatTimestamp(cue)}`;
   }
   return slot;
 }
@@ -203,10 +211,16 @@ function sourceRole(label, entry) {
   }
   if (lower.includes("dazed")) return "Primary interview source.";
   if (lower.includes("rockstar youtube")) return "Official publisher video.";
+  if (lower.includes("gta vi music page")) return "Official publisher station page.";
+  if (lower.includes("rockstar newswire")) return "Official publisher announcement.";
   if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
     return "Official publisher announcement.";
   }
-  if (lower.includes("official spotify track")) return "Official streaming page for this debut single.";
+  if (lower.includes("official spotify track")) {
+    return entry.appearanceKey === "the_album"
+      ? "Official streaming page for this debut single."
+      : "Official streaming page for this track.";
+  }
   if (lower.includes("atlantic records youtube")) return "Official label video for this debut single.";
   if (lower.includes("linkfire hub")) return "Official smart link for this debut single.";
   if (lower.includes("atlantic records")) return "Label announcement (track titles).";
@@ -258,12 +272,18 @@ function renderSourceItems(sources, entry) {
     .join("");
 }
 
+function sharedSourcesLabel(entry, data) {
+  if (stationFor(entry, data)) return "Shared station sources";
+  if (entry.appearanceKey === "the_album") return "Shared album press";
+  return "Shared sources";
+}
+
 function renderSourceList(entry, data) {
   const own = renderSourceItems(entry.sources || [], entry);
   const shared = sharedSourcesFor(entry, data);
   if (!shared.length) return own;
   return `${own}
-    <p class="panel-eyebrow source-shared-label">Shared album press</p>
+    <p class="panel-eyebrow source-shared-label">${escapeHtml(sharedSourcesLabel(entry, data))}</p>
     ${renderSourceItems(shared, entry)}`;
 }
 
@@ -349,6 +369,7 @@ function sourceButton(entry, state) {
 function renderRow(entry, indexNum, state) {
   const expanded = state.expandedId === entry.id;
   const playing = state.playingId === entry.id;
+  const anchored = state.anchorId === entry.id;
   const track = entry.track
     ? `<p class="row-track">“${escapeHtml(entry.track)}”</p>`
     : `<p class="row-track is-empty">Track not specified</p>`;
@@ -357,18 +378,19 @@ function renderRow(entry, indexNum, state) {
     `index-row--${entry.tier}`,
     expanded ? "is-active" : "",
     playing ? "is-playing" : "",
+    anchored ? "is-anchor" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
   return `
-    <article class="${classes}" data-id="${escapeHtml(entry.id)}">
+    <article class="${classes}" id="${escapeHtml(entry.id)}" data-id="${escapeHtml(entry.id)}">
       <div class="row-summary">
         <span class="row-num">${String(indexNum).padStart(2, "0")}</span>
         <div class="row-identity">
           <h3 class="row-artist">${entry.artists.map(escapeHtml).join(", ")}</h3>
           ${track}
-          <p class="row-cue">${escapeHtml(formatCueLine(entry))}</p>
+          <p class="row-cue">${escapeHtml(formatCueLine(entry, state.data))}</p>
         </div>
         <p class="row-evidence">${escapeHtml(TIER_LABEL[entry.tier])}</p>
         <div class="row-actions">${playButton(entry, state)}</div>
@@ -378,9 +400,17 @@ function renderRow(entry, indexNum, state) {
     </article>`;
 }
 
-function matchesQuery(entry, q) {
+function matchesQuery(entry, q, data) {
   if (!q) return true;
-  const hay = [...entry.artists, entry.track || "", entry.appearance, entry.note || ""]
+  const station = stationFor(entry, data);
+  const hay = [
+    ...entry.artists,
+    entry.track || "",
+    entry.appearance,
+    entry.note || "",
+    station?.name || "",
+    ...(station?.hosts || []),
+  ]
     .join(" ")
     .toLowerCase();
   return hay.includes(q);
@@ -395,7 +425,7 @@ function catalogSection(entry) {
 function filteredEntries(data, state) {
   return data.entries.filter((e) => {
     if (state.tier !== "all" && catalogSection(e) !== state.tier) return false;
-    return matchesQuery(e, state.query.trim().toLowerCase());
+    return matchesQuery(e, state.query.trim().toLowerCase(), data);
   });
 }
 
@@ -460,6 +490,29 @@ function render(data, state, options = {}) {
             </div>`
           : waitingBlock;
       }
+    } else if (tier === "official_promo") {
+      const promo = rows.filter((e) => !stationFor(e, data));
+      const radio = rows.filter((e) => stationFor(e, data));
+      if (promo.length) bodyHtml = `<div class="index-list">${head}${renderRows(promo)}</div>`;
+      const stationKeys = [];
+      const seen = new Set();
+      for (const entry of radio) {
+        if (seen.has(entry.appearanceKey)) continue;
+        seen.add(entry.appearanceKey);
+        stationKeys.push(entry.appearanceKey);
+      }
+      stationKeys.forEach((key, index) => {
+        const station = data.stations[key];
+        const list = radio.filter((e) => e.appearanceKey === key);
+        const hosts = station.hosts?.length ? `Hosted by ${station.hosts.join(" and ")}.` : "";
+        const copy = [station.blurb, hosts].filter(Boolean).join(" ");
+        const showHead = !promo.length && index === 0;
+        bodyHtml += `<div class="subsection">
+              <h3 class="subsection-title">${escapeHtml(station.name)}</h3>
+              ${copy ? `<p class="subsection-copy">${escapeHtml(copy)}</p>` : ""}
+              <div class="index-list">${showHead ? head : ""}${renderRows(list)}</div>
+            </div>`;
+      });
     } else {
       bodyHtml = `<div class="index-list">${head}${renderRows(rows)}</div>`;
     }
@@ -886,6 +939,43 @@ function bindCatalog(data, state, player) {
   });
 }
 
+function catalogHashId() {
+  const raw = (typeof location !== "undefined" && location.hash ? location.hash : "").replace(/^#/, "");
+  if (!raw) return null;
+  let id = raw;
+  try {
+    id = decodeURIComponent(raw);
+  } catch {
+    /* keep raw */
+  }
+  if (id === "radio" || id.startsWith("tier-")) return null;
+  return id;
+}
+
+function applyCatalogHash(data, state) {
+  const id = catalogHashId();
+  if (!id) {
+    state.anchorId = null;
+    return { startRadio: typeof location !== "undefined" && location.hash === "#radio" };
+  }
+  const entry = data.entries.find((e) => e.id === id);
+  if (!entry) {
+    state.anchorId = null;
+    return { startRadio: false };
+  }
+  state.query = "";
+  state.tier = "all";
+  state.expandedId = id;
+  state.anchorId = id;
+  return { startRadio: false, scrollTo: id };
+}
+
+function scrollToEntry(id) {
+  const el = document.getElementById(id);
+  if (!el || typeof el.scrollIntoView !== "function") return;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
 async function main() {
   const catalog = $("#catalog");
   const res = await fetch("data/entries.json", { cache: "no-store" });
@@ -904,6 +994,7 @@ async function main() {
     sourcePreference: "full",
     videoSource: "full",
     radioMode: true,
+    anchorId: null,
     data,
   };
 
@@ -961,10 +1052,23 @@ async function main() {
   });
 
   bindCatalog(data, state, player);
+  const hashResult = applyCatalogHash(data, state);
+  if (search && hashResult.scrollTo) search.value = "";
   render(data, state);
   player.sync();
+  if (hashResult.scrollTo) {
+    requestAnimationFrame(() => scrollToEntry(hashResult.scrollTo));
+  }
+  if (hashResult.startRadio) player.startRadio();
 
-  if (location.hash === "#radio") player.startRadio();
+  window.addEventListener("hashchange", () => {
+    const next = applyCatalogHash(data, state);
+    if (search && !state.query) search.value = "";
+    render(data, state);
+    player.sync();
+    if (next.scrollTo) requestAnimationFrame(() => scrollToEntry(next.scrollTo));
+    if (next.startRadio) player.startRadio();
+  });
 }
 
 main();

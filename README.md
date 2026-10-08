@@ -10,10 +10,10 @@ This is fan documentation. It is not affiliated with Rockstar Games or Take-Two 
 
 Four catalog tiers. Confirmed rows sit in the first three. Unconfirmed leak rows are a one-off fourth section at the bottom and do not count as confirmed.
 
-1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
+1. **official_promo**: audio heard in Rockstar-published Trailer 1, Trailer 2, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
 3. **artist_reported** — the artist (or a channel they control) claims involvement. Link a **primary** source. Flag it as not Rockstar-verified.
-4. **unconfirmed_leak** — briefly listed on streaming pages or copyright claims, then pulled. Not confirmed by Rockstar, Atlantic, or the artist. No Play button, no embeds. Do not link posts that carry leaked audio.
+4. **unconfirmed_leak**: briefly listed on streaming pages or copyright claims, then pulled. Not confirmed by Rockstar, Atlantic, or the artist. No Play button, no embeds. Do not link posts that carry leaked audio.
 
 Aggregators such as @videotech are discovery only. Keep them as a breadcrumb until you have the artist’s own post. Anonymous rumors stay off the confirmed list.
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-17",
+  "updated": "2026-10-09",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -30,7 +30,147 @@
         "label": "GAMINGbible (verifies six singles on Spotify)",
         "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
       }
+    ],
+    "radio_cocoteo_fm": [
+      {
+        "label": "Rockstar Games, GTA VI music page: Cocoteo FM preview (primary)",
+        "url": "https://www.rockstargames.com/VI/music/cocoteo-fm"
+      },
+      {
+        "label": "Rockstar Games on X: Cocoteo FM post (primary)",
+        "url": "https://x.com/RockstarGames/status/2108317765153026077"
+      },
+      {
+        "label": "Rockstar Newswire: The Music of Grand Theft Auto VI, In-Game Radio Stations (primary)",
+        "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4/the-music-of-grand-theft-auto-vi-in-game-radio-stations"
+      }
+    ],
+    "radio_back_country": [
+      {
+        "label": "Rockstar Games, GTA VI music page: Back Country Radio preview (primary)",
+        "url": "https://www.rockstargames.com/VI/music/back-country-radio"
+      },
+      {
+        "label": "Rockstar Games on X: Back Country Radio post (primary)",
+        "url": "https://x.com/RockstarGames/status/2108310216609558531"
+      },
+      {
+        "label": "Rockstar Newswire: The Music of Grand Theft Auto VI, In-Game Radio Stations (primary)",
+        "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4/the-music-of-grand-theft-auto-vi-in-game-radio-stations"
+      }
+    ],
+    "radio_afrobank_fm": [
+      {
+        "label": "Rockstar Games, GTA VI music page: AfroBank FM preview (primary)",
+        "url": "https://www.rockstargames.com/VI/music/afrobank"
+      },
+      {
+        "label": "Rockstar Games on X: AfroBank FM post (primary)",
+        "url": "https://x.com/RockstarGames/status/2108275237901017150"
+      },
+      {
+        "label": "Rockstar Newswire: The Music of Grand Theft Auto VI, In-Game Radio Stations (primary)",
+        "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4/the-music-of-grand-theft-auto-vi-in-game-radio-stations"
+      }
+    ],
+    "radio_the_chamber": [
+      {
+        "label": "Rockstar Games, GTA VI music page: The Chamber 106.6 preview (primary)",
+        "url": "https://www.rockstargames.com/VI/music/the-chamber"
+      },
+      {
+        "label": "Rockstar Games on X: The Chamber 106.6 post (primary)",
+        "url": "https://x.com/RockstarGames/status/2108283798391558496"
+      },
+      {
+        "label": "Rockstar Newswire: The Music of Grand Theft Auto VI, In-Game Radio Stations (primary)",
+        "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4/the-music-of-grand-theft-auto-vi-in-game-radio-stations"
+      }
+    ],
+    "radio_flash_fm": [
+      {
+        "label": "Rockstar Games, GTA VI music page: Flash FM preview (primary)",
+        "url": "https://www.rockstargames.com/VI/music/flash-fm"
+      },
+      {
+        "label": "Rockstar Games on X: Flash FM post (primary)",
+        "url": "https://x.com/RockstarGames/status/2108301660799848520"
+      },
+      {
+        "label": "Rockstar Newswire: The Music of Grand Theft Auto VI, In-Game Radio Stations (primary)",
+        "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4/the-music-of-grand-theft-auto-vi-in-game-radio-stations"
+      }
+    ],
+    "radio_dirty_south_classics": [
+      {
+        "label": "Rockstar Games, GTA VI music page: Dirty South Classics preview (primary)",
+        "url": "https://www.rockstargames.com/VI/music/dirty-south-classics"
+      },
+      {
+        "label": "Rockstar Games on X: Dirty South Classics post (primary)",
+        "url": "https://x.com/RockstarGames/status/2108292853436661943"
+      },
+      {
+        "label": "Rockstar Newswire: The Music of Grand Theft Auto VI, In-Game Radio Stations (primary)",
+        "url": "https://www.rockstargames.com/newswire/article/o3982oa93a23k4/the-music-of-grand-theft-auto-vi-in-game-radio-stations"
+      }
     ]
+  },
+  "stations": {
+    "radio_cocoteo_fm": {
+      "name": "Cocoteo FM",
+      "hosts": [
+        "El Martillo",
+        "La Gata"
+      ],
+      "blurb": "Modern Latin music, from bachata and merengue to dembow and reggaeton.",
+      "previewPage": "https://www.rockstargames.com/VI/music/cocoteo-fm"
+    },
+    "radio_back_country": {
+      "name": "Back Country Radio",
+      "hosts": [
+        "MW",
+        "Delta Dawne"
+      ],
+      "blurb": "Airboat-ready renegade country music for the Grassrivers, Port Gellhorn and beyond. Newswire also names Mud Dog Mike as a roving reporter.",
+      "previewPage": "https://www.rockstargames.com/VI/music/back-country-radio"
+    },
+    "radio_afrobank_fm": {
+      "name": "AfroBank FM",
+      "hosts": [
+        "Burna",
+        "Palmsy"
+      ],
+      "blurb": "African music from 20th-century classics to amapiano and 3-step.",
+      "previewPage": "https://www.rockstargames.com/VI/music/afrobank"
+    },
+    "radio_the_chamber": {
+      "name": "The Chamber 106.6",
+      "hosts": [
+        "DJ Kerry",
+        "DJ Tom"
+      ],
+      "blurb": "Metal anthems across several decades.",
+      "previewPage": "https://www.rockstargames.com/VI/music/the-chamber"
+    },
+    "radio_flash_fm": {
+      "name": "Flash FM",
+      "hosts": [
+        "Robyn",
+        "Alex"
+      ],
+      "blurb": "The long-running Vice City pop station.",
+      "previewPage": "https://www.rockstargames.com/VI/music/flash-fm"
+    },
+    "radio_dirty_south_classics": {
+      "name": "Dirty South Classics",
+      "hosts": [
+        "Trick",
+        "Trina"
+      ],
+      "blurb": "Regional rap and hip-hop classics from the South.",
+      "previewPage": "https://www.rockstargames.com/VI/music/dirty-south-classics"
+    }
   },
   "artists": {
     "Tom Petty": {
@@ -212,6 +352,10 @@
     "RushDee": {
       "blurb": "Producer/engineer. Tagged on Hendrix Smoke Instagram Story with Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); own primary not yet attached.",
       "cite": ""
+    },
+    "Zara Larsson": {
+      "blurb": "Swedish singer. \"Midnight Sun (Girls Trip)\" with PinkPantheress is a 2026 release named in Rockstar's Flash FM preview. It is not a GTA VI: The Album single.",
+      "cite": "https://en.wikipedia.org/wiki/Zara_Larsson"
     }
   },
   "entries": [
@@ -1216,6 +1360,352 @@
         }
       ],
       "status": "needs_primary_source"
+    },
+    {
+      "id": "radio-cocoteo-fm-eoo",
+      "artists": [
+        "Bad Bunny"
+      ],
+      "track": "EoO",
+      "year": 2025,
+      "tier": "official_promo",
+      "appearance": "Cocoteo FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_cocoteo_fm",
+      "note": "Named in Rockstar's Cocoteo FM preview on the official GTA VI music page (8 Oct 2026). From the 2025 album DeBÍ TiRAR MáS FOToS.",
+      "previewCueSeconds": 23,
+      "sources": []
+    },
+    {
+      "id": "radio-cocoteo-fm-si-es-trucho-es-trucho-remix",
+      "artists": [
+        "Axel Rulay",
+        "Farruko",
+        "El Alfa"
+      ],
+      "track": "Si Es Trucho Es Trucho (Remix)",
+      "year": null,
+      "tier": "official_promo",
+      "appearance": "Cocoteo FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_cocoteo_fm",
+      "note": "Named in Rockstar's Cocoteo FM preview on the official GTA VI music page (8 Oct 2026). Rockstar credits Axel Rulay ft. Farruko & El Alfa. Year not verified: Apple US only lists a 2022 Tiësto remix, which may be a different version.",
+      "previewCueSeconds": 57,
+      "sources": []
+    },
+    {
+      "id": "radio-cocoteo-fm-canalla",
+      "artists": [
+        "Romeo Santos",
+        "El Chaval de la Bachata"
+      ],
+      "track": "Canalla",
+      "year": 2019,
+      "tier": "official_promo",
+      "appearance": "Cocoteo FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_cocoteo_fm",
+      "note": "Named in Rockstar's Cocoteo FM preview on the official GTA VI music page (8 Oct 2026). From the 2019 album Utopía.",
+      "previewCueSeconds": 85,
+      "sources": []
+    },
+    {
+      "id": "radio-back-country-radio-need-a-little-time-off-for-bad-behavior",
+      "artists": [
+        "David Allan Coe"
+      ],
+      "track": "Need a Little Time Off for Bad Behavior",
+      "year": 1975,
+      "tier": "official_promo",
+      "appearance": "Back Country Radio radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_back_country",
+      "note": "Named in Rockstar's Back Country Radio preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 14,
+      "sources": []
+    },
+    {
+      "id": "radio-back-country-radio-dont-come-home-a-drinkin",
+      "artists": [
+        "Loretta Lynn"
+      ],
+      "track": "Don't Come Home A-Drinkin' (With Lovin' On Your Mind)",
+      "year": 1966,
+      "tier": "official_promo",
+      "appearance": "Back Country Radio radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_back_country",
+      "note": "Named in Rockstar's Back Country Radio preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 39,
+      "sources": []
+    },
+    {
+      "id": "radio-back-country-radio-the-conversation",
+      "artists": [
+        "Hank Williams, Jr.",
+        "Waylon Jennings"
+      ],
+      "track": "The Conversation",
+      "year": 1979,
+      "tier": "official_promo",
+      "appearance": "Back Country Radio radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_back_country",
+      "note": "Named in Rockstar's Back Country Radio preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 79,
+      "sources": []
+    },
+    {
+      "id": "radio-afrobank-fm-joha",
+      "artists": [
+        "Asake"
+      ],
+      "track": "Joha",
+      "year": 2022,
+      "tier": "official_promo",
+      "appearance": "AfroBank FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_afrobank_fm",
+      "note": "Named in Rockstar's AfroBank FM preview on the official GTA VI music page (8 Oct 2026). From the 2022 album Mr. Money With The Vibe.",
+      "previewCueSeconds": 16,
+      "sources": []
+    },
+    {
+      "id": "radio-afrobank-fm-gye-wani",
+      "artists": [
+        "Pat Thomas",
+        "Ebo Taylor"
+      ],
+      "track": "Gye Wani",
+      "year": null,
+      "tier": "official_promo",
+      "appearance": "AfroBank FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_afrobank_fm",
+      "note": "Named in Rockstar's AfroBank FM preview on the official GTA VI music page (8 Oct 2026). Rockstar credits Pat Thomas ft. Ebo Taylor. Original release year not verified; the streaming version sits on the 2024 compilation Ghana Special 2 (1980 to 1993 recordings).",
+      "previewCueSeconds": 50,
+      "sources": []
+    },
+    {
+      "id": "radio-afrobank-fm-shaysana",
+      "artists": [
+        "DJ Lag",
+        "Robot Boii",
+        "Kamo Mphela"
+      ],
+      "track": "Shay'sana",
+      "year": 2024,
+      "tier": "official_promo",
+      "appearance": "AfroBank FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_afrobank_fm",
+      "note": "Named in Rockstar's AfroBank FM preview on the official GTA VI music page (8 Oct 2026). Rockstar credits DJ Lag & Robot Boii ft. Kamo Mphela.",
+      "previewCueSeconds": 69,
+      "sources": []
+    },
+    {
+      "id": "radio-the-chamber-106-6-i",
+      "artists": [
+        "Black Sabbath"
+      ],
+      "track": "I",
+      "year": 1992,
+      "tier": "official_promo",
+      "appearance": "The Chamber 106.6 radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_the_chamber",
+      "note": "Named in Rockstar's The Chamber 106.6 preview on the official GTA VI music page (8 Oct 2026). Rockstar lists the title as \"I\", from the 1992 album Dehumanizer. It is not the song \"Black Sabbath\".",
+      "previewCueSeconds": 22,
+      "sources": []
+    },
+    {
+      "id": "radio-the-chamber-106-6-im-broken",
+      "artists": [
+        "Pantera"
+      ],
+      "track": "I'm Broken",
+      "year": 1994,
+      "tier": "official_promo",
+      "appearance": "The Chamber 106.6 radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_the_chamber",
+      "note": "Named in Rockstar's The Chamber 106.6 preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 62,
+      "sources": []
+    },
+    {
+      "id": "radio-the-chamber-106-6-raining-blood",
+      "artists": [
+        "Slayer"
+      ],
+      "track": "Raining Blood",
+      "year": 1986,
+      "tier": "official_promo",
+      "appearance": "The Chamber 106.6 radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_the_chamber",
+      "note": "Named in Rockstar's The Chamber 106.6 preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 96,
+      "sources": []
+    },
+    {
+      "id": "radio-flash-fm-good-ones",
+      "artists": [
+        "Charli xcx"
+      ],
+      "track": "Good Ones",
+      "year": 2021,
+      "tier": "official_promo",
+      "appearance": "Flash FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_flash_fm",
+      "note": "Named in Rockstar's Flash FM preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 10,
+      "sources": []
+    },
+    {
+      "id": "radio-flash-fm-electric-feel",
+      "artists": [
+        "MGMT"
+      ],
+      "track": "Electric Feel",
+      "year": 2007,
+      "tier": "official_promo",
+      "appearance": "Flash FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_flash_fm",
+      "note": "Named in Rockstar's Flash FM preview on the official GTA VI music page (8 Oct 2026).",
+      "previewCueSeconds": 59,
+      "sources": []
+    },
+    {
+      "id": "radio-flash-fm-midnight-sun-girls-trip",
+      "artists": [
+        "Zara Larsson",
+        "PinkPantheress"
+      ],
+      "track": "Midnight Sun (Girls Trip)",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "Flash FM radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_flash_fm",
+      "note": "Named in Rockstar's Flash FM preview on the official GTA VI music page (8 Oct 2026). A Flash FM radio track, not a GTA VI: The Album single. It is the PinkPantheress version of Zara Larsson's \"Midnight Sun\", released in 2026 on Midnight Sun: Girls Trip (Sommer House / Epic).",
+      "spotifyTrackId": "2FHGYrQEmuWGX24QoQtQ13",
+      "youtubeVideoId": "BkGaKI7zwmg",
+      "previewCueSeconds": 91,
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2FHGYrQEmuWGX24QoQtQ13"
+        },
+        {
+          "label": "Official audio on YouTube (Zara Larsson, Topic channel)",
+          "url": "https://www.youtube.com/watch?v=BkGaKI7zwmg"
+        },
+        {
+          "label": "Official visualizer on YouTube (ZaraLarssonMusicVEVO)",
+          "url": "https://www.youtube.com/watch?v=N1o-jptI974"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/song/midnight-sun-girls-trip/1894058258"
+        }
+      ]
+    },
+    {
+      "id": "radio-dirty-south-classics-like-a-pimp",
+      "artists": [
+        "David Banner",
+        "Lil' Flip"
+      ],
+      "track": "Like A Pimp",
+      "year": 2003,
+      "tier": "official_promo",
+      "appearance": "Dirty South Classics radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_dirty_south_classics",
+      "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits David Banner ft. Lil' Flip.",
+      "previewCueSeconds": 22,
+      "sources": []
+    },
+    {
+      "id": "radio-dirty-south-classics-who-dat",
+      "artists": [
+        "JT Money",
+        "Solé"
+      ],
+      "track": "Who Dat",
+      "year": 1999,
+      "tier": "official_promo",
+      "appearance": "Dirty South Classics radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_dirty_south_classics",
+      "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits JT Money ft. Solé.",
+      "previewCueSeconds": 63,
+      "sources": []
+    },
+    {
+      "id": "radio-dirty-south-classics-born-n-raised",
+      "artists": [
+        "DJ Khaled",
+        "Trick Daddy",
+        "Rick Ross",
+        "Pitbull"
+      ],
+      "track": "Born N Raised",
+      "year": 2006,
+      "tier": "official_promo",
+      "appearance": "Dirty South Classics radio preview, Rockstar music page (8 Oct 2026)",
+      "appearanceKey": "radio_dirty_south_classics",
+      "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits DJ Khaled ft. Trick Daddy, Rick Ross & Pitbull.",
+      "previewCueSeconds": 101,
+      "sources": []
+    },
+    {
+      "id": "leak-fuerza-regida-suzuki",
+      "artists": [
+        "Fuerza Regida"
+      ],
+      "track": "Suzuki",
+      "year": 2026,
+      "tier": "unconfirmed_leak",
+      "appearance": "Unconfirmed: reportedly GTA VI: The Album, track 10",
+      "appearanceKey": "unconfirmed_leak",
+      "status": "unconfirmed",
+      "note": "Not confirmed by Rockstar, Atlantic or the band. Spotify's album page briefly showed Fuerza Regida on track 10 on 4 Oct 2026, and the name was reported removed the same afternoon. On 8 Oct a YouTuber posted a copyright claim screenshot naming the audio as \"Suzuki (from GTAVI: The Album)\" by Fuerza Regida y Grand Theft Auto VI. The band's 7 Oct Instagram reel shows a VICE CITY / LEONIDA plate but names no song. Apple Music still lists track 10 as untitled.",
+      "sources": [
+        {
+          "label": "Carrero on X: copyright claim screenshot (8 Oct 2026)",
+          "url": "https://x.com/carrerovYT/status/2107995019961577676"
+        },
+        {
+          "label": "videotech on X: Spotify listing spotted (4 Oct 2026)",
+          "url": "https://x.com/videotech/status/2106684023468589077"
+        },
+        {
+          "label": "iGrandTheftAuto on X: names removed (4 Oct 2026)",
+          "url": "https://x.com/iGrandTheftAuto/status/2106752235959173443"
+        },
+        {
+          "label": "Fuerza Regida on Instagram: Leonida plate reel (7 Oct 2026)",
+          "url": "https://www.instagram.com/fuerzaregida/reel/DeMutd8MF2v/"
+        },
+        {
+          "label": "Consequence coverage",
+          "url": "https://consequence.net/2026/10/fuerza-regida-grand-theft-auto-vi-soundtrack/"
+        }
+      ]
+    },
+    {
+      "id": "leak-cardi-b-track-19",
+      "artists": [
+        "Cardi B"
+      ],
+      "track": "Untitled (track 19)",
+      "year": 2026,
+      "tier": "unconfirmed_leak",
+      "appearance": "Unconfirmed: reportedly GTA VI: The Album, track 19",
+      "appearanceKey": "unconfirmed_leak",
+      "status": "unconfirmed",
+      "note": "Not confirmed by Rockstar, Atlantic or Cardi B. Spotify's album page briefly showed Cardi B on track 19 on 4 Oct 2026, with no song title, and the name was reported removed the same afternoon. Her own posts since then name no song or album. Apple Music still lists track 19 as untitled.",
+      "sources": [
+        {
+          "label": "videotech on X: Spotify listing spotted (4 Oct 2026)",
+          "url": "https://x.com/videotech/status/2106684023468589077"
+        },
+        {
+          "label": "iGrandTheftAuto on X: names removed (4 Oct 2026)",
+          "url": "https://x.com/iGrandTheftAuto/status/2106752235959173443"
+        },
+        {
+          "label": "Beebom coverage",
+          "url": "https://beebom.com/gta-6-spotify-leak-reveals-cardi-b-fuerza-regida-joining-soundtrack/"
+        }
+      ]
     }
   ]
 }

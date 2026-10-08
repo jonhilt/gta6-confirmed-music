@@ -48,10 +48,10 @@ test('trailer mode advances to the next distinct trailer and keeps cue tracking'
   assert.equal(vm.runInContext("entryAtTime(data, 'VQRLujxTm3c', 64).id", c), 't2-hot-together');
 });
 
-test('full-track radio visits all 26 tracks in catalog order and wraps once', async () => {
+test('full-track radio visits all official YouTube tracks in catalog order and wraps once', async () => {
   const c = setup();
   const expected = c.data.entries.filter((entry) => entry.youtubeVideoId);
-  assert.equal(expected.length, 26);
+  assert.ok(expected.some((entry) => entry.id === 'radio-flash-fm-midnight-sun-girls-trip'));
   await c.player.startRadio();
   for (const entry of expected) {
     assert.equal(c.state.playingId, entry.id);
@@ -140,6 +140,80 @@ test('visualiser follows Spotify playback and ignores events after switching awa
   await c.player.setProvider('full');
   c.spotifyEvents.playback_update({ data: { isPaused: false, isBuffering: false } });
   assert.equal(graphic.classList.values.has('is-playing'), false);
+});
+
+test('radio rows share station sources and only Midnight Sun is playable', () => {
+  const c = setup();
+  const radio = c.data.entries.filter((e) => String(e.appearanceKey).startsWith('radio_'));
+  assert.equal(radio.length, 18);
+  const playable = radio.filter((e) => e.spotifyTrackId || e.youtubeVideoId);
+  assert.equal(playable.length, 1);
+  assert.equal(playable[0].id, 'radio-flash-fm-midnight-sun-girls-trip');
+  assert.equal(playable[0].spotifyTrackId, '2FHGYrQEmuWGX24QoQtQ13');
+  assert.equal(playable[0].youtubeVideoId, 'BkGaKI7zwmg');
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'radio-cocoteo-fm-eoo');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(html, /id="radio-cocoteo-fm-eoo"/);
+  assert.match(html, /Cocoteo FM · Radio preview · 8 Oct 2026/);
+  assert.match(html, /Shared station sources/);
+  assert.match(html, /Official publisher station page/);
+  assert.doesNotMatch(html, /row-action--play/);
+  assert.match(html, /Sources/);
+  const midnight = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'radio-flash-fm-midnight-sun-girls-trip');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(midnight, /id="radio-flash-fm-midnight-sun-girls-trip"/);
+  assert.match(midnight, /row-action--play/);
+  assert.match(midnight, /Official streaming page for this track/);
+});
+
+test('catalog hash opens the matching row and leaves #radio for the player', () => {
+  const c = setup();
+  c.location.hash = '#radio-flash-fm-midnight-sun-girls-trip';
+  const result = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(c.state.expandedId, 'radio-flash-fm-midnight-sun-girls-trip');
+  assert.equal(c.state.anchorId, 'radio-flash-fm-midnight-sun-girls-trip');
+  assert.equal(result.scrollTo, 'radio-flash-fm-midnight-sun-girls-trip');
+  assert.equal(result.startRadio, false);
+  c.location.hash = '#radio';
+  const radio = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(radio.startRadio, true);
+  assert.equal(c.state.anchorId, null);
+});
+
+test('unconfirmed leak rows sit below confirmed tiers with no Play and no Distinct link', () => {
+  const c = setup();
+  const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
+  assert.equal(leaks.length, 2);
+  assert.deepEqual(leaks.map((e) => e.id), ['leak-fuerza-regida-suzuki', 'leak-cardi-b-track-19']);
+  assert.equal(leaks.every((e) => !e.spotifyTrackId && !e.youtubeVideoId), true);
+  const catalog = JSON.stringify(c.data);
+  assert.equal(catalog.includes('ItsNotDistinct'), false);
+  assert.equal(catalog.includes('2107998030536527892'), false);
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(html, /id="leak-fuerza-regida-suzuki"/);
+  assert.match(html, /row-badge--unconfirmed">Unconfirmed</);
+  assert.doesNotMatch(html, /row-action--play/);
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki'), data)", c), false);
+  const copy = vm.runInContext('TIER_COPY.unconfirmed_leak', c);
+  assert.equal(
+    copy,
+    "Briefly listed, unconfirmed. These names showed up on streaming listings or copyright claims before being pulled. Rockstar, Atlantic and the artists have not confirmed them. We will move them up or remove them as soon as there is an official source."
+  );
+  c.location.hash = '#leak-cardi-b-track-19';
+  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(hash.scrollTo, 'leak-cardi-b-track-19');
+  assert.equal(vm.runInContext('TIER_ORDER.at(-1)', c), 'unconfirmed_leak');
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 51);
 });
 
 test('album grouping preserves evidence labels in the row and source panel', () => {

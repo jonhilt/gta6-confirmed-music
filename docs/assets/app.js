@@ -3,15 +3,17 @@ const TIER_LABEL = {
   the_album: "GTA VI: The Album",
   rockstar_named: "Rockstar-named",
   artist_reported: "Artist-reported",
+  unconfirmed_leak: "Unconfirmed",
 };
 
-const TIER_ORDER = ["official_promo", "the_album", "rockstar_named", "artist_reported"];
+const TIER_ORDER = ["official_promo", "the_album", "rockstar_named", "artist_reported", "unconfirmed_leak"];
 
 const TIER_SECTION_NUM = {
   official_promo: "01",
   the_album: "02",
   rockstar_named: "03",
   artist_reported: "04",
+  unconfirmed_leak: "05",
 };
 
 const TIER_COPY = {
@@ -21,6 +23,8 @@ const TIER_COPY = {
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
+  unconfirmed_leak:
+    "Briefly listed, unconfirmed. These names showed up on streaming listings or copyright claims before being pulled. Rockstar, Atlantic and the artists have not confirmed them. We will move them up or remove them as soon as there is an official source.",
 };
 
 const EVIDENCE_HEADLINE = {
@@ -28,7 +32,12 @@ const EVIDENCE_HEADLINE = {
   rockstar_named: "An artist mention. Not a song credit.",
   artist_reported_needs: "A reported teaser. Proof still pending.",
   artist_reported: "Artist-reported claim with linked sources.",
+  unconfirmed_leak: "Unconfirmed listing. Not a confirmed credit.",
 };
+
+function isUnconfirmed(entry) {
+  return entry?.tier === "unconfirmed_leak";
+}
 
 function $(sel, root = document) {
   return root.querySelector(sel);
@@ -74,6 +83,7 @@ function formatCueLine(entry, data) {
   if (key === "the_album") slot = "The Album · 17 Sep 2026";
   if (key === "interview") slot = "Named by Rockstar · Aug 2026";
   if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
+  if (key === "unconfirmed_leak") slot = entry.appearance;
   if (station) slot = `${station.name} · Radio preview · 8 Oct 2026`;
   if (!slot) slot = entry.appearance;
 
@@ -157,6 +167,7 @@ function ytSource(entry, data, source = "trailer") {
 }
 
 function canPlay(entry, data) {
+  if (isUnconfirmed(entry)) return false;
   return Boolean(ytSource(entry, data) || spotifyTrackId(entry));
 }
 
@@ -172,6 +183,7 @@ function radioVideos(data, source = "full") {
   const seen = new Set();
   const list = [];
   for (const entry of data.entries) {
+    if (isUnconfirmed(entry)) continue;
     const yt = ytSource(entry, data, source);
     if (!yt || yt.embedRestricted) continue;
     if (seen.has(yt.videoId)) continue;
@@ -206,6 +218,13 @@ function entryAtTime(data, videoId, seconds) {
 
 function sourceRole(label, entry) {
   const lower = label.toLowerCase();
+  if (isUnconfirmed(entry) || entry.status === "unconfirmed") {
+    if (lower.includes("videotech") || lower.includes("igrandtheftauto") || lower.includes("carrero")) {
+      return "Discovery only. Not proof.";
+    }
+    if (lower.includes("instagram")) return "Artist visual teaser. Does not name the song.";
+    if (lower.includes("consequence") || lower.includes("beebom")) return "Secondary news report.";
+  }
   if (entry.status === "needs_primary_source" && lower.includes("videotech")) {
     return "Discovery only. Not proof.";
   }
@@ -238,6 +257,7 @@ function evidenceSummary(entry, artists) {
 function evidenceHeadline(entry) {
   if (entry.tier === "official_promo") return EVIDENCE_HEADLINE.official_promo;
   if (entry.tier === "rockstar_named") return EVIDENCE_HEADLINE.rockstar_named;
+  if (isUnconfirmed(entry)) return EVIDENCE_HEADLINE.unconfirmed_leak;
   if (entry.status === "needs_primary_source") return EVIDENCE_HEADLINE.artist_reported_needs;
   return EVIDENCE_HEADLINE.artist_reported;
 }
@@ -392,7 +412,11 @@ function renderRow(entry, indexNum, state) {
           ${track}
           <p class="row-cue">${escapeHtml(formatCueLine(entry, state.data))}</p>
         </div>
-        <p class="row-evidence">${escapeHtml(TIER_LABEL[entry.tier])}</p>
+        <p class="row-evidence">${
+          isUnconfirmed(entry)
+            ? `<span class="row-badge row-badge--unconfirmed">Unconfirmed</span>`
+            : escapeHtml(TIER_LABEL[entry.tier])
+        }</p>
         <div class="row-actions">${playButton(entry, state)}</div>
         <div class="row-source">${sourceButton(entry, state)}</div>
       </div>
@@ -435,7 +459,8 @@ function render(data, state, options = {}) {
   const root = $("#catalog");
   if (!root) return;
   const filtered = filteredEntries(data, state);
-  const total = data.entries.length;
+  const total = data.entries.filter((e) => !isUnconfirmed(e)).length;
+  const leakCount = data.entries.filter(isUnconfirmed).length;
   const scrollY = options.preserveScroll ? window.scrollY : null;
 
   const awaitingPrimary = data.entries.filter((e) => e.status === "needs_primary_source").length;
@@ -445,10 +470,14 @@ function render(data, state, options = {}) {
   }
   const introMeta = $("#intro-meta");
   if (introMeta) {
-    introMeta.textContent =
-      awaitingPrimary > 0
-        ? `${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`
-        : "";
+    const bits = [];
+    if (awaitingPrimary > 0) {
+      bits.push(`${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`);
+    }
+    if (leakCount > 0) {
+      bits.push(`${leakCount} unconfirmed row${leakCount === 1 ? "" : "s"} sit below the confirmed list`);
+    }
+    introMeta.textContent = bits.join(". ");
   }
 
   if (!filtered.length) {
@@ -469,7 +498,8 @@ function render(data, state, options = {}) {
 
     const renderRows = (list) =>
       list
-        .map((entry) => {
+        .map((entry, index) => {
+          if (tier === "unconfirmed_leak") return renderRow(entry, index + 1, state);
           globalNum += 1;
           return renderRow(entry, globalNum, state);
         })

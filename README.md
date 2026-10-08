@@ -8,13 +8,14 @@ This is fan documentation. It is not affiliated with Rockstar Games or Take-Two 
 
 ## What belongs on the list
 
-Three tiers. Nothing else goes on the home page.
+Four catalog tiers. Confirmed rows sit in the first three. Unconfirmed leak rows are a one-off fourth section at the bottom and do not count as confirmed.
 
 1. **official_promo** — audio heard in Rockstar-published Trailer 1, Trailer 2, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
 3. **artist_reported** — the artist (or a channel they control) claims involvement. Link a **primary** source. Flag it as not Rockstar-verified.
+4. **unconfirmed_leak** — briefly listed on streaming pages or copyright claims, then pulled. Not confirmed by Rockstar, Atlantic, or the artist. No Play button, no embeds. Do not link posts that carry leaked audio.
 
-Aggregators such as @videotech are discovery only. Keep them as a breadcrumb until you have the artist’s own post. Anonymous rumors stay off the main UI.
+Aggregators such as @videotech are discovery only. Keep them as a breadcrumb until you have the artist’s own post. Anonymous rumors stay off the confirmed list.
 
 Copyright: no lyrics, no pasted bios. One or two factual sentences per artist with a citeable URL. Track titles and artist names are fine. Linking to official Rockstar media with a citation is fine. Do not host their video or audio files, or scrape logos and box art into the site chrome.
 
@@ -32,11 +33,11 @@ The site is static HTML. It reads:
 | `artists` | yes | array of strings |
 | `track` | no | `null` if unknown |
 | `year` | no | original release year if known |
-| `tier` | yes | `official_promo` \| `rockstar_named` \| `artist_reported` |
+| `tier` | yes | `official_promo` \| `rockstar_named` \| `artist_reported` \| `unconfirmed_leak` |
 | `appearance` | yes | short human sentence |
-| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` \| `radio_cocoteo_fm` \| `radio_back_country` \| `radio_afrobank_fm` \| `radio_the_chamber` \| `radio_flash_fm` \| `radio_dirty_south_classics` |
+| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` \| `radio_cocoteo_fm` \| `radio_back_country` \| `radio_afrobank_fm` \| `radio_the_chamber` \| `radio_flash_fm` \| `radio_dirty_south_classics` \| `unconfirmed_leak` |
 | `sources` | yes | `{ "label", "url" }[]` — first link should be the strongest |
-| `status` | no | `needs_primary_source` for artist-reported rows without a primary URL |
+| `status` | no | `needs_primary_source` for artist-reported rows without a primary URL; `unconfirmed` for leak rows |
 | `note` | no | one factual caveat |
 | `cueSeconds` | no | integer start time on the Rockstar YouTube upload; Play uses this |
 | `previewCueSeconds` | no | integer start time of the track in Rockstar's station preview mp3 (display only; we do not host or embed those files) |
@@ -66,7 +67,7 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 4. Bump `updated` (ISO date).
 5. Open a PR. Do not paste lyrics.
 
-## Current coverage (2026-10-08)
+## Current coverage (2026-10-09)
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
@@ -74,6 +75,7 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 - The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles.
 - Rockstar-named: Real Dimez (Dazed). Kodak Black and Sexyy Red Dazed mentions are notes on the Extended Look Skrilla and Pound Town rows.
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
+- Unconfirmed (not in the confirmed count): Fuerza Regida "Suzuki" (album track 10) and Cardi B untitled (album track 19). Discovery sources only; no Play or embeds.
 
 ## License
 

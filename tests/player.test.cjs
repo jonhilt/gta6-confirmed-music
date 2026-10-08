@@ -186,6 +186,36 @@ test('catalog hash opens the matching row and leaves #radio for the player', () 
   assert.equal(c.state.anchorId, null);
 });
 
+test('unconfirmed leak rows sit below confirmed tiers with no Play and no Distinct link', () => {
+  const c = setup();
+  const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
+  assert.equal(leaks.length, 2);
+  assert.deepEqual(leaks.map((e) => e.id), ['leak-fuerza-regida-suzuki', 'leak-cardi-b-track-19']);
+  assert.equal(leaks.every((e) => !e.spotifyTrackId && !e.youtubeVideoId), true);
+  const catalog = JSON.stringify(c.data);
+  assert.equal(catalog.includes('ItsNotDistinct'), false);
+  assert.equal(catalog.includes('2107998030536527892'), false);
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(html, /id="leak-fuerza-regida-suzuki"/);
+  assert.match(html, /row-badge--unconfirmed">Unconfirmed</);
+  assert.doesNotMatch(html, /row-action--play/);
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki'), data)", c), false);
+  const copy = vm.runInContext('TIER_COPY.unconfirmed_leak', c);
+  assert.equal(
+    copy,
+    "Briefly listed, unconfirmed. These names showed up on streaming listings or copyright claims before being pulled. Rockstar, Atlantic and the artists have not confirmed them. We will move them up or remove them as soon as there is an official source."
+  );
+  c.location.hash = '#leak-cardi-b-track-19';
+  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(hash.scrollTo, 'leak-cardi-b-track-19');
+  assert.equal(vm.runInContext('TIER_ORDER.at(-1)', c), 'unconfirmed_leak');
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 51);
+});
+
 test('album grouping preserves evidence labels in the row and source panel', () => {
   const c = setup();
   const html = vm.runInContext(`(() => {

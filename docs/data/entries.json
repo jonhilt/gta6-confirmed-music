@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -1644,6 +1644,68 @@
       "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits DJ Khaled ft. Trick Daddy, Rick Ross & Pitbull.",
       "previewCueSeconds": 101,
       "sources": []
+    },
+    {
+      "id": "leak-fuerza-regida-suzuki",
+      "artists": [
+        "Fuerza Regida"
+      ],
+      "track": "Suzuki",
+      "year": 2026,
+      "tier": "unconfirmed_leak",
+      "appearance": "Unconfirmed: reportedly GTA VI: The Album, track 10",
+      "appearanceKey": "unconfirmed_leak",
+      "status": "unconfirmed",
+      "note": "Not confirmed by Rockstar, Atlantic or the band. Spotify's album page briefly showed Fuerza Regida on track 10 on 4 Oct 2026, and the name was reported removed the same afternoon. On 8 Oct a YouTuber posted a copyright claim screenshot naming the audio as \"Suzuki (from GTAVI: The Album)\" by Fuerza Regida y Grand Theft Auto VI. The band's 7 Oct Instagram reel shows a VICE CITY / LEONIDA plate but names no song. Apple Music still lists track 10 as untitled.",
+      "sources": [
+        {
+          "label": "Carrero on X: copyright claim screenshot (8 Oct 2026)",
+          "url": "https://x.com/carrerovYT/status/2107995019961577676"
+        },
+        {
+          "label": "videotech on X: Spotify listing spotted (4 Oct 2026)",
+          "url": "https://x.com/videotech/status/2106684023468589077"
+        },
+        {
+          "label": "iGrandTheftAuto on X: names removed (4 Oct 2026)",
+          "url": "https://x.com/iGrandTheftAuto/status/2106752235959173443"
+        },
+        {
+          "label": "Fuerza Regida on Instagram: Leonida plate reel (7 Oct 2026)",
+          "url": "https://www.instagram.com/fuerzaregida/reel/DeMutd8MF2v/"
+        },
+        {
+          "label": "Consequence coverage",
+          "url": "https://consequence.net/2026/10/fuerza-regida-grand-theft-auto-vi-soundtrack/"
+        }
+      ]
+    },
+    {
+      "id": "leak-cardi-b-track-19",
+      "artists": [
+        "Cardi B"
+      ],
+      "track": "Untitled (track 19)",
+      "year": 2026,
+      "tier": "unconfirmed_leak",
+      "appearance": "Unconfirmed: reportedly GTA VI: The Album, track 19",
+      "appearanceKey": "unconfirmed_leak",
+      "status": "unconfirmed",
+      "note": "Not confirmed by Rockstar, Atlantic or Cardi B. Spotify's album page briefly showed Cardi B on track 19 on 4 Oct 2026, with no song title, and the name was reported removed the same afternoon. Her own posts since then name no song or album. Apple Music still lists track 19 as untitled.",
+      "sources": [
+        {
+          "label": "videotech on X: Spotify listing spotted (4 Oct 2026)",
+          "url": "https://x.com/videotech/status/2106684023468589077"
+        },
+        {
+          "label": "iGrandTheftAuto on X: names removed (4 Oct 2026)",
+          "url": "https://x.com/iGrandTheftAuto/status/2106752235959173443"
+        },
+        {
+          "label": "Beebom coverage",
+          "url": "https://beebom.com/gta-6-spotify-leak-reveals-cardi-b-fuerza-regida-joining-soundtrack/"
+        }
+      ]
     }
   ]
 }

@@ -490,11 +490,91 @@ input {
   font-size: 0.84rem;
 }
 
+.row-radio-link {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+}
+
+.row-radio-link a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.row-radio-link a:hover,
+.row-radio-link a:focus-visible {
+  color: var(--paper);
+}
+
+.radio-page {
+  display: grid;
+  gap: 0;
+}
+
+.station-card {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.15rem 0 1.4rem;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: calc(var(--sticky-header-height, 0px) + 0.75rem);
+}
+
+.station-card-head {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.station-card-title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.station-card-hosts {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.radio-track-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.radio-track-name,
+.radio-track-cue {
+  margin: 0;
+}
+
+.radio-track-name {
+  color: var(--paper);
+  font-size: 0.95rem;
+}
+
+.radio-track-cue {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
 .station-player {
   display: grid;
   gap: 0.4rem;
   justify-items: start;
   max-width: 36rem;
+}
+
+.station-player-label {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .station-player-frame {
@@ -1233,7 +1313,10 @@ code {
   .nav-brand-leonida { font-size: 0.75rem; }
   .nav-brand-drop { font-size: 1.3rem; }
   .nav-links { gap: 0.15rem; }
-  .nav-links a { font-size: 0.9rem; }
+  .nav-links a { font-size: 0.82rem; }
+
+  .station-card-title { font-size: 1.4rem; }
+  .station-player { max-width: 100%; }
 
   .archive-hero {
     padding: 0.5rem 0 0.75rem;

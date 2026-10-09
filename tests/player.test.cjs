@@ -257,7 +257,7 @@ test('album grouping preserves evidence labels in the row and source panel', () 
   assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 'ar-travis-scott'))", c), 'the_album');
 });
 
-test('station subsections click-to-load the official Rockstar simple embed', () => {
+test('catalog rows link to Radio and never render Rockstar embed iframes', () => {
   const c = setup({ stubRender: false });
   const html = vm.runInContext(`(() => {
     state.tier = 'all';
@@ -265,18 +265,41 @@ test('station subsections click-to-load the official Rockstar simple embed', () 
     render(data, state);
     return document.querySelector('#catalog').innerHTML;
   })()`, c);
-  assert.match(html, /data-action="load-station-embed"/);
+  assert.match(html, /id="radio-flash-fm-midnight-sun-girls-trip"/);
+  assert.match(html, /Hear it on Flash FM/);
+  assert.match(html, /href="radio\/#flash-fm"/);
+  assert.doesNotMatch(html, /rockstargames\.com\/VI\/music\/embed/);
+  assert.doesNotMatch(html, /<iframe/);
+  assert.doesNotMatch(html, /data-action="load-station-embed"/);
+  assert.doesNotMatch(html, /Official station preview/);
+  assert.doesNotMatch(html, /\u2014/);
+});
+
+test('Radio view click-to-load Rockstar simple embeds and lists preview cues', () => {
+  const c = setup({ stubRender: false });
+  const html = vm.runInContext(`(() => {
+    state.loadedStationEmbed = null;
+    renderRadio(data, state);
+    return document.querySelector('#radio-stations').innerHTML;
+  })()`, c);
+  assert.match(html, /id="flash-fm"/);
+  assert.match(html, /Official station preview/);
+  assert.match(html, /Hosted by Robyn and Alex/);
   assert.match(html, /Flash FM on Rockstar/);
   assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/music\/flash-fm/);
-  assert.doesNotMatch(html, /rockstargames\.com\/VI\/music\/embed\/flash-fm\/simple/);
+  assert.match(html, /at 0:10 in the preview/);
+  assert.match(html, /data-action="load-station-embed"/);
+  assert.doesNotMatch(html, /<iframe/);
+  assert.doesNotMatch(html, /yt-host|spotify-host|player-dock/);
   const loaded = vm.runInContext(`(() => {
-    stationEmbedsLoaded(state).add('radio_flash_fm');
-    render(data, state);
-    return document.querySelector('#catalog').innerHTML;
+    state.loadedStationEmbed = 'radio_flash_fm';
+    renderRadio(data, state);
+    return document.querySelector('#radio-stations').innerHTML;
   })()`, c);
   assert.match(loaded, /src="https:\/\/www\.rockstargames\.com\/VI\/music\/embed\/flash-fm\/simple"/);
   assert.match(loaded, /allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"/);
-  assert.match(loaded, /loading="lazy"/);
+  assert.equal((loaded.match(/<iframe/g) || []).length, 1);
+  assert.doesNotMatch(loaded, /rockstargames\.com\/VI\/music\/embed\/cocoteo-fm\/simple/);
   assert.doesNotMatch(loaded, /\u2014/);
 });
 
@@ -300,4 +323,5 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   const copy = vm.runInContext('stationEmbedFrame(data.stations.radio_flash_fm, "radio_flash_fm", state)', c);
   assert.equal(copy.includes('\u2014'), false);
   assert.match(copy, /Load official player/);
+  assert.match(copy, /Official station preview/);
 });

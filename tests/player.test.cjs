@@ -188,39 +188,61 @@ test('catalog hash opens the matching row and leaves #radio for the player', () 
   assert.equal(c.state.anchorId, null);
 });
 
-test('unconfirmed leak rows sit below confirmed tiers with no Play and no Distinct link', () => {
-  const c = setup();
+test('Rockstar album singles replace leak rows, alias old hashes, and hide the empty unconfirmed section', async () => {
+  const c = setup({ stubRender: false });
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
-  assert.equal(leaks.length, 2);
-  assert.deepEqual(leaks.map((e) => e.id), ['leak-fuerza-regida-suzuki', 'leak-cardi-b-track-19']);
-  assert.equal(leaks.every((e) => !e.spotifyTrackId && !e.youtubeVideoId && !e.appleMusicUrl && !e.rockstarEmbedUrl), true);
-  assert.equal(leaks.every((e) => e.previewSource === 'none'), true);
+  assert.equal(leaks.length, 0);
+  assert.equal(c.data.entries.length, 53);
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 53);
   const catalog = JSON.stringify(c.data);
   assert.equal(catalog.includes('ItsNotDistinct'), false);
   assert.equal(catalog.includes('2107998030536527892'), false);
+  assert.equal(catalog.includes('leak-fuerza-regida-suzuki'), false);
+  assert.equal(catalog.includes('leak-cardi-b-track-19'), false);
+  const suzuki = c.data.entries.find((e) => e.id === 'ar-fuerza-regida-suzuki');
+  const cardi = c.data.entries.find((e) => e.id === 'ar-cardi-b-dont-chart');
+  assert.equal(suzuki.track, 'Suzuki');
+  assert.equal(suzuki.artists[0], 'Fuerza Regida');
+  assert.equal(suzuki.appearanceKey, 'the_album');
+  assert.equal(suzuki.tier, 'official_promo');
+  assert.equal(suzuki.spotifyTrackId, '6VDw2mGBIa4csypjOhS6JT');
+  assert.equal(suzuki.youtubeVideoId, 'wROPn_SFE5s');
+  assert.equal(suzuki.appleMusicUrl, 'https://music.apple.com/gb/album/suzuki-from-gtavi-the-album-single/6820156381');
+  assert.equal(cardi.track, "Don't Chart");
+  assert.equal(cardi.track.includes('\u2019'), false);
+  assert.equal(cardi.spotifyTrackId, '4NaBitL0J4PBSODIL1sUg7');
+  assert.equal(cardi.youtubeVideoId, '0BxQ6hi3lXY');
+  assert.equal(cardi.appleMusicUrl, 'https://music.apple.com/us/album/dont-chart/6812476961?i=6812477308');
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'ar-fuerza-regida-suzuki'), data)", c), true);
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'ar-cardi-b-dont-chart'), data)", c), true);
   const html = vm.runInContext(`(() => {
-    const entry = data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki');
-    state.expandedId = entry.id;
-    return renderRow(entry, 1, state);
+    state.tier = 'all';
+    state.query = '';
+    render(data, state);
+    return document.querySelector('#catalog').innerHTML;
   })()`, c);
-  assert.match(html, /id="leak-fuerza-regida-suzuki"/);
-  assert.match(html, /row-badge--unconfirmed">Unconfirmed</);
-  assert.doesNotMatch(html, /row-action--play/);
-  assert.doesNotMatch(html, /<iframe/);
-  assert.doesNotMatch(html, /open\.spotify\.com\/embed/);
-  assert.doesNotMatch(html, /youtube-nocookie/);
+  assert.doesNotMatch(html, /id="tier-unconfirmed_leak"/);
+  assert.doesNotMatch(html, /Not released/);
+  assert.doesNotMatch(html, /row-badge--unconfirmed/);
+  assert.match(html, /id="ar-fuerza-regida-suzuki"/);
+  assert.match(html, /id="ar-cardi-b-dont-chart"/);
+  assert.match(html, /row-action--play/);
   assert.doesNotMatch(html, /ItsNotDistinct/);
-  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki'), data)", c), false);
-  const copy = vm.runInContext('TIER_COPY.unconfirmed_leak', c);
-  assert.equal(
-    copy,
-    "Briefly listed, unconfirmed. These names showed up on streaming listings or copyright claims before being pulled. Rockstar, Atlantic and the artists have not confirmed them. We will move them up or remove them as soon as there is an official source."
-  );
+  assert.equal(c.nodes.get('.tier-key--leak').hidden, true);
+  assert.match(c.nodes.get('#hero-kicker').textContent, /53 entries/);
+  c.location.hash = '#leak-fuerza-regida-suzuki';
+  const suzukiHash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(suzukiHash.scrollTo, 'ar-fuerza-regida-suzuki');
+  assert.equal(c.state.expandedId, 'ar-fuerza-regida-suzuki');
   c.location.hash = '#leak-cardi-b-track-19';
-  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
-  assert.equal(hash.scrollTo, 'leak-cardi-b-track-19');
-  assert.equal(vm.runInContext('TIER_ORDER.at(-1)', c), 'unconfirmed_leak');
-  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 51);
+  const cardiHash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(cardiHash.scrollTo, 'ar-cardi-b-dont-chart');
+  await c.player.playEntry('ar-fuerza-regida-suzuki');
+  assert.equal(c.state.playingId, 'ar-fuerza-regida-suzuki');
+  assert.equal(c.state.provider, 'youtube');
+  await c.player.playEntry('ar-cardi-b-dont-chart');
+  assert.equal(c.state.playingId, 'ar-cardi-b-dont-chart');
+  assert.equal(c.state.provider, 'youtube');
 });
 
 test('album grouping preserves evidence labels in the row and source panel', () => {
@@ -262,8 +284,9 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   const c = setup();
   const radio = c.data.entries.filter((e) => String(e.appearanceKey).startsWith('radio_'));
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
+  const singles = c.data.entries.filter((e) => ['ar-fuerza-regida-suzuki', 'ar-cardi-b-dont-chart'].includes(e.id));
   const stations = Object.values(c.data.stations);
-  for (const entry of [...radio, ...leaks]) {
+  for (const entry of [...radio, ...leaks, ...singles]) {
     assert.equal(`${entry.note || ''}${entry.previewSource || ''}`.includes('\u2014'), false);
     for (const source of entry.sources || []) {
       assert.equal(`${source.label}${source.url}`.includes('\u2014'), false);

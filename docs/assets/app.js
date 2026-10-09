@@ -539,6 +539,8 @@ function render(data, state, options = {}) {
     }
     introMeta.textContent = bits.join(". ");
   }
+  const leakKey = $(".tier-key--leak");
+  if (leakKey) leakKey.hidden = leakCount === 0;
 
   if (!filtered.length) {
     root.innerHTML = `<p class="empty">No rows match that filter.</p>`;
@@ -1036,6 +1038,11 @@ function bindCatalog(data, state, player) {
   });
 }
 
+const CATALOG_ID_ALIASES = {
+  "leak-fuerza-regida-suzuki": "ar-fuerza-regida-suzuki",
+  "leak-cardi-b-track-19": "ar-cardi-b-dont-chart",
+};
+
 function catalogHashId() {
   const raw = (typeof location !== "undefined" && location.hash ? location.hash : "").replace(/^#/, "");
   if (!raw) return null;
@@ -1046,7 +1053,7 @@ function catalogHashId() {
     /* keep raw */
   }
   if (id === "radio" || id.startsWith("tier-")) return null;
-  return id;
+  return CATALOG_ID_ALIASES[id] || id;
 }
 
 function applyCatalogHash(data, state) {

@@ -49,7 +49,7 @@ The site is static HTML. It reads:
 
 `sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel. Radio preview rows share the station page, the station's @RockstarGames post, and the Newswire article under `sharedSources.<stationKey>`.
 
-`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, `previewPage`, and `embedUrl` for Rockstar's official `/VI/music/embed/{key}/simple` player. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog. Station players are click-to-load iframes of that official embed. We do not host, rip, or proxy the preview audio.
+`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, `previewPage`, and `embedUrl` for Rockstar's official `/VI/music/embed/{key}/simple` player. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog. Each station is one card: the official simple embed on top, then compact track rows. Track Play uses the shared bottom dock (Spotify first, YouTube nocookie if there is no Spotify id). We do not host, rip, or proxy the preview audio.
 
 Each catalog row's `id` is also its page anchor (`https://leonidadrop.com/#<id>`). Visiting that hash scrolls to the row and opens Sources.
 

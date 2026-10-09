@@ -29,7 +29,7 @@
       href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20261009radioplay" />
+    <link rel="stylesheet" href="assets/style.css?v=20261009stationcard" />
     <link rel="icon" href="assets/leonida-needle-mark.svg" type="image/svg+xml" />
   </head>
   <body>
@@ -127,27 +127,31 @@
         </footer>
       </div>
 
-      <aside class="player-dock" id="player-dock" aria-label="Leonida player">
+      <aside class="player-dock" id="player-dock" aria-label="Now playing" hidden>
         <div class="dock-header">
-          <p class="dock-kicker" id="dock-kicker">Leonida Radio</p>
-          <p class="dock-status" id="dock-status">Playlist mode / auto-advance on</p>
+          <div class="dock-header-copy">
+            <p class="dock-kicker" id="dock-kicker">Now playing</p>
+            <p class="dock-status" id="dock-status">Shared player</p>
+          </div>
+          <button type="button" class="dock-close" data-action="close-player" aria-label="Close player">
+            Close
+          </button>
         </div>
         <div class="dock-identity">
-          <h2 class="dock-track" id="dock-track">Known tracks. On rotation.</h2>
-          <p class="dock-artist" id="dock-artist">YouTube radio · official uploads only</p>
+          <h2 class="dock-track" id="dock-track">Select a track</h2>
+          <p class="dock-artist" id="dock-artist">Official Spotify or YouTube only</p>
         </div>
         <div class="dock-providers" id="dock-providers" hidden></div>
         <div class="dock-stage">
           <div id="yt-host" class="yt-host"></div>
           <div id="spotify-host" class="spotify-host" hidden></div>
           <div class="dock-empty" id="dock-empty">
-            <p>Start radio to cycle official YouTube videos.</p>
+            <p>Play a track to listen here.</p>
           </div>
         </div>
         <div class="dock-footer">
           <p class="dock-note" id="dock-note">
-            Radio plays official YouTube videos in list order. When a video ends, the next one starts.
-            Extended Look is age-restricted and will not embed.
+            One player for the list. Spotify first, YouTube when there is no Spotify id.
           </p>
           <div class="dock-actions">
             <button type="button" class="dock-cta" data-action="start-radio" id="dock-start">
@@ -156,12 +160,13 @@
             <a class="dock-outbound" id="dock-outbound" hidden rel="noopener noreferrer" target="_blank">
               Open on YouTube
             </a>
+            <a class="dock-apple" id="dock-apple" hidden rel="noopener noreferrer" target="_blank">Listen on Apple Music</a>
           </div>
         </div>
       </aside>
     </div>
 
-    <script src="assets/app.js?v=20261009radioplay"></script>
+    <script src="assets/app.js?v=20261009stationcard"></script>
     <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "36ca547414b54089a4cac3e3b336f02d"}'></script><!-- End Cloudflare Web Analytics -->
   </body>
 </html>

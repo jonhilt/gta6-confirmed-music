@@ -5,21 +5,27 @@ const vm = require('node:vm');
 
 function setup({ manualReady = false, stubRender = true } = {}) {
   const nodes = new Map();
-  const node = () => ({ dataset: {}, classList: { values: new Set(), toggle(name, on) { on ? this.values.add(name) : this.values.delete(name); } }, replaceChildren() {}, appendChild() {} });
+  const node = () => ({ dataset: {}, hidden: false, style: {}, classList: { values: new Set(), toggle(name, on) { on ? this.values.add(name) : this.values.delete(name); } }, replaceChildren() {}, appendChild() {} });
   const context = {
     queueMicrotask, URL, console, loads: [], location: { origin: 'http://localhost:8000' },
     setInterval: () => 1, clearInterval() {}, setTimeout: (fn) => fn(),
-    document: { querySelector(selector) { if (!nodes.has(selector)) nodes.set(selector, node()); return nodes.get(selector); }, createElement: node },
+    document: {
+      body: node(),
+      documentElement: { style: { setProperty() {} } },
+      querySelector(selector) { if (!nodes.has(selector)) nodes.set(selector, node()); return nodes.get(selector); },
+      createElement: node,
+    },
     data: JSON.parse(fs.readFileSync('docs/data/entries.json', 'utf8')),
   };
   context.window = { YT: { PlayerState: { ENDED: 0, PLAYING: 1 }, Player: class {
     constructor(id, options) {
+      context.ytOptions = options;
       context.events = options.events;
       context.ready = () => { this.isReady = true; options.events.onReady(); };
       if (!manualReady) queueMicrotask(context.ready);
     }
     loadVideoById(video) { assert.ok(this.isReady, 'must wait for onReady'); context.loaded = video; context.loads.push(video); }
-    pauseVideo() {}
+    pauseVideo() { context.ytPaused = (context.ytPaused || 0) + 1; }
   } } };
   context.nodes = nodes;
   vm.createContext(context);
@@ -91,13 +97,13 @@ test('concurrent selections wait for readiness and only load the latest track', 
 
 test('Spotify selection invalidates a pending YouTube load', async () => {
   const c = setup({ manualReady: true });
-  const pending = c.player.playEntry('ar-travis-scott');
+  const pending = c.player.playEntry('t1-love-is-a-long-road');
   await initialized(c);
-  await c.player.setProvider('spotify');
+  const next = c.player.playEntry('ar-travis-scott');
   c.ready();
-  await pending;
-  assert.equal(c.loads.length, 0);
+  await Promise.all([pending, next]);
   assert.equal(c.state.provider, 'spotify');
+  assert.ok((c.ytPaused || 0) >= 1);
 });
 
 test('YouTube errors stop radio and expose a fallback instead of retrying forever', async () => {
@@ -146,7 +152,7 @@ test('radio rows share station sources and play official Spotify or YouTube ids'
   const c = setup();
   const radio = c.data.entries.filter((e) => String(e.appearanceKey).startsWith('radio_'));
   assert.equal(radio.length, 18);
-  assert.equal(radio.every((e) => e.previewSource === 'spotify' && e.spotifyTrackId), true);
+  assert.equal(radio.every((e) => e.previewSource === 'spotify' && e.spotifyTrackId && e.previewCueSeconds != null), true);
   const gye = radio.find((e) => e.id === 'radio-afrobank-fm-gye-wani');
   assert.equal(gye.youtubeVideoId, undefined);
   assert.match(gye.appleMusicUrl, /music\.apple\.com\/us\//);
@@ -156,22 +162,29 @@ test('radio rows share station sources and play official Spotify or YouTube ids'
   const html = vm.runInContext(`(() => {
     const entry = data.entries.find(e => e.id === 'radio-cocoteo-fm-eoo');
     state.expandedId = entry.id;
-    return renderRow(entry, 1, state);
+    return renderStationTrack(entry, state);
   })()`, c);
   assert.match(html, /id="radio-cocoteo-fm-eoo"/);
-  assert.match(html, /Cocoteo FM · Radio preview · 8 Oct 2026/);
+  assert.match(html, /at 0:23 in the preview/);
+  assert.match(html, /Listen on Apple Music/);
   assert.match(html, /Shared station sources/);
   assert.match(html, /Official publisher station page/);
   assert.match(html, /row-action--play/);
   assert.match(html, /Sources/);
+  assert.doesNotMatch(html, /<iframe/);
   const midnightHtml = vm.runInContext(`(() => {
     const entry = data.entries.find(e => e.id === 'radio-flash-fm-midnight-sun-girls-trip');
     state.expandedId = entry.id;
-    return renderRow(entry, 1, state);
+    return renderStationTrack(entry, state);
   })()`, c);
   assert.match(midnightHtml, /id="radio-flash-fm-midnight-sun-girls-trip"/);
   assert.match(midnightHtml, /row-action--play/);
   assert.match(midnightHtml, /Official streaming page for this track/);
+  const gyeHtml = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'radio-afrobank-fm-gye-wani');
+    return renderStationTrack(entry, state);
+  })()`, c);
+  assert.match(gyeHtml, /Listen on Apple Music \(US store\)/);
 });
 
 test('catalog hash opens the matching row and leaves #radio for the player', () => {
@@ -204,7 +217,7 @@ test('unconfirmed leak rows sit below confirmed tiers with no Play and no Distin
     return renderRow(entry, 1, state);
   })()`, c);
   assert.match(html, /id="leak-fuerza-regida-suzuki"/);
-  assert.match(html, /row-badge--unconfirmed">Unconfirmed</);
+  assert.match(html, /row-badge--unconfirmed">Not released</);
   assert.doesNotMatch(html, /row-action--play/);
   assert.doesNotMatch(html, /<iframe/);
   assert.doesNotMatch(html, /open\.spotify\.com\/embed/);
@@ -243,9 +256,15 @@ test('station subsections click-to-load the official Rockstar simple embed', () 
     render(data, state);
     return document.querySelector('#catalog').innerHTML;
   })()`, c);
+  assert.match(html, /data-station-card="radio_flash_fm"/);
+  assert.match(html, /Official station preview/);
+  assert.match(html, /Hosted by Robyn and Alex/);
+  assert.match(html, /Pause the station preview before playing a track/);
   assert.match(html, /data-action="load-station-embed"/);
   assert.match(html, /Flash FM on Rockstar/);
   assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/music\/flash-fm/);
+  assert.match(html, /id="radio-flash-fm-good-ones"/);
+  assert.match(html, /at 0:10 in the preview/);
   assert.doesNotMatch(html, /rockstargames\.com\/VI\/music\/embed\/flash-fm\/simple/);
   const loaded = vm.runInContext(`(() => {
     stationEmbedsLoaded(state).add('radio_flash_fm');
@@ -277,4 +296,18 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   const copy = vm.runInContext('stationEmbedFrame(data.stations.radio_flash_fm, "radio_flash_fm", state)', c);
   assert.equal(copy.includes('\u2014'), false);
   assert.match(copy, /Load official player/);
+  assert.match(copy, /Official station preview/);
+});
+
+test('play loads Spotify first into the shared dock and uses youtube-nocookie as fallback', async () => {
+  const c = setup();
+  await c.player.playEntry('radio-flash-fm-good-ones');
+  assert.equal(c.state.provider, 'spotify');
+  assert.equal(c.state.playingId, 'radio-flash-fm-good-ones');
+  await c.player.playEntry('t1-love-is-a-long-road');
+  assert.equal(c.state.provider, 'youtube');
+  assert.equal(c.ytOptions.host, 'https://www.youtube-nocookie.com');
+  c.player.closePlayer();
+  assert.equal(c.state.playingId, null);
+  assert.equal(c.state.dockClosed, true);
 });

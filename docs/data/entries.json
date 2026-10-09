@@ -124,7 +124,10 @@
         "La Gata"
       ],
       "blurb": "Modern Latin music, from bachata and merengue to dembow and reggaeton.",
-      "previewPage": "https://www.rockstargames.com/VI/music/cocoteo-fm"
+      "previewPage": "https://www.rockstargames.com/VI/music/cocoteo-fm",
+      "embedKey": "cocoteo-fm",
+      "embedUrl": "https://www.rockstargames.com/VI/music/embed/cocoteo-fm/simple",
+      "embedAppearance": "simple"
     },
     "radio_back_country": {
       "name": "Back Country Radio",
@@ -133,7 +136,10 @@
         "Delta Dawne"
       ],
       "blurb": "Airboat-ready renegade country music for the Grassrivers, Port Gellhorn and beyond. Newswire also names Mud Dog Mike as a roving reporter.",
-      "previewPage": "https://www.rockstargames.com/VI/music/back-country-radio"
+      "previewPage": "https://www.rockstargames.com/VI/music/back-country-radio",
+      "embedKey": "back-country-radio",
+      "embedUrl": "https://www.rockstargames.com/VI/music/embed/back-country-radio/simple",
+      "embedAppearance": "simple"
     },
     "radio_afrobank_fm": {
       "name": "AfroBank FM",
@@ -142,7 +148,10 @@
         "Palmsy"
       ],
       "blurb": "African music from 20th-century classics to amapiano and 3-step.",
-      "previewPage": "https://www.rockstargames.com/VI/music/afrobank"
+      "previewPage": "https://www.rockstargames.com/VI/music/afrobank",
+      "embedKey": "afrobank",
+      "embedUrl": "https://www.rockstargames.com/VI/music/embed/afrobank/simple",
+      "embedAppearance": "simple"
     },
     "radio_the_chamber": {
       "name": "The Chamber 106.6",
@@ -151,7 +160,10 @@
         "DJ Tom"
       ],
       "blurb": "Metal anthems across several decades.",
-      "previewPage": "https://www.rockstargames.com/VI/music/the-chamber"
+      "previewPage": "https://www.rockstargames.com/VI/music/the-chamber",
+      "embedKey": "the-chamber",
+      "embedUrl": "https://www.rockstargames.com/VI/music/embed/the-chamber/simple",
+      "embedAppearance": "simple"
     },
     "radio_flash_fm": {
       "name": "Flash FM",
@@ -160,7 +172,10 @@
         "Alex"
       ],
       "blurb": "The long-running Vice City pop station.",
-      "previewPage": "https://www.rockstargames.com/VI/music/flash-fm"
+      "previewPage": "https://www.rockstargames.com/VI/music/flash-fm",
+      "embedKey": "flash-fm",
+      "embedUrl": "https://www.rockstargames.com/VI/music/embed/flash-fm/simple",
+      "embedAppearance": "simple"
     },
     "radio_dirty_south_classics": {
       "name": "Dirty South Classics",
@@ -169,7 +184,10 @@
         "Trina"
       ],
       "blurb": "Regional rap and hip-hop classics from the South.",
-      "previewPage": "https://www.rockstargames.com/VI/music/dirty-south-classics"
+      "previewPage": "https://www.rockstargames.com/VI/music/dirty-south-classics",
+      "embedKey": "dirty-south-classics",
+      "embedUrl": "https://www.rockstargames.com/VI/music/embed/dirty-south-classics/simple",
+      "embedAppearance": "simple"
     }
   },
   "artists": {
@@ -1373,7 +1391,24 @@
       "appearanceKey": "radio_cocoteo_fm",
       "note": "Named in Rockstar's Cocoteo FM preview on the official GTA VI music page (8 Oct 2026). From the 2025 album DeBÍ TiRAR MáS FOToS.",
       "previewCueSeconds": 23,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/6J5kc12BW5HuP3d7C3vvx8"
+        },
+        {
+          "label": "Official visualizer on YouTube (Bad Bunny)",
+          "url": "https://www.youtube.com/watch?v=myDIeOjqQos"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/song/eoo/1787023929"
+        }
+      ],
+      "spotifyTrackId": "6J5kc12BW5HuP3d7C3vvx8",
+      "youtubeVideoId": "myDIeOjqQos",
+      "appleMusicUrl": "https://music.apple.com/us/song/eoo/1787023929",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-cocoteo-fm-si-es-trucho-es-trucho-remix",
@@ -1389,7 +1424,24 @@
       "appearanceKey": "radio_cocoteo_fm",
       "note": "Named in Rockstar's Cocoteo FM preview on the official GTA VI music page (8 Oct 2026). Rockstar credits Axel Rulay ft. Farruko & El Alfa. Year not verified: Apple US only lists a 2022 Tiësto remix, which may be a different version.",
       "previewCueSeconds": 57,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/79TmKWcU3YfyqkmE34pCRr"
+        },
+        {
+          "label": "Official video on YouTube (Axel Rulay)",
+          "url": "https://www.youtube.com/watch?v=KktT_jxfR8s"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/si-es-trucho-es-trucho-remix-feat-farruko-el-alfa/1578564752?i=1578564753"
+        }
+      ],
+      "spotifyTrackId": "79TmKWcU3YfyqkmE34pCRr",
+      "youtubeVideoId": "KktT_jxfR8s",
+      "appleMusicUrl": "https://music.apple.com/us/album/si-es-trucho-es-trucho-remix-feat-farruko-el-alfa/1578564752?i=1578564753",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-cocoteo-fm-canalla",
@@ -1404,7 +1456,24 @@
       "appearanceKey": "radio_cocoteo_fm",
       "note": "Named in Rockstar's Cocoteo FM preview on the official GTA VI music page (8 Oct 2026). From the 2019 album Utopía.",
       "previewCueSeconds": 85,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4XEXrp37kZXpQTB2r5vWbS"
+        },
+        {
+          "label": "Official video on YouTube (RomeoSantosVEVO)",
+          "url": "https://www.youtube.com/watch?v=8zcZC4HVr68"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/canalla/1458398617?i=1458398730"
+        }
+      ],
+      "spotifyTrackId": "4XEXrp37kZXpQTB2r5vWbS",
+      "youtubeVideoId": "8zcZC4HVr68",
+      "appleMusicUrl": "https://music.apple.com/gb/album/canalla/1458398617?i=1458398730",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-back-country-radio-need-a-little-time-off-for-bad-behavior",
@@ -1418,7 +1487,24 @@
       "appearanceKey": "radio_back_country",
       "note": "Named in Rockstar's Back Country Radio preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 14,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4sI1XZLU78y6mNvK5nwiLS"
+        },
+        {
+          "label": "Official audio on YouTube (David Allan Coe, Topic channel)",
+          "url": "https://www.youtube.com/watch?v=NBLVocr_RnM"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/need-a-little-time-off-for-bad-behavior/1554595045?i=1554595151"
+        }
+      ],
+      "spotifyTrackId": "4sI1XZLU78y6mNvK5nwiLS",
+      "youtubeVideoId": "NBLVocr_RnM",
+      "appleMusicUrl": "https://music.apple.com/gb/album/need-a-little-time-off-for-bad-behavior/1554595045?i=1554595151",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-back-country-radio-dont-come-home-a-drinkin",
@@ -1432,7 +1518,24 @@
       "appearanceKey": "radio_back_country",
       "note": "Named in Rockstar's Back Country Radio preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 39,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/1Ch2cPleHoVVXLVRRrGF6o"
+        },
+        {
+          "label": "Official audio on YouTube (LorettaLynnVEVO)",
+          "url": "https://www.youtube.com/watch?v=YF8lUDJi6cw"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/dont-come-home-a-drinkin-with-lovin-on-your-mind/1444207380?i=1444208079"
+        }
+      ],
+      "spotifyTrackId": "1Ch2cPleHoVVXLVRRrGF6o",
+      "youtubeVideoId": "YF8lUDJi6cw",
+      "appleMusicUrl": "https://music.apple.com/gb/album/dont-come-home-a-drinkin-with-lovin-on-your-mind/1444207380?i=1444208079",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-back-country-radio-the-conversation",
@@ -1447,7 +1550,24 @@
       "appearanceKey": "radio_back_country",
       "note": "Named in Rockstar's Back Country Radio preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 79,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/7GIBwtwVahJvvpot8g4Z4V"
+        },
+        {
+          "label": "Official audio on YouTube (Hank Williams Jr., Topic channel)",
+          "url": "https://www.youtube.com/watch?v=v87acwCXy4c"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/the-conversation/531184243?i=531184327"
+        }
+      ],
+      "spotifyTrackId": "7GIBwtwVahJvvpot8g4Z4V",
+      "youtubeVideoId": "v87acwCXy4c",
+      "appleMusicUrl": "https://music.apple.com/gb/album/the-conversation/531184243?i=531184327",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-afrobank-fm-joha",
@@ -1461,7 +1581,24 @@
       "appearanceKey": "radio_afrobank_fm",
       "note": "Named in Rockstar's AfroBank FM preview on the official GTA VI music page (8 Oct 2026). From the 2022 album Mr. Money With The Vibe.",
       "previewCueSeconds": 16,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5UwxpuGHkwiojKDaPC5ZNu"
+        },
+        {
+          "label": "Official video on YouTube (AsakeVEVO)",
+          "url": "https://www.youtube.com/watch?v=fXl5dPuiJa0"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/joha/1636748658?i=1636749025"
+        }
+      ],
+      "spotifyTrackId": "5UwxpuGHkwiojKDaPC5ZNu",
+      "youtubeVideoId": "fXl5dPuiJa0",
+      "appleMusicUrl": "https://music.apple.com/gb/album/joha/1636748658?i=1636749025",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-afrobank-fm-gye-wani",
@@ -1476,7 +1613,19 @@
       "appearanceKey": "radio_afrobank_fm",
       "note": "Named in Rockstar's AfroBank FM preview on the official GTA VI music page (8 Oct 2026). Rockstar credits Pat Thomas ft. Ebo Taylor. Original release year not verified; the streaming version sits on the 2024 compilation Ghana Special 2 (1980 to 1993 recordings).",
       "previewCueSeconds": 50,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/1pdqRmsAvdtNQQ5ReaHNn1"
+        },
+        {
+          "label": "Apple Music track (US store)",
+          "url": "https://music.apple.com/us/album/gye-wani-feat-ebo-taylor/1720461164?i=1720461371"
+        }
+      ],
+      "spotifyTrackId": "1pdqRmsAvdtNQQ5ReaHNn1",
+      "appleMusicUrl": "https://music.apple.com/us/album/gye-wani-feat-ebo-taylor/1720461164?i=1720461371",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-afrobank-fm-shaysana",
@@ -1492,7 +1641,24 @@
       "appearanceKey": "radio_afrobank_fm",
       "note": "Named in Rockstar's AfroBank FM preview on the official GTA VI music page (8 Oct 2026). Rockstar credits DJ Lag & Robot Boii ft. Kamo Mphela.",
       "previewCueSeconds": 69,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5RowpzAMP5LGfXRQhBdMFv"
+        },
+        {
+          "label": "Official visualizer on YouTube (DJ LAG)",
+          "url": "https://www.youtube.com/watch?v=pQ_jb9qxxH0"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/shaysana-feat-kamo-mphela/1744644722?i=1744644918"
+        }
+      ],
+      "spotifyTrackId": "5RowpzAMP5LGfXRQhBdMFv",
+      "youtubeVideoId": "pQ_jb9qxxH0",
+      "appleMusicUrl": "https://music.apple.com/gb/album/shaysana-feat-kamo-mphela/1744644722?i=1744644918",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-the-chamber-106-6-i",
@@ -1506,7 +1672,24 @@
       "appearanceKey": "radio_the_chamber",
       "note": "Named in Rockstar's The Chamber 106.6 preview on the official GTA VI music page (8 Oct 2026). Rockstar lists the title as \"I\", from the 1992 album Dehumanizer. It is not the song \"Black Sabbath\".",
       "previewCueSeconds": 22,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/7CAuk3iMezAKo58pvwBGQC"
+        },
+        {
+          "label": "Official audio on YouTube (Black Sabbath, Topic channel)",
+          "url": "https://www.youtube.com/watch?v=1IKdbsFgyNQ"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/i/723622728?i=723623230"
+        }
+      ],
+      "spotifyTrackId": "7CAuk3iMezAKo58pvwBGQC",
+      "youtubeVideoId": "1IKdbsFgyNQ",
+      "appleMusicUrl": "https://music.apple.com/gb/album/i/723622728?i=723623230",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-the-chamber-106-6-im-broken",
@@ -1520,7 +1703,24 @@
       "appearanceKey": "radio_the_chamber",
       "note": "Named in Rockstar's The Chamber 106.6 preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 62,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2M5WTwqnkyz7bW6P1CiD6q"
+        },
+        {
+          "label": "Official video on YouTube (Pantera)",
+          "url": "https://www.youtube.com/watch?v=2-V8kYT1pvE"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/im-broken/838351582?i=838351656"
+        }
+      ],
+      "spotifyTrackId": "2M5WTwqnkyz7bW6P1CiD6q",
+      "youtubeVideoId": "2-V8kYT1pvE",
+      "appleMusicUrl": "https://music.apple.com/gb/album/im-broken/838351582?i=838351656",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-the-chamber-106-6-raining-blood",
@@ -1534,7 +1734,24 @@
       "appearanceKey": "radio_the_chamber",
       "note": "Named in Rockstar's The Chamber 106.6 preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 96,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/0YjAFxSSrQVBgXgAXx0htq"
+        },
+        {
+          "label": "Official audio on YouTube (Slayer, Topic channel)",
+          "url": "https://www.youtube.com/watch?v=hFjoOOPU6Xo"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/raining-blood/1733768895?i=1733769810"
+        }
+      ],
+      "spotifyTrackId": "0YjAFxSSrQVBgXgAXx0htq",
+      "youtubeVideoId": "hFjoOOPU6Xo",
+      "appleMusicUrl": "https://music.apple.com/gb/album/raining-blood/1733768895?i=1733769810",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-flash-fm-good-ones",
@@ -1548,7 +1765,24 @@
       "appearanceKey": "radio_flash_fm",
       "note": "Named in Rockstar's Flash FM preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 10,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2grSOc6HNTXQQXNoRKt9UM"
+        },
+        {
+          "label": "Official video on YouTube (Charli xcx)",
+          "url": "https://www.youtube.com/watch?v=kjAuUXdSFaM"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/good-ones/1592545087?i=1592545107"
+        }
+      ],
+      "spotifyTrackId": "2grSOc6HNTXQQXNoRKt9UM",
+      "youtubeVideoId": "kjAuUXdSFaM",
+      "appleMusicUrl": "https://music.apple.com/gb/album/good-ones/1592545087?i=1592545107",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-flash-fm-electric-feel",
@@ -1562,7 +1796,24 @@
       "appearanceKey": "radio_flash_fm",
       "note": "Named in Rockstar's Flash FM preview on the official GTA VI music page (8 Oct 2026).",
       "previewCueSeconds": 59,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3FtYbEfBqAlGO46NUDQSAt"
+        },
+        {
+          "label": "Official video on YouTube (MGMTVEVO)",
+          "url": "https://www.youtube.com/watch?v=MmZexg8sxyk"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/electric-feel/273519664?i=273519677"
+        }
+      ],
+      "spotifyTrackId": "3FtYbEfBqAlGO46NUDQSAt",
+      "youtubeVideoId": "MmZexg8sxyk",
+      "appleMusicUrl": "https://music.apple.com/gb/album/electric-feel/273519664?i=273519677",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-flash-fm-midnight-sun-girls-trip",
@@ -1596,7 +1847,9 @@
           "label": "Apple Music track",
           "url": "https://music.apple.com/us/song/midnight-sun-girls-trip/1894058258"
         }
-      ]
+      ],
+      "previewSource": "spotify",
+      "appleMusicUrl": "https://music.apple.com/us/song/midnight-sun-girls-trip/1894058258"
     },
     {
       "id": "radio-dirty-south-classics-like-a-pimp",
@@ -1611,7 +1864,24 @@
       "appearanceKey": "radio_dirty_south_classics",
       "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits David Banner ft. Lil' Flip.",
       "previewCueSeconds": 22,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/0DW5anNzTO7h0OlKqFsVQ6"
+        },
+        {
+          "label": "Official video on YouTube (DavidBannerVEVO)",
+          "url": "https://www.youtube.com/watch?v=MKGQ5cIw_ew"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/like-a-pimp-feat-lil-flip/1449301940?i=1449302092"
+        }
+      ],
+      "spotifyTrackId": "0DW5anNzTO7h0OlKqFsVQ6",
+      "youtubeVideoId": "MKGQ5cIw_ew",
+      "appleMusicUrl": "https://music.apple.com/gb/album/like-a-pimp-feat-lil-flip/1449301940?i=1449302092",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-dirty-south-classics-who-dat",
@@ -1626,7 +1896,24 @@
       "appearanceKey": "radio_dirty_south_classics",
       "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits JT Money ft. Solé.",
       "previewCueSeconds": 63,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2rbb3lOMI71NIMbJCS1wQQ"
+        },
+        {
+          "label": "Official video on YouTube (JT Money)",
+          "url": "https://www.youtube.com/watch?v=pr0lCgPIMGI"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/who-dat/713514373?i=713514399"
+        }
+      ],
+      "spotifyTrackId": "2rbb3lOMI71NIMbJCS1wQQ",
+      "youtubeVideoId": "pr0lCgPIMGI",
+      "appleMusicUrl": "https://music.apple.com/gb/album/who-dat/713514373?i=713514399",
+      "previewSource": "spotify"
     },
     {
       "id": "radio-dirty-south-classics-born-n-raised",
@@ -1643,7 +1930,24 @@
       "appearanceKey": "radio_dirty_south_classics",
       "note": "Named in Rockstar's Dirty South Classics preview on the official GTA VI music page (8 Oct 2026). Rockstar credits DJ Khaled ft. Trick Daddy, Rick Ross & Pitbull.",
       "previewCueSeconds": 101,
-      "sources": []
+      "sources": [
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/7jPYbNUUYBKXhrAvSFwVf2"
+        },
+        {
+          "label": "Official audio on YouTube (Pitbull, Topic channel)",
+          "url": "https://www.youtube.com/watch?v=7lOthFpn9os"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/gb/album/born-n-raised-dj-khaled-featuring-pitbull-trick-daddy/200523381?i=200543085"
+        }
+      ],
+      "spotifyTrackId": "7jPYbNUUYBKXhrAvSFwVf2",
+      "youtubeVideoId": "7lOthFpn9os",
+      "appleMusicUrl": "https://music.apple.com/gb/album/born-n-raised-dj-khaled-featuring-pitbull-trick-daddy/200523381?i=200543085",
+      "previewSource": "spotify"
     },
     {
       "id": "leak-fuerza-regida-suzuki",
@@ -1678,7 +1982,8 @@
           "label": "Consequence coverage",
           "url": "https://consequence.net/2026/10/fuerza-regida-grand-theft-auto-vi-soundtrack/"
         }
-      ]
+      ],
+      "previewSource": "none"
     },
     {
       "id": "leak-cardi-b-track-19",
@@ -1705,7 +2010,8 @@
           "label": "Beebom coverage",
           "url": "https://beebom.com/gta-6-spotify-leak-reveals-cardi-b-fuerza-regida-joining-soundtrack/"
         }
-      ]
+      ],
+      "previewSource": "none"
     }
   ]
 }

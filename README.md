@@ -43,11 +43,13 @@ The site is static HTML. It reads:
 | `previewCueSeconds` | no | integer start time of the track in Rockstar's station preview mp3 (display only; we do not host or embed those files) |
 | `spotifyTrackId` | no | 22-character Spotify track ID. Play loads the official Spotify track embed |
 | `youtubeVideoId` | no | 11-character official full-track YouTube upload ID. Can coexist with a trailer cue |
+| `appleMusicUrl` | no | Official Apple Music track URL. Shown as a source link, never as a hosted file |
+| `previewSource` | no | `spotify` \| `youtube` \| `rockstar_station_embed` \| `none`. Radio rows use `spotify` when a verified Spotify id exists. Leak rows are `none` |
 | `inUniverse` | no | `true` for fictional in-game acts |
 
 `sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel. Radio preview rows share the station page, the station's @RockstarGames post, and the Newswire article under `sharedSources.<stationKey>`.
 
-`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, and `previewPage`. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog.
+`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, `previewPage`, and `embedUrl` for Rockstar's official `/VI/music/embed/{key}/simple` player. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog. Station players are click-to-load iframes of that official embed. We do not host, rip, or proxy the preview audio.
 
 Each catalog row's `id` is also its page anchor (`https://leonidadrop.com/#<id>`). Visiting that hash scrolls to the row and opens Sources.
 
@@ -71,7 +73,7 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
-- Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Rows cite Rockstar's station page, the matching @RockstarGames post, and the Newswire article. Only Flash FM's Midnight Sun (Girls Trip) currently has `spotifyTrackId` / `youtubeVideoId`.
+- Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Rows cite Rockstar's station page, the matching @RockstarGames post, and the Newswire article. Each station subsection can load Rockstar's official simple embed. Verified Spotify ids drive Play; official artist/VEVO/Topic YouTube ids are the fallback; Apple Music is a source link. Gye Wani has no YouTube id (label upload, not artist/VEVO/Topic). Unconfirmed leak rows stay `previewSource: none` with no embeds.
 - The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles.
 - Rockstar-named: Real Dimez (Dazed). Kodak Black and Sexyy Red Dazed mentions are notes on the Extended Look Skrilla and Pound Town rows.
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).

@@ -8,7 +8,7 @@ This is fan documentation. It is not affiliated with Rockstar Games or Take-Two 
 
 ## What belongs on the list
 
-Four catalog tiers. Confirmed rows sit in the first three. An unconfirmed leak section can sit at the bottom when names were listed then pulled with no Rockstar confirmation; it hides when empty and those rows do not count as confirmed.
+Four catalog tiers. Confirmed rows sit in the first three. Unconfirmed leak rows are a one-off fourth section at the bottom and do not count as confirmed.
 
 1. **official_promo**: audio heard in Rockstar-published Trailer 1, Trailer 2, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
@@ -49,7 +49,7 @@ The site is static HTML. It reads:
 
 `sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel. Radio preview rows share the station page, the station's @RockstarGames post, and the Newswire article under `sharedSources.<stationKey>`.
 
-`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, `previewPage`, and `embedUrl` for Rockstar's official `/VI/music/embed/{key}/simple` player. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog. Each station is one card: the official simple embed on top, then compact track rows. Track Play uses the shared bottom dock (Spotify first, YouTube nocookie if there is no Spotify id). We do not host, rip, or proxy the preview audio.
+`stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, `previewPage`, and `embedUrl` for Rockstar's official `/VI/music/embed/{key}/simple` player. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog. Station players are click-to-load iframes of that official embed. We do not host, rip, or proxy the preview audio.
 
 Each catalog row's `id` is also its page anchor (`https://leonidadrop.com/#<id>`). Visiting that hash scrolls to the row and opens Sources.
 
@@ -73,11 +73,11 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
-- Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Rows cite Rockstar's station page, the matching @RockstarGames post, and the Newswire article. Each station subsection can load Rockstar's official simple embed. Verified Spotify ids drive Play; official artist/VEVO/Topic YouTube ids are the fallback; Apple Music is a source link. Gye Wani has no YouTube id (label upload, not artist/VEVO/Topic).
-- The Album: six 17 Sep debut singles plus two 9 Oct singles (Fuerza Regida "Suzuki", Cardi B "Don't Chart") as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles. Old leak hashes `#leak-fuerza-regida-suzuki` and `#leak-cardi-b-track-19` alias to the new ids.
+- Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Rows cite Rockstar's station page, the matching @RockstarGames post, and the Newswire article. Each station subsection can load Rockstar's official simple embed. Verified Spotify ids drive Play; official artist/VEVO/Topic YouTube ids are the fallback; Apple Music is a source link. Gye Wani has no YouTube id (label upload, not artist/VEVO/Topic). Unconfirmed leak rows stay `previewSource: none` with no embeds.
+- The Album: six debut singles as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Those six track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles.
 - Rockstar-named: Real Dimez (Dazed). Kodak Black and Sexyy Red Dazed mentions are notes on the Extended Look Skrilla and Pound Town rows.
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
-- Unconfirmed: none. The Unconfirmed section hides when it has no rows.
+- Unconfirmed (not in the confirmed count): Fuerza Regida "Suzuki" (album track 10) and Cardi B untitled (album track 19). Discovery sources only; no Play or embeds.
 
 ## License
 

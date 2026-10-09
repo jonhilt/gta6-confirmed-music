@@ -280,7 +280,6 @@ function lucideIcon(name, size = 16) {
     "chevron-up": `<path d="m18 15-6-6-6 6"/>`,
     "arrow-up-right": `<path d="M7 7h10v10"/><path d="M7 17 17 7"/>`,
     "clock-3": `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16.5 12"/>`,
-    x: `<path d="M18 6 6 18"/><path d="m6 6 12 12"/>`,
   }[name];
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
 }
@@ -321,50 +320,20 @@ function parkStationEmbeds(root) {
   return parked;
 }
 
-function stationHostLine(station) {
-  const hosts = station?.hosts || [];
-  if (!hosts.length) return "";
-  if (hosts.length === 1) return `Hosted by ${hosts[0]}`;
-  return `Hosted by ${hosts.slice(0, -1).join(", ")} and ${hosts[hosts.length - 1]}`;
-}
-
-function appleMusicUrl(entry) {
-  const url = entry?.appleMusicUrl;
-  if (typeof url !== "string") return null;
-  const trimmed = url.trim();
-  if (!trimmed.startsWith("https://music.apple.com/")) return null;
-  return trimmed;
-}
-
-function appleMusicLabel(entry) {
-  const url = appleMusicUrl(entry);
-  if (!url) return null;
-  return url.includes("/us/") ? "Listen on Apple Music (US store)" : "Listen on Apple Music";
-}
-
-function previewCueLine(entry) {
-  if (entry?.previewCueSeconds == null || Number.isNaN(Number(entry.previewCueSeconds))) return "";
-  return `at ${formatTimestamp(entry.previewCueSeconds)} in the preview`;
-}
-
 function stationEmbedFrame(station, key, state) {
   const loaded = stationEmbedsLoaded(state).has(key);
   const src = station.embedUrl;
-  const hosts = stationHostLine(station);
   if (!src) {
     return `<p class="station-player-fallback"><a href="${escapeHtml(station.previewPage)}" rel="noopener noreferrer">Open ${escapeHtml(station.name)} on Rockstar</a></p>`;
   }
   const frame = loaded
-    ? `<iframe title="${escapeHtml(`${station.name} official station preview`)}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
-    : `<button type="button" class="station-player-load" data-action="load-station-embed" data-station-key="${escapeHtml(key)}" aria-label="${escapeHtml(`Load official ${station.name} station preview`)}">
+    ? `<iframe title="${escapeHtml(`${station.name} on Rockstar`)}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
+    : `<button type="button" class="station-player-load" data-action="load-station-embed" data-station-key="${escapeHtml(key)}">
         ${lucideIcon("play", 14)}<span>Load official player</span>
       </button>`;
   return `
     <div class="station-player">
-      <p class="station-player-label">Official station preview</p>
-      ${hosts ? `<p class="station-player-hosts">${escapeHtml(hosts)}</p>` : ""}
       <div class="station-player-frame" data-station-embed="${escapeHtml(key)}">${frame}</div>
-      <p class="station-player-hint">Pause the station preview before playing a track</p>
       <a class="station-player-link" href="${escapeHtml(station.previewPage)}" rel="noopener noreferrer">
         ${escapeHtml(station.name)} on Rockstar
         ${externalIcon()}
@@ -444,12 +413,6 @@ function playButton(entry, state) {
       : variant === "play-both"
         ? "Play"
         : "Play video";
-  const who = `${entry.track || "track"} by ${entry.artists.join(", ")}`;
-  const aria = playing
-    ? restricted
-      ? `Selected in player. Open on YouTube to watch ${who}.`
-      : `Now playing ${who}`
-    : `Play ${who} in the shared player`;
   const icon = lucideIcon(playing ? "headphones" : variant === "play-audio" ? "headphones" : "play", 14);
   return `
     <button
@@ -458,7 +421,7 @@ function playButton(entry, state) {
       data-action="play-entry"
       data-id="${escapeHtml(entry.id)}"
       aria-pressed="${String(playing)}"
-      aria-label="${escapeHtml(aria)}"
+      aria-label="${escapeHtml(playing ? restricted ? "Selected in player. Open on YouTube to watch." : "Now playing in Leonida Radio" : label)}"
     >
       ${icon}<span class="row-action-label">${escapeHtml(label)}</span>
     </button>`;
@@ -511,7 +474,7 @@ function renderRow(entry, indexNum, state) {
         </div>
         <p class="row-evidence">${
           isUnconfirmed(entry)
-            ? `<span class="row-badge row-badge--unconfirmed">Not released</span>`
+            ? `<span class="row-badge row-badge--unconfirmed">Unconfirmed</span>`
             : escapeHtml(TIER_LABEL[entry.tier])
         }</p>
         <div class="row-actions">${playButton(entry, state)}</div>
@@ -519,56 +482,6 @@ function renderRow(entry, indexNum, state) {
       </div>
       ${expanded ? renderDetailsPanel(entry, state.data, state.data.artists) : ""}
     </article>`;
-}
-
-function renderStationTrack(entry, state) {
-  const expanded = state.expandedId === entry.id;
-  const playing = state.playingId === entry.id;
-  const anchored = state.anchorId === entry.id;
-  const cue = previewCueLine(entry);
-  const apple = appleMusicUrl(entry);
-  const appleLabel = appleMusicLabel(entry);
-  const sp = spotifyTrackId(entry);
-  const listen = [
-    apple
-      ? `<a class="station-apple" href="${escapeHtml(apple)}" rel="noopener noreferrer">${escapeHtml(appleLabel)}</a>`
-      : "",
-    sp
-      ? `<a class="station-apple" href="${escapeHtml(spotifyOpenUrl(sp))}" rel="noopener noreferrer">Open on Spotify</a>`
-      : "",
-  ].filter(Boolean);
-  const classes = [
-    "station-track",
-    playing ? "is-playing" : "",
-    expanded ? "is-active" : "",
-    anchored ? "is-anchor" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-  return `
-    <article class="${classes}" id="${escapeHtml(entry.id)}" data-id="${escapeHtml(entry.id)}">
-      <div class="station-track-main">
-        <h4 class="station-track-artist">${entry.artists.map(escapeHtml).join(", ")}</h4>
-        <p class="station-track-title">${entry.track ? `“${escapeHtml(entry.track)}”` : "Track not specified"}</p>
-        ${cue ? `<p class="station-track-cue">${escapeHtml(cue)}</p>` : ""}
-        ${listen.length ? `<p class="station-listen">${listen.join(" · ")}</p>` : ""}
-      </div>
-      <div class="station-track-actions">${playButton(entry, state)}${sourceButton(entry, state)}</div>
-      ${expanded ? renderDetailsPanel(entry, state.data, state.data.artists) : ""}
-    </article>`;
-}
-
-function renderStationCard(station, key, tracks, state) {
-  return `
-    <section class="station-card" data-station-card="${escapeHtml(key)}">
-      <header class="station-card-head">
-        <h3 class="station-card-title">${escapeHtml(station.name)}</h3>
-      </header>
-      ${stationEmbedFrame(station, key, state)}
-      <div class="station-track-list">
-        ${tracks.map((entry) => renderStationTrack(entry, state)).join("")}
-      </div>
-    </section>`;
 }
 
 function matchesQuery(entry, q, data) {
@@ -616,18 +529,16 @@ function render(data, state, options = {}) {
     kicker.textContent = `The sound of Leonida / ${total} entries · updated ${data.updated}`;
   }
   const introMeta = $("#intro-meta");
-    if (introMeta) {
-      const bits = [];
-      if (awaitingPrimary > 0) {
-        bits.push(`${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`);
-      }
-      if (leakCount > 0) {
-        bits.push(`${leakCount} unconfirmed row${leakCount === 1 ? "" : "s"} sit below the confirmed list`);
-      }
-      introMeta.textContent = bits.join(". ");
+  if (introMeta) {
+    const bits = [];
+    if (awaitingPrimary > 0) {
+      bits.push(`${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`);
     }
-    const leakKey = $(".tier-key--leak");
-    if (leakKey) leakKey.hidden = leakCount === 0;
+    if (leakCount > 0) {
+      bits.push(`${leakCount} unconfirmed row${leakCount === 1 ? "" : "s"} sit below the confirmed list`);
+    }
+    introMeta.textContent = bits.join(". ");
+  }
 
   if (!filtered.length) {
     root.innerHTML = `<p class="empty">No rows match that filter.</p>`;
@@ -683,7 +594,15 @@ function render(data, state, options = {}) {
       stationKeys.forEach((key, index) => {
         const station = data.stations[key];
         const list = radio.filter((e) => e.appearanceKey === key);
-        bodyHtml += renderStationCard(station, key, list, state);
+        const hosts = station.hosts?.length ? `Hosted by ${station.hosts.join(" and ")}.` : "";
+        const copy = [station.blurb, hosts].filter(Boolean).join(" ");
+        const showHead = !promo.length && index === 0;
+        bodyHtml += `<div class="subsection">
+              <h3 class="subsection-title">${escapeHtml(station.name)}</h3>
+              ${copy ? `<p class="subsection-copy">${escapeHtml(copy)}</p>` : ""}
+              ${stationEmbedFrame(station, key, state)}
+              <div class="index-list">${showHead ? head : ""}${renderRows(list)}</div>
+            </div>`;
       });
     } else {
       bodyHtml = `<div class="index-list">${head}${renderRows(rows)}</div>`;
@@ -744,6 +663,9 @@ function playerController(state) {
   const ytHost = $("#yt-host");
   const spotifyHost = $("#spotify-host");
   const empty = $("#dock-empty");
+  const providers = $("#dock-providers");
+  const outbound = $("#dock-outbound");
+  const startBtn = $("#dock-start");
   if (!ytHost) return { sync() {}, playEntry() {}, startRadio() {} };
 
   function setVisualizerPlaying(playing) {
@@ -758,60 +680,6 @@ function playerController(state) {
   let playbackError = false;
   let cueTimer = null;
   let ignoreEnded = false;
-
-  function pauseSpotify() {
-    if (spotifyController && typeof spotifyController.pause === "function") {
-      try {
-        spotifyController.pause();
-      } catch {
-        /* cross-origin pause can throw if the widget is gone */
-      }
-    }
-  }
-
-  function pauseYouTube() {
-    if (ytPlayer && typeof ytPlayer.pauseVideo === "function") {
-      try {
-        ytPlayer.pauseVideo();
-      } catch {
-        /* player may not be ready */
-      }
-    }
-  }
-
-  function silenceStationPreviews() {
-    const root = $("#catalog");
-    stationEmbedsLoaded(state).clear();
-    if (!root || typeof root.querySelectorAll !== "function") return;
-    root.querySelectorAll("[data-station-embed] iframe").forEach((iframe) => {
-      iframe.src = "about:blank";
-      iframe.remove();
-    });
-  }
-
-  function pauseAllMedia({ stations = false } = {}) {
-    pauseSpotify();
-    pauseYouTube();
-    if (stations) silenceStationPreviews();
-  }
-
-  function syncDockChrome() {
-    const dock = $("#player-dock");
-    const open = Boolean(state.playingId) && !state.dockClosed;
-    dock?.classList.toggle("is-open", open);
-    dock?.classList.toggle("has-selection", open);
-    if (dock) dock.hidden = !open;
-    document.body?.classList.toggle("has-dock", open);
-    const applySpace = () => {
-      const space = open && dock && typeof dock.getBoundingClientRect === "function"
-        ? `${Math.ceil(dock.getBoundingClientRect().height)}px`
-        : "0px";
-      document.documentElement?.style?.setProperty("--player-dock-space", space);
-      if (document.body?.style) document.body.style.paddingBottom = open ? space : "";
-    };
-    applySpace();
-    if (open && typeof requestAnimationFrame === "function") requestAnimationFrame(applySpace);
-  }
 
   function selectedYoutube(entry) {
     return ytSource(entry, state.data, state.videoSource);
@@ -845,27 +713,78 @@ function playerController(state) {
 
   function syncDock() {
     const entry = currentEntry();
-    if (!entry) state.dockClosed = true;
-    syncDockChrome();
+    $("#player-dock")?.classList.toggle("has-selection", Boolean(entry));
     const yt = entry ? selectedYoutube(entry) : null;
     const sp = entry ? spotifyTrackId(entry) : null;
+    const kicker = $("#dock-kicker");
+    const status = $("#dock-status");
     const track = $("#dock-track");
     const artist = $("#dock-artist");
+    const note = $("#dock-note");
     const navStatus = $("#nav-radio-status");
     const radioEntry = document.querySelector(".radio-entry");
+
     const inRadio = state.provider === "youtube" && state.radioMode;
-    const sourceLabel = state.provider === "spotify" ? "Spotify" : inRadio ? "YouTube radio" : "YouTube";
+    if (kicker) kicker.textContent = inRadio ? "Leonida Radio" : "From the list";
+    if (status) {
+      status.textContent = inRadio
+        ? "Playlist mode / auto-advance on"
+        : state.provider === "spotify"
+          ? "Spotify · this track only"
+          : "Single video · return to radio to auto-advance";
+    }
     if (track) {
-      track.textContent = entry?.track || (inRadio ? "Leonida Radio" : "Select a track");
+      track.textContent = entry?.track || (inRadio ? "Known tracks. On rotation." : "Select a track");
     }
     if (artist) {
-      artist.textContent = entry ? `${entry.artists.join(", ")} · ${sourceLabel}` : "";
+      artist.textContent = entry
+        ? `${entry.artists.join(", ")}${yt ? ` / ${yt.label}` : ""}`
+        : "YouTube radio · official uploads only";
+    }
+    if (note) {
+      note.textContent = yt?.embedRestricted
+        ? "Open on YouTube to watch at the verified cue. Radio skips this upload."
+        : inRadio
+          ? "Radio plays official YouTube videos in list order. When a video ends, the next one starts."
+          : state.provider === "spotify"
+            ? "Listening to the full track on Spotify."
+            : "Playing in the shared dock. We do not host the file.";
     }
     if (navStatus) {
-      navStatus.textContent = state.playingId && inRadio ? "Radio open" : "YouTube playlist";
+      navStatus.textContent = state.playingId ? (inRadio ? "● Radio open" : "From the list") : "YouTube playlist";
     }
     if (radioEntry && radioEntry.tagName === "BUTTON") {
       radioEntry.classList.toggle("is-live", Boolean(state.playingId) && inRadio);
+    }
+    if (startBtn) startBtn.textContent = state.playingId && state.provider === "youtube" ? "Next video" : "Start radio";
+
+    if (providers) {
+      const trailer = entry && videoMeta(state.data, entry);
+      const options = [
+        entry && youtubeVideoId(entry) && { id: "full", label: "Full track", detail: "YouTube" },
+        trailer && { id: "trailer", label: trailer.label.replace("Rockstar ", ""), detail: `${Math.floor(trailer.start / 60)}:${String(trailer.start % 60).padStart(2, "0")} · Trailer cue` },
+        sp && { id: "spotify", label: "Spotify", detail: "Full track" },
+      ].filter(Boolean);
+      const active = state.provider === "spotify" ? "spotify" : state.videoSource;
+      providers.hidden = options.length < 2;
+      providers.innerHTML = options.map((option) => `
+        <button type="button" class="provider-tab${active === option.id ? " is-active" : ""}" aria-pressed="${active === option.id}" data-action="set-provider" data-source="${option.id}">
+          ${escapeHtml(option.label)} <small>${escapeHtml(option.detail)}</small>
+        </button>`).join("");
+    }
+
+    if (outbound) {
+      if (state.provider === "spotify" && sp) {
+        outbound.hidden = false;
+        outbound.href = spotifyOpenUrl(sp);
+        outbound.textContent = "Open on Spotify";
+      } else if (yt) {
+        outbound.hidden = false;
+        outbound.href = youtubeWatchFromId(yt.videoId, yt.start);
+        outbound.textContent = "Open on YouTube";
+      } else {
+        outbound.hidden = true;
+      }
     }
 
     const showSpotify = Boolean(entry && state.provider === "spotify" && sp);
@@ -873,22 +792,18 @@ function playerController(state) {
     if (spotifyHost) {
       spotifyHost.hidden = !showSpotify;
       if (showSpotify) {
-        const uri = `spotify:track:${sp}`;
-        if (spotifyHost.dataset.track === sp && spotifyController) {
-          /* already on this track */
-        } else if (spotifyController && typeof spotifyController.loadUri === "function") {
-          spotifyHost.dataset.track = sp;
-          spotifyController.loadUri(uri);
-        } else if (spotifyHost.dataset.track !== sp) {
+        const src = `${spotifyEmbedUrl(sp)}?utm_source=generator`;
+        if (spotifyHost.dataset.track !== sp) {
           const generation = ++spotifyGeneration;
           spotifyController?.destroy();
           spotifyController = null;
           spotifyHost.dataset.track = sp;
+          spotifyHost.innerHTML = `<iframe title="Spotify Embed: ${escapeHtml(entry.track || "Official track")}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
           loadSpotifyApi().then((api) => {
             if (!api || generation !== spotifyGeneration || state.provider !== "spotify") return;
             const mount = document.createElement("div");
             spotifyHost.replaceChildren(mount);
-            api.createController(mount, { uri, width: "100%", height: "80" }, (controller) => {
+            api.createController(mount, { uri: `spotify:track:${sp}`, width: "100%", height: "100%" }, (controller) => {
               if (generation !== spotifyGeneration || state.provider !== "spotify") {
                 controller.destroy();
                 return;
@@ -902,31 +817,29 @@ function playerController(state) {
           });
         }
       } else {
-        pauseSpotify();
+        spotifyGeneration++;
+        spotifyController?.destroy();
+        spotifyController = null;
+        spotifyHost.replaceChildren();
+        delete spotifyHost.dataset.track;
       }
     }
     ytHost.hidden = !showYt;
     if (empty) {
       empty.hidden = showSpotify || showYt;
-      if (playbackError && yt && state.provider === "youtube") {
-        empty.innerHTML = `<div class="dock-restricted">
+      empty.innerHTML = playbackError && yt && state.provider === "youtube"
+        ? `<div class="dock-restricted">
             <strong>Video unavailable here</strong>
-            <p>Open it on YouTube, or close the player.</p>
+            <p>Playback stopped. Open this video on YouTube or choose the next video.</p>
             <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
-          </div>`;
-      } else if (yt?.embedRestricted && state.provider === "youtube") {
-        empty.innerHTML = `<div class="dock-restricted">
+          </div>`
+        : yt?.embedRestricted && state.provider === "youtube"
+        ? `<div class="dock-restricted">
             <strong>Age-restricted video</strong>
-            <p>Watch on YouTube to verify your age.</p>
+            <p>${escapeHtml(yt.label)} can only be watched on YouTube. You may need to sign in to verify your age.</p>
             <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
-          </div>`;
-      } else if (entry && state.provider === "spotify") {
-        empty.innerHTML = "<p>Loading Spotify…</p>";
-      } else if (entry) {
-        empty.innerHTML = "<p>Loading YouTube video…</p>";
-      } else {
-        empty.innerHTML = "<p>Play a track to listen here.</p>";
-      }
+          </div>`
+        : entry ? "<p>Loading YouTube video…</p>" : "<p>Start radio to cycle official YouTube videos.</p>";
     }
   }
 
@@ -962,7 +875,6 @@ function playerController(state) {
         ytPlayer = new window.YT.Player("yt-player-mount", {
           width: "100%",
           height: "100%",
-          host: "https://www.youtube-nocookie.com",
           playerVars: {
             autoplay: 1,
             rel: 0,
@@ -1021,26 +933,23 @@ function playerController(state) {
     setVisualizerPlaying(false);
     playbackError = false;
     stopCueTimer();
-    state.dockClosed = false;
-    pauseAllMedia({ stations: true });
     const preferred = state.sourcePreference;
     const hasFull = Boolean(youtubeVideoId(entry));
     const hasTrailer = Boolean(videoMeta(state.data, entry));
-    const sp = spotifyTrackId(entry);
-    const wantSpotify = Boolean(sp) && (preferred === "spotify" || (preferred !== "full" && preferred !== "trailer"));
-    state.provider = wantSpotify ? "spotify" : "youtube";
+    state.provider = preferred === "spotify" && spotifyTrackId(entry) ? "spotify" : "youtube";
     state.videoSource = preferred === "trailer" && hasTrailer ? "trailer" : hasFull ? "full" : "trailer";
     const yt = selectedYoutube(entry);
+    const sp = spotifyTrackId(entry);
     state.radioMode = radioMode;
     if (state.provider !== "spotify" && yt?.embedRestricted) {
       state.provider = "youtube";
-      pauseSpotify();
       setPlaying(entry.id, { radioMode: false });
+      if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
       stopCueTimer();
       return;
     }
     if (state.provider === "spotify" && sp) {
-      pauseYouTube();
+      if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
       stopCueTimer();
       setPlaying(entry.id, { radioMode: false });
       return;
@@ -1049,12 +958,11 @@ function playerController(state) {
     if (!yt) {
       if (sp) {
         state.provider = "spotify";
-        pauseYouTube();
+        if (ytPlayer && typeof ytPlayer.pauseVideo === "function") ytPlayer.pauseVideo();
         setPlaying(entry.id, { radioMode: false });
       }
       return;
     }
-    pauseSpotify();
     setPlaying(entry.id, { radioMode });
     await loadVideo(yt.videoId, yt.start, request);
     syncDock();
@@ -1087,24 +995,9 @@ function playerController(state) {
   async function playEntry(id) {
     const entry = state.data.entries.find((e) => e.id === id);
     if (!entry || !canPlay(entry, state.data)) return;
-    if (spotifyTrackId(entry)) {
-      state.sourcePreference = "spotify";
-      await playVideoForEntry(entry, { radioMode: false });
-      return;
-    }
     const yt = ytSource(entry, state.data, state.sourcePreference);
     const continueRadio = Boolean(yt && !yt.embedRestricted);
     await playVideoForEntry(entry, { radioMode: continueRadio });
-  }
-
-  function closePlayer() {
-    state.dockClosed = true;
-    state.playingId = null;
-    state.radioMode = false;
-    pauseAllMedia();
-    setVisualizerPlaying(false);
-    render(state.data, state, { preserveScroll: true });
-    syncDock();
   }
 
   async function setProvider(source) {
@@ -1119,7 +1012,7 @@ function playerController(state) {
   }
 
   syncDock();
-  return { sync: syncDock, playEntry, startRadio, setProvider, playNextVideo, closePlayer, pauseAllMedia };
+  return { sync: syncDock, playEntry, startRadio, setProvider, playNextVideo };
 }
 
 function bindCatalog(data, state, player) {
@@ -1137,17 +1030,11 @@ function bindCatalog(data, state, player) {
       player.playEntry(id);
     } else if (action === "load-station-embed") {
       const key = btn.dataset.stationKey;
-      if (player.pauseAllMedia) player.pauseAllMedia();
       if (key) stationEmbedsLoaded(state).add(key);
       render(data, state, { preserveScroll: true });
     }
   });
 }
-
-const CATALOG_ID_ALIASES = {
-  "leak-fuerza-regida-suzuki": "ar-fuerza-regida-suzuki",
-  "leak-cardi-b-track-19": "ar-cardi-b-dont-chart",
-};
 
 function catalogHashId() {
   const raw = (typeof location !== "undefined" && location.hash ? location.hash : "").replace(/^#/, "");
@@ -1159,7 +1046,7 @@ function catalogHashId() {
     /* keep raw */
   }
   if (id === "radio" || id.startsWith("tier-")) return null;
-  return CATALOG_ID_ALIASES[id] || id;
+  return id;
 }
 
 function applyCatalogHash(data, state) {
@@ -1259,7 +1146,6 @@ async function main() {
     const action = btn.dataset.action;
     if (action === "start-radio") player.startRadio();
     if (action === "set-provider") player.setProvider(btn.dataset.source);
-    if (action === "close-player") player.closePlayer();
   });
 
   bindCatalog(data, state, player);

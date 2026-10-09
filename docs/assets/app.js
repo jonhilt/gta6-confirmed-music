@@ -167,7 +167,7 @@ function ytSource(entry, data, source = "trailer") {
 }
 
 function canPlay(entry, data) {
-  if (isUnconfirmed(entry)) return false;
+  if (isUnconfirmed(entry) || entry?.previewSource === "none") return false;
   return Boolean(ytSource(entry, data) || spotifyTrackId(entry));
 }
 
@@ -235,10 +235,17 @@ function sourceRole(label, entry) {
   if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
     return "Official publisher announcement.";
   }
-  if (lower.includes("official spotify track")) {
+  if (lower.includes("official spotify track") || lower.includes("apple music track")) {
     return entry.appearanceKey === "the_album"
       ? "Official streaming page for this debut single."
       : "Official streaming page for this track.";
+  }
+  if (
+    lower.includes("official audio on youtube") ||
+    lower.includes("official video on youtube") ||
+    lower.includes("official visualizer on youtube")
+  ) {
+    return "Official video for this track.";
   }
   if (lower.includes("atlantic records youtube")) return "Official label video for this debut single.";
   if (lower.includes("linkfire hub")) return "Official smart link for this debut single.";
@@ -296,6 +303,59 @@ function sharedSourcesLabel(entry, data) {
   if (stationFor(entry, data)) return "Shared station sources";
   if (entry.appearanceKey === "the_album") return "Shared album press";
   return "Shared sources";
+}
+
+function stationEmbedsLoaded(state) {
+  if (!state.loadedStationEmbeds) state.loadedStationEmbeds = new Set();
+  return state.loadedStationEmbeds;
+}
+
+function parkStationEmbeds(root) {
+  const parked = new Map();
+  if (!root || typeof root.querySelectorAll !== "function") return parked;
+  root.querySelectorAll("[data-station-embed]").forEach((host) => {
+    const iframe = host.querySelector("iframe");
+    if (iframe) parked.set(host.dataset.stationEmbed, iframe);
+  });
+  return parked;
+}
+
+function stationEmbedFrame(station, key, state) {
+  const loaded = stationEmbedsLoaded(state).has(key);
+  const src = station.embedUrl;
+  if (!src) {
+    return `<p class="station-player-fallback"><a href="${escapeHtml(station.previewPage)}" rel="noopener noreferrer">Open ${escapeHtml(station.name)} on Rockstar</a></p>`;
+  }
+  const frame = loaded
+    ? `<iframe title="${escapeHtml(`${station.name} on Rockstar`)}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
+    : `<button type="button" class="station-player-load" data-action="load-station-embed" data-station-key="${escapeHtml(key)}">
+        ${lucideIcon("play", 14)}<span>Load official player</span>
+      </button>`;
+  return `
+    <div class="station-player">
+      <div class="station-player-frame" data-station-embed="${escapeHtml(key)}">${frame}</div>
+      <a class="station-player-link" href="${escapeHtml(station.previewPage)}" rel="noopener noreferrer">
+        ${escapeHtml(station.name)} on Rockstar
+        ${externalIcon()}
+      </a>
+    </div>`;
+}
+
+function restoreStationEmbeds(root, parked, state) {
+  const loaded = stationEmbedsLoaded(state);
+  if (!root || typeof root.querySelectorAll !== "function") return;
+  root.querySelectorAll("[data-station-embed]").forEach((host) => {
+    const key = host.dataset.stationEmbed;
+    const parkedFrame = parked.get(key);
+    if (parkedFrame) {
+      host.replaceChildren(parkedFrame);
+      return;
+    }
+    if (!loaded.has(key) || host.querySelector("iframe")) return;
+    const station = state.data?.stations?.[key];
+    if (!station?.embedUrl) return;
+    host.innerHTML = `<iframe title="${escapeHtml(`${station.name} on Rockstar`)}" src="${escapeHtml(station.embedUrl)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+  });
 }
 
 function renderSourceList(entry, data) {
@@ -540,6 +600,7 @@ function render(data, state, options = {}) {
         bodyHtml += `<div class="subsection">
               <h3 class="subsection-title">${escapeHtml(station.name)}</h3>
               ${copy ? `<p class="subsection-copy">${escapeHtml(copy)}</p>` : ""}
+              ${stationEmbedFrame(station, key, state)}
               <div class="index-list">${showHead ? head : ""}${renderRows(list)}</div>
             </div>`;
       });
@@ -561,7 +622,9 @@ function render(data, state, options = {}) {
       </section>`);
   }
 
+  const parked = parkStationEmbeds(root);
   root.innerHTML = chunks.join("");
+  restoreStationEmbeds(root, parked, state);
   if (scrollY != null) window.scrollTo(0, scrollY);
 }
 
@@ -931,7 +994,7 @@ function playerController(state) {
 
   async function playEntry(id) {
     const entry = state.data.entries.find((e) => e.id === id);
-    if (!entry) return;
+    if (!entry || !canPlay(entry, state.data)) return;
     const yt = ytSource(entry, state.data, state.sourcePreference);
     const continueRadio = Boolean(yt && !yt.embedRestricted);
     await playVideoForEntry(entry, { radioMode: continueRadio });
@@ -965,6 +1028,10 @@ function bindCatalog(data, state, player) {
       render(data, state, { preserveScroll: true });
     } else if (action === "play-entry") {
       player.playEntry(id);
+    } else if (action === "load-station-embed") {
+      const key = btn.dataset.stationKey;
+      if (key) stationEmbedsLoaded(state).add(key);
+      render(data, state, { preserveScroll: true });
     }
   });
 }

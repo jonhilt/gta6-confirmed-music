@@ -1230,80 +1230,6 @@
       ]
     },
     {
-      "id": "ar-fuerza-regida-suzuki",
-      "artists": [
-        "Fuerza Regida"
-      ],
-      "track": "Suzuki",
-      "year": 2026,
-      "tier": "official_promo",
-      "appearance": "GTA VI: The Album, track 10 (single)",
-      "appearanceKey": "the_album",
-      "spotifyTrackId": "6VDw2mGBIa4csypjOhS6JT",
-      "youtubeVideoId": "wROPn_SFE5s",
-      "appleMusicUrl": "https://music.apple.com/gb/album/suzuki-from-gtavi-the-album-single/6820156381",
-      "note": "Rockstar announced Suzuki as a GTA VI: The Album single on 9 Oct 2026 (04:01 BST). Official Atlantic video and Spotify track.",
-      "sources": [
-        {
-          "label": "Rockstar Games on X, Suzuki and Don't Chart singles (primary)",
-          "url": "https://x.com/RockstarGames/status/2108392405707735366"
-        },
-        {
-          "label": "Official Linkfire hub (The Album single)",
-          "url": "https://gtavi-thealbum.lnk.to/suzuki"
-        },
-        {
-          "label": "Atlantic Records YouTube (official video)",
-          "url": "https://www.youtube.com/watch?v=wROPn_SFE5s"
-        },
-        {
-          "label": "Official Spotify track (Atlantic / The Album single)",
-          "url": "https://open.spotify.com/track/6VDw2mGBIa4csypjOhS6JT"
-        },
-        {
-          "label": "Apple Music track",
-          "url": "https://music.apple.com/gb/album/suzuki-from-gtavi-the-album-single/6820156381"
-        }
-      ]
-    },
-    {
-      "id": "ar-cardi-b-dont-chart",
-      "artists": [
-        "Cardi B"
-      ],
-      "track": "Don't Chart",
-      "year": 2026,
-      "tier": "official_promo",
-      "appearance": "GTA VI: The Album, track 19 (single)",
-      "appearanceKey": "the_album",
-      "spotifyTrackId": "4NaBitL0J4PBSODIL1sUg7",
-      "youtubeVideoId": "0BxQ6hi3lXY",
-      "appleMusicUrl": "https://music.apple.com/us/album/dont-chart/6812476961?i=6812477308",
-      "note": "Rockstar announced Don't Chart as a GTA VI: The Album single on 9 Oct 2026 (04:01 BST). Official Atlantic video and Spotify track.",
-      "sources": [
-        {
-          "label": "Rockstar Games on X, Suzuki and Don't Chart singles (primary)",
-          "url": "https://x.com/RockstarGames/status/2108392405707735366"
-        },
-        {
-          "label": "Official Linkfire hub (The Album single)",
-          "url": "https://gtavi-thealbum.lnk.to/dontchart"
-        },
-        {
-          "label": "Atlantic Records YouTube (official video)",
-          "url": "https://www.youtube.com/watch?v=0BxQ6hi3lXY"
-        },
-        {
-          "label": "Official Spotify track (Atlantic / The Album single)",
-          "url": "https://open.spotify.com/track/4NaBitL0J4PBSODIL1sUg7"
-        },
-        {
-          "label": "Apple Music track",
-          "url": "https://music.apple.com/us/album/dont-chart/6812476961?i=6812477308"
-        }
-      ]
-    },
-    {
       "id": "rs-real-dimez",
       "artists": [
         "Real Dimez"
@@ -2022,6 +1948,70 @@
       "youtubeVideoId": "7lOthFpn9os",
       "appleMusicUrl": "https://music.apple.com/gb/album/born-n-raised-dj-khaled-featuring-pitbull-trick-daddy/200523381?i=200543085",
       "previewSource": "spotify"
+    },
+    {
+      "id": "leak-fuerza-regida-suzuki",
+      "artists": [
+        "Fuerza Regida"
+      ],
+      "track": "Suzuki",
+      "year": 2026,
+      "tier": "unconfirmed_leak",
+      "appearance": "Unconfirmed: reportedly GTA VI: The Album, track 10",
+      "appearanceKey": "unconfirmed_leak",
+      "status": "unconfirmed",
+      "note": "Not confirmed by Rockstar, Atlantic or the band. Spotify's album page briefly showed Fuerza Regida on track 10 on 4 Oct 2026, and the name was reported removed the same afternoon. On 8 Oct a YouTuber posted a copyright claim screenshot naming the audio as \"Suzuki (from GTAVI: The Album)\" by Fuerza Regida y Grand Theft Auto VI. The band's 7 Oct Instagram reel shows a VICE CITY / LEONIDA plate but names no song. Apple Music still lists track 10 as untitled.",
+      "sources": [
+        {
+          "label": "Carrero on X: copyright claim screenshot (8 Oct 2026)",
+          "url": "https://x.com/carrerovYT/status/2107995019961577676"
+        },
+        {
+          "label": "videotech on X: Spotify listing spotted (4 Oct 2026)",
+          "url": "https://x.com/videotech/status/2106684023468589077"
+        },
+        {
+          "label": "iGrandTheftAuto on X: names removed (4 Oct 2026)",
+          "url": "https://x.com/iGrandTheftAuto/status/2106752235959173443"
+        },
+        {
+          "label": "Fuerza Regida on Instagram: Leonida plate reel (7 Oct 2026)",
+          "url": "https://www.instagram.com/fuerzaregida/reel/DeMutd8MF2v/"
+        },
+        {
+          "label": "Consequence coverage",
+          "url": "https://consequence.net/2026/10/fuerza-regida-grand-theft-auto-vi-soundtrack/"
+        }
+      ],
+      "previewSource": "none"
+    },
+    {
+      "id": "leak-cardi-b-track-19",
+      "artists": [
+        "Cardi B"
+      ],
+      "track": "Untitled (track 19)",
+      "year": 2026,
+      "tier": "unconfirmed_leak",
+      "appearance": "Unconfirmed: reportedly GTA VI: The Album, track 19",
+      "appearanceKey": "unconfirmed_leak",
+      "status": "unconfirmed",
+      "note": "Not confirmed by Rockstar, Atlantic or Cardi B. Spotify's album page briefly showed Cardi B on track 19 on 4 Oct 2026, with no song title, and the name was reported removed the same afternoon. Her own posts since then name no song or album. Apple Music still lists track 19 as untitled.",
+      "sources": [
+        {
+          "label": "videotech on X: Spotify listing spotted (4 Oct 2026)",
+          "url": "https://x.com/videotech/status/2106684023468589077"
+        },
+        {
+          "label": "iGrandTheftAuto on X: names removed (4 Oct 2026)",
+          "url": "https://x.com/iGrandTheftAuto/status/2106752235959173443"
+        },
+        {
+          "label": "Beebom coverage",
+          "url": "https://beebom.com/gta-6-spotify-leak-reveals-cardi-b-fuerza-regida-joining-soundtrack/"
+        }
+      ],
+      "previewSource": "none"
     }
   ]
 }

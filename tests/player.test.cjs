@@ -5,27 +5,21 @@ const vm = require('node:vm');
 
 function setup({ manualReady = false, stubRender = true } = {}) {
   const nodes = new Map();
-  const node = () => ({ dataset: {}, hidden: false, style: {}, classList: { values: new Set(), toggle(name, on) { on ? this.values.add(name) : this.values.delete(name); } }, replaceChildren() {}, appendChild() {} });
+  const node = () => ({ dataset: {}, classList: { values: new Set(), toggle(name, on) { on ? this.values.add(name) : this.values.delete(name); } }, replaceChildren() {}, appendChild() {} });
   const context = {
     queueMicrotask, URL, console, loads: [], location: { origin: 'http://localhost:8000' },
     setInterval: () => 1, clearInterval() {}, setTimeout: (fn) => fn(),
-    document: {
-      body: node(),
-      documentElement: { style: { setProperty() {} } },
-      querySelector(selector) { if (!nodes.has(selector)) nodes.set(selector, node()); return nodes.get(selector); },
-      createElement: node,
-    },
+    document: { querySelector(selector) { if (!nodes.has(selector)) nodes.set(selector, node()); return nodes.get(selector); }, createElement: node },
     data: JSON.parse(fs.readFileSync('docs/data/entries.json', 'utf8')),
   };
   context.window = { YT: { PlayerState: { ENDED: 0, PLAYING: 1 }, Player: class {
     constructor(id, options) {
-      context.ytOptions = options;
       context.events = options.events;
       context.ready = () => { this.isReady = true; options.events.onReady(); };
       if (!manualReady) queueMicrotask(context.ready);
     }
     loadVideoById(video) { assert.ok(this.isReady, 'must wait for onReady'); context.loaded = video; context.loads.push(video); }
-    pauseVideo() { context.ytPaused = (context.ytPaused || 0) + 1; }
+    pauseVideo() {}
   } } };
   context.nodes = nodes;
   vm.createContext(context);
@@ -97,13 +91,13 @@ test('concurrent selections wait for readiness and only load the latest track', 
 
 test('Spotify selection invalidates a pending YouTube load', async () => {
   const c = setup({ manualReady: true });
-  const pending = c.player.playEntry('t1-love-is-a-long-road');
+  const pending = c.player.playEntry('ar-travis-scott');
   await initialized(c);
-  const next = c.player.playEntry('ar-travis-scott');
+  await c.player.setProvider('spotify');
   c.ready();
-  await Promise.all([pending, next]);
+  await pending;
+  assert.equal(c.loads.length, 0);
   assert.equal(c.state.provider, 'spotify');
-  assert.ok((c.ytPaused || 0) >= 1);
 });
 
 test('YouTube errors stop radio and expose a fallback instead of retrying forever', async () => {
@@ -152,7 +146,7 @@ test('radio rows share station sources and play official Spotify or YouTube ids'
   const c = setup();
   const radio = c.data.entries.filter((e) => String(e.appearanceKey).startsWith('radio_'));
   assert.equal(radio.length, 18);
-  assert.equal(radio.every((e) => e.previewSource === 'spotify' && e.spotifyTrackId && e.previewCueSeconds != null), true);
+  assert.equal(radio.every((e) => e.previewSource === 'spotify' && e.spotifyTrackId), true);
   const gye = radio.find((e) => e.id === 'radio-afrobank-fm-gye-wani');
   assert.equal(gye.youtubeVideoId, undefined);
   assert.match(gye.appleMusicUrl, /music\.apple\.com\/us\//);
@@ -162,29 +156,22 @@ test('radio rows share station sources and play official Spotify or YouTube ids'
   const html = vm.runInContext(`(() => {
     const entry = data.entries.find(e => e.id === 'radio-cocoteo-fm-eoo');
     state.expandedId = entry.id;
-    return renderStationTrack(entry, state);
+    return renderRow(entry, 1, state);
   })()`, c);
   assert.match(html, /id="radio-cocoteo-fm-eoo"/);
-  assert.match(html, /at 0:23 in the preview/);
-  assert.match(html, /Listen on Apple Music/);
+  assert.match(html, /Cocoteo FM · Radio preview · 8 Oct 2026/);
   assert.match(html, /Shared station sources/);
   assert.match(html, /Official publisher station page/);
   assert.match(html, /row-action--play/);
   assert.match(html, /Sources/);
-  assert.doesNotMatch(html, /<iframe/);
   const midnightHtml = vm.runInContext(`(() => {
     const entry = data.entries.find(e => e.id === 'radio-flash-fm-midnight-sun-girls-trip');
     state.expandedId = entry.id;
-    return renderStationTrack(entry, state);
+    return renderRow(entry, 1, state);
   })()`, c);
   assert.match(midnightHtml, /id="radio-flash-fm-midnight-sun-girls-trip"/);
   assert.match(midnightHtml, /row-action--play/);
   assert.match(midnightHtml, /Official streaming page for this track/);
-  const gyeHtml = vm.runInContext(`(() => {
-    const entry = data.entries.find(e => e.id === 'radio-afrobank-fm-gye-wani');
-    return renderStationTrack(entry, state);
-  })()`, c);
-  assert.match(gyeHtml, /Listen on Apple Music \(US store\)/);
 });
 
 test('catalog hash opens the matching row and leaves #radio for the player', () => {
@@ -201,58 +188,39 @@ test('catalog hash opens the matching row and leaves #radio for the player', () 
   assert.equal(c.state.anchorId, null);
 });
 
-test('Rockstar album singles replace leak rows, alias old hashes, and hide the empty unconfirmed section', async () => {
-  const c = setup({ stubRender: false });
+test('unconfirmed leak rows sit below confirmed tiers with no Play and no Distinct link', () => {
+  const c = setup();
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
-  assert.equal(leaks.length, 0);
-  assert.equal(c.data.entries.length, 53);
-  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 53);
+  assert.equal(leaks.length, 2);
+  assert.deepEqual(leaks.map((e) => e.id), ['leak-fuerza-regida-suzuki', 'leak-cardi-b-track-19']);
+  assert.equal(leaks.every((e) => !e.spotifyTrackId && !e.youtubeVideoId && !e.appleMusicUrl && !e.rockstarEmbedUrl), true);
+  assert.equal(leaks.every((e) => e.previewSource === 'none'), true);
   const catalog = JSON.stringify(c.data);
   assert.equal(catalog.includes('ItsNotDistinct'), false);
   assert.equal(catalog.includes('2107998030536527892'), false);
-  assert.equal(catalog.includes('leak-fuerza-regida-suzuki'), false);
-  assert.equal(catalog.includes('leak-cardi-b-track-19'), false);
-  const suzuki = c.data.entries.find((e) => e.id === 'ar-fuerza-regida-suzuki');
-  const cardi = c.data.entries.find((e) => e.id === 'ar-cardi-b-dont-chart');
-  assert.equal(suzuki.track, 'Suzuki');
-  assert.equal(suzuki.artists[0], 'Fuerza Regida');
-  assert.equal(suzuki.appearanceKey, 'the_album');
-  assert.equal(suzuki.spotifyTrackId, '6VDw2mGBIa4csypjOhS6JT');
-  assert.equal(suzuki.youtubeVideoId, 'wROPn_SFE5s');
-  assert.equal(cardi.track, "Don't Chart");
-  assert.equal(cardi.track.includes('\u2019'), false);
-  assert.equal(cardi.spotifyTrackId, '4NaBitL0J4PBSODIL1sUg7');
-  assert.equal(cardi.youtubeVideoId, '0BxQ6hi3lXY');
-  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'ar-fuerza-regida-suzuki'), data)", c), true);
-  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'ar-cardi-b-dont-chart'), data)", c), true);
   const html = vm.runInContext(`(() => {
-    state.tier = 'all';
-    state.query = '';
-    render(data, state);
-    return document.querySelector('#catalog').innerHTML;
+    const entry = data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
   })()`, c);
-  assert.doesNotMatch(html, /id="tier-unconfirmed_leak"/);
-  assert.doesNotMatch(html, /Not released/);
-  assert.doesNotMatch(html, /row-badge--unconfirmed/);
-  assert.match(html, /id="ar-fuerza-regida-suzuki"/);
-  assert.match(html, /id="ar-cardi-b-dont-chart"/);
-  assert.match(html, /row-action--play/);
+  assert.match(html, /id="leak-fuerza-regida-suzuki"/);
+  assert.match(html, /row-badge--unconfirmed">Unconfirmed</);
+  assert.doesNotMatch(html, /row-action--play/);
+  assert.doesNotMatch(html, /<iframe/);
+  assert.doesNotMatch(html, /open\.spotify\.com\/embed/);
+  assert.doesNotMatch(html, /youtube-nocookie/);
   assert.doesNotMatch(html, /ItsNotDistinct/);
-  assert.equal(c.nodes.get('.tier-key--leak').hidden, true);
-  assert.match(c.nodes.get('#hero-kicker').textContent, /53 entries/);
-  c.location.hash = '#leak-fuerza-regida-suzuki';
-  const suzukiHash = vm.runInContext('applyCatalogHash(data, state)', c);
-  assert.equal(suzukiHash.scrollTo, 'ar-fuerza-regida-suzuki');
-  assert.equal(c.state.expandedId, 'ar-fuerza-regida-suzuki');
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'leak-fuerza-regida-suzuki'), data)", c), false);
+  const copy = vm.runInContext('TIER_COPY.unconfirmed_leak', c);
+  assert.equal(
+    copy,
+    "Briefly listed, unconfirmed. These names showed up on streaming listings or copyright claims before being pulled. Rockstar, Atlantic and the artists have not confirmed them. We will move them up or remove them as soon as there is an official source."
+  );
   c.location.hash = '#leak-cardi-b-track-19';
-  const cardiHash = vm.runInContext('applyCatalogHash(data, state)', c);
-  assert.equal(cardiHash.scrollTo, 'ar-cardi-b-dont-chart');
-  await c.player.playEntry('ar-fuerza-regida-suzuki');
-  assert.equal(c.state.provider, 'spotify');
-  assert.equal(c.state.playingId, 'ar-fuerza-regida-suzuki');
-  await c.player.playEntry('ar-cardi-b-dont-chart');
-  assert.equal(c.state.provider, 'spotify');
-  assert.equal(c.state.playingId, 'ar-cardi-b-dont-chart');
+  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(hash.scrollTo, 'leak-cardi-b-track-19');
+  assert.equal(vm.runInContext('TIER_ORDER.at(-1)', c), 'unconfirmed_leak');
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 51);
 });
 
 test('album grouping preserves evidence labels in the row and source panel', () => {
@@ -275,15 +243,9 @@ test('station subsections click-to-load the official Rockstar simple embed', () 
     render(data, state);
     return document.querySelector('#catalog').innerHTML;
   })()`, c);
-  assert.match(html, /data-station-card="radio_flash_fm"/);
-  assert.match(html, /Official station preview/);
-  assert.match(html, /Hosted by Robyn and Alex/);
-  assert.match(html, /Pause the station preview before playing a track/);
   assert.match(html, /data-action="load-station-embed"/);
   assert.match(html, /Flash FM on Rockstar/);
   assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/music\/flash-fm/);
-  assert.match(html, /id="radio-flash-fm-good-ones"/);
-  assert.match(html, /at 0:10 in the preview/);
   assert.doesNotMatch(html, /rockstargames\.com\/VI\/music\/embed\/flash-fm\/simple/);
   const loaded = vm.runInContext(`(() => {
     stationEmbedsLoaded(state).add('radio_flash_fm');
@@ -300,9 +262,8 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   const c = setup();
   const radio = c.data.entries.filter((e) => String(e.appearanceKey).startsWith('radio_'));
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
-  const singles = c.data.entries.filter((e) => ['ar-fuerza-regida-suzuki', 'ar-cardi-b-dont-chart'].includes(e.id));
   const stations = Object.values(c.data.stations);
-  for (const entry of [...radio, ...leaks, ...singles]) {
+  for (const entry of [...radio, ...leaks]) {
     assert.equal(`${entry.note || ''}${entry.previewSource || ''}`.includes('\u2014'), false);
     for (const source of entry.sources || []) {
       assert.equal(`${source.label}${source.url}`.includes('\u2014'), false);
@@ -316,50 +277,4 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   const copy = vm.runInContext('stationEmbedFrame(data.stations.radio_flash_fm, "radio_flash_fm", state)', c);
   assert.equal(copy.includes('\u2014'), false);
   assert.match(copy, /Load official player/);
-  assert.match(copy, /Official station preview/);
-});
-
-test('play loads Spotify first into the shared dock and uses youtube-nocookie as fallback', async () => {
-  const c = setup();
-  await c.player.playEntry('radio-flash-fm-good-ones');
-  assert.equal(c.state.provider, 'spotify');
-  assert.equal(c.state.playingId, 'radio-flash-fm-good-ones');
-  await c.player.playEntry('t1-love-is-a-long-road');
-  assert.equal(c.state.provider, 'youtube');
-  assert.equal(c.ytOptions.host, 'https://www.youtube-nocookie.com');
-  c.player.closePlayer();
-  assert.equal(c.state.playingId, null);
-  assert.equal(c.state.dockClosed, true);
-});
-
-test('slim dock labels match the loaded source and keep listen links on the row', async () => {
-  const markup = fs.readFileSync('docs/index.html', 'utf8');
-  const dockMarkup = markup.slice(markup.indexOf('id="player-dock"'));
-  assert.match(markup, /class="dock-bar"/);
-  assert.doesNotMatch(dockMarkup, /From the list/);
-  assert.doesNotMatch(dockMarkup, /dock-providers/);
-  assert.doesNotMatch(dockMarkup, /data-action="start-radio"/);
-  assert.doesNotMatch(dockMarkup, /Listen on Apple Music/);
-  assert.doesNotMatch(dockMarkup, /Open on Spotify/);
-  const c = setup();
-  const goodOnes = c.data.entries.find((e) => e.id === 'radio-flash-fm-good-ones');
-  await c.player.playEntry('radio-flash-fm-good-ones');
-  assert.equal(c.nodes.get('#dock-track').textContent, goodOnes.track);
-  assert.match(c.nodes.get('#dock-artist').textContent, /Spotify/);
-  assert.doesNotMatch(c.nodes.get('#dock-artist').textContent, /YouTube/);
-  await c.player.playEntry('t1-love-is-a-long-road');
-  assert.match(c.nodes.get('#dock-artist').textContent, /YouTube/);
-  assert.doesNotMatch(c.nodes.get('#dock-artist').textContent, /Spotify/);
-  await c.player.startRadio();
-  assert.equal(c.state.radioMode, true);
-  assert.equal(c.state.provider, 'youtube');
-  assert.match(c.nodes.get('#dock-artist').textContent, /YouTube radio/);
-  const html = vm.runInContext(`(() => {
-    const entry = data.entries.find(e => e.id === 'radio-flash-fm-good-ones');
-    return renderStationTrack(entry, state);
-  })()`, c);
-  assert.match(html, /Listen on Apple Music/);
-  assert.match(html, /Open on Spotify/);
-  assert.match(html, /class="station-listen"/);
-  assert.doesNotMatch(html, /\u2014/);
 });

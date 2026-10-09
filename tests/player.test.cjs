@@ -311,3 +311,35 @@ test('play loads Spotify first into the shared dock and uses youtube-nocookie as
   assert.equal(c.state.playingId, null);
   assert.equal(c.state.dockClosed, true);
 });
+
+test('slim dock labels match the loaded source and keep listen links on the row', async () => {
+  const markup = fs.readFileSync('docs/index.html', 'utf8');
+  const dockMarkup = markup.slice(markup.indexOf('id="player-dock"'));
+  assert.match(markup, /class="dock-bar"/);
+  assert.doesNotMatch(dockMarkup, /From the list/);
+  assert.doesNotMatch(dockMarkup, /dock-providers/);
+  assert.doesNotMatch(dockMarkup, /data-action="start-radio"/);
+  assert.doesNotMatch(dockMarkup, /Listen on Apple Music/);
+  assert.doesNotMatch(dockMarkup, /Open on Spotify/);
+  const c = setup();
+  const goodOnes = c.data.entries.find((e) => e.id === 'radio-flash-fm-good-ones');
+  await c.player.playEntry('radio-flash-fm-good-ones');
+  assert.equal(c.nodes.get('#dock-track').textContent, goodOnes.track);
+  assert.match(c.nodes.get('#dock-artist').textContent, /Spotify/);
+  assert.doesNotMatch(c.nodes.get('#dock-artist').textContent, /YouTube/);
+  await c.player.playEntry('t1-love-is-a-long-road');
+  assert.match(c.nodes.get('#dock-artist').textContent, /YouTube/);
+  assert.doesNotMatch(c.nodes.get('#dock-artist').textContent, /Spotify/);
+  await c.player.startRadio();
+  assert.equal(c.state.radioMode, true);
+  assert.equal(c.state.provider, 'youtube');
+  assert.match(c.nodes.get('#dock-artist').textContent, /YouTube radio/);
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'radio-flash-fm-good-ones');
+    return renderStationTrack(entry, state);
+  })()`, c);
+  assert.match(html, /Listen on Apple Music/);
+  assert.match(html, /Open on Spotify/);
+  assert.match(html, /class="station-listen"/);
+  assert.doesNotMatch(html, /\u2014/);
+});

@@ -588,17 +588,20 @@ input {
   justify-content: flex-end;
 }
 
-.station-apple,
-.dock-apple {
+.station-listen {
+  margin: 0.2rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.station-apple {
   font-size: 0.72rem;
   color: var(--teal);
   text-decoration: none;
 }
 
 .station-apple:hover,
-.station-apple:focus-visible,
-.dock-apple:hover,
-.dock-apple:focus-visible {
+.station-apple:focus-visible {
   text-decoration: underline;
 }
 
@@ -971,10 +974,10 @@ input {
 }
 
 body.has-dock {
-  padding-bottom: var(--player-dock-space, 12rem);
+  padding-bottom: var(--player-dock-space, 9.5rem);
 }
 
-/* Dock */
+/* Slim now-playing dock: identity bar + 80px embed */
 .player-dock {
   display: none;
   flex-direction: column;
@@ -985,7 +988,7 @@ body.has-dock {
   right: 0;
   bottom: 0;
   z-index: 40;
-  max-height: min(42dvh, 22rem);
+  max-height: 9.5rem;
   min-height: 0;
 }
 
@@ -993,24 +996,25 @@ body.has-dock {
   display: flex;
 }
 
-.dock-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
+.dock-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   flex-shrink: 0;
-  gap: 0.5rem;
-  padding: 0.65rem 0.9rem 0.4rem;
-  border-bottom: 1px solid var(--magenta);
+  min-height: 2.6rem;
+  padding: 0.3rem 0.7rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .dock-close {
   margin: 0;
-  padding: 0.35rem 0.55rem;
+  flex-shrink: 0;
+  padding: 0.28rem 0.5rem;
   border: 1px solid var(--line-strong);
   background: transparent;
   color: var(--paper);
   font-family: var(--track);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1022,94 +1026,44 @@ body.has-dock {
   border-color: var(--teal);
 }
 
-.dock-kicker {
-  margin: 0;
-  font-family: var(--track);
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--paper);
-}
-
-.dock-status {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #a8b9ba;
-}
-
 .dock-identity {
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
-  padding: 0.45rem 0.9rem 0.35rem;
+  padding: 0;
 }
 
 .dock-track {
   margin: 0;
   font-family: var(--track);
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.15;
   color: var(--paper);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dock-artist {
-  margin: 0.25rem 0 0;
+  margin: 0.08rem 0 0;
   font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #a8b9ba;
-}
-
-.dock-providers {
-  display: flex;
-  flex-shrink: 0;
-  gap: 0.4rem;
-  padding: 0 0.9rem 0.45rem;
-}
-
-.provider-tab {
-  flex: 1;
-  min-height: 2.6rem;
-  border: 0;
-  background: var(--asphalt);
-  color: #a8b9ba;
-  cursor: pointer;
-  display: grid;
-  align-content: center;
-  justify-items: start;
-  padding: 0.35rem 0.7rem;
-  font-family: var(--track);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.provider-tab small {
-  font-family: var(--body);
-  font-size: 0.62rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
   color: #a8b9ba;
-}
-
-.provider-tab.is-active {
-  background: #203c40;
-  color: var(--teal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dock-stage {
   position: relative;
   flex-shrink: 0;
   background: var(--stage);
-  min-height: 5rem;
-  height: 5.2rem;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
 }
 
 .yt-host,
@@ -1122,91 +1076,54 @@ body.has-dock {
 .yt-host iframe,
 .spotify-host iframe {
   width: 100%;
-  height: 100%;
+  height: 80px;
   border: 0;
-}
-
-.spotify-host iframe {
-  height: 100%;
 }
 
 .dock-empty {
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 1rem;
+  padding: 0.4rem 0.75rem;
   color: #8d9fa3;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
 }
 
 .dock-empty[hidden],
 .spotify-host[hidden],
-.yt-host[hidden],
-.dock-outbound[hidden] {
+.yt-host[hidden] {
   display: none;
 }
 
-.dock-providers[hidden] {
-  visibility: hidden;
+.dock-restricted {
+  padding: 0.35rem 0.6rem;
 }
 
 .dock-restricted strong {
   color: var(--teal);
-  font-size: 1rem;
+  font-size: 0.82rem;
 }
 
 .dock-restricted p {
-  line-height: 1.5;
-  margin: 0.75rem 0 1rem;
+  line-height: 1.3;
+  margin: 0.2rem 0 0.35rem;
+  font-size: 0.72rem;
 }
 
 .dock-restricted .dock-outbound {
   display: inline-block;
   border: 1px solid currentColor;
-  padding: 0.65rem 0.9rem;
-}
-
-.dock-footer {
-  display: grid;
-  gap: 0.4rem;
-  padding: 0.45rem 0.9rem 0.7rem;
-}
-
-.dock-apple[hidden] {
-  display: none;
-}
-
-.dock-note {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #a9b8ba;
-  line-height: 1.45;
-}
-
-.dock-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.dock-cta {
-  margin: 0;
-  padding: 0.45rem 0.8rem;
-  border: 0;
-  background: transparent;
-  color: var(--teal);
+  padding: 0.2rem 0.45rem;
   font-family: var(--track);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .dock-outbound {
   font-family: var(--track);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1379,19 +1296,15 @@ code {
   .player-dock {
     left: 0;
     right: 0;
-    max-height: min(48dvh, 18rem);
-  }
-
-  .dock-note {
-    display: none;
+    max-height: 150px;
   }
 
   .dock-track {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
   .dock-artist {
-    font-size: 0.55rem;
+    font-size: 0.52rem;
     line-height: 1.25;
   }
 

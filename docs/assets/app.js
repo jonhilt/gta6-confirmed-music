@@ -528,6 +528,15 @@ function renderStationTrack(entry, state) {
   const cue = previewCueLine(entry);
   const apple = appleMusicUrl(entry);
   const appleLabel = appleMusicLabel(entry);
+  const sp = spotifyTrackId(entry);
+  const listen = [
+    apple
+      ? `<a class="station-apple" href="${escapeHtml(apple)}" rel="noopener noreferrer">${escapeHtml(appleLabel)}</a>`
+      : "",
+    sp
+      ? `<a class="station-apple" href="${escapeHtml(spotifyOpenUrl(sp))}" rel="noopener noreferrer">Open on Spotify</a>`
+      : "",
+  ].filter(Boolean);
   const classes = [
     "station-track",
     playing ? "is-playing" : "",
@@ -542,11 +551,7 @@ function renderStationTrack(entry, state) {
         <h4 class="station-track-artist">${entry.artists.map(escapeHtml).join(", ")}</h4>
         <p class="station-track-title">${entry.track ? `“${escapeHtml(entry.track)}”` : "Track not specified"}</p>
         ${cue ? `<p class="station-track-cue">${escapeHtml(cue)}</p>` : ""}
-        ${
-          apple
-            ? `<a class="station-apple" href="${escapeHtml(apple)}" rel="noopener noreferrer">${escapeHtml(appleLabel)}</a>`
-            : ""
-        }
+        ${listen.length ? `<p class="station-listen">${listen.join(" · ")}</p>` : ""}
       </div>
       <div class="station-track-actions">${playButton(entry, state)}${sourceButton(entry, state)}</div>
       ${expanded ? renderDetailsPanel(entry, state.data, state.data.artists) : ""}
@@ -737,9 +742,6 @@ function playerController(state) {
   const ytHost = $("#yt-host");
   const spotifyHost = $("#spotify-host");
   const empty = $("#dock-empty");
-  const providers = $("#dock-providers");
-  const outbound = $("#dock-outbound");
-  const startBtn = $("#dock-start");
   if (!ytHost) return { sync() {}, playEntry() {}, startRadio() {} };
 
   function setVisualizerPlaying(playing) {
@@ -798,11 +800,15 @@ function playerController(state) {
     dock?.classList.toggle("has-selection", open);
     if (dock) dock.hidden = !open;
     document.body?.classList.toggle("has-dock", open);
-    const space = open && dock && typeof dock.getBoundingClientRect === "function"
-      ? `${Math.ceil(dock.getBoundingClientRect().height)}px`
-      : "0px";
-    document.documentElement?.style?.setProperty("--player-dock-space", space);
-    if (document.body?.style) document.body.style.paddingBottom = open ? space : "";
+    const applySpace = () => {
+      const space = open && dock && typeof dock.getBoundingClientRect === "function"
+        ? `${Math.ceil(dock.getBoundingClientRect().height)}px`
+        : "0px";
+      document.documentElement?.style?.setProperty("--player-dock-space", space);
+      if (document.body?.style) document.body.style.paddingBottom = open ? space : "";
+    };
+    applySpace();
+    if (open && typeof requestAnimationFrame === "function") requestAnimationFrame(applySpace);
   }
 
   function selectedYoutube(entry) {
@@ -841,86 +847,23 @@ function playerController(state) {
     syncDockChrome();
     const yt = entry ? selectedYoutube(entry) : null;
     const sp = entry ? spotifyTrackId(entry) : null;
-    const kicker = $("#dock-kicker");
-    const status = $("#dock-status");
     const track = $("#dock-track");
     const artist = $("#dock-artist");
-    const note = $("#dock-note");
     const navStatus = $("#nav-radio-status");
     const radioEntry = document.querySelector(".radio-entry");
-
     const inRadio = state.provider === "youtube" && state.radioMode;
-    if (kicker) kicker.textContent = inRadio ? "Leonida Radio" : "From the list";
-    if (status) {
-      status.textContent = inRadio
-        ? "Playlist mode / auto-advance on"
-        : state.provider === "spotify"
-          ? "Spotify · this track only"
-          : "Single video · return to radio to auto-advance";
-    }
+    const sourceLabel = state.provider === "spotify" ? "Spotify" : inRadio ? "YouTube radio" : "YouTube";
     if (track) {
-      track.textContent = entry?.track || (inRadio ? "Known tracks. On rotation." : "Select a track");
+      track.textContent = entry?.track || (inRadio ? "Leonida Radio" : "Select a track");
     }
     if (artist) {
-      artist.textContent = entry
-        ? `${entry.artists.join(", ")}${yt ? ` / ${yt.label}` : ""}`
-        : "YouTube radio · official uploads only";
-    }
-    if (note) {
-      note.textContent = yt?.embedRestricted
-        ? "Open on YouTube to watch at the verified cue. Radio skips this upload."
-        : inRadio
-          ? "Radio plays official YouTube videos in list order. When a video ends, the next one starts."
-          : state.provider === "spotify"
-            ? "Listening to the full track on Spotify."
-            : "Playing in the shared dock. We do not host the file.";
+      artist.textContent = entry ? `${entry.artists.join(", ")} · ${sourceLabel}` : "";
     }
     if (navStatus) {
-      navStatus.textContent = state.playingId ? (inRadio ? "● Radio open" : "From the list") : "YouTube playlist";
+      navStatus.textContent = state.playingId && inRadio ? "Radio open" : "YouTube playlist";
     }
     if (radioEntry && radioEntry.tagName === "BUTTON") {
       radioEntry.classList.toggle("is-live", Boolean(state.playingId) && inRadio);
-    }
-    if (startBtn) startBtn.textContent = state.playingId && state.provider === "youtube" ? "Next video" : "Start radio";
-
-    if (providers) {
-      const trailer = entry && videoMeta(state.data, entry);
-      const options = [
-        entry && youtubeVideoId(entry) && { id: "full", label: "Full track", detail: "YouTube" },
-        trailer && { id: "trailer", label: trailer.label.replace("Rockstar ", ""), detail: `${Math.floor(trailer.start / 60)}:${String(trailer.start % 60).padStart(2, "0")} · Trailer cue` },
-        sp && { id: "spotify", label: "Spotify", detail: "Full track" },
-      ].filter(Boolean);
-      const active = state.provider === "spotify" ? "spotify" : state.videoSource;
-      providers.hidden = options.length < 2;
-      providers.innerHTML = options.map((option) => `
-        <button type="button" class="provider-tab${active === option.id ? " is-active" : ""}" aria-pressed="${active === option.id}" data-action="set-provider" data-source="${option.id}">
-          ${escapeHtml(option.label)} <small>${escapeHtml(option.detail)}</small>
-        </button>`).join("");
-    }
-
-    if (outbound) {
-      if (state.provider === "spotify" && sp) {
-        outbound.hidden = false;
-        outbound.href = spotifyOpenUrl(sp);
-        outbound.textContent = "Open on Spotify";
-      } else if (yt) {
-        outbound.hidden = false;
-        outbound.href = youtubeWatchFromId(yt.videoId, yt.start);
-        outbound.textContent = "Open on YouTube";
-      } else {
-        outbound.hidden = true;
-      }
-    }
-    const apple = $("#dock-apple");
-    const appleHref = entry ? appleMusicUrl(entry) : null;
-    if (apple) {
-      if (appleHref) {
-        apple.hidden = false;
-        apple.href = appleHref;
-        apple.textContent = appleMusicLabel(entry);
-      } else {
-        apple.hidden = true;
-      }
     }
 
     const showSpotify = Boolean(entry && state.provider === "spotify" && sp);
@@ -963,19 +906,25 @@ function playerController(state) {
     ytHost.hidden = !showYt;
     if (empty) {
       empty.hidden = showSpotify || showYt;
-      empty.innerHTML = playbackError && yt && state.provider === "youtube"
-        ? `<div class="dock-restricted">
+      if (playbackError && yt && state.provider === "youtube") {
+        empty.innerHTML = `<div class="dock-restricted">
             <strong>Video unavailable here</strong>
-            <p>Playback stopped. Open this video on YouTube or choose the next video.</p>
+            <p>Open it on YouTube, or close the player.</p>
             <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
-          </div>`
-        : yt?.embedRestricted && state.provider === "youtube"
-        ? `<div class="dock-restricted">
+          </div>`;
+      } else if (yt?.embedRestricted && state.provider === "youtube") {
+        empty.innerHTML = `<div class="dock-restricted">
             <strong>Age-restricted video</strong>
-            <p>${escapeHtml(yt.label)} can only be watched on YouTube. You may need to sign in to verify your age.</p>
+            <p>Watch on YouTube to verify your age.</p>
             <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
-          </div>`
-        : entry ? "<p>Loading YouTube video…</p>" : "<p>Start radio to cycle official YouTube videos.</p>";
+          </div>`;
+      } else if (entry && state.provider === "spotify") {
+        empty.innerHTML = "<p>Loading Spotify…</p>";
+      } else if (entry) {
+        empty.innerHTML = "<p>Loading YouTube video…</p>";
+      } else {
+        empty.innerHTML = "<p>Play a track to listen here.</p>";
+      }
     }
   }
 

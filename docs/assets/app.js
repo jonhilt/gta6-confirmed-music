@@ -616,16 +616,18 @@ function render(data, state, options = {}) {
     kicker.textContent = `The sound of Leonida / ${total} entries · updated ${data.updated}`;
   }
   const introMeta = $("#intro-meta");
-  if (introMeta) {
-    const bits = [];
-    if (awaitingPrimary > 0) {
-      bits.push(`${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`);
+    if (introMeta) {
+      const bits = [];
+      if (awaitingPrimary > 0) {
+        bits.push(`${awaitingPrimary} artist-reported row${awaitingPrimary === 1 ? "" : "s"} still need a primary link`);
+      }
+      if (leakCount > 0) {
+        bits.push(`${leakCount} unconfirmed row${leakCount === 1 ? "" : "s"} sit below the confirmed list`);
+      }
+      introMeta.textContent = bits.join(". ");
     }
-    if (leakCount > 0) {
-      bits.push(`${leakCount} unconfirmed row${leakCount === 1 ? "" : "s"} sit below the confirmed list`);
-    }
-    introMeta.textContent = bits.join(". ");
-  }
+    const leakKey = $(".tier-key--leak");
+    if (leakKey) leakKey.hidden = leakCount === 0;
 
   if (!filtered.length) {
     root.innerHTML = `<p class="empty">No rows match that filter.</p>`;
@@ -1142,6 +1144,11 @@ function bindCatalog(data, state, player) {
   });
 }
 
+const CATALOG_ID_ALIASES = {
+  "leak-fuerza-regida-suzuki": "ar-fuerza-regida-suzuki",
+  "leak-cardi-b-track-19": "ar-cardi-b-dont-chart",
+};
+
 function catalogHashId() {
   const raw = (typeof location !== "undefined" && location.hash ? location.hash : "").replace(/^#/, "");
   if (!raw) return null;
@@ -1152,7 +1159,7 @@ function catalogHashId() {
     /* keep raw */
   }
   if (id === "radio" || id.startsWith("tier-")) return null;
-  return id;
+  return CATALOG_ID_ALIASES[id] || id;
 }
 
 function applyCatalogHash(data, state) {

@@ -140,6 +140,10 @@ function youtubeVideoId(entry) {
   return trimmed;
 }
 
+function youtubeEmbedUnplayable(code) {
+  return code === 100 || code === 101 || code === 150;
+}
+
 function youtubeWatchFromId(id, startSeconds) {
   const url = new URL(`https://www.youtube.com/watch?v=${id}`);
   if (startSeconds) url.searchParams.set("t", String(Math.floor(startSeconds)));
@@ -848,11 +852,14 @@ function playerController(state) {
     ytHost.hidden = !showYt;
     if (empty) {
       empty.hidden = showSpotify || showYt;
+      const apple = typeof entry?.appleMusicUrl === "string" ? entry.appleMusicUrl.trim() : "";
       empty.innerHTML = playbackError && yt && state.provider === "youtube"
         ? `<div class="dock-restricted">
-            <strong>Video unavailable here</strong>
-            <p>Playback stopped. Open this video on YouTube or choose the next video.</p>
+            <strong>Not playable here</strong>
+            <p>This YouTube upload cannot play in the catalog player.</p>
             <a class="dock-outbound" href="${escapeHtml(youtubeWatchFromId(yt.videoId, yt.start))}" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+            ${sp ? `<a class="dock-outbound" href="${escapeHtml(spotifyOpenUrl(sp))}" target="_blank" rel="noopener noreferrer">Open on Spotify ↗</a>` : ""}
+            ${apple ? `<a class="dock-outbound" href="${escapeHtml(apple)}" target="_blank" rel="noopener noreferrer">Open on Apple Music ↗</a>` : ""}
           </div>`
         : yt?.embedRestricted && state.provider === "youtube"
         ? `<div class="dock-restricted">
@@ -920,14 +927,23 @@ function playerController(state) {
                 if (id) startCueTimer(id);
               }
             },
-            onError() {
+            onError(event) {
               if (state.provider !== "youtube") return;
               setVisualizerPlaying(false);
-              playbackError = true;
-              state.radioMode = false;
-              playbackRequest++;
               stopCueTimer();
               if (typeof ytPlayer?.pauseVideo === "function") ytPlayer.pauseVideo();
+              playbackRequest++;
+              const entry = currentEntry();
+              const sp = entry ? spotifyTrackId(entry) : null;
+              if (youtubeEmbedUnplayable(event?.data) && sp) {
+                playbackError = false;
+                state.provider = "spotify";
+                state.radioMode = false;
+                setPlaying(entry.id, { radioMode: false });
+                return;
+              }
+              playbackError = true;
+              state.radioMode = false;
               syncDock();
             },
           },

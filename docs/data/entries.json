@@ -1752,16 +1752,11 @@
           "url": "https://open.spotify.com/track/7CAuk3iMezAKo58pvwBGQC"
         },
         {
-          "label": "Official audio on YouTube (Black Sabbath, Topic channel)",
-          "url": "https://www.youtube.com/watch?v=1IKdbsFgyNQ"
-        },
-        {
           "label": "Apple Music track",
           "url": "https://music.apple.com/gb/album/i/723622728?i=723623230"
         }
       ],
       "spotifyTrackId": "7CAuk3iMezAKo58pvwBGQC",
-      "youtubeVideoId": "1IKdbsFgyNQ",
       "appleMusicUrl": "https://music.apple.com/gb/album/i/723622728?i=723623230",
       "previewSource": "spotify"
     },
@@ -1815,7 +1810,7 @@
         },
         {
           "label": "Official audio on YouTube (Slayer, Topic channel)",
-          "url": "https://www.youtube.com/watch?v=hFjoOOPU6Xo"
+          "url": "https://www.youtube.com/watch?v=Gy3BOmvLf2w"
         },
         {
           "label": "Apple Music track",
@@ -1823,7 +1818,7 @@
         }
       ],
       "spotifyTrackId": "0YjAFxSSrQVBgXgAXx0htq",
-      "youtubeVideoId": "hFjoOOPU6Xo",
+      "youtubeVideoId": "Gy3BOmvLf2w",
       "appleMusicUrl": "https://music.apple.com/gb/album/raining-blood/1733768895?i=1733769810",
       "previewSource": "spotify"
     },

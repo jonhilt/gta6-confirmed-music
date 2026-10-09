@@ -498,6 +498,7 @@ input {
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--panel-2);
+  scroll-margin-top: calc(var(--sticky-header-height, 0px) + var(--sticky-nav-height, 0px) + 0.75rem);
 }
 
 .station-card-head {

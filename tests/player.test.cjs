@@ -107,8 +107,43 @@ test('YouTube errors stop radio and expose a fallback instead of retrying foreve
   await Promise.resolve();
   assert.equal(c.state.radioMode, false);
   assert.equal(c.loads.length, 1);
+  assert.equal(c.state.provider, 'youtube');
+  assert.match(c.nodes.get('#dock-empty').innerHTML, /Not playable here/);
   assert.match(c.nodes.get('#dock-empty').innerHTML, /Open on YouTube/);
   assert.equal(c.nodes.get('#dock-empty').hidden, false);
+});
+
+test('YouTube embed errors 100/101/150 switch to Spotify when the row has a track id', async () => {
+  const c = setup();
+  await c.player.playEntry('radio-the-chamber-106-6-raining-blood');
+  assert.equal(c.state.provider, 'youtube');
+  assert.equal(c.loaded.videoId, 'Gy3BOmvLf2w');
+  for (const code of [100, 101, 150]) {
+    c.state.provider = 'youtube';
+    c.state.radioMode = true;
+    c.events.onError({ data: code });
+    await Promise.resolve();
+    assert.equal(c.state.provider, 'spotify');
+    assert.equal(c.state.radioMode, false);
+    assert.equal(c.state.playingId, 'radio-the-chamber-106-6-raining-blood');
+    assert.equal(c.nodes.get('#spotify-host').hidden, false);
+    assert.equal(c.nodes.get('#dock-empty').hidden, true);
+  }
+  c.state.provider = 'youtube';
+  c.events.onError({ data: 5 });
+  await Promise.resolve();
+  assert.equal(c.state.provider, 'youtube');
+  assert.match(c.nodes.get('#dock-empty').innerHTML, /Not playable here/);
+});
+
+test('Play uses Spotify when a row has no YouTube id', async () => {
+  const c = setup();
+  await c.player.playEntry('radio-the-chamber-106-6-i');
+  assert.equal(c.state.playingId, 'radio-the-chamber-106-6-i');
+  assert.equal(c.state.provider, 'spotify');
+  assert.equal(c.state.radioMode, false);
+  assert.equal(c.loads.length, 0);
+  assert.equal(c.nodes.get('#spotify-host').hidden, false);
 });
 
 test('visualiser only animates during YouTube playback and stops on pause or error', async () => {
@@ -149,6 +184,11 @@ test('radio rows share station sources and play official Spotify or YouTube ids'
   assert.equal(radio.every((e) => e.previewSource === 'spotify' && e.spotifyTrackId), true);
   const gye = radio.find((e) => e.id === 'radio-afrobank-fm-gye-wani');
   assert.equal(gye.youtubeVideoId, undefined);
+  const sabbath = radio.find((e) => e.id === 'radio-the-chamber-106-6-i');
+  assert.equal(sabbath.youtubeVideoId, undefined);
+  assert.equal(sabbath.spotifyTrackId, '7CAuk3iMezAKo58pvwBGQC');
+  const slayer = radio.find((e) => e.id === 'radio-the-chamber-106-6-raining-blood');
+  assert.equal(slayer.youtubeVideoId, 'Gy3BOmvLf2w');
   assert.match(gye.appleMusicUrl, /music\.apple\.com\/us\//);
   const midnight = radio.find((e) => e.id === 'radio-flash-fm-midnight-sun-girls-trip');
   assert.equal(midnight.spotifyTrackId, '2FHGYrQEmuWGX24QoQtQ13');

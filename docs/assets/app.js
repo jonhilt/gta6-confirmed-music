@@ -73,6 +73,28 @@ function stationFor(entry, data) {
   return data?.stations?.[key] || null;
 }
 
+function stationSlug(station) {
+  return station?.embedKey || "";
+}
+
+function stationRadioHref(station) {
+  const slug = stationSlug(station);
+  return slug ? `radio/#${slug}` : "radio/";
+}
+
+function stationHostLine(station) {
+  const hosts = station?.hosts || [];
+  if (!hosts.length) return "";
+  if (hosts.length === 1) return `Hosted by ${hosts[0]}`;
+  if (hosts.length === 2) return `Hosted by ${hosts[0]} and ${hosts[1]}`;
+  return `Hosted by ${hosts.slice(0, -1).join(", ")}, and ${hosts.at(-1)}`;
+}
+
+function previewCueLine(entry) {
+  if (entry?.previewCueSeconds == null || Number.isNaN(Number(entry.previewCueSeconds))) return "";
+  return `at ${formatTimestamp(entry.previewCueSeconds)} in the preview`;
+}
+
 function formatCueLine(entry, data) {
   const key = entry.appearanceKey;
   const station = stationFor(entry, data);
@@ -305,34 +327,20 @@ function sharedSourcesLabel(entry, data) {
   return "Shared sources";
 }
 
-function stationEmbedsLoaded(state) {
-  if (!state.loadedStationEmbeds) state.loadedStationEmbeds = new Set();
-  return state.loadedStationEmbeds;
-}
-
-function parkStationEmbeds(root) {
-  const parked = new Map();
-  if (!root || typeof root.querySelectorAll !== "function") return parked;
-  root.querySelectorAll("[data-station-embed]").forEach((host) => {
-    const iframe = host.querySelector("iframe");
-    if (iframe) parked.set(host.dataset.stationEmbed, iframe);
-  });
-  return parked;
-}
-
 function stationEmbedFrame(station, key, state) {
-  const loaded = stationEmbedsLoaded(state).has(key);
+  const loaded = state.loadedStationEmbed === key;
   const src = station.embedUrl;
   if (!src) {
     return `<p class="station-player-fallback"><a href="${escapeHtml(station.previewPage)}" rel="noopener noreferrer">Open ${escapeHtml(station.name)} on Rockstar</a></p>`;
   }
   const frame = loaded
-    ? `<iframe title="${escapeHtml(`${station.name} on Rockstar`)}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
-    : `<button type="button" class="station-player-load" data-action="load-station-embed" data-station-key="${escapeHtml(key)}">
+    ? `<iframe title="${escapeHtml(`${station.name} official station preview`)}" src="${escapeHtml(src)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
+    : `<button type="button" class="station-player-load" data-action="load-station-embed" data-station-key="${escapeHtml(key)}" aria-label="${escapeHtml(`Load official ${station.name} station preview`)}">
         ${lucideIcon("play", 14)}<span>Load official player</span>
       </button>`;
   return `
     <div class="station-player">
+      <p class="station-player-label">Official station preview</p>
       <div class="station-player-frame" data-station-embed="${escapeHtml(key)}">${frame}</div>
       <a class="station-player-link" href="${escapeHtml(station.previewPage)}" rel="noopener noreferrer">
         ${escapeHtml(station.name)} on Rockstar
@@ -341,20 +349,50 @@ function stationEmbedFrame(station, key, state) {
     </div>`;
 }
 
-function restoreStationEmbeds(root, parked, state) {
-  const loaded = stationEmbedsLoaded(state);
+function renderRadioTrack(entry) {
+  const cue = previewCueLine(entry);
+  const title = entry.track ? `“${escapeHtml(entry.track)}”` : "Track not specified";
+  return `
+    <li class="radio-track">
+      <p class="radio-track-name">${entry.artists.map(escapeHtml).join(", ")} · ${title}</p>
+      ${cue ? `<p class="radio-track-cue">${escapeHtml(cue)}</p>` : ""}
+    </li>`;
+}
+
+function renderRadioCard(station, key, tracks, state) {
+  const slug = stationSlug(station) || key;
+  const hosts = stationHostLine(station);
+  return `
+    <section class="station-card" id="${escapeHtml(slug)}" data-station-card="${escapeHtml(key)}">
+      <header class="station-card-head">
+        <h2 class="station-card-title">${escapeHtml(station.name)}</h2>
+        ${hosts ? `<p class="station-card-hosts">${escapeHtml(hosts)}</p>` : ""}
+      </header>
+      ${stationEmbedFrame(station, key, state)}
+      <ul class="radio-track-list">
+        ${tracks.map(renderRadioTrack).join("")}
+      </ul>
+    </section>`;
+}
+
+function renderRadio(data, state) {
+  const root = $("#radio-stations");
+  if (!root) return;
+  const keys = Object.keys(data.stations || {});
+  root.innerHTML = keys
+    .map((key) => {
+      const station = data.stations[key];
+      const tracks = data.entries.filter((e) => e.appearanceKey === key);
+      return renderRadioCard(station, key, tracks, state);
+    })
+    .join("");
+}
+
+function unloadRadioEmbeds() {
+  const root = $("#radio-stations");
   if (!root || typeof root.querySelectorAll !== "function") return;
-  root.querySelectorAll("[data-station-embed]").forEach((host) => {
-    const key = host.dataset.stationEmbed;
-    const parkedFrame = parked.get(key);
-    if (parkedFrame) {
-      host.replaceChildren(parkedFrame);
-      return;
-    }
-    if (!loaded.has(key) || host.querySelector("iframe")) return;
-    const station = state.data?.stations?.[key];
-    if (!station?.embedUrl) return;
-    host.innerHTML = `<iframe title="${escapeHtml(`${station.name} on Rockstar`)}" src="${escapeHtml(station.embedUrl)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+  root.querySelectorAll("iframe").forEach((frame) => {
+    frame.src = "about:blank";
   });
 }
 
@@ -446,6 +484,12 @@ function sourceButton(entry, state) {
     </button>`;
 }
 
+function stationRadioLink(entry, data) {
+  const station = stationFor(entry, data);
+  if (!station) return "";
+  return `<p class="row-radio-link"><a href="${escapeHtml(stationRadioHref(station))}">Hear it on ${escapeHtml(station.name)}</a></p>`;
+}
+
 function renderRow(entry, indexNum, state) {
   const expanded = state.expandedId === entry.id;
   const playing = state.playingId === entry.id;
@@ -471,6 +515,7 @@ function renderRow(entry, indexNum, state) {
           <h3 class="row-artist">${entry.artists.map(escapeHtml).join(", ")}</h3>
           ${track}
           <p class="row-cue">${escapeHtml(formatCueLine(entry, state.data))}</p>
+          ${stationRadioLink(entry, state.data)}
         </div>
         <p class="row-evidence">${
           isUnconfirmed(entry)
@@ -582,30 +627,6 @@ function render(data, state, options = {}) {
             </div>`
           : waitingBlock;
       }
-    } else if (tier === "official_promo") {
-      const promo = rows.filter((e) => !stationFor(e, data));
-      const radio = rows.filter((e) => stationFor(e, data));
-      if (promo.length) bodyHtml = `<div class="index-list">${head}${renderRows(promo)}</div>`;
-      const stationKeys = [];
-      const seen = new Set();
-      for (const entry of radio) {
-        if (seen.has(entry.appearanceKey)) continue;
-        seen.add(entry.appearanceKey);
-        stationKeys.push(entry.appearanceKey);
-      }
-      stationKeys.forEach((key, index) => {
-        const station = data.stations[key];
-        const list = radio.filter((e) => e.appearanceKey === key);
-        const hosts = station.hosts?.length ? `Hosted by ${station.hosts.join(" and ")}.` : "";
-        const copy = [station.blurb, hosts].filter(Boolean).join(" ");
-        const showHead = !promo.length && index === 0;
-        bodyHtml += `<div class="subsection">
-              <h3 class="subsection-title">${escapeHtml(station.name)}</h3>
-              ${copy ? `<p class="subsection-copy">${escapeHtml(copy)}</p>` : ""}
-              ${stationEmbedFrame(station, key, state)}
-              <div class="index-list">${showHead ? head : ""}${renderRows(list)}</div>
-            </div>`;
-      });
     } else {
       bodyHtml = `<div class="index-list">${head}${renderRows(rows)}</div>`;
     }
@@ -624,9 +645,7 @@ function render(data, state, options = {}) {
       </section>`);
   }
 
-  const parked = parkStationEmbeds(root);
   root.innerHTML = chunks.join("");
-  restoreStationEmbeds(root, parked, state);
   if (scrollY != null) window.scrollTo(0, scrollY);
 }
 
@@ -1030,10 +1049,6 @@ function bindCatalog(data, state, player) {
       render(data, state, { preserveScroll: true });
     } else if (action === "play-entry") {
       player.playEntry(id);
-    } else if (action === "load-station-embed") {
-      const key = btn.dataset.stationKey;
-      if (key) stationEmbedsLoaded(state).add(key);
-      render(data, state, { preserveScroll: true });
     }
   });
 }
@@ -1080,15 +1095,56 @@ function scrollToEntry(id) {
   el.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+function catalogDataUrl() {
+  const script = document.querySelector("script[src*='assets/app.js']");
+  if (script?.getAttribute("src")) {
+    return new URL("../data/entries.json", script.src).href;
+  }
+  return "data/entries.json";
+}
+
+function bindRadio(data, state) {
+  const root = $("#radio-stations");
+  if (!root) return;
+  root.addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-action='load-station-embed']");
+    if (!btn) return;
+    const key = btn.dataset.stationKey;
+    if (!key) return;
+    unloadRadioEmbeds();
+    state.loadedStationEmbed = key;
+    renderRadio(data, state);
+  });
+  window.addEventListener("hashchange", () => {
+    const slug = (location.hash || "").replace(/^#/, "");
+    if (slug) requestAnimationFrame(() => scrollToEntry(slug));
+  });
+  window.addEventListener("pagehide", () => {
+    state.loadedStationEmbed = null;
+    unloadRadioEmbeds();
+  });
+  renderRadio(data, state);
+  const slug = (location.hash || "").replace(/^#/, "");
+  if (slug) requestAnimationFrame(() => scrollToEntry(slug));
+}
+
 async function main() {
   const catalog = $("#catalog");
-  const res = await fetch("data/entries.json", { cache: "no-store" });
+  const radioRoot = $("#radio-stations");
+  const res = await fetch(catalogDataUrl(), { cache: "no-store" });
   if (!res.ok) {
-    if (catalog) catalog.innerHTML = `<p class="empty">Could not load data/entries.json (${res.status}).</p>`;
+    const message = `<p class="empty">Could not load data/entries.json (${res.status}).</p>`;
+    if (catalog) catalog.innerHTML = message;
+    if (radioRoot) radioRoot.innerHTML = message;
     return;
   }
 
   const data = await res.json();
+  if (radioRoot) {
+    bindRadio(data, { loadedStationEmbed: null, data });
+    return;
+  }
+  if (!catalog) return;
   const state = {
     query: "",
     tier: "all",

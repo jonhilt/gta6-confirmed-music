@@ -102,7 +102,7 @@ test('Spotify selection invalidates a pending YouTube load', async () => {
 
 test('YouTube errors stop radio and expose a fallback instead of retrying forever', async () => {
   const c = setup();
-  await c.player.startRadio();
+  await c.player.playEntry('t1-love-is-a-long-road');
   c.events.onError({ data: 150 });
   await Promise.resolve();
   assert.equal(c.state.radioMode, false);
@@ -232,8 +232,8 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   const c = setup({ stubRender: false });
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
   assert.equal(leaks.length, 0);
-  assert.equal(c.data.entries.length, 53);
-  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 53);
+  assert.equal(c.data.entries.length, 54);
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 54);
   const catalog = JSON.stringify(c.data);
   assert.equal(catalog.includes('ItsNotDistinct'), false);
   assert.equal(catalog.includes('2107998030536527892'), false);
@@ -269,7 +269,7 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   assert.match(html, /row-action--play/);
   assert.doesNotMatch(html, /ItsNotDistinct/);
   assert.equal(c.nodes.get('.tier-key--leak').hidden, true);
-  assert.match(c.nodes.get('#hero-kicker').textContent, /53 entries/);
+  assert.match(c.nodes.get('#hero-kicker').textContent, /54 entries/);
   c.location.hash = '#leak-fuerza-regida-suzuki';
   const suzukiHash = vm.runInContext('applyCatalogHash(data, state)', c);
   assert.equal(suzukiHash.scrollTo, 'ar-fuerza-regida-suzuki');
@@ -364,4 +364,51 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   assert.equal(copy.includes('\u2014'), false);
   assert.match(copy, /Load official player/);
   assert.match(copy, /Official station preview/);
+});
+
+test('catalog sections are Trailers, The Album, Radio, Rockstar-named, Artist-reported', () => {
+  const c = setup({ stubRender: false });
+  const html = vm.runInContext(`(() => {
+    state.tier = 'all';
+    state.query = '';
+    render(data, state);
+    return document.querySelector('#catalog').innerHTML;
+  })()`, c);
+  const order = [...html.matchAll(/id="tier-([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(order, ['official_promo', 'the_album', 'radio', 'rockstar_named', 'artist_reported']);
+  assert.match(html, /id="tier-radio"/);
+  assert.match(html, /<h2 class="tier-header-name">Trailers<\/h2>/);
+  assert.match(html, /<h2 class="tier-header-name">Radio<\/h2>/);
+  assert.match(html, /Music heard in Rockstar trailers and the Extended Look/);
+  const trailers = html.split('id="tier-the_album"')[0];
+  assert.match(trailers, /id="tier-official_promo"/);
+  assert.doesNotMatch(trailers, /radio station/);
+  assert.equal(html.includes('\u2014'), false);
+  assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 'radio-flash-fm-good-ones'))", c), 'radio');
+  assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 't3-flower-in-a-hurricane'))", c), 'official_promo');
+  c.location.hash = '#tier-radio';
+  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(hash.startRadio, false);
+  assert.equal(c.state.anchorId, null);
+});
+
+test('Launch Trailer cue label has no em dash or middle dot, and no unverified cue', () => {
+  const c = setup();
+  const entry = c.data.entries.find((e) => e.id === 't3-flower-in-a-hurricane');
+  assert.ok(entry);
+  assert.equal(entry.appearanceKey, 'trailer3');
+  assert.equal(entry.cueSeconds, undefined);
+  assert.equal(c.data.officialVideos.trailer3.url, 'https://www.youtube.com/watch?v=rz1B4B2yBZY');
+  assert.equal(c.data.officialVideos.trailer3.url.includes('icy-lhqJhMQ'), false);
+  const line = vm.runInContext("formatCueLine(data.entries.find(e => e.id === 't3-flower-in-a-hurricane'), data)", c);
+  assert.equal(line, 'Launch Trailer, 15 Oct 2026');
+  assert.equal(line.includes('\u2014'), false);
+  assert.equal(line.includes('\u00b7'), false);
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 't3-flower-in-a-hurricane');
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(html, /Launch Trailer, 15 Oct 2026/);
+  assert.match(html, /Also on The Album/);
+  assert.doesNotMatch(html, /icy-lhqJhMQ/);
 });

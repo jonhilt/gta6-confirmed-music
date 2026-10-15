@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-09",
+  "updated": "2026-10-15",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -14,6 +14,10 @@
       "label": "Rockstar Extended Look",
       "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
       "embedRestricted": true
+    },
+    "trailer3": {
+      "label": "Rockstar Launch Trailer",
+      "url": "https://www.youtube.com/watch?v=rz1B4B2yBZY"
     }
   },
   "sharedSources": {
@@ -377,6 +381,50 @@
     }
   },
   "entries": [
+    {
+      "id": "t3-flower-in-a-hurricane",
+      "artists": [
+        "Justice",
+        "Tame Impala",
+        "SZA",
+        "King Gizzard & The Lizard Wizard"
+      ],
+      "track": "Flower in a Hurricane",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "Launch Trailer (15 Oct 2026)",
+      "appearanceKey": "trailer3",
+      "note": "Rockstar names this as the Launch Trailer song on X and in the YouTube description. Also on The Album.",
+      "spotifyTrackId": "4HCOHRCSQelz2GPX8iTamO",
+      "youtubeVideoId": "JWxoRY7AFSw",
+      "appleMusicUrl": "https://music.apple.com/us/album/flower-in-a-hurricane-from-gtavi/6819802963?i=6819802968",
+      "sources": [
+        {
+          "label": "Rockstar YouTube, Launch Trailer (primary)",
+          "url": "https://www.youtube.com/watch?v=rz1B4B2yBZY"
+        },
+        {
+          "label": "Rockstar Games on X, Launch Trailer post (primary)",
+          "url": "https://x.com/RockstarGames/status/2110717537964953810"
+        },
+        {
+          "label": "Official Linkfire hub (linked from Rockstar's YouTube description)",
+          "url": "https://justice.lnk.to/flowerinahurricane"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4HCOHRCSQelz2GPX8iTamO"
+        },
+        {
+          "label": "Official audio on YouTube (Justice - Topic)",
+          "url": "https://www.youtube.com/watch?v=JWxoRY7AFSw"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/flower-in-a-hurricane-from-gtavi/6819802963?i=6819802968"
+        }
+      ]
+    },
     {
       "id": "t1-love-is-a-long-road",
       "artists": [

@@ -1,25 +1,38 @@
 const TIER_LABEL = {
   official_promo: "Official promo",
   the_album: "GTA VI: The Album",
+  radio: "Radio",
   rockstar_named: "Rockstar-named",
   artist_reported: "Artist-reported",
   unconfirmed_leak: "Unconfirmed",
 };
 
-const TIER_ORDER = ["official_promo", "the_album", "rockstar_named", "artist_reported", "unconfirmed_leak"];
+const TIER_SECTION_LABEL = {
+  official_promo: "Trailers",
+  the_album: "GTA VI: The Album",
+  radio: "Radio",
+  rockstar_named: "Rockstar-named",
+  artist_reported: "Artist-reported",
+  unconfirmed_leak: "Unconfirmed",
+};
+
+const TIER_ORDER = ["official_promo", "the_album", "radio", "rockstar_named", "artist_reported", "unconfirmed_leak"];
 
 const TIER_SECTION_NUM = {
   official_promo: "01",
   the_album: "02",
-  rockstar_named: "03",
-  artist_reported: "04",
-  unconfirmed_leak: "05",
+  radio: "03",
+  rockstar_named: "04",
+  artist_reported: "05",
+  unconfirmed_leak: "06",
 };
 
 const TIER_COPY = {
   official_promo:
-    "Music heard in Rockstar trailers, the Extended Look, and Rockstar's radio station previews. Choose a full track or jump to a trailer cue when one exists.",
+    "Music heard in Rockstar trailers and the Extended Look. Choose a full track or jump to the trailer cue.",
   the_album: "Original music from Grand Theft Auto VI: The Album. Listen to the debut singles on YouTube or Spotify, and check the album announcement below.",
+  radio:
+    "Songs Rockstar played in its in-game radio station previews, grouped by station. Hear each preview on the Radio page.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
   artist_reported:
     "Artist or fan-account claims. We want a link from the artist before treating a row as solid.",
@@ -101,6 +114,7 @@ function formatCueLine(entry, data) {
   let slot;
   if (key === "trailer1") slot = "Trailer 1 · 04 Dec 2023";
   if (key === "trailer2") slot = "Trailer 2 · 06 May 2025";
+  if (key === "trailer3") slot = "Launch Trailer, 15 Oct 2026";
   if (key === "extendedLook") slot = "Extended Look · 27 Aug 2026";
   if (key === "the_album") slot = "The Album · 17 Sep 2026";
   if (key === "interview") slot = "Named by Rockstar · Aug 2026";
@@ -494,6 +508,11 @@ function stationRadioLink(entry, data) {
   return `<p class="row-radio-link"><a href="${escapeHtml(stationRadioHref(station))}">Hear it on ${escapeHtml(station.name)}</a></p>`;
 }
 
+function alsoOnAlbumLine(entry) {
+  if (!String(entry?.note || "").includes("Also on The Album")) return "";
+  return `<p class="row-radio-link">Also on The Album</p>`;
+}
+
 function renderRow(entry, indexNum, state) {
   const expanded = state.expandedId === entry.id;
   const playing = state.playingId === entry.id;
@@ -519,6 +538,7 @@ function renderRow(entry, indexNum, state) {
           <h3 class="row-artist">${entry.artists.map(escapeHtml).join(", ")}</h3>
           ${track}
           <p class="row-cue">${escapeHtml(formatCueLine(entry, state.data))}</p>
+          ${alsoOnAlbumLine(entry)}
           ${stationRadioLink(entry, state.data)}
         </div>
         <p class="row-evidence">${
@@ -550,9 +570,13 @@ function matchesQuery(entry, q, data) {
 }
 
 function catalogSection(entry) {
-  return entry.tier === "official_promo" && entry.appearanceKey === "the_album"
-    ? "the_album"
-    : entry.tier;
+  if (entry.tier === "official_promo" && String(entry.appearanceKey || "").startsWith("radio_")) {
+    return "radio";
+  }
+  if (entry.tier === "official_promo" && entry.appearanceKey === "the_album") {
+    return "the_album";
+  }
+  return entry.tier;
 }
 
 function filteredEntries(data, state) {
@@ -631,6 +655,28 @@ function render(data, state, options = {}) {
             </div>`
           : waitingBlock;
       }
+    } else if (tier === "radio") {
+      const stations = state.data.stations || {};
+      const seen = new Set();
+      const groups = [];
+      for (const key of Object.keys(stations)) {
+        const list = rows.filter((e) => e.appearanceKey === key);
+        if (!list.length) continue;
+        seen.add(key);
+        groups.push({ title: stations[key].name, list });
+      }
+      const leftover = rows.filter((e) => !seen.has(e.appearanceKey));
+      if (leftover.length) groups.push({ title: null, list: leftover });
+      bodyHtml = groups
+        .map((group, index) => {
+          const listHtml = `<div class="index-list">${index === 0 ? head : ""}${renderRows(group.list)}</div>`;
+          if (!group.title) return listHtml;
+          return `<div class="subsection">
+              <h3 class="subsection-title">${escapeHtml(group.title)}</h3>
+              ${listHtml}
+            </div>`;
+        })
+        .join("");
     } else {
       bodyHtml = `<div class="index-list">${head}${renderRows(rows)}</div>`;
     }
@@ -640,7 +686,7 @@ function render(data, state, options = {}) {
         <div class="tier-header">
           <div class="tier-header-title">
             <span class="tier-header-num">${TIER_SECTION_NUM[tier]}</span>
-            <h2 class="tier-header-name">${TIER_LABEL[tier]}</h2>
+            <h2 class="tier-header-name">${TIER_SECTION_LABEL[tier] || TIER_LABEL[tier]}</h2>
           </div>
           <span class="tier-header-count">${rows.length} ${rows.length === 1 ? "entry" : "entries"}</span>
         </div>

@@ -368,6 +368,7 @@ input {
 
 .tier-key--official { color: var(--promo); }
 .tier-key--album { color: var(--magenta); }
+.tier-key--radio { color: var(--teal); }
 .tier-key--named { color: var(--named); }
 .tier-key--reported { color: var(--reported); }
 .tier-key--leak { color: var(--leak); }
@@ -451,6 +452,7 @@ input {
 
 .tier-section--official_promo .tier-header-num { color: var(--promo); }
 .tier-section--the_album .tier-header-num { color: var(--magenta); }
+.tier-section--radio .tier-header-num { color: var(--teal); }
 .tier-section--rockstar_named .tier-header-num { color: var(--named); }
 .tier-section--artist_reported .tier-header-num { color: var(--reported); }
 .tier-section--unconfirmed_leak .tier-header-num { color: var(--leak); }
@@ -461,6 +463,14 @@ input {
 
 .tier-section--official_promo .subsection-title {
   color: var(--promo);
+}
+
+.tier-section--radio .subsection {
+  margin-top: 1.35rem;
+}
+
+.tier-section--radio .subsection-title {
+  color: var(--teal);
 }
 
 .tier-description {

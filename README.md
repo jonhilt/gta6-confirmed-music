@@ -10,7 +10,7 @@ This is fan documentation. It is not affiliated with Rockstar Games or Take-Two 
 
 Four catalog tiers. Confirmed rows sit in the first three. An unconfirmed leak section can sit at the bottom when names were listed then pulled with no Rockstar confirmation; it hides when empty and those rows do not count as confirmed.
 
-1. **official_promo**: audio heard in Rockstar-published Trailer 1, Trailer 2, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
+1. **official_promo**: audio heard in Rockstar-published Trailer 1, Trailer 2, Launch Trailer, Extended Look, or the 8 Oct 2026 in-game radio station previews, or a track/album Rockstar + Atlantic named for *Grand Theft Auto VI: The Album*.
 2. **rockstar_named** — Rockstar staff named the artist in an interview. There may be no track yet.
 3. **artist_reported** — the artist (or a channel they control) claims involvement. Link a **primary** source. Flag it as not Rockstar-verified.
 4. **unconfirmed_leak**: briefly listed on streaming pages or copyright claims, then pulled. Not confirmed by Rockstar, Atlantic, or the artist. No Play button, no embeds. Do not link posts that carry leaked audio.
@@ -35,7 +35,7 @@ The site is static HTML. It reads:
 | `year` | no | original release year if known |
 | `tier` | yes | `official_promo` \| `rockstar_named` \| `artist_reported` \| `unconfirmed_leak` |
 | `appearance` | yes | short human sentence |
-| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` \| `radio_cocoteo_fm` \| `radio_back_country` \| `radio_afrobank_fm` \| `radio_the_chamber` \| `radio_flash_fm` \| `radio_dirty_south_classics` \| `unconfirmed_leak` |
+| `appearanceKey` | yes | `trailer1` \| `trailer2` \| `trailer3` \| `extendedLook` \| `the_album` \| `interview` \| `artist_claim` \| `radio_cocoteo_fm` \| `radio_back_country` \| `radio_afrobank_fm` \| `radio_the_chamber` \| `radio_flash_fm` \| `radio_dirty_south_classics` \| `unconfirmed_leak` |
 | `sources` | yes | `{ "label", "url" }[]` — first link should be the strongest |
 | `status` | no | `needs_primary_source` for artist-reported rows without a primary URL; `unconfirmed` for leak rows |
 | `note` | no | one factual caveat |
@@ -64,14 +64,16 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 2. Prefer a Rockstar video URL for promo audio:
    - Trailer 1: https://www.youtube.com/watch?v=QdBZY2fkU-0
    - Trailer 2: https://www.youtube.com/watch?v=VQRLujxTm3c
+   - Launch Trailer: https://www.youtube.com/watch?v=rz1B4B2yBZY
    - Extended Look: https://www.youtube.com/watch?v=tJbzMqJGH4k
 3. Append the object to `entries` and, if needed, a blurb in `artists`.
 4. Bump `updated` (ISO date).
 5. Open a PR. Do not paste lyrics.
 
-## Current coverage (2026-10-09)
+## Current coverage (2026-10-15)
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
+- Launch Trailer (15 Oct 2026): Justice feat. Tame Impala, SZA, King Gizzard & The Lizard Wizard, "Flower in a Hurricane". Displayed under Trailers with an Also on The Album note. Cue time not set; YouTube description, chapters, and captions do not give a start time.
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
 - Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Catalog rows keep their anchors and play through the catalog dock (Spotify / YouTube / Apple). Each row links to the Radio page station card (`/radio/#flash-fm`). Rockstar `/VI/music/embed/{key}/simple` iframes load only on `/radio/`. Gye Wani has no YouTube id (label upload, not artist/VEVO/Topic). Black Sabbath "I" has no YouTube id (the 2007 Remaster Topic upload is not playable in GB / as an embed, and there is no official artist, VEVO, label, or same-edition Topic replacement).
 - The Album: six 17 Sep debut singles plus two 9 Oct singles (Fuerza Regida "Suzuki", Cardi B "Don't Chart") as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles. Old leak hashes `#leak-fuerza-regida-suzuki` and `#leak-cardi-b-track-19` alias to the new ids.

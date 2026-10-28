@@ -9,6 +9,7 @@ const TIER_LABEL = {
 
 const TIER_SECTION_LABEL = {
   official_promo: "Trailers",
+  score: "Original Score",
   the_album: "GTA VI: The Album",
   radio: "Radio",
   rockstar_named: "Rockstar-named",
@@ -16,20 +17,23 @@ const TIER_SECTION_LABEL = {
   unconfirmed_leak: "Unconfirmed",
 };
 
-const TIER_ORDER = ["official_promo", "the_album", "radio", "rockstar_named", "artist_reported", "unconfirmed_leak"];
+const TIER_ORDER = ["official_promo", "score", "the_album", "radio", "rockstar_named", "artist_reported", "unconfirmed_leak"];
 
 const TIER_SECTION_NUM = {
   official_promo: "01",
-  the_album: "02",
-  radio: "03",
-  rockstar_named: "04",
-  artist_reported: "05",
-  unconfirmed_leak: "06",
+  score: "02",
+  the_album: "03",
+  radio: "04",
+  rockstar_named: "05",
+  artist_reported: "06",
+  unconfirmed_leak: "07",
 };
 
 const TIER_COPY = {
   official_promo:
     "Music heard in Rockstar trailers and the Extended Look. Choose a full track or jump to the trailer cue.",
+  score:
+    "Official GTA VI: Original Score singles on streaming. Flower in a Hurricane stays under Trailers because it is heard in the Launch Trailer.",
   the_album: "Original music from Grand Theft Auto VI: The Album. Listen to the debut singles on YouTube or Spotify, and check the album announcement below.",
   radio:
     "Songs Rockstar played in its in-game radio station previews, grouped by station. Hear each preview on the Radio page.",
@@ -117,6 +121,7 @@ function formatCueLine(entry, data) {
   if (key === "trailer3") slot = "Launch Trailer, 15 Oct 2026";
   if (key === "extendedLook") slot = "Extended Look · 27 Aug 2026";
   if (key === "the_album") slot = "The Album · 17 Sep 2026";
+  if (key === "original_score") slot = "GTA VI: Original Score, 28 Oct 2026 NZ / 29 Oct elsewhere";
   if (key === "interview") slot = "Named by Rockstar · Aug 2026";
   if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
   if (key === "unconfirmed_leak") slot = entry.appearance;
@@ -275,7 +280,7 @@ function sourceRole(label, entry) {
   if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
     return "Official publisher announcement.";
   }
-  if (lower.includes("official spotify track") || lower.includes("apple music track")) {
+  if (lower.includes("official spotify track") || lower.includes("official spotify single") || lower.includes("apple music track")) {
     return entry.appearanceKey === "the_album"
       ? "Official streaming page for this debut single."
       : "Official streaming page for this track.";
@@ -575,6 +580,9 @@ function catalogSection(entry) {
   }
   if (entry.tier === "official_promo" && entry.appearanceKey === "the_album") {
     return "the_album";
+  }
+  if (entry.tier === "official_promo" && entry.appearanceKey === "original_score") {
+    return "score";
   }
   return entry.tier;
 }

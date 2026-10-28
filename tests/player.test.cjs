@@ -232,8 +232,8 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   const c = setup({ stubRender: false });
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
   assert.equal(leaks.length, 0);
-  assert.equal(c.data.entries.length, 54);
-  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 54);
+  assert.equal(c.data.entries.length, 55);
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 55);
   const catalog = JSON.stringify(c.data);
   assert.equal(catalog.includes('ItsNotDistinct'), false);
   assert.equal(catalog.includes('2107998030536527892'), false);
@@ -269,7 +269,7 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   assert.match(html, /row-action--play/);
   assert.doesNotMatch(html, /ItsNotDistinct/);
   assert.equal(c.nodes.get('.tier-key--leak').hidden, true);
-  assert.match(c.nodes.get('#hero-kicker').textContent, /54 entries/);
+  assert.match(c.nodes.get('#hero-kicker').textContent, /55 entries/);
   c.location.hash = '#leak-fuerza-regida-suzuki';
   const suzukiHash = vm.runInContext('applyCatalogHash(data, state)', c);
   assert.equal(suzukiHash.scrollTo, 'ar-fuerza-regida-suzuki');
@@ -366,7 +366,7 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   assert.match(copy, /Official station preview/);
 });
 
-test('catalog sections are Trailers, The Album, Radio, Rockstar-named, Artist-reported', () => {
+test('catalog sections are Trailers, Original Score, The Album, Radio, Rockstar-named, Artist-reported', () => {
   const c = setup({ stubRender: false });
   const html = vm.runInContext(`(() => {
     state.tier = 'all';
@@ -375,21 +375,79 @@ test('catalog sections are Trailers, The Album, Radio, Rockstar-named, Artist-re
     return document.querySelector('#catalog').innerHTML;
   })()`, c);
   const order = [...html.matchAll(/id="tier-([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(order, ['official_promo', 'the_album', 'radio', 'rockstar_named', 'artist_reported']);
+  assert.deepEqual(order, ['official_promo', 'score', 'the_album', 'radio', 'rockstar_named', 'artist_reported']);
   assert.match(html, /id="tier-radio"/);
+  assert.match(html, /id="tier-score"/);
   assert.match(html, /<h2 class="tier-header-name">Trailers<\/h2>/);
+  assert.match(html, /<h2 class="tier-header-name">Original Score<\/h2>/);
   assert.match(html, /<h2 class="tier-header-name">Radio<\/h2>/);
   assert.match(html, /Music heard in Rockstar trailers and the Extended Look/);
-  const trailers = html.split('id="tier-the_album"')[0];
+  const trailers = html.split('id="tier-score"')[0];
   assert.match(trailers, /id="tier-official_promo"/);
+  assert.match(trailers, /id="t3-flower-in-a-hurricane"/);
+  assert.doesNotMatch(trailers, /id="score-justice-pusher"/);
   assert.doesNotMatch(trailers, /radio station/);
+  const score = html.split('id="tier-the_album"')[0].split('id="tier-score"')[1];
+  assert.match(score, /id="score-justice-pusher"/);
+  assert.doesNotMatch(score, /id="t3-flower-in-a-hurricane"/);
   assert.equal(html.includes('\u2014'), false);
   assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 'radio-flash-fm-good-ones'))", c), 'radio');
   assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 't3-flower-in-a-hurricane'))", c), 'official_promo');
+  assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 'score-justice-pusher'))", c), 'score');
   c.location.hash = '#tier-radio';
   const hash = vm.runInContext('applyCatalogHash(data, state)', c);
   assert.equal(hash.startRadio, false);
   assert.equal(c.state.anchorId, null);
+  c.location.hash = '#tier-score';
+  const scoreHash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(scoreHash.startRadio, false);
+  assert.equal(c.state.anchorId, null);
+});
+
+test('Justice Pusher Original Score row plays Spotify and keeps aggregator copy off the catalog', async () => {
+  const c = setup({ stubRender: false });
+  const entry = c.data.entries.find((e) => e.id === 'score-justice-pusher');
+  assert.ok(entry);
+  assert.equal(entry.tier, 'official_promo');
+  assert.equal(entry.appearanceKey, 'original_score');
+  assert.deepEqual(entry.artists, ['Justice', 'Gesaffelstein']);
+  assert.equal(entry.year, 2026);
+  assert.equal(entry.track, 'Pusher (feat. Gesaffelstein) [From GTAVI: Original Score]');
+  assert.equal(entry.spotifyTrackId, '6pxjskMHpE4QBmxoOX6O5H');
+  assert.equal(entry.youtubeVideoId, undefined);
+  assert.equal(entry.appleMusicUrl, 'https://music.apple.com/nz/album/pusher-from-gtavi-original-score/6826181370?i=6826181374');
+  assert.equal(entry.sources[0].url, 'https://open.spotify.com/album/6T1v6phBadT4WrAHWaybkZ');
+  const catalog = JSON.stringify(c.data);
+  assert.equal(/gry-online/i.test(catalog), false);
+  assert.equal(/50-track/i.test(catalog), false);
+  assert.equal(catalog.includes('11 Dec'), false);
+  assert.equal(`${entry.note}${entry.appearance}`.includes('\u2014'), false);
+  assert.match(entry.note, /Not heard in a trailer/);
+  assert.match(entry.note, /Rockstar has not posted about it yet/);
+  assert.match(entry.appearance, /GTA VI: Original Score/);
+  assert.match(entry.appearance, /28 Oct 2026 in NZ/);
+  assert.match(entry.appearance, /29 Oct elsewhere/);
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'score-justice-pusher'), data)", c), true);
+  const html = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'score-justice-pusher');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(html, /id="score-justice-pusher"/);
+  assert.match(html, /row-action--play/);
+  assert.match(html, /Play audio/);
+  assert.match(html, /GTA VI: Original Score, 28 Oct 2026 NZ \/ 29 Oct elsewhere/);
+  assert.match(html, /Official streaming page for this track/);
+  assert.doesNotMatch(html, /gry-online/i);
+  await c.player.playEntry('score-justice-pusher');
+  assert.equal(c.state.playingId, 'score-justice-pusher');
+  assert.equal(c.state.provider, 'spotify');
+  assert.equal(c.state.radioMode, false);
+  assert.equal(c.loads.length, 0);
+  c.location.hash = '#score-justice-pusher';
+  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(hash.scrollTo, 'score-justice-pusher');
+  assert.equal(c.state.expandedId, 'score-justice-pusher');
 });
 
 test('Launch Trailer cue label has no em dash or middle dot, and no unverified cue', () => {

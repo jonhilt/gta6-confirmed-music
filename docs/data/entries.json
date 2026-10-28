@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-28",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -422,6 +422,35 @@
         {
           "label": "Apple Music track",
           "url": "https://music.apple.com/us/album/flower-in-a-hurricane-from-gtavi/6819802963?i=6819802968"
+        }
+      ]
+    },
+    {
+      "id": "score-justice-pusher",
+      "artists": [
+        "Justice",
+        "Gesaffelstein"
+      ],
+      "track": "Pusher (feat. Gesaffelstein) [From GTAVI: Original Score]",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: Original Score single, released 28 Oct 2026 in NZ and 29 Oct elsewhere",
+      "appearanceKey": "original_score",
+      "note": "Not heard in a trailer. Rockstar has not posted about it yet.",
+      "spotifyTrackId": "6pxjskMHpE4QBmxoOX6O5H",
+      "appleMusicUrl": "https://music.apple.com/nz/album/pusher-from-gtavi-original-score/6826181370?i=6826181374",
+      "sources": [
+        {
+          "label": "Official Spotify single (Take-Two / Ed Banger, primary)",
+          "url": "https://open.spotify.com/album/6T1v6phBadT4WrAHWaybkZ"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/6pxjskMHpE4QBmxoOX6O5H"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/nz/album/pusher-from-gtavi-original-score/6826181370?i=6826181374"
         }
       ]
     },

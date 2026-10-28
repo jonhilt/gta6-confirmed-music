@@ -55,6 +55,7 @@ Each catalog row's `id` is also its page anchor (`https://leonidadrop.com/#<id>`
 
 `officialVideos` entries may set `embedRestricted: true` when YouTube blocks third-party embeds
 (Extended Look). Those rows show an age restriction message in the player, with a YouTube link at `cueSeconds`.
+Set `released` (ISO date) on each trailer or Extended Look video so the Trailers section sorts oldest first, then by `cueSeconds` inside that video. A new trailer still lands in date order even if you append the row at the end of `entries`.
 
 Artist blurbs live under `artists` in the same file (not inside each row). Keep them to two sentences and a `cite` URL.
 

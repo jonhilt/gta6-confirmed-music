@@ -404,6 +404,90 @@ test('catalog sections are Trailers, Original Score, The Album, Radio, Rockstar-
   assert.equal(c.state.anchorId, null);
 });
 
+function catalogSectionChunk(html, sectionId, nextSectionId) {
+  return html.split(`id="${sectionId}"`)[1].split(`id="${nextSectionId}"`)[0];
+}
+
+function catalogRowIds(html) {
+  return [...html.matchAll(/<article class="index-row[^"]*" id="([^"]+)"/g)].map((match) => match[1]);
+}
+
+function catalogRowNums(html) {
+  return [...html.matchAll(/<span class="row-num">(\d+)<\/span>/g)].map((match) => match[1]);
+}
+
+test('Trailers list oldest videos first, keeps cue order, and numbers rows to match', () => {
+  const c = setup({ stubRender: false });
+  const html = vm.runInContext(`(() => {
+    state.tier = 'all';
+    state.query = '';
+    render(data, state);
+    return document.querySelector('#catalog').innerHTML;
+  })()`, c);
+  const trailers = catalogSectionChunk(html, 'tier-official_promo', 'tier-score');
+  const trailerIds = catalogRowIds(trailers);
+  assert.deepEqual(trailerIds, [
+    't1-love-is-a-long-road',
+    't2-thunder-island',
+    't2-child-support',
+    't2-everybody-have-fun-tonight',
+    't2-talkin-to-myself-again',
+    't2-hot-together',
+    'el-pop-bottles',
+    'el-pound-town',
+    'el-skrilla',
+    'el-let-your-love-flow',
+    'el-love-bites',
+    'el-people-are-people',
+    'el-but-i-think-its-a-dream',
+    'el-cars-and-girls',
+    'el-off-the-grid',
+    'el-devil-woman',
+    'el-se-me-nota',
+    'el-against-all-odds',
+    'el-mine-o-mine',
+    'el-inner-light',
+    't3-flower-in-a-hurricane',
+  ]);
+  assert.deepEqual(catalogRowNums(trailers), trailerIds.map((_, index) => String(index + 1).padStart(2, '0')));
+  assert.equal(trailerIds[0], 't1-love-is-a-long-road');
+  assert.equal(trailerIds.at(-1), 't3-flower-in-a-hurricane');
+  assert.deepEqual(catalogRowIds(catalogSectionChunk(html, 'tier-score', 'tier-the_album')), ['score-justice-pusher']);
+  assert.equal(catalogRowIds(catalogSectionChunk(html, 'tier-the_album', 'tier-radio'))[0], 'album-gta-vi-the-album');
+  assert.equal(catalogRowIds(catalogSectionChunk(html, 'tier-radio', 'tier-rockstar_named'))[0], 'radio-cocoteo-fm-eoo');
+  assert.deepEqual(catalogRowIds(catalogSectionChunk(html, 'tier-rockstar_named', 'tier-artist_reported')), ['rs-real-dimez']);
+
+  c.data.officialVideos.trailer4 = {
+    label: 'Rockstar Trailer 4',
+    url: 'https://www.youtube.com/watch?v=abcdefghijk',
+    released: '2026-11-01',
+  };
+  c.data.entries.unshift({
+    id: 't4-future-cue',
+    artists: ['Future Cue'],
+    track: 'Future Cue',
+    tier: 'official_promo',
+    appearance: 'Trailer 4 (1 Nov 2026)',
+    appearanceKey: 'trailer4',
+    cueSeconds: 12,
+    sources: [],
+  });
+  const withFuture = vm.runInContext(`(() => {
+    state.tier = 'all';
+    state.query = '';
+    render(data, state);
+    return document.querySelector('#catalog').innerHTML;
+  })()`, c);
+  const futureIds = catalogRowIds(catalogSectionChunk(withFuture, 'tier-official_promo', 'tier-score'));
+  assert.equal(futureIds[0], 't1-love-is-a-long-road');
+  assert.equal(futureIds.at(-2), 't3-flower-in-a-hurricane');
+  assert.equal(futureIds.at(-1), 't4-future-cue');
+  c.location.hash = '#t3-flower-in-a-hurricane';
+  const hash = vm.runInContext('applyCatalogHash(data, state)', c);
+  assert.equal(hash.scrollTo, 't3-flower-in-a-hurricane');
+  assert.equal(c.state.anchorId, 't3-flower-in-a-hurricane');
+});
+
 test('Justice Pusher Original Score row plays Spotify and keeps aggregator copy off the catalog', async () => {
   const c = setup({ stubRender: false });
   const entry = c.data.entries.find((e) => e.id === 'score-justice-pusher');

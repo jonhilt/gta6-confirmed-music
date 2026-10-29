@@ -4,20 +4,24 @@
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
-      "url": "https://www.youtube.com/watch?v=QdBZY2fkU-0"
+      "url": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
+      "released": "2023-12-04"
     },
     "trailer2": {
       "label": "Rockstar Trailer 2",
-      "url": "https://www.youtube.com/watch?v=VQRLujxTm3c"
+      "url": "https://www.youtube.com/watch?v=VQRLujxTm3c",
+      "released": "2025-05-06"
     },
     "extendedLook": {
       "label": "Rockstar Extended Look",
       "url": "https://www.youtube.com/watch?v=tJbzMqJGH4k",
-      "embedRestricted": true
+      "embedRestricted": true,
+      "released": "2026-08-27"
     },
     "trailer3": {
       "label": "Rockstar Launch Trailer",
-      "url": "https://www.youtube.com/watch?v=rz1B4B2yBZY"
+      "url": "https://www.youtube.com/watch?v=rz1B4B2yBZY",
+      "released": "2026-10-15"
     }
   },
   "sharedSources": {

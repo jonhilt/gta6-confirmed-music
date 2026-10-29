@@ -587,6 +587,55 @@ function catalogSection(entry) {
   return entry.tier;
 }
 
+const MONTH_INDEX = {
+  jan: 0,
+  feb: 1,
+  mar: 2,
+  apr: 3,
+  may: 4,
+  jun: 5,
+  jul: 6,
+  aug: 7,
+  sep: 8,
+  oct: 9,
+  nov: 10,
+  dec: 11,
+};
+
+function parseAppearanceDate(text) {
+  const match = String(text || "").match(/\b(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})\b/i);
+  if (!match) return null;
+  const month = MONTH_INDEX[match[2].slice(0, 3).toLowerCase()];
+  if (month == null) return null;
+  return Date.UTC(Number(match[3]), month, Number(match[1]));
+}
+
+function trailerReleasedAt(entry, data) {
+  const rec = data?.officialVideos?.[entry?.appearanceKey];
+  if (rec?.released) {
+    const fromVideo = Date.parse(rec.released);
+    if (!Number.isNaN(fromVideo)) return fromVideo;
+  }
+  return parseAppearanceDate(entry?.appearance) ?? Number.POSITIVE_INFINITY;
+}
+
+function sortTrailerRows(rows, data) {
+  return rows
+    .map((entry, index) => ({ entry, index }))
+    .sort((a, b) => {
+      const byDate = trailerReleasedAt(a.entry, data) - trailerReleasedAt(b.entry, data);
+      if (byDate) return byDate;
+      const cueA = a.entry.cueSeconds;
+      const cueB = b.entry.cueSeconds;
+      const aHasCue = cueA != null && !Number.isNaN(Number(cueA));
+      const bHasCue = cueB != null && !Number.isNaN(Number(cueB));
+      if (aHasCue && bHasCue && Number(cueA) !== Number(cueB)) return Number(cueA) - Number(cueB);
+      if (aHasCue !== bHasCue) return aHasCue ? -1 : 1;
+      return a.index - b.index;
+    })
+    .map((item) => item.entry);
+}
+
 function filteredEntries(data, state) {
   return data.entries.filter((e) => {
     if (state.tier !== "all" && catalogSection(e) !== state.tier) return false;
@@ -663,6 +712,8 @@ function render(data, state, options = {}) {
             </div>`
           : waitingBlock;
       }
+    } else if (tier === "official_promo") {
+      bodyHtml = `<div class="index-list">${head}${renderRows(sortTrailerRows(rows, state.data))}</div>`;
     } else if (tier === "radio") {
       const stations = state.data.stations || {};
       const seen = new Set();

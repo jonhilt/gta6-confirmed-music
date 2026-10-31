@@ -52,6 +52,7 @@ test('full-track radio visits all official YouTube tracks in catalog order and w
   const c = setup();
   const expected = c.data.entries.filter((entry) => entry.youtubeVideoId);
   assert.ok(expected.some((entry) => entry.id === 'radio-flash-fm-midnight-sun-girls-trip'));
+  assert.ok(expected.some((entry) => entry.id === 'score-justice-pusher'));
   await c.player.startRadio();
   for (const entry of expected) {
     assert.equal(c.state.playingId, entry.id);
@@ -488,7 +489,7 @@ test('Trailers list oldest videos first, keeps cue order, and numbers rows to ma
   assert.equal(c.state.anchorId, 't3-flower-in-a-hurricane');
 });
 
-test('Justice Pusher Original Score row plays Spotify and keeps aggregator copy off the catalog', async () => {
+test('Justice Pusher Original Score row plays the official YouTube video and keeps aggregator copy off the catalog', async () => {
   const c = setup({ stubRender: false });
   const entry = c.data.entries.find((e) => e.id === 'score-justice-pusher');
   assert.ok(entry);
@@ -498,16 +499,28 @@ test('Justice Pusher Original Score row plays Spotify and keeps aggregator copy 
   assert.equal(entry.year, 2026);
   assert.equal(entry.track, 'Pusher (feat. Gesaffelstein) [From GTAVI: Original Score]');
   assert.equal(entry.spotifyTrackId, '6pxjskMHpE4QBmxoOX6O5H');
-  assert.equal(entry.youtubeVideoId, undefined);
+  assert.equal(entry.youtubeVideoId, 'Ip_Kc3EQiOI');
   assert.equal(entry.appleMusicUrl, 'https://music.apple.com/nz/album/pusher-from-gtavi-original-score/6826181370?i=6826181374');
-  assert.equal(entry.sources[0].url, 'https://open.spotify.com/album/6T1v6phBadT4WrAHWaybkZ');
+  assert.deepEqual(entry.sources.map((source) => source.url), [
+    'https://x.com/RockstarGames/status/2115790782711930978',
+    'https://www.rockstargames.com/VI/music',
+    'https://justice.lnk.to/gtaoriginalscore',
+    'https://open.spotify.com/track/6pxjskMHpE4QBmxoOX6O5H',
+    'https://www.youtube.com/watch?v=Ip_Kc3EQiOI',
+    'https://music.apple.com/nz/album/pusher-from-gtavi-original-score/6826181370?i=6826181374',
+  ]);
+  assert.equal(entry.sources.filter((source) => /open\.spotify\.com/.test(source.url)).length, 1);
+  assert.equal(entry.sources.some((source) => source.url.includes('6T1v6phBadT4WrAHWaybkZ')), false);
+  const albumSource = entry.sources.find((source) => source.url === 'https://justice.lnk.to/gtaoriginalscore');
+  assert.match(albumSource.label, /Grand Theft Auto VI: Original Score/);
+  assert.match(albumSource.label, /30 tracks plus digital bonus tracks/);
+  assert.match(albumSource.label, /11 Dec 2026/);
   const catalog = JSON.stringify(c.data);
   assert.equal(/gry-online/i.test(catalog), false);
   assert.equal(/50-track/i.test(catalog), false);
-  assert.equal(catalog.includes('11 Dec'), false);
-  assert.equal(`${entry.note}${entry.appearance}`.includes('\u2014'), false);
-  assert.match(entry.note, /Not heard in a trailer/);
-  assert.match(entry.note, /Rockstar has not posted about it yet/);
+  assert.equal(/50 tracks/i.test(catalog), false);
+  assert.equal(`${entry.note}${entry.appearance}${entry.sources.map((source) => source.label).join('')}`.includes('\u2014'), false);
+  assert.equal(entry.note, 'Not heard in a trailer. Rockstar announced it as an Original Score single on 29 Oct 2026 and lists it on the official GTA VI music page.');
   assert.match(entry.appearance, /GTA VI: Original Score/);
   assert.match(entry.appearance, /28 Oct 2026 in NZ/);
   assert.match(entry.appearance, /29 Oct elsewhere/);
@@ -519,15 +532,22 @@ test('Justice Pusher Original Score row plays Spotify and keeps aggregator copy 
   })()`, c);
   assert.match(html, /id="score-justice-pusher"/);
   assert.match(html, /row-action--play/);
-  assert.match(html, /Play audio/);
+  assert.match(html, /<span class="row-action-label">Play<\/span>/);
+  assert.doesNotMatch(html, /Play audio/);
   assert.match(html, /GTA VI: Original Score, 28 Oct 2026 NZ \/ 29 Oct elsewhere/);
+  assert.match(html, /Official publisher announcement/);
+  assert.match(html, /Official publisher music page/);
+  assert.match(html, /Official smart link for the Original Score album/);
   assert.match(html, /Official streaming page for this track/);
+  assert.match(html, /Official video for this track/);
+  assert.doesNotMatch(html, /Official publisher station page/);
   assert.doesNotMatch(html, /gry-online/i);
+  assert.doesNotMatch(html, /6T1v6phBadT4WrAHWaybkZ/);
   await c.player.playEntry('score-justice-pusher');
   assert.equal(c.state.playingId, 'score-justice-pusher');
-  assert.equal(c.state.provider, 'spotify');
-  assert.equal(c.state.radioMode, false);
-  assert.equal(c.loads.length, 0);
+  assert.equal(c.state.provider, 'youtube');
+  assert.equal(c.state.videoSource, 'full');
+  assert.equal(c.loaded.videoId, 'Ip_Kc3EQiOI');
   c.location.hash = '#score-justice-pusher';
   const hash = vm.runInContext('applyCatalogHash(data, state)', c);
   assert.equal(hash.scrollTo, 'score-justice-pusher');

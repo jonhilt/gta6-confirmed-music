@@ -275,7 +275,11 @@ function sourceRole(label, entry) {
   }
   if (lower.includes("dazed")) return "Primary interview source.";
   if (lower.includes("rockstar youtube")) return "Official publisher video.";
-  if (lower.includes("gta vi music page")) return "Official publisher station page.";
+  if (lower.includes("gta vi music page")) {
+    return lower.includes("preview")
+      ? "Official publisher station page."
+      : "Official publisher music page.";
+  }
   if (lower.includes("rockstar newswire")) return "Official publisher announcement.";
   if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
     return "Official publisher announcement.";
@@ -293,7 +297,11 @@ function sourceRole(label, entry) {
     return "Official video for this track.";
   }
   if (lower.includes("atlantic records youtube")) return "Official label video for this debut single.";
-  if (lower.includes("linkfire hub")) return "Official smart link for this debut single.";
+  if (lower.includes("linkfire hub")) {
+    return lower.includes("original score")
+      ? "Official smart link for the Original Score album."
+      : "Official smart link for this debut single.";
+  }
   if (lower.includes("atlantic records")) return "Label announcement (track titles).";
   if (lower.includes("push square") || lower.includes("ign")) return "Secondary news report.";
   return "Supporting citation.";

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-28",
+  "updated": "2026-10-31",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -440,17 +440,30 @@
       "tier": "official_promo",
       "appearance": "GTA VI: Original Score single, released 28 Oct 2026 in NZ and 29 Oct elsewhere",
       "appearanceKey": "original_score",
-      "note": "Not heard in a trailer. Rockstar has not posted about it yet.",
+      "note": "Not heard in a trailer. Rockstar announced it as an Original Score single on 29 Oct 2026 and lists it on the official GTA VI music page.",
       "spotifyTrackId": "6pxjskMHpE4QBmxoOX6O5H",
+      "youtubeVideoId": "Ip_Kc3EQiOI",
       "appleMusicUrl": "https://music.apple.com/nz/album/pusher-from-gtavi-original-score/6826181370?i=6826181374",
       "sources": [
         {
-          "label": "Official Spotify single (Take-Two / Ed Banger, primary)",
-          "url": "https://open.spotify.com/album/6T1v6phBadT4WrAHWaybkZ"
+          "label": "Rockstar Games on X, Original Score and Pusher single (primary)",
+          "url": "https://x.com/RockstarGames/status/2115790782711930978"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (Grand Theft Auto VI: Original Score, 30 tracks plus digital bonus tracks, 11 Dec 2026)",
+          "url": "https://justice.lnk.to/gtaoriginalscore"
         },
         {
           "label": "Official Spotify track",
           "url": "https://open.spotify.com/track/6pxjskMHpE4QBmxoOX6O5H"
+        },
+        {
+          "label": "Official video on YouTube (Justice)",
+          "url": "https://www.youtube.com/watch?v=Ip_Kc3EQiOI"
         },
         {
           "label": "Apple Music track",

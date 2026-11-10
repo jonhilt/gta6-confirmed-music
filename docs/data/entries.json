@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-31",
+  "updated": "2026-11-10",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -1394,6 +1394,51 @@
         {
           "label": "Apple Music track",
           "url": "https://music.apple.com/us/album/dont-chart/6812476961?i=6812477308"
+        }
+      ]
+    },
+    {
+      "id": "album-tove-lo-blood-in-your-eyes",
+      "artists": [
+        "Tove Lo"
+      ],
+      "track": "Blood In Your Eyes",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album single, released 10 Nov 2026. Featured in Rockstar's Pre-Load Now video.",
+      "appearanceKey": "the_album",
+      "spotifyTrackId": "4h3tY2zV4easaHEAbHVmgj",
+      "youtubeVideoId": "UqdOZmMQfSk",
+      "appleMusicUrl": "https://music.apple.com/us/album/blood-in-your-eyes-from-gtavi-the-album/6831700338?i=6831700450",
+      "note": "Rockstar announced Blood In Your Eyes as a GTA VI: The Album single on X on 10 Nov 2026 and says it is featured in the Pre-Load Now video. It is listed under The Album on the official GTA VI music page. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, Blood In Your Eyes single and Pre-Load Now video (primary)",
+          "url": "https://x.com/RockstarGames/status/2120172512105357644"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Rockstar YouTube, Pre-Load Now video (description names the single)",
+          "url": "https://www.youtube.com/watch?v=_yl5ELcmugI"
+        },
+        {
+          "label": "Official Linkfire hub (The Album single)",
+          "url": "https://gtavi-thealbum.lnk.to/bloodinyoureyes"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=UqdOZmMQfSk"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4h3tY2zV4easaHEAbHVmgj"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/blood-in-your-eyes-from-gtavi-the-album/6831700338?i=6831700450"
         }
       ]
     },

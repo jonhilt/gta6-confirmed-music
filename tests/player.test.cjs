@@ -53,6 +53,7 @@ test('full-track radio visits all official YouTube tracks in catalog order and w
   const expected = c.data.entries.filter((entry) => entry.youtubeVideoId);
   assert.ok(expected.some((entry) => entry.id === 'radio-flash-fm-midnight-sun-girls-trip'));
   assert.ok(expected.some((entry) => entry.id === 'score-justice-pusher'));
+  assert.ok(expected.some((entry) => entry.id === 'album-tove-lo-blood-in-your-eyes'));
   await c.player.startRadio();
   for (const entry of expected) {
     assert.equal(c.state.playingId, entry.id);
@@ -233,8 +234,8 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   const c = setup({ stubRender: false });
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
   assert.equal(leaks.length, 0);
-  assert.equal(c.data.entries.length, 55);
-  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 55);
+  assert.equal(c.data.entries.length, 56);
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 56);
   const catalog = JSON.stringify(c.data);
   assert.equal(catalog.includes('ItsNotDistinct'), false);
   assert.equal(catalog.includes('2107998030536527892'), false);
@@ -270,7 +271,7 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   assert.match(html, /row-action--play/);
   assert.doesNotMatch(html, /ItsNotDistinct/);
   assert.equal(c.nodes.get('.tier-key--leak').hidden, true);
-  assert.match(c.nodes.get('#hero-kicker').textContent, /55 entries/);
+  assert.match(c.nodes.get('#hero-kicker').textContent, /56 entries/);
   c.location.hash = '#leak-fuerza-regida-suzuki';
   const suzukiHash = vm.runInContext('applyCatalogHash(data, state)', c);
   assert.equal(suzukiHash.scrollTo, 'ar-fuerza-regida-suzuki');
@@ -348,7 +349,7 @@ test('radio and leak copy keeps official ids without em dashes or leak audio lin
   const c = setup();
   const radio = c.data.entries.filter((e) => String(e.appearanceKey).startsWith('radio_'));
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
-  const singles = c.data.entries.filter((e) => ['ar-fuerza-regida-suzuki', 'ar-cardi-b-dont-chart'].includes(e.id));
+  const singles = c.data.entries.filter((e) => ['ar-fuerza-regida-suzuki', 'ar-cardi-b-dont-chart', 'album-tove-lo-blood-in-your-eyes'].includes(e.id));
   const stations = Object.values(c.data.stations);
   for (const entry of [...radio, ...leaks, ...singles]) {
     assert.equal(`${entry.note || ''}${entry.previewSource || ''}`.includes('\u2014'), false);
@@ -573,4 +574,78 @@ test('Launch Trailer cue label has no em dash or middle dot, and no unverified c
   assert.match(html, /Launch Trailer, 15 Oct 2026/);
   assert.match(html, /Also on The Album/);
   assert.doesNotMatch(html, /icy-lhqJhMQ/);
+});
+
+test('Tove Lo Blood In Your Eyes is an Album official promo single with Atlantic YouTube Play, not a trailer', async () => {
+  const c = setup({ stubRender: false });
+  const entry = c.data.entries.find((e) => e.id === 'album-tove-lo-blood-in-your-eyes');
+  const flower = c.data.entries.find((e) => e.id === 't3-flower-in-a-hurricane');
+  assert.ok(entry);
+  assert.ok(flower);
+  assert.equal(c.data.updated, '2026-11-10');
+  assert.deepEqual(Object.keys(c.data.officialVideos), ['trailer1', 'trailer2', 'extendedLook', 'trailer3']);
+  assert.equal(JSON.stringify(c.data.officialVideos).includes('_yl5ELcmugI'), false);
+  assert.equal(JSON.stringify(c.data.officialVideos).includes('TIPlpDAsfWo'), false);
+  assert.equal(JSON.stringify(c.data).includes('0lI_KzhfIBk'), false);
+  assert.equal(JSON.stringify(c.data).includes('TIPlpDAsfWo'), false);
+  assert.equal(/gry-online/i.test(JSON.stringify(c.data)), false);
+  assert.equal(/itsnotdistinct/i.test(JSON.stringify(c.data)), false);
+  assert.equal(entry.tier, 'official_promo');
+  assert.equal(entry.appearanceKey, 'the_album');
+  assert.deepEqual(entry.artists, ['Tove Lo']);
+  assert.equal(entry.track, 'Blood In Your Eyes');
+  assert.equal(entry.year, 2026);
+  assert.equal(entry.cueSeconds, undefined);
+  assert.equal(entry.spotifyTrackId, '4h3tY2zV4easaHEAbHVmgj');
+  assert.equal(entry.youtubeVideoId, 'UqdOZmMQfSk');
+  assert.equal(entry.appleMusicUrl, 'https://music.apple.com/us/album/blood-in-your-eyes-from-gtavi-the-album/6831700338?i=6831700450');
+  assert.equal(entry.appearance, "GTA VI: The Album single, released 10 Nov 2026. Featured in Rockstar's Pre-Load Now video.");
+  assert.equal(entry.note, 'Rockstar announced Blood In Your Eyes as a GTA VI: The Album single on X on 10 Nov 2026 and says it is featured in the Pre-Load Now video. It is listed under The Album on the official GTA VI music page. Official Atlantic video and Spotify track.');
+  assert.deepEqual(entry.sources.map((source) => source.url), [
+    'https://x.com/RockstarGames/status/2120172512105357644',
+    'https://www.rockstargames.com/VI/music',
+    'https://www.youtube.com/watch?v=_yl5ELcmugI',
+    'https://gtavi-thealbum.lnk.to/bloodinyoureyes',
+    'https://www.youtube.com/watch?v=UqdOZmMQfSk',
+    'https://open.spotify.com/track/4h3tY2zV4easaHEAbHVmgj',
+    'https://music.apple.com/us/album/blood-in-your-eyes-from-gtavi-the-album/6831700338?i=6831700450',
+  ]);
+  assert.equal(`${entry.note}${entry.appearance}${entry.sources.map((source) => `${source.label}${source.url}`).join('')}`.includes('\u2014'), false);
+  assert.equal(c.data.artists['Tove Lo'], undefined);
+  assert.equal(flower.appearanceKey, 'trailer3');
+  assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 'album-tove-lo-blood-in-your-eyes'))", c), 'the_album');
+  assert.equal(vm.runInContext("catalogSection(data.entries.find(e => e.id === 't3-flower-in-a-hurricane'))", c), 'official_promo');
+  assert.equal(vm.runInContext("canPlay(data.entries.find(e => e.id === 'album-tove-lo-blood-in-your-eyes'), data)", c), true);
+  const html = vm.runInContext(`(() => {
+    state.tier = 'all';
+    state.query = '';
+    render(data, state);
+    return document.querySelector('#catalog').innerHTML;
+  })()`, c);
+  const trailers = catalogSectionChunk(html, 'tier-official_promo', 'tier-score');
+  const album = catalogSectionChunk(html, 'tier-the_album', 'tier-radio');
+  assert.match(album, /id="album-tove-lo-blood-in-your-eyes"/);
+  assert.doesNotMatch(trailers, /id="album-tove-lo-blood-in-your-eyes"/);
+  assert.match(trailers, /id="t3-flower-in-a-hurricane"/);
+  assert.doesNotMatch(album, /id="t3-flower-in-a-hurricane"/);
+  const row = vm.runInContext(`(() => {
+    const entry = data.entries.find(e => e.id === 'album-tove-lo-blood-in-your-eyes');
+    state.expandedId = entry.id;
+    return renderRow(entry, 1, state);
+  })()`, c);
+  assert.match(row, /row-action--play/);
+  assert.match(row, /<span class="row-action-label">Play<\/span>/);
+  assert.doesNotMatch(row, /Play audio/);
+  assert.match(row, /Official publisher announcement/);
+  assert.match(row, /Official publisher music page/);
+  assert.match(row, /Official publisher video/);
+  assert.match(row, /Official smart link for this debut single/);
+  assert.match(row, /Official label video for this debut single/);
+  assert.match(row, /Official streaming page for this debut single/);
+  assert.doesNotMatch(row, /\u2014/);
+  await c.player.playEntry('album-tove-lo-blood-in-your-eyes');
+  assert.equal(c.state.playingId, 'album-tove-lo-blood-in-your-eyes');
+  assert.equal(c.state.provider, 'youtube');
+  assert.equal(c.state.videoSource, 'full');
+  assert.equal(c.loaded.videoId, 'UqdOZmMQfSk');
 });

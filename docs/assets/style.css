@@ -476,6 +476,14 @@ input {
   color: var(--teal);
 }
 
+.tier-section--the_album .subsection {
+  margin-top: 1.35rem;
+}
+
+.tier-section--the_album .subsection-title {
+  color: var(--magenta);
+}
+
 .tier-description {
   margin: 0;
   color: var(--muted);

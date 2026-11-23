@@ -72,7 +72,7 @@ test('trailer choice persists and Extended Look keeps its restriction overlay', 
   assert.equal(c.state.videoSource, 'trailer');
   assert.equal(c.state.radioMode, false);
   await c.player.playNextVideo();
-  assert.equal(c.state.playingId, 'ar-travis-scott');
+  assert.equal(c.state.playingId, 'album-justice-starting-from-zero');
   assert.equal(c.state.sourcePreference, 'trailer');
 });
 
@@ -234,8 +234,8 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   const c = setup({ stubRender: false });
   const leaks = c.data.entries.filter((e) => e.tier === 'unconfirmed_leak');
   assert.equal(leaks.length, 0);
-  assert.equal(c.data.entries.length, 56);
-  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 56);
+  assert.equal(c.data.entries.length, 101);
+  assert.equal(c.data.entries.filter((e) => e.tier !== 'unconfirmed_leak').length, 101);
   const catalog = JSON.stringify(c.data);
   assert.equal(catalog.includes('ItsNotDistinct'), false);
   assert.equal(catalog.includes('2107998030536527892'), false);
@@ -271,7 +271,7 @@ test('Rockstar album singles replace leak rows, alias old hashes, and hide the e
   assert.match(html, /row-action--play/);
   assert.doesNotMatch(html, /ItsNotDistinct/);
   assert.equal(c.nodes.get('.tier-key--leak').hidden, true);
-  assert.match(c.nodes.get('#hero-kicker').textContent, /56 entries/);
+  assert.match(c.nodes.get('#hero-kicker').textContent, /101 entries/);
   c.location.hash = '#leak-fuerza-regida-suzuki';
   const suzukiHash = vm.runInContext('applyCatalogHash(data, state)', c);
   assert.equal(suzukiHash.scrollTo, 'ar-fuerza-regida-suzuki');
@@ -582,7 +582,7 @@ test('Tove Lo Blood In Your Eyes is an Album official promo single with Atlantic
   const flower = c.data.entries.find((e) => e.id === 't3-flower-in-a-hurricane');
   assert.ok(entry);
   assert.ok(flower);
-  assert.equal(c.data.updated, '2026-11-10');
+  assert.equal(c.data.updated, '2026-11-23');
   assert.deepEqual(Object.keys(c.data.officialVideos), ['trailer1', 'trailer2', 'extendedLook', 'trailer3']);
   assert.equal(JSON.stringify(c.data.officialVideos).includes('_yl5ELcmugI'), false);
   assert.equal(JSON.stringify(c.data.officialVideos).includes('TIPlpDAsfWo'), false);
@@ -599,7 +599,8 @@ test('Tove Lo Blood In Your Eyes is an Album official promo single with Atlantic
   assert.equal(entry.spotifyTrackId, '4h3tY2zV4easaHEAbHVmgj');
   assert.equal(entry.youtubeVideoId, 'UqdOZmMQfSk');
   assert.equal(entry.appleMusicUrl, 'https://music.apple.com/us/album/blood-in-your-eyes-from-gtavi-the-album/6831700338?i=6831700450');
-  assert.equal(entry.appearance, "GTA VI: The Album single, released 10 Nov 2026. Featured in Rockstar's Pre-Load Now video.");
+  assert.match(entry.appearance, /track 22/);
+  assert.equal(entry.appearance, "GTA VI: The Album, track 22 (single, released 10 Nov 2026). Featured in Rockstar's Pre-Load Now video.");
   assert.equal(entry.note, 'Rockstar announced Blood In Your Eyes as a GTA VI: The Album single on X on 10 Nov 2026 and says it is featured in the Pre-Load Now video. It is listed under The Album on the official GTA VI music page. Official Atlantic video and Spotify track.');
   assert.deepEqual(entry.sources.map((source) => source.url), [
     'https://x.com/RockstarGames/status/2120172512105357644',
@@ -639,9 +640,9 @@ test('Tove Lo Blood In Your Eyes is an Album official promo single with Atlantic
   assert.match(row, /Official publisher announcement/);
   assert.match(row, /Official publisher music page/);
   assert.match(row, /Official publisher video/);
-  assert.match(row, /Official smart link for this debut single/);
-  assert.match(row, /Official label video for this debut single/);
-  assert.match(row, /Official streaming page for this debut single/);
+  assert.match(row, /Official smart link for this album track/);
+  assert.match(row, /Official label video for this album track/);
+  assert.match(row, /Official streaming page for this album track/);
   assert.doesNotMatch(row, /\u2014/);
   await c.player.playEntry('album-tove-lo-blood-in-your-eyes');
   assert.equal(c.state.playingId, 'album-tove-lo-blood-in-your-eyes');
@@ -649,3 +650,125 @@ test('Tove Lo Blood In Your Eyes is an Album official promo single with Atlantic
   assert.equal(c.state.videoSource, 'full');
   assert.equal(c.loaded.videoId, 'UqdOZmMQfSk');
 });
+
+const THE_ALBUM_SECTION_ORDER = [
+  'album-gta-vi-the-album',
+  'album-justice-starting-from-zero',
+  'ar-yung-lean',
+  'album-playboi-carti-ahh-yea',
+  'ar-travis-scott',
+  'ar-ca7riel-paco-amoroso',
+  'album-dua-lipa-go-easy',
+  'ar-morgan-wallen',
+  'album-jhayco-x',
+  'ar-fuerza-regida-suzuki',
+  'ar-rauw-alejandro',
+  'album-a-boogie-wit-da-hoodie-dance-with-me',
+  'album-burna-boy-bigger',
+  'album-gunna-count-up',
+  'ar-kodak-black',
+  'album-young-thug-wakin-up-flex',
+  'album-tee-grizzley-ikyfl',
+  'ar-don-toliver',
+  'ar-cardi-b-dont-chart',
+  'album-jt-gma',
+  'album-jennie-power-trip',
+  'album-tove-lo-blood-in-your-eyes',
+  'album-zara-larsson-fast-emotion',
+  'album-camila-cabello-sweet-like-candy',
+  'album-fcukers-only-one',
+  'album-arca-sandunguea',
+  'album-rina-sawayama-trdwfe',
+  'album-rose-gray-all-again',
+  'album-lana-del-rey-crazy-for-you',
+  'album-kali-uchis-largate',
+  'album-omar-apollo-no-me-busques',
+  'ar-keith-richards',
+  'album-jesse-johnson-stone-kold-krazy-luuv',
+  'album-stanley-clarke-overtown-lights',
+  'album-travis-scott-burn-this-shit-down',
+  'album-slayyyter-internet-star',
+  'album-the-dare-interesting',
+  'album-anitta-touch-go',
+  'album-offset-i-just-came-to-pop-it',
+  'album-hxg-rckstrliving',
+  'album-21-savage-cookin',
+  'album-pooh-shiesty-got-dat',
+  'album-young-nudy-don-da-da',
+  'album-sofaygo-cashout',
+  'album-real-dimez-cooties',
+  'album-latto-50-bands',
+  'album-kodak-black-tet-kale-bobis',
+  'album-denzel-curry-fla-flow',
+  'album-neil-frances-you-move-me',
+  'album-chris-stassy-dont-play-around',
+  'album-health-nightmare',
+  'album-power-trip-mutual-death-warrant',
+  'album-overmono-granforma',
+  'album-overmono-windsor-drop',
+  'album-overmono-eighty-eight-comet',
+  'album-overmono-banshee',
+  'album-overmono-welcome-to-leonida',
+];
+
+test('The Album section follows track order, keeps Flower under Trailers, and splits Deluxe Edition', () => {
+  const c = setup({ stubRender: false });
+  const html = vm.runInContext(`(() => {
+    state.tier = 'all';
+    state.query = '';
+    render(data, state);
+    return document.querySelector('#catalog').innerHTML;
+  })()`, c);
+  const album = catalogSectionChunk(html, 'tier-the_album', 'tier-radio');
+  const trailers = catalogSectionChunk(html, 'tier-official_promo', 'tier-score');
+  assert.deepEqual(catalogRowIds(album), THE_ALBUM_SECTION_ORDER);
+  assert.doesNotMatch(album, /id="t3-flower-in-a-hurricane"/);
+  assert.match(trailers, /id="t3-flower-in-a-hurricane"/);
+  assert.match(album, /<h3 class="subsection-title">Deluxe Edition<\/h3>/);
+  assert.match(album, /Tracks 35 to 57, released 23 Nov 2026/);
+  const justice = c.data.entries.find((e) => e.id === 'album-justice-starting-from-zero');
+  const deluxeFirst = c.data.entries.find((e) => e.id === 'album-travis-scott-burn-this-shit-down');
+  const product = c.data.entries.find((e) => e.id === 'album-gta-vi-the-album');
+  assert.equal(justice.albumTrack, 1);
+  assert.equal(deluxeFirst.albumTrack, 35);
+  assert.equal(product.albumTrack, undefined);
+  const justiceCue = vm.runInContext("formatCueLine(data.entries.find(e => e.id === 'album-justice-starting-from-zero'), data)", c);
+  const deluxeCue = vm.runInContext("formatCueLine(data.entries.find(e => e.id === 'album-travis-scott-burn-this-shit-down'), data)", c);
+  const productCue = vm.runInContext("formatCueLine(data.entries.find(e => e.id === 'album-gta-vi-the-album'), data)", c);
+  assert.equal(justiceCue, 'The Album · 20 Nov 2026');
+  assert.equal(deluxeCue, 'The Album (Deluxe Edition) · 23 Nov 2026');
+  assert.equal(productCue, 'The Album · 20 Nov 2026 / Deluxe Edition · 23 Nov 2026');
+  assert.match(album, /including the Deluxe Edition/);
+  assert.doesNotMatch(album, /debut singles/);
+  const kodak = c.data.entries.find((e) => e.id === 'ar-kodak-black');
+  const don = c.data.entries.find((e) => e.id === 'ar-don-toliver');
+  assert.equal(kodak.track, "Let's Rock");
+  assert.equal(kodak.albumTrack, 15);
+  assert.equal(don.track, 'TF?');
+  assert.equal(don.albumTrack, 18);
+});
+
+test('album sources stay on primary Rockstar and storefront links, not news aggregators', () => {
+  const c = setup();
+  const blocked = /themusicuniverse|gematsu|gamingbible|polygon\.com|ign\.com|nme\.com|musically\.com/i;
+  const shared = c.data.sharedSources.the_album || [];
+  assert.equal(shared.length > 0, true);
+  for (const source of shared) {
+    assert.equal(blocked.test(source.url), false, source.url);
+    assert.equal(`${source.label}${source.url}`.includes('\u2014'), false);
+  }
+  const sharedUrls = shared.map((source) => source.url);
+  assert.equal(sharedUrls.includes('https://x.com/RockstarGames/status/2123778388296888354'), true);
+  assert.equal(sharedUrls.includes('https://x.com/RockstarGames/status/2124867612450386302'), true);
+  assert.equal(sharedUrls.includes('https://www.rockstargames.com/VI/music'), true);
+  assert.equal(sharedUrls.includes('https://gtavi-thealbum.lnk.to/gtavithealbum'), true);
+  assert.equal(sharedUrls.includes('https://gtavi-thealbum.lnk.to/deluxeedition'), true);
+  const albumRows = c.data.entries.filter((e) => e.appearanceKey === 'the_album');
+  assert.equal(albumRows.length, 57);
+  for (const entry of albumRows) {
+    for (const source of entry.sources || []) {
+      assert.equal(blocked.test(source.url), false, `${entry.id} ${source.url}`);
+    }
+  }
+});
+

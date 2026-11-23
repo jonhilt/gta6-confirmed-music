@@ -34,7 +34,7 @@ const TIER_COPY = {
     "Music heard in Rockstar trailers and the Extended Look. Choose a full track or jump to the trailer cue.",
   score:
     "Official GTA VI: Original Score singles on streaming. Flower in a Hurricane stays under Trailers because it is heard in the Launch Trailer.",
-  the_album: "Original music from Grand Theft Auto VI: The Album. Listen to the debut singles on YouTube or Spotify, and check the album announcement below.",
+  the_album: "Original music from Grand Theft Auto VI: The Album, including the Deluxe Edition. Listen to the tracks on YouTube or Spotify, and check the album announcement below.",
   radio:
     "Songs Rockstar played in its in-game radio station previews, grouped by station. Hear each preview on the Radio page.",
   rockstar_named: "Rockstar staff named the artist in an interview. The track may still be unknown.",
@@ -120,7 +120,12 @@ function formatCueLine(entry, data) {
   if (key === "trailer2") slot = "Trailer 2 · 06 May 2025";
   if (key === "trailer3") slot = "Launch Trailer, 15 Oct 2026";
   if (key === "extendedLook") slot = "Extended Look · 27 Aug 2026";
-  if (key === "the_album") slot = "The Album · 17 Sep 2026";
+  if (key === "the_album") {
+    const albumTrack = Number(entry.albumTrack);
+    if (Number.isFinite(albumTrack) && albumTrack >= 35) slot = "The Album (Deluxe Edition) · 23 Nov 2026";
+    else if (entry.id === "album-gta-vi-the-album") slot = "The Album · 20 Nov 2026 / Deluxe Edition · 23 Nov 2026";
+    else slot = "The Album · 20 Nov 2026";
+  }
   if (key === "original_score") slot = "GTA VI: Original Score, 28 Oct 2026 NZ / 29 Oct elsewhere";
   if (key === "interview") slot = "Named by Rockstar · Aug 2026";
   if (key === "artist_claim") slot = "Artist teaser · Sep 2026";
@@ -284,9 +289,14 @@ function sourceRole(label, entry) {
   if (lower.includes("rockstar games on x") || lower.includes("the album official store")) {
     return "Official publisher announcement.";
   }
+  if (lower.includes("spotify album") || lower.includes("apple music album") || lower.includes("apple music deluxe album")) {
+    return lower.includes("deluxe")
+      ? "Official streaming page for The Album Deluxe Edition."
+      : "Official streaming page for The Album.";
+  }
   if (lower.includes("official spotify track") || lower.includes("official spotify single") || lower.includes("apple music track")) {
     return entry.appearanceKey === "the_album"
-      ? "Official streaming page for this debut single."
+      ? "Official streaming page for this album track."
       : "Official streaming page for this track.";
   }
   if (
@@ -296,11 +306,14 @@ function sourceRole(label, entry) {
   ) {
     return "Official video for this track.";
   }
-  if (lower.includes("atlantic records youtube")) return "Official label video for this debut single.";
+  if (lower.includes("atlantic records youtube")) return "Official label video for this album track.";
   if (lower.includes("linkfire hub")) {
-    return lower.includes("original score")
-      ? "Official smart link for the Original Score album."
-      : "Official smart link for this debut single.";
+    if (lower.includes("original score")) return "Official smart link for the Original Score album.";
+    if (lower.includes("deluxe")) return "Official smart link for The Album Deluxe Edition.";
+    if (entry.id === "album-gta-vi-the-album") return "Official smart link for The Album.";
+    return entry.appearanceKey === "the_album"
+      ? "Official smart link for this album track."
+      : "Official smart link for this track.";
   }
   if (lower.includes("atlantic records")) return "Label announcement (track titles).";
   if (lower.includes("push square") || lower.includes("ign")) return "Secondary news report.";
@@ -354,7 +367,7 @@ function renderSourceItems(sources, entry) {
 
 function sharedSourcesLabel(entry, data) {
   if (stationFor(entry, data)) return "Shared station sources";
-  if (entry.appearanceKey === "the_album") return "Shared album press";
+  if (entry.appearanceKey === "the_album") return "Shared album sources";
   return "Shared sources";
 }
 
@@ -644,6 +657,26 @@ function sortTrailerRows(rows, data) {
     .map((item) => item.entry);
 }
 
+function albumTrackNumber(entry) {
+  const n = Number(entry?.albumTrack);
+  return Number.isFinite(n) ? n : null;
+}
+
+function sortAlbumRows(rows) {
+  return rows
+    .map((entry, index) => ({ entry, index }))
+    .sort((a, b) => {
+      const an = albumTrackNumber(a.entry);
+      const bn = albumTrackNumber(b.entry);
+      if (an == null && bn == null) return a.index - b.index;
+      if (an == null) return -1;
+      if (bn == null) return 1;
+      if (an !== bn) return an - bn;
+      return a.index - b.index;
+    })
+    .map((item) => item.entry);
+}
+
 function filteredEntries(data, state) {
   return data.entries.filter((e) => {
     if (state.tier !== "all" && catalogSection(e) !== state.tier) return false;
@@ -722,6 +755,30 @@ function render(data, state, options = {}) {
       }
     } else if (tier === "official_promo") {
       bodyHtml = `<div class="index-list">${head}${renderRows(sortTrailerRows(rows, state.data))}</div>`;
+    } else if (tier === "the_album") {
+      const sorted = sortAlbumRows(rows);
+      const standard = sorted.filter((entry) => {
+        const n = albumTrackNumber(entry);
+        return n == null || n < 35;
+      });
+      const deluxe = sorted.filter((entry) => albumTrackNumber(entry) >= 35);
+      const renderAlbumRows = (list) =>
+        list
+          .map((entry) => {
+            globalNum += 1;
+            const n = albumTrackNumber(entry);
+            return renderRow(entry, n == null ? 0 : n, state);
+          })
+          .join("");
+      const standardHtml = `<div class="index-list">${head}${renderAlbumRows(standard)}</div>`;
+      const deluxeHtml = deluxe.length
+        ? `<div class="subsection">
+              <h3 class="subsection-title">Deluxe Edition</h3>
+              <p class="subsection-copy">Tracks 35 to 57, released 23 Nov 2026.</p>
+              <div class="index-list">${renderAlbumRows(deluxe)}</div>
+            </div>`
+        : "";
+      bodyHtml = `${standardHtml}${deluxeHtml}`;
     } else if (tier === "radio") {
       const stations = state.data.stations || {};
       const seen = new Set();

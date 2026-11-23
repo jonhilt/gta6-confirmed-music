@@ -44,10 +44,11 @@ The site is static HTML. It reads:
 | `spotifyTrackId` | no | 22-character Spotify track ID. Play loads the official Spotify track embed |
 | `youtubeVideoId` | no | 11-character official full-track YouTube upload ID. Can coexist with a trailer cue |
 | `appleMusicUrl` | no | Official Apple Music track URL. Shown as a source link, never as a hosted file |
+| `albumTrack` | no | Rockstar track number on GTA VI: The Album. Track 6 stays under Trailers. Deluxe Edition is 35 to 57 |
 | `previewSource` | no | `spotify` \| `youtube` \| `rockstar_station_embed` \| `none`. Radio rows use `spotify` when a verified Spotify id exists. Leak rows are `none` |
 | `inUniverse` | no | `true` for fictional in-game acts |
 
-`sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X and gtavi-thealbum.com on the row, plus Spotify/YouTube/Linkfire on each debut single. Shared press (Music Universe, Gematsu, GAMINGbible) lives under `sharedSources.the_album` and is appended in the Sources panel. Radio preview rows share the station page, the station's @RockstarGames post, and the Newswire article under `sharedSources.<stationKey>`.
+`sharedSources` is a catalog-level map keyed by `appearanceKey`. The Album rows keep Rockstar X, the GTA VI music page, and official Linkfire hubs under `sharedSources.the_album`, plus Spotify/YouTube/Linkfire on each track. Radio preview rows share the station page, the station's @RockstarGames post, and the Newswire article under `sharedSources.<stationKey>`.
 
 `stations` is a catalog-level map keyed by the same radio `appearanceKey` values. Each station has `name`, `hosts` (in-game DJ names as Rockstar prints them), `blurb`, `previewPage`, `embedKey`, and `embedUrl` for Rockstar's official `/VI/music/embed/{key}/simple` player. Hosts stay as Rockstar's DJ names; press-reported real-world identities stay off the catalog. Station players live on `/radio/` as click-to-load iframes of that official embed. We do not host, rip, or proxy the preview audio.
 
@@ -71,14 +72,14 @@ Artist blurbs live under `artists` in the same file (not inside each row). Keep 
 4. Bump `updated` (ISO date).
 5. Open a PR. Do not paste lyrics.
 
-## Current coverage (2026-11-10)
+## Current coverage (2026-11-23)
 
 - Trailer 1 + 2: six tracks (Petty; Ferguson; Zenglen; Wang Chung; Wynette; Pointer Sisters).
 - Launch Trailer (15 Oct 2026): Justice feat. Tame Impala, SZA, King Gizzard & The Lizard Wizard, "Flower in a Hurricane". Displayed under Trailers with an Also on The Album note. Cue time not set; YouTube description, chapters, and captions do not give a start time.
 - Original Score: Justice feat. Gesaffelstein, "Pusher (feat. Gesaffelstein) [From GTAVI: Original Score]" (`score-justice-pusher`, `appearanceKey: original_score`). Official Spotify track `6pxjskMHpE4QBmxoOX6O5H` and Justice YouTube video `Ip_Kc3EQiOI`. Released 28 Oct 2026 in NZ and 29 Oct elsewhere. Rockstar posted the Original Score single on 29 Oct 2026 and lists it on rockstargames.com/VI/music. Album *Grand Theft Auto VI: Original Score* is 30 tracks plus digital bonus tracks, out 11 Dec 2026 (justice.lnk.to/gtaoriginalscore). Stays in its own Original Score section (`#tier-score`). Flower in a Hurricane stays under Trailers.
 - Extended Look: fourteen IDs as listed by Polygon, checked against IGN / Music Ally.
 - Radio station previews (8 Oct 2026): 18 named tracks, three each on Cocoteo FM, Back Country Radio, AfroBank FM, The Chamber 106.6, Flash FM, and Dirty South Classics. Catalog rows keep their anchors and play through the catalog dock (Spotify / YouTube / Apple). Each row links to the Radio page station card (`/radio/#flash-fm`). Rockstar `/VI/music/embed/{key}/simple` iframes load only on `/radio/`. Gye Wani has no YouTube id (label upload, not artist/VEVO/Topic). Black Sabbath "I" has no YouTube id (the 2007 Remaster Topic upload is not playable in GB / as an embed, and there is no official artist, VEVO, label, or same-edition Topic replacement).
-- The Album: six 17 Sep debut singles, two 9 Oct singles (Fuerza Regida "Suzuki", Cardi B "Don't Chart"), and the 10 Nov single Tove Lo "Blood In Your Eyes" as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Pre-Load Now is a 30-second pre-load ad, not a trailer, so Blood In Your Eyes stays under The Album. Collabs canonicalized to `ar-ca7riel-paco-amoroso` (Sexy Magic) and `ar-yung-lean` (That's It). Track rows carry `spotifyTrackId` and `youtubeVideoId` for the official Atlantic/Rockstar singles. Old leak hashes `#leak-fuerza-regida-suzuki` and `#leak-cardi-b-track-19` alias to the new ids.
+- The Album: 34-track standard album released 20 Nov 2026 and Deluxe Edition tracks 35 to 57 released 23 Nov 2026, as `official_promo` (`appearanceKey: the_album`), plus album product row `album-gta-vi-the-album`. Flower in a Hurricane stays under Trailers with an Also on The Album note (track 6). Pre-Load Now is a 30-second pre-load ad, not a trailer, so Blood In Your Eyes stays under The Album as track 22. Kodak Black (`ar-kodak-black`, Let's Rock) and Don Toliver (`ar-don-toliver`, TF?) keep those ids. Real Dimez interview stays `rockstar_named`; Cooties (Remix) is `album-real-dimez-cooties`. Old leak hashes `#leak-fuerza-regida-suzuki` and `#leak-cardi-b-track-19` alias to the new ids.
 - Rockstar-named: Real Dimez (Dazed). Kodak Black and Sexyy Red Dazed mentions are notes on the Extended Look Skrilla and Pound Town rows.
 - Artist-reported awaiting a primary URL: Hendrix Smoke story-tag cluster (Don Toliver, Kodak Black story-tag row, Hendrix Smoke, ATL Jacob, RushDee).
 - Unconfirmed: none. The Unconfirmed section hides when it has no rows.

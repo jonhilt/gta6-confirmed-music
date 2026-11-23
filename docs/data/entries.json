@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-11-10",
+  "updated": "2026-11-23",
   "officialVideos": {
     "trailer1": {
       "label": "Rockstar Trailer 1",
@@ -27,16 +27,24 @@
   "sharedSources": {
     "the_album": [
       {
-        "label": "Atlantic Records / Rockstar announcement (via The Music Universe)",
-        "url": "https://themusicuniverse.com/atlantic-records-and-rockstar-games-announce-grand-theft-auto-vi-the-album/"
+        "label": "Rockstar Games on X, The Album release post (primary)",
+        "url": "https://x.com/RockstarGames/status/2123778388296888354"
       },
       {
-        "label": "Gematsu (lists six debut singles)",
-        "url": "https://www.gematsu.com/2026/09/grand-theft-auto-vi-the-album-announced"
+        "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+        "url": "https://x.com/RockstarGames/status/2124867612450386302"
       },
       {
-        "label": "GAMINGbible (verifies six singles on Spotify)",
-        "url": "https://www.gamingbible.com/news/gta-6-the-album-revealed-rockstar-games-listen-814367-20260917"
+        "label": "Rockstar Games, GTA VI music page",
+        "url": "https://www.rockstargames.com/VI/music"
+      },
+      {
+        "label": "Official Linkfire hub (The Album)",
+        "url": "https://gtavi-thealbum.lnk.to/gtavithealbum"
+      },
+      {
+        "label": "Official Linkfire hub (The Album Deluxe Edition)",
+        "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
       }
     ],
     "radio_cocoteo_fm": [
@@ -398,7 +406,8 @@
       "tier": "official_promo",
       "appearance": "Launch Trailer (15 Oct 2026)",
       "appearanceKey": "trailer3",
-      "note": "Rockstar names this as the Launch Trailer song on X and in the YouTube description. Also on The Album.",
+      "albumTrack": 6,
+      "note": "Rockstar names this as the Launch Trailer song on X and in the YouTube description. Also on The Album as track 6.",
       "spotifyTrackId": "4HCOHRCSQelz2GPX8iTamO",
       "youtubeVideoId": "JWxoRY7AFSw",
       "appleMusicUrl": "https://music.apple.com/us/album/flower-in-a-hurricane-from-gtavi/6819802963?i=6819802968",
@@ -1056,10 +1065,14 @@
       "track": "Grand Theft Auto VI: The Album (34 original tracks)",
       "year": 2026,
       "tier": "official_promo",
-      "appearance": "Rockstar Games + Atlantic Records announcement (17 Sep 2026); releases with the game 19 Nov 2026",
+      "appearance": "Rockstar Games + Atlantic Records announcement (17 Sep 2026); album released 20 Nov 2026; Deluxe Edition released 23 Nov 2026",
       "appearanceKey": "the_album",
-      "note": "Album product row. 34 original tracks; six debut singles streaming at announcement. Physical CD/vinyl at gtavi-thealbum.com. Not a radio cue.",
+      "note": "Album product row. The standard album has 34 original tracks. The Deluxe Edition adds 23 bonus tracks (tracks 35 to 57), all listed on the official GTA VI music page. Rockstar released the album on 20 Nov 2026 and the Deluxe Edition on 23 Nov 2026. Physical CD/vinyl at gtavi-thealbum.com. Not a radio cue.",
       "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
         {
           "label": "Rockstar Games on X, The Album announcement (primary)",
           "url": "https://x.com/RockstarGames/status/2100556854099140721"
@@ -1067,46 +1080,81 @@
         {
           "label": "Grand Theft Auto VI: The Album official store (primary)",
           "url": "https://www.gtavi-thealbum.com/"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/gtavithealbum"
+        },
+        {
+          "label": "Official Spotify album",
+          "url": "https://open.spotify.com/album/5BYKG4MHfySZthe2W6r7n4"
+        },
+        {
+          "label": "Apple Music album",
+          "url": "https://music.apple.com/us/album/grand-theft-auto-vi-the-album/6812476961"
+        },
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary for deluxe)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Spotify deluxe album",
+          "url": "https://open.spotify.com/album/2O7j5mKjiyJRLNUo4RZKzs"
+        },
+        {
+          "label": "Apple Music deluxe album",
+          "url": "https://music.apple.com/us/album/grand-theft-auto-vi-the-album-deluxe-edition/6837496123"
         }
       ]
     },
     {
-      "id": "ar-travis-scott",
+      "id": "album-justice-starting-from-zero",
       "artists": [
-        "Travis Scott"
+        "Justice",
+        "Michael McDonald"
       ],
-      "track": "RHYNO (prod. by Guy-Manuel de Homem-Christo)",
+      "track": "Starting from Zero (feat. Michael McDonald)",
       "year": 2026,
       "tier": "official_promo",
-      "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
+      "appearance": "GTA VI: The Album, track 1 (released 20 Nov 2026)",
       "appearanceKey": "the_album",
-      "spotifyTrackId": "2QrLrUqdSg5njDVEqq5QFp",
-      "youtubeVideoId": "3Ev1PQEm7ns",
-      "note": "Was artist_reported (IG 15 Sep). Rockstar announced The Album; Atlantic press + press verifying Spotify name this debut single. Producer: Guy-Manuel de Homem-Christo.",
+      "albumTrack": 1,
+      "spotifyTrackId": "171rxWDjFvjPeFjSHF4WS5",
+      "youtubeVideoId": "hYvK824FQK8",
+      "appleMusicUrl": "https://music.apple.com/us/album/starting-from-zero-feat-michael-mcdonald/6812476961?i=6812476962",
+      "note": "Rockstar lists Starting from Zero as track 1 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Justice video and Spotify track. Justice's own uploads title it as from GTAVI: Original Score, but Rockstar lists it on The Album.",
       "sources": [
         {
-          "label": "Travis Scott Instagram (15 Sep tease, retained)",
-          "url": "https://www.instagram.com/p/DdT73c5ubnj/"
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
         },
         {
-          "label": "Rockstar Games on X, The Album announcement (primary)",
-          "url": "https://x.com/RockstarGames/status/2100556854099140721"
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
         },
         {
-          "label": "Grand Theft Auto VI: The Album official store (primary)",
-          "url": "https://www.gtavi-thealbum.com/"
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://justice.lnk.to/startingfromzero"
         },
         {
-          "label": "Official Spotify track (Atlantic / The Album debut single)",
-          "url": "https://open.spotify.com/track/2QrLrUqdSg5njDVEqq5QFp"
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/171rxWDjFvjPeFjSHF4WS5"
         },
         {
-          "label": "Atlantic Records YouTube (official video)",
-          "url": "https://www.youtube.com/watch?v=3Ev1PQEm7ns"
+          "label": "Official video on YouTube (Justice)",
+          "url": "https://www.youtube.com/watch?v=hYvK824FQK8"
         },
         {
-          "label": "Official Linkfire hub (The Album debut single)",
-          "url": "https://gtavi-thealbum.lnk.to/rhyno"
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/starting-from-zero-feat-michael-mcdonald/6812476961?i=6812476962"
         }
       ]
     },
@@ -1120,8 +1168,9 @@
       "track": "That's It (feat. Future & Metro Boomin)",
       "year": 2026,
       "tier": "official_promo",
-      "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
+      "appearance": "GTA VI: The Album, track 2 (debut single, 17 Sep 2026)",
       "appearanceKey": "the_album",
+      "albumTrack": 2,
       "spotifyTrackId": "45TB2WNxWu2X4MmqmCAJnF",
       "youtubeVideoId": "joMjcNtxuTU",
       "note": "Canonical collab row. Album debut single names Yung Lean with Future & Metro Boomin. Duplicate solo rows ar-future and ar-metro-boomin removed.",
@@ -1153,26 +1202,73 @@
         {
           "label": "Official Linkfire hub (The Album debut single)",
           "url": "https://gtavi-thealbum.lnk.to/thatsit"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
         }
       ]
     },
     {
-      "id": "ar-morgan-wallen",
+      "id": "album-playboi-carti-ahh-yea",
       "artists": [
-        "Morgan Wallen"
+        "Playboi Carti"
       ],
-      "track": "Last Thing You Need",
+      "track": "AHH YEA",
       "year": 2026,
       "tier": "official_promo",
-      "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
+      "appearance": "GTA VI: The Album, track 3 (released 20 Nov 2026)",
       "appearanceKey": "the_album",
-      "spotifyTrackId": "5qGziX9216V8hKJjGg8RtH",
-      "youtubeVideoId": "9leAwpph-xs",
-      "note": "Was artist_reported (X 15 Sep). Album debut single named in Atlantic/Rockstar press.",
+      "albumTrack": 3,
+      "spotifyTrackId": "5tLZfwzwK8KxoBsNwbNFDI",
+      "youtubeVideoId": "fO1nuAzs2IM",
+      "appleMusicUrl": "https://music.apple.com/us/album/ahh-yea/6812476961?i=6812477266",
+      "note": "Rockstar lists AHH YEA as track 3 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
       "sources": [
         {
-          "label": "Morgan Wallen on X (15 Sep tease, retained)",
-          "url": "https://x.com/MorganWallen/status/2099880521727635464"
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/ahhyea"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5tLZfwzwK8KxoBsNwbNFDI"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=fO1nuAzs2IM"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/ahh-yea/6812476961?i=6812477266"
+        }
+      ]
+    },
+    {
+      "id": "ar-travis-scott",
+      "artists": [
+        "Travis Scott"
+      ],
+      "track": "RHYNO",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 4 (debut single, 17 Sep 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 4,
+      "spotifyTrackId": "2QrLrUqdSg5njDVEqq5QFp",
+      "youtubeVideoId": "3Ev1PQEm7ns",
+      "note": "Was artist_reported (IG 15 Sep). Rockstar announced The Album; Atlantic press + press verifying Spotify name this debut single. Producer: Guy-Manuel de Homem-Christo.",
+      "sources": [
+        {
+          "label": "Travis Scott Instagram (15 Sep tease, retained)",
+          "url": "https://www.instagram.com/p/DdT73c5ubnj/"
         },
         {
           "label": "Rockstar Games on X, The Album announcement (primary)",
@@ -1184,95 +1280,19 @@
         },
         {
           "label": "Official Spotify track (Atlantic / The Album debut single)",
-          "url": "https://open.spotify.com/track/5qGziX9216V8hKJjGg8RtH"
+          "url": "https://open.spotify.com/track/2QrLrUqdSg5njDVEqq5QFp"
         },
         {
           "label": "Atlantic Records YouTube (official video)",
-          "url": "https://www.youtube.com/watch?v=9leAwpph-xs"
+          "url": "https://www.youtube.com/watch?v=3Ev1PQEm7ns"
         },
         {
           "label": "Official Linkfire hub (The Album debut single)",
-          "url": "https://gtavi-thealbum.lnk.to/lastthingyouneed"
-        }
-      ]
-    },
-    {
-      "id": "ar-rauw-alejandro",
-      "artists": [
-        "Rauw Alejandro"
-      ],
-      "track": "Macacoa 2000",
-      "year": 2026,
-      "tier": "official_promo",
-      "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
-      "appearanceKey": "the_album",
-      "spotifyTrackId": "7GtO6G2Iue3yfIYhx36JZn",
-      "youtubeVideoId": "76R2Q9vObqI",
-      "note": "Was artist_reported (IG 15 Sep). Album debut single named in Atlantic/Rockstar press.",
-      "sources": [
-        {
-          "label": "Rauw Alejandro Instagram (15 Sep tease, retained)",
-          "url": "https://www.instagram.com/p/DdUFuFeuzOI/"
+          "url": "https://gtavi-thealbum.lnk.to/rhyno"
         },
         {
-          "label": "Rockstar Games on X, The Album announcement (primary)",
-          "url": "https://x.com/RockstarGames/status/2100556854099140721"
-        },
-        {
-          "label": "Grand Theft Auto VI: The Album official store (primary)",
-          "url": "https://www.gtavi-thealbum.com/"
-        },
-        {
-          "label": "Official Spotify track (Atlantic / The Album debut single)",
-          "url": "https://open.spotify.com/track/7GtO6G2Iue3yfIYhx36JZn"
-        },
-        {
-          "label": "Atlantic Records YouTube (official video)",
-          "url": "https://www.youtube.com/watch?v=76R2Q9vObqI"
-        },
-        {
-          "label": "Official Linkfire hub (The Album debut single)",
-          "url": "https://gtavi-thealbum.lnk.to/macacoa2000"
-        }
-      ]
-    },
-    {
-      "id": "ar-keith-richards",
-      "artists": [
-        "Keith Richards"
-      ],
-      "track": "Bright Lights, Big City",
-      "year": 2026,
-      "tier": "official_promo",
-      "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
-      "appearanceKey": "the_album",
-      "spotifyTrackId": "2X67K1KTLBg9EU2dMUQC42",
-      "youtubeVideoId": "e2z4tuS4Mbo",
-      "note": "Was artist_reported (IG 15 Sep). Album debut single named in Atlantic/Rockstar press.",
-      "sources": [
-        {
-          "label": "Keith Richards Instagram (15 Sep tease, retained)",
-          "url": "https://www.instagram.com/p/DdUFptdRWBp/"
-        },
-        {
-          "label": "Rockstar Games on X, The Album announcement (primary)",
-          "url": "https://x.com/RockstarGames/status/2100556854099140721"
-        },
-        {
-          "label": "Grand Theft Auto VI: The Album official store (primary)",
-          "url": "https://www.gtavi-thealbum.com/"
-        },
-        {
-          "label": "Official Spotify track (Atlantic / The Album debut single)",
-          "url": "https://open.spotify.com/track/2X67K1KTLBg9EU2dMUQC42"
-        },
-        {
-          "label": "Atlantic Records YouTube (official video)",
-          "url": "https://www.youtube.com/watch?v=e2z4tuS4Mbo"
-        },
-        {
-          "label": "Official Linkfire hub (The Album debut single)",
-          "url": "https://gtavi-thealbum.lnk.to/brightlightsbigcity"
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
         }
       ]
     },
@@ -1287,8 +1307,9 @@
       "track": "Sexy Magic",
       "year": 2026,
       "tier": "official_promo",
-      "appearance": "Grand Theft Auto VI: The Album, debut singles / Rockstar+Atlantic announcement (17 Sep 2026)",
+      "appearance": "GTA VI: The Album, track 5 (debut single, 17 Sep 2026)",
       "appearanceKey": "the_album",
+      "albumTrack": 5,
       "spotifyTrackId": "62hqNk13CuFLOpCw1cPMAF",
       "youtubeVideoId": "G59iOfClrVo",
       "note": "Canonical collab row. Album debut single credits CA7RIEL & Paco Amoroso, PinkPantheress, Fred again.., and Etienne de Crécy. Duplicate solo rows ar-fred-again and ar-pinkpantheress removed; PinkPantheress needs_primary_source cleared via this Rockstar/Atlantic credit.",
@@ -1320,6 +1341,139 @@
         {
           "label": "Official Linkfire hub (The Album debut single)",
           "url": "https://gtavi-thealbum.lnk.to/sexymagic"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        }
+      ]
+    },
+    {
+      "id": "album-dua-lipa-go-easy",
+      "artists": [
+        "Dua Lipa"
+      ],
+      "track": "Go Easy",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 7 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 7,
+      "spotifyTrackId": "3SLoSFMLOb9jcMsdgyQnOJ",
+      "youtubeVideoId": "jiC-FwD3KwY",
+      "appleMusicUrl": "https://music.apple.com/us/album/go-easy/6812476961?i=6812477282",
+      "note": "Rockstar lists Go Easy as track 7 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/goeasy"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3SLoSFMLOb9jcMsdgyQnOJ"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=jiC-FwD3KwY"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/go-easy/6812476961?i=6812477282"
+        }
+      ]
+    },
+    {
+      "id": "ar-morgan-wallen",
+      "artists": [
+        "Morgan Wallen"
+      ],
+      "track": "Last Thing You Need",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 8 (debut single, 17 Sep 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 8,
+      "spotifyTrackId": "5qGziX9216V8hKJjGg8RtH",
+      "youtubeVideoId": "9leAwpph-xs",
+      "note": "Was artist_reported (X 15 Sep). Album debut single named in Atlantic/Rockstar press.",
+      "sources": [
+        {
+          "label": "Morgan Wallen on X (15 Sep tease, retained)",
+          "url": "https://x.com/MorganWallen/status/2099880521727635464"
+        },
+        {
+          "label": "Rockstar Games on X, The Album announcement (primary)",
+          "url": "https://x.com/RockstarGames/status/2100556854099140721"
+        },
+        {
+          "label": "Grand Theft Auto VI: The Album official store (primary)",
+          "url": "https://www.gtavi-thealbum.com/"
+        },
+        {
+          "label": "Official Spotify track (Atlantic / The Album debut single)",
+          "url": "https://open.spotify.com/track/5qGziX9216V8hKJjGg8RtH"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=9leAwpph-xs"
+        },
+        {
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/lastthingyouneed"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        }
+      ]
+    },
+    {
+      "id": "album-jhayco-x",
+      "artists": [
+        "JHAYCO"
+      ],
+      "track": "X",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 9 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 9,
+      "spotifyTrackId": "2jxAeWwgNBd4XgYPn1POoX",
+      "youtubeVideoId": "IeqQ-UWgxuY",
+      "appleMusicUrl": "https://music.apple.com/us/album/x/6812476961?i=6812477297",
+      "note": "Rockstar lists X as track 9 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/XGTAVI"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2jxAeWwgNBd4XgYPn1POoX"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=IeqQ-UWgxuY"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/x/6812476961?i=6812477297"
         }
       ]
     },
@@ -1333,6 +1487,7 @@
       "tier": "official_promo",
       "appearance": "GTA VI: The Album, track 10 (single)",
       "appearanceKey": "the_album",
+      "albumTrack": 10,
       "spotifyTrackId": "6VDw2mGBIa4csypjOhS6JT",
       "youtubeVideoId": "wROPn_SFE5s",
       "appleMusicUrl": "https://music.apple.com/gb/album/suzuki-from-gtavi-the-album-single/6820156381",
@@ -1357,6 +1512,351 @@
         {
           "label": "Apple Music track",
           "url": "https://music.apple.com/gb/album/suzuki-from-gtavi-the-album-single/6820156381"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        }
+      ]
+    },
+    {
+      "id": "ar-rauw-alejandro",
+      "artists": [
+        "Rauw Alejandro"
+      ],
+      "track": "Macacoa 2000",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 11 (debut single, 17 Sep 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 11,
+      "spotifyTrackId": "7GtO6G2Iue3yfIYhx36JZn",
+      "youtubeVideoId": "76R2Q9vObqI",
+      "note": "Was artist_reported (IG 15 Sep). Album debut single named in Atlantic/Rockstar press.",
+      "sources": [
+        {
+          "label": "Rauw Alejandro Instagram (15 Sep tease, retained)",
+          "url": "https://www.instagram.com/p/DdUFuFeuzOI/"
+        },
+        {
+          "label": "Rockstar Games on X, The Album announcement (primary)",
+          "url": "https://x.com/RockstarGames/status/2100556854099140721"
+        },
+        {
+          "label": "Grand Theft Auto VI: The Album official store (primary)",
+          "url": "https://www.gtavi-thealbum.com/"
+        },
+        {
+          "label": "Official Spotify track (Atlantic / The Album debut single)",
+          "url": "https://open.spotify.com/track/7GtO6G2Iue3yfIYhx36JZn"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=76R2Q9vObqI"
+        },
+        {
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/macacoa2000"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        }
+      ]
+    },
+    {
+      "id": "album-a-boogie-wit-da-hoodie-dance-with-me",
+      "artists": [
+        "A Boogie Wit da Hoodie",
+        "elkan"
+      ],
+      "track": "Dance with Me (feat. elkan)",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 12 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 12,
+      "spotifyTrackId": "2gKi3NbZSf7aFjaQ3C94Yj",
+      "youtubeVideoId": "9RN2aNH0BKU",
+      "appleMusicUrl": "https://music.apple.com/us/album/dance-with-me-feat-elkan/6812476961?i=6812477300",
+      "note": "Rockstar lists Dance with Me as track 12 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/dancewithme"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2gKi3NbZSf7aFjaQ3C94Yj"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=9RN2aNH0BKU"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/dance-with-me-feat-elkan/6812476961?i=6812477300"
+        }
+      ]
+    },
+    {
+      "id": "album-burna-boy-bigger",
+      "artists": [
+        "Burna Boy"
+      ],
+      "track": "Bigger",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 13 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 13,
+      "spotifyTrackId": "0wK8ZH0T9lvGiM3AaQDoah",
+      "youtubeVideoId": "2FRnfzphm8s",
+      "appleMusicUrl": "https://music.apple.com/us/album/bigger/6812476961?i=6812477301",
+      "note": "Rockstar lists Bigger as track 13 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/bigger"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/0wK8ZH0T9lvGiM3AaQDoah"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=2FRnfzphm8s"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/bigger/6812476961?i=6812477301"
+        }
+      ]
+    },
+    {
+      "id": "album-gunna-count-up",
+      "artists": [
+        "Gunna"
+      ],
+      "track": "COUNT UP",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 14 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 14,
+      "spotifyTrackId": "77er9Mx3nLca8RcfpGrgvv",
+      "youtubeVideoId": "9Udp6fpEsrE",
+      "appleMusicUrl": "https://music.apple.com/us/album/count-up/6812476961?i=6812477302",
+      "note": "Rockstar lists COUNT UP as track 14 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/countup"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/77er9Mx3nLca8RcfpGrgvv"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=9Udp6fpEsrE"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/count-up/6812476961?i=6812477302"
+        }
+      ]
+    },
+    {
+      "id": "ar-kodak-black",
+      "artists": [
+        "Kodak Black",
+        "Don Toliver"
+      ],
+      "track": "Let's Rock",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 15 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 15,
+      "spotifyTrackId": "3MHXtz0Qu0ksVGcvlp7Mfu",
+      "youtubeVideoId": "7ySjFIG3s48",
+      "appleMusicUrl": "https://music.apple.com/us/album/lets-rock/6812476961?i=6812477303",
+      "note": "Was artist_reported (a producer's Instagram Story tagged Kodak Black on 15 Sep). Rockstar lists Let's Rock by Kodak Black and Don Toliver as track 15 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/letsrock"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3MHXtz0Qu0ksVGcvlp7Mfu"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=7ySjFIG3s48"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/lets-rock/6812476961?i=6812477303"
+        }
+      ]
+    },
+    {
+      "id": "album-young-thug-wakin-up-flex",
+      "artists": [
+        "Young Thug"
+      ],
+      "track": "WAKIN UP FLEX",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 16 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 16,
+      "spotifyTrackId": "6OX2yNczMDou6xvQCBmjjl",
+      "youtubeVideoId": "7oEceZdFZlk",
+      "appleMusicUrl": "https://music.apple.com/us/album/wakin-up-flex/6812476961?i=6812477304",
+      "note": "Rockstar lists WAKIN UP FLEX as track 16 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/wakingupflex"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/6OX2yNczMDou6xvQCBmjjl"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=7oEceZdFZlk"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/wakin-up-flex/6812476961?i=6812477304"
+        }
+      ]
+    },
+    {
+      "id": "album-tee-grizzley-ikyfl",
+      "artists": [
+        "Tee Grizzley"
+      ],
+      "track": "IKYFL",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 17 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 17,
+      "spotifyTrackId": "3ZxGI5giGDjAT2CL2V9p8f",
+      "youtubeVideoId": "muBMcWzzh3E",
+      "appleMusicUrl": "https://music.apple.com/us/album/ikyfl/6812476961?i=6812477305",
+      "note": "Rockstar lists IKYFL as track 17 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/IKYFL"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3ZxGI5giGDjAT2CL2V9p8f"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=muBMcWzzh3E"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/ikyfl/6812476961?i=6812477305"
+        }
+      ]
+    },
+    {
+      "id": "ar-don-toliver",
+      "artists": [
+        "Don Toliver"
+      ],
+      "track": "TF?",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 18 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 18,
+      "spotifyTrackId": "4AUAOxJflfzmblig7NrqGN",
+      "youtubeVideoId": "8DSBy4G4IeA",
+      "appleMusicUrl": "https://music.apple.com/us/album/tf/6812476961?i=6812477306",
+      "note": "Was artist_reported (a producer's Instagram Story tagged Don Toliver on 15 Sep). Rockstar lists TF? as track 18 on GTA VI: The Album on the official GTA VI music page. Don Toliver is also on track 15, Let's Rock. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/DTTF"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4AUAOxJflfzmblig7NrqGN"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=8DSBy4G4IeA"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/tf/6812476961?i=6812477306"
         }
       ]
     },
@@ -1370,6 +1870,7 @@
       "tier": "official_promo",
       "appearance": "GTA VI: The Album, track 19 (single)",
       "appearanceKey": "the_album",
+      "albumTrack": 19,
       "spotifyTrackId": "4NaBitL0J4PBSODIL1sUg7",
       "youtubeVideoId": "0BxQ6hi3lXY",
       "appleMusicUrl": "https://music.apple.com/us/album/dont-chart/6812476961?i=6812477308",
@@ -1394,6 +1895,94 @@
         {
           "label": "Apple Music track",
           "url": "https://music.apple.com/us/album/dont-chart/6812476961?i=6812477308"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        }
+      ]
+    },
+    {
+      "id": "album-jt-gma",
+      "artists": [
+        "JT"
+      ],
+      "track": "GMA",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 20 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 20,
+      "spotifyTrackId": "0wcHjDyKbllhDc7PpvdtU9",
+      "youtubeVideoId": "Q2hq5iHFFoM",
+      "appleMusicUrl": "https://music.apple.com/us/album/gma/6812476961?i=6812477309",
+      "note": "Rockstar lists GMA as track 20 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/GMA"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/0wcHjDyKbllhDc7PpvdtU9"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=Q2hq5iHFFoM"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/gma/6812476961?i=6812477309"
+        }
+      ]
+    },
+    {
+      "id": "album-jennie-power-trip",
+      "artists": [
+        "JENNIE"
+      ],
+      "track": "Power Trip",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 21 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 21,
+      "spotifyTrackId": "66owIEhGwAjAi2yPmwa2dU",
+      "youtubeVideoId": "aCRr5rASMGY",
+      "appleMusicUrl": "https://music.apple.com/us/album/power-trip/6812476961?i=6812477311",
+      "note": "Rockstar lists Power Trip as track 21 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/powertrip"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/66owIEhGwAjAi2yPmwa2dU"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=aCRr5rASMGY"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/power-trip/6812476961?i=6812477311"
         }
       ]
     },
@@ -1405,8 +1994,9 @@
       "track": "Blood In Your Eyes",
       "year": 2026,
       "tier": "official_promo",
-      "appearance": "GTA VI: The Album single, released 10 Nov 2026. Featured in Rockstar's Pre-Load Now video.",
+      "appearance": "GTA VI: The Album, track 22 (single, released 10 Nov 2026). Featured in Rockstar's Pre-Load Now video.",
       "appearanceKey": "the_album",
+      "albumTrack": 22,
       "spotifyTrackId": "4h3tY2zV4easaHEAbHVmgj",
       "youtubeVideoId": "UqdOZmMQfSk",
       "appleMusicUrl": "https://music.apple.com/us/album/blood-in-your-eyes-from-gtavi-the-album/6831700338?i=6831700450",
@@ -1443,6 +2033,1582 @@
       ]
     },
     {
+      "id": "album-zara-larsson-fast-emotion",
+      "artists": [
+        "Zara Larsson"
+      ],
+      "track": "Fast Emotion",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 23 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 23,
+      "spotifyTrackId": "68GADd4qLCU16tgCn2W0F5",
+      "youtubeVideoId": "WFeh9BYD67M",
+      "appleMusicUrl": "https://music.apple.com/us/album/fast-emotion/6812476961?i=6812477313",
+      "note": "Rockstar lists Fast Emotion as track 23 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/fastemotion"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/68GADd4qLCU16tgCn2W0F5"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=WFeh9BYD67M"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/fast-emotion/6812476961?i=6812477313"
+        }
+      ]
+    },
+    {
+      "id": "album-camila-cabello-sweet-like-candy",
+      "artists": [
+        "Camila Cabello"
+      ],
+      "track": "Sweet Like Candy",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 24 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 24,
+      "spotifyTrackId": "1QusS0DZ2KK8ukxsAoFZPK",
+      "youtubeVideoId": "HeIbYC05QZI",
+      "appleMusicUrl": "https://music.apple.com/us/album/sweet-like-candy/6812476961?i=6812477314",
+      "note": "Rockstar lists Sweet Like Candy as track 24 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/sweetlikecandy"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/1QusS0DZ2KK8ukxsAoFZPK"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=HeIbYC05QZI"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/sweet-like-candy/6812476961?i=6812477314"
+        }
+      ]
+    },
+    {
+      "id": "album-fcukers-only-one",
+      "artists": [
+        "Fcukers"
+      ],
+      "track": "Only One",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 25 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 25,
+      "spotifyTrackId": "2Df1qZun61Mrj4xo6ndtTy",
+      "youtubeVideoId": "MAzcURJ3QSI",
+      "appleMusicUrl": "https://music.apple.com/us/album/only-one/6812476961?i=6812477315",
+      "note": "Rockstar lists Only One as track 25 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/onlyone"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2Df1qZun61Mrj4xo6ndtTy"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=MAzcURJ3QSI"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/only-one/6812476961?i=6812477315"
+        }
+      ]
+    },
+    {
+      "id": "album-arca-sandunguea",
+      "artists": [
+        "Arca"
+      ],
+      "track": "Sandunguea",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 26 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 26,
+      "spotifyTrackId": "1Q8z154tjq6WMJALCOM7gE",
+      "youtubeVideoId": "iuDkLDeGaus",
+      "appleMusicUrl": "https://music.apple.com/us/album/sandunguea/6812476961?i=6812477316",
+      "note": "Rockstar lists Sandunguea as track 26 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/sandungeau"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/1Q8z154tjq6WMJALCOM7gE"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=iuDkLDeGaus"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/sandunguea/6812476961?i=6812477316"
+        }
+      ]
+    },
+    {
+      "id": "album-rina-sawayama-trdwfe",
+      "artists": [
+        "Rina Sawayama"
+      ],
+      "track": "TRDWFE",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 27 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 27,
+      "spotifyTrackId": "4XikHdgDDgZT0jDxJXjz9F",
+      "youtubeVideoId": "cHMbg8cgQpw",
+      "appleMusicUrl": "https://music.apple.com/us/album/trdwfe/6812476961?i=6812477317",
+      "note": "Rockstar lists TRDWFE as track 27 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/TRDWFE"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4XikHdgDDgZT0jDxJXjz9F"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=cHMbg8cgQpw"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/trdwfe/6812476961?i=6812477317"
+        }
+      ]
+    },
+    {
+      "id": "album-rose-gray-all-again",
+      "artists": [
+        "Rose Gray"
+      ],
+      "track": "All Again",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 28 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 28,
+      "spotifyTrackId": "4Fv459S7bhBGbDHJhICbUy",
+      "youtubeVideoId": "3KqPjzeClX8",
+      "appleMusicUrl": "https://music.apple.com/us/album/all-again/6812476961?i=6812477318",
+      "note": "Rockstar lists All Again as track 28 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/allagain"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4Fv459S7bhBGbDHJhICbUy"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=3KqPjzeClX8"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/all-again/6812476961?i=6812477318"
+        }
+      ]
+    },
+    {
+      "id": "album-lana-del-rey-crazy-for-you",
+      "artists": [
+        "Lana Del Rey"
+      ],
+      "track": "Crazy for You",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 29 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 29,
+      "spotifyTrackId": "7atOpwxr1aIeRlyGEPNn0C",
+      "youtubeVideoId": "k9JZXiQifHQ",
+      "appleMusicUrl": "https://music.apple.com/us/album/crazy-for-you/6812476961?i=6812477319",
+      "note": "Rockstar lists Crazy for You as track 29 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/crazyforyou"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/7atOpwxr1aIeRlyGEPNn0C"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=k9JZXiQifHQ"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/crazy-for-you/6812476961?i=6812477319"
+        }
+      ]
+    },
+    {
+      "id": "album-kali-uchis-largate",
+      "artists": [
+        "Kali Uchis",
+        "Helado Negro"
+      ],
+      "track": "Largate",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 30 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 30,
+      "spotifyTrackId": "3g9MD1bGGHDCCB1CbWBhTM",
+      "youtubeVideoId": "DsGY5aV7byE",
+      "appleMusicUrl": "https://music.apple.com/us/album/largate/6812476961?i=6812477320",
+      "note": "Rockstar lists Largate as track 30 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/largate"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3g9MD1bGGHDCCB1CbWBhTM"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=DsGY5aV7byE"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/largate/6812476961?i=6812477320"
+        }
+      ]
+    },
+    {
+      "id": "album-omar-apollo-no-me-busques",
+      "artists": [
+        "Omar Apollo"
+      ],
+      "track": "NO ME BUSQUES",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 31 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 31,
+      "spotifyTrackId": "4uJTuWY1iJmyXWUtBPEKKt",
+      "youtubeVideoId": "S36dv1fDFVU",
+      "appleMusicUrl": "https://music.apple.com/us/album/no-me-busques/6812476961?i=6812477321",
+      "note": "Rockstar lists NO ME BUSQUES as track 31 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/nomebusques"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4uJTuWY1iJmyXWUtBPEKKt"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=S36dv1fDFVU"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/no-me-busques/6812476961?i=6812477321"
+        }
+      ]
+    },
+    {
+      "id": "ar-keith-richards",
+      "artists": [
+        "Keith Richards"
+      ],
+      "track": "Bright Lights, Big City",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 32 (debut single, 17 Sep 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 32,
+      "spotifyTrackId": "2X67K1KTLBg9EU2dMUQC42",
+      "youtubeVideoId": "e2z4tuS4Mbo",
+      "note": "Was artist_reported (IG 15 Sep). Album debut single named in Atlantic/Rockstar press.",
+      "sources": [
+        {
+          "label": "Keith Richards Instagram (15 Sep tease, retained)",
+          "url": "https://www.instagram.com/p/DdUFptdRWBp/"
+        },
+        {
+          "label": "Rockstar Games on X, The Album announcement (primary)",
+          "url": "https://x.com/RockstarGames/status/2100556854099140721"
+        },
+        {
+          "label": "Grand Theft Auto VI: The Album official store (primary)",
+          "url": "https://www.gtavi-thealbum.com/"
+        },
+        {
+          "label": "Official Spotify track (Atlantic / The Album debut single)",
+          "url": "https://open.spotify.com/track/2X67K1KTLBg9EU2dMUQC42"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=e2z4tuS4Mbo"
+        },
+        {
+          "label": "Official Linkfire hub (The Album debut single)",
+          "url": "https://gtavi-thealbum.lnk.to/brightlightsbigcity"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        }
+      ]
+    },
+    {
+      "id": "album-jesse-johnson-stone-kold-krazy-luuv",
+      "artists": [
+        "Jesse Johnson",
+        "DāM-FunK"
+      ],
+      "track": "Stone Kold Krazy Luuv",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 33 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 33,
+      "spotifyTrackId": "2mLHtW9nUOtZPvYcW1iqFo",
+      "youtubeVideoId": "OFSlXl29nss",
+      "appleMusicUrl": "https://music.apple.com/us/album/stone-kold-krazy-luuv/6812476961?i=6812477515",
+      "note": "Rockstar lists Stone Kold Krazy Luuv as track 33 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official audio from Jesse Johnson - Topic and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/stonekoldkrazyluuv"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2mLHtW9nUOtZPvYcW1iqFo"
+        },
+        {
+          "label": "Official audio on YouTube (Jesse Johnson - Topic)",
+          "url": "https://www.youtube.com/watch?v=OFSlXl29nss"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/stone-kold-krazy-luuv/6812476961?i=6812477515"
+        }
+      ]
+    },
+    {
+      "id": "album-stanley-clarke-overtown-lights",
+      "artists": [
+        "Stanley Clarke",
+        "Yussef Dayes",
+        "Robert Glasper"
+      ],
+      "track": "Overtown Lights",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "GTA VI: The Album, track 34 (released 20 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 34,
+      "spotifyTrackId": "2fGCjJeXtoeqEDML2RFhVf",
+      "youtubeVideoId": "sYpgEuZC7uQ",
+      "appleMusicUrl": "https://music.apple.com/us/album/overtown-lights/6812476961?i=6812477516",
+      "note": "Rockstar lists Overtown Lights as track 34 on GTA VI: The Album on the official GTA VI music page. Rockstar released the album on 20 Nov 2026. Official audio from Stanley Clarke - Topic and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album release post (primary)",
+          "url": "https://x.com/RockstarGames/status/2123778388296888354"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/overtownlights"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/2fGCjJeXtoeqEDML2RFhVf"
+        },
+        {
+          "label": "Official audio on YouTube (Stanley Clarke - Topic)",
+          "url": "https://www.youtube.com/watch?v=sYpgEuZC7uQ"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/overtown-lights/6812476961?i=6812477516"
+        }
+      ]
+    },
+    {
+      "id": "album-travis-scott-burn-this-shit-down",
+      "artists": [
+        "Travis Scott"
+      ],
+      "track": "Burn This Shit Down",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 35 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 35,
+      "spotifyTrackId": "53pabicUMt71nzAQ8kw7uF",
+      "youtubeVideoId": "2sUhJahVWyQ",
+      "appleMusicUrl": "https://music.apple.com/us/album/burn-this-shit-down/6837496123?i=6837497403",
+      "note": "Rockstar lists Burn This Shit Down as track 35 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track. Travis Scott also appears on The Album with RHYNO (track 4).",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/BTSD"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/53pabicUMt71nzAQ8kw7uF"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=2sUhJahVWyQ"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/burn-this-shit-down/6837496123?i=6837497403"
+        }
+      ]
+    },
+    {
+      "id": "album-slayyyter-internet-star",
+      "artists": [
+        "Slayyyter"
+      ],
+      "track": "INTERNET $TAR",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 36 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 36,
+      "spotifyTrackId": "3damZUbfnwGhQKQYtukVyL",
+      "youtubeVideoId": "wuHcdqKwRzI",
+      "appleMusicUrl": "https://music.apple.com/us/album/internet-%24tar/6837496123?i=6837497616",
+      "note": "Rockstar lists INTERNET $TAR as track 36 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/internetstar"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3damZUbfnwGhQKQYtukVyL"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=wuHcdqKwRzI"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/internet-%24tar/6837496123?i=6837497616"
+        }
+      ]
+    },
+    {
+      "id": "album-the-dare-interesting",
+      "artists": [
+        "The Dare"
+      ],
+      "track": "Interesting",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 37 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 37,
+      "spotifyTrackId": "5YcAUUm3SSsA9nqBWtjM8V",
+      "youtubeVideoId": "Wq-yMoai8MY",
+      "appleMusicUrl": "https://music.apple.com/us/album/interesting/6837496123?i=6837497617",
+      "note": "Rockstar lists Interesting as track 37 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/interesting"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5YcAUUm3SSsA9nqBWtjM8V"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=Wq-yMoai8MY"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/interesting/6837496123?i=6837497617"
+        }
+      ]
+    },
+    {
+      "id": "album-anitta-touch-go",
+      "artists": [
+        "Anitta"
+      ],
+      "track": "Touch & Go",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 38 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 38,
+      "spotifyTrackId": "7CC40hXBkDF6mby3RU1ADc",
+      "youtubeVideoId": "VlFqVPzvHkU",
+      "appleMusicUrl": "https://music.apple.com/us/album/touch-go/6837496123?i=6837497620",
+      "note": "Rockstar lists Touch & Go as track 38 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/touchandgo"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/7CC40hXBkDF6mby3RU1ADc"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=VlFqVPzvHkU"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/touch-go/6837496123?i=6837497620"
+        }
+      ]
+    },
+    {
+      "id": "album-offset-i-just-came-to-pop-it",
+      "artists": [
+        "Offset"
+      ],
+      "track": "I JUST CAME TO POP IT",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 39 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 39,
+      "spotifyTrackId": "3K3xoxSgLVRuMTigVJOUD6",
+      "youtubeVideoId": "2aRnLAY1fl4",
+      "appleMusicUrl": "https://music.apple.com/us/album/i-just-came-to-pop-it/6837496123?i=6837497626",
+      "note": "Rockstar lists I JUST CAME TO POP IT as track 39 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/IJCTPI"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3K3xoxSgLVRuMTigVJOUD6"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=2aRnLAY1fl4"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/i-just-came-to-pop-it/6837496123?i=6837497626"
+        }
+      ]
+    },
+    {
+      "id": "album-hxg-rckstrliving",
+      "artists": [
+        "HXG",
+        "tana",
+        "Quavo"
+      ],
+      "track": "RCKSTRL!VING",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 40 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 40,
+      "spotifyTrackId": "660YGbl9i5d9A8XIKnJ7Ww",
+      "youtubeVideoId": "PWqLGaWlx0c",
+      "appleMusicUrl": "https://music.apple.com/us/album/rckstrl-ving/6837496123?i=6837497643",
+      "note": "Rockstar lists RCKSTRL!VING as track 40 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/RCKSTRLIVING"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/660YGbl9i5d9A8XIKnJ7Ww"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=PWqLGaWlx0c"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/rckstrl-ving/6837496123?i=6837497643"
+        }
+      ]
+    },
+    {
+      "id": "album-21-savage-cookin",
+      "artists": [
+        "21 Savage"
+      ],
+      "track": "Cookin",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 41 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 41,
+      "spotifyTrackId": "41WGn4e7p8WXv9LqlljJhJ",
+      "youtubeVideoId": "AlDDwx_e38A",
+      "appleMusicUrl": "https://music.apple.com/us/album/cookin/6837496123?i=6837497798",
+      "note": "Rockstar lists Cookin as track 41 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/cookin"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/41WGn4e7p8WXv9LqlljJhJ"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=AlDDwx_e38A"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/cookin/6837496123?i=6837497798"
+        }
+      ]
+    },
+    {
+      "id": "album-pooh-shiesty-got-dat",
+      "artists": [
+        "Pooh Shiesty"
+      ],
+      "track": "Got Dat",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 42 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 42,
+      "spotifyTrackId": "0pmlmHFiZ7UkjYNka3St79",
+      "youtubeVideoId": "KQ6x-De2wLA",
+      "appleMusicUrl": "https://music.apple.com/us/album/got-dat/6837496123?i=6837497801",
+      "note": "Rockstar lists Got Dat as track 42 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/gotdat"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/0pmlmHFiZ7UkjYNka3St79"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=KQ6x-De2wLA"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/got-dat/6837496123?i=6837497801"
+        }
+      ]
+    },
+    {
+      "id": "album-young-nudy-don-da-da",
+      "artists": [
+        "Young Nudy"
+      ],
+      "track": "Don Da Da",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 43 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 43,
+      "spotifyTrackId": "1Fx0mOOuhIh0GkpejG2nlP",
+      "youtubeVideoId": "SG-L63VNhGY",
+      "appleMusicUrl": "https://music.apple.com/us/album/don-da-da/6837496123?i=6837497803",
+      "note": "Rockstar lists Don Da Da as track 43 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/dondada"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/1Fx0mOOuhIh0GkpejG2nlP"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=SG-L63VNhGY"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/don-da-da/6837496123?i=6837497803"
+        }
+      ]
+    },
+    {
+      "id": "album-sofaygo-cashout",
+      "artists": [
+        "SoFaygo"
+      ],
+      "track": "CASHOUT",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 44 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 44,
+      "spotifyTrackId": "5mJj0zA5OudajHgvWmm2Jm",
+      "youtubeVideoId": "CXIwhi8ivB8",
+      "appleMusicUrl": "https://music.apple.com/us/album/cashout/6837496123?i=6837497808",
+      "note": "Rockstar lists CASHOUT as track 44 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/cashout"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5mJj0zA5OudajHgvWmm2Jm"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=CXIwhi8ivB8"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/cashout/6837496123?i=6837497808"
+        }
+      ]
+    },
+    {
+      "id": "album-real-dimez-cooties",
+      "artists": [
+        "Real Dimez",
+        "Sexyy Red"
+      ],
+      "track": "Cooties (Remix)",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 45 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 45,
+      "spotifyTrackId": "3Q5nO0zCq8Mao1KgCCl9wk",
+      "youtubeVideoId": "qeRJE59T5qM",
+      "appleMusicUrl": "https://music.apple.com/us/album/cooties-remix/6837496123?i=6837497811",
+      "note": "Rockstar lists Cooties (Remix) by Real Dimez and Sexyy Red as track 45 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track. Real Dimez were previously listed on the site as a Rockstar-named in-universe virtual duo with no track; that interview row is kept and now points here. Sexyy Red also appears in the Extended Look with Pound Town.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/cooties"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3Q5nO0zCq8Mao1KgCCl9wk"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=qeRJE59T5qM"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/cooties-remix/6837496123?i=6837497811"
+        }
+      ]
+    },
+    {
+      "id": "album-latto-50-bands",
+      "artists": [
+        "Latto",
+        "Flo Milli"
+      ],
+      "track": "50 Bands (feat. Flo Milli)",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 46 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 46,
+      "spotifyTrackId": "5nPhdydAsaYyTRvOUrUdDD",
+      "youtubeVideoId": "i5WHHH05LYk",
+      "appleMusicUrl": "https://music.apple.com/us/album/50-bands-feat-flo-milli/6837496123?i=6837497813",
+      "note": "Rockstar lists 50 Bands as track 46 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/50bands"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5nPhdydAsaYyTRvOUrUdDD"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=i5WHHH05LYk"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/50-bands-feat-flo-milli/6837496123?i=6837497813"
+        }
+      ]
+    },
+    {
+      "id": "album-kodak-black-tet-kale-bobis",
+      "artists": [
+        "Kodak Black",
+        "Michaël Brun"
+      ],
+      "track": "Tèt Kale Bobis",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 47 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 47,
+      "spotifyTrackId": "4ABAhsJ5JpOE1IpfjNZjyt",
+      "youtubeVideoId": "lF_o6XP9F6M",
+      "appleMusicUrl": "https://music.apple.com/us/album/t%C3%A8t-kale-bobis/6837496123?i=6837497817",
+      "note": "Rockstar lists Tèt Kale Bobis as track 47 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track. Kodak Black also appears on The Album with Let's Rock (track 15) and in the Extended Look with Skrilla.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/tkb"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/4ABAhsJ5JpOE1IpfjNZjyt"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=lF_o6XP9F6M"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/t%C3%A8t-kale-bobis/6837496123?i=6837497817"
+        }
+      ]
+    },
+    {
+      "id": "album-denzel-curry-fla-flow",
+      "artists": [
+        "Denzel Curry",
+        "454"
+      ],
+      "track": "FLA Flow (feat. 454)",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 48 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 48,
+      "spotifyTrackId": "63nJ5fUc7Qr01o7EDEKnpn",
+      "youtubeVideoId": "L-sJbq9H_6g",
+      "appleMusicUrl": "https://music.apple.com/us/album/fla-flow-feat-454/6837496123?i=6837497819",
+      "note": "Rockstar lists FLA Flow as track 48 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/FLAFlow"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/63nJ5fUc7Qr01o7EDEKnpn"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=L-sJbq9H_6g"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/fla-flow-feat-454/6837496123?i=6837497819"
+        }
+      ]
+    },
+    {
+      "id": "album-neil-frances-you-move-me",
+      "artists": [
+        "NEIL FRANCES"
+      ],
+      "track": "You Move Me",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 49 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 49,
+      "spotifyTrackId": "5OC9zEtbRPSD4KmZVm3XZp",
+      "youtubeVideoId": "22X2EQCEyTo",
+      "appleMusicUrl": "https://music.apple.com/us/album/you-move-me/6837496123?i=6837497823",
+      "note": "Rockstar lists You Move Me as track 49 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/youmoveme"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5OC9zEtbRPSD4KmZVm3XZp"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=22X2EQCEyTo"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/you-move-me/6837496123?i=6837497823"
+        }
+      ]
+    },
+    {
+      "id": "album-chris-stassy-dont-play-around",
+      "artists": [
+        "CHRIS STASSY",
+        "KETTAMA"
+      ],
+      "track": "Don't Play Around",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 50 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 50,
+      "spotifyTrackId": "1bbd9LM41gNxros8rrOJQz",
+      "youtubeVideoId": "rshz_TzspWE",
+      "appleMusicUrl": "https://music.apple.com/us/album/dont-play-around/6837496123?i=6837497978",
+      "note": "Rockstar lists Don't Play Around as track 50 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/dontplayaround"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/1bbd9LM41gNxros8rrOJQz"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=rshz_TzspWE"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/dont-play-around/6837496123?i=6837497978"
+        }
+      ]
+    },
+    {
+      "id": "album-health-nightmare",
+      "artists": [
+        "HEALTH"
+      ],
+      "track": "NIGHTMARE",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 51 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 51,
+      "spotifyTrackId": "3sz7nEH1eweg88MElOXHoa",
+      "youtubeVideoId": "Sv9adDSc070",
+      "appleMusicUrl": "https://music.apple.com/us/album/nightmare/6837496123?i=6837497982",
+      "note": "Rockstar lists NIGHTMARE as track 51 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/nightmare"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/3sz7nEH1eweg88MElOXHoa"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=Sv9adDSc070"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/nightmare/6837496123?i=6837497982"
+        }
+      ]
+    },
+    {
+      "id": "album-power-trip-mutual-death-warrant",
+      "artists": [
+        "Power Trip"
+      ],
+      "track": "Mutual Death Warrant",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 52 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 52,
+      "spotifyTrackId": "6n4qL92ucu2veRX9AcfK80",
+      "youtubeVideoId": "ghTr3lEcdb4",
+      "appleMusicUrl": "https://music.apple.com/us/album/mutual-death-warrant/6837496123?i=6837497984",
+      "note": "Rockstar lists Mutual Death Warrant as track 52 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track. This is Power Trip the band, not JENNIE's album track Power Trip (track 21).",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/mdw"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/6n4qL92ucu2veRX9AcfK80"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=ghTr3lEcdb4"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/mutual-death-warrant/6837496123?i=6837497984"
+        }
+      ]
+    },
+    {
+      "id": "album-overmono-granforma",
+      "artists": [
+        "Overmono"
+      ],
+      "track": "Granforma",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 53 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 53,
+      "spotifyTrackId": "59RZALeMFV4BryjznfJQYs",
+      "youtubeVideoId": "Lw4Hnkg9I7g",
+      "appleMusicUrl": "https://music.apple.com/us/album/granforma/6837496123?i=6837497986",
+      "note": "Rockstar lists Granforma as track 53 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/granforma"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/59RZALeMFV4BryjznfJQYs"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=Lw4Hnkg9I7g"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/granforma/6837496123?i=6837497986"
+        }
+      ]
+    },
+    {
+      "id": "album-overmono-windsor-drop",
+      "artists": [
+        "Overmono"
+      ],
+      "track": "Windsor Drop",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 54 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 54,
+      "spotifyTrackId": "5tsGS0HBAa8S2UYhzm2lPK",
+      "youtubeVideoId": "gEFsqZttmIg",
+      "appleMusicUrl": "https://music.apple.com/us/album/windsor-drop/6837496123?i=6837497989",
+      "note": "Rockstar lists Windsor Drop as track 54 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/windsordrop"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5tsGS0HBAa8S2UYhzm2lPK"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=gEFsqZttmIg"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/windsor-drop/6837496123?i=6837497989"
+        }
+      ]
+    },
+    {
+      "id": "album-overmono-eighty-eight-comet",
+      "artists": [
+        "Overmono"
+      ],
+      "track": "Eighty Eight Comet",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 55 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 55,
+      "spotifyTrackId": "5z0gGwiNYKISAHquuSPvgM",
+      "youtubeVideoId": "DcLeQwtnJXk",
+      "appleMusicUrl": "https://music.apple.com/us/album/eighty-eight-comet/6837496123?i=6837497990",
+      "note": "Rockstar lists Eighty Eight Comet as track 55 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/eightyeightcomet"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/5z0gGwiNYKISAHquuSPvgM"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=DcLeQwtnJXk"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/eighty-eight-comet/6837496123?i=6837497990"
+        }
+      ]
+    },
+    {
+      "id": "album-overmono-banshee",
+      "artists": [
+        "Overmono"
+      ],
+      "track": "Banshee",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 56 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 56,
+      "spotifyTrackId": "6EnDr4PZwYb8B81rjmTyJh",
+      "youtubeVideoId": "CclovVcVdiA",
+      "appleMusicUrl": "https://music.apple.com/us/album/banshee/6837496123?i=6837497992",
+      "note": "Rockstar lists Banshee as track 56 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/banshee"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/6EnDr4PZwYb8B81rjmTyJh"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=CclovVcVdiA"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/banshee/6837496123?i=6837497992"
+        }
+      ]
+    },
+    {
+      "id": "album-overmono-welcome-to-leonida",
+      "artists": [
+        "Overmono"
+      ],
+      "track": "Welcome to Leonida",
+      "year": 2026,
+      "tier": "official_promo",
+      "appearance": "The Album (Deluxe Edition), track 57 (released 23 Nov 2026)",
+      "appearanceKey": "the_album",
+      "albumTrack": 57,
+      "spotifyTrackId": "21YgHDxeSRBFnVwt2nkDML",
+      "youtubeVideoId": "DYLKqWacTy0",
+      "appleMusicUrl": "https://music.apple.com/us/album/welcome-to-leonida/6837496123?i=6837497996",
+      "note": "Rockstar lists Welcome to Leonida as track 57 on The Album (Deluxe Edition) on the official GTA VI music page. Rockstar released the Deluxe Edition on 23 Nov 2026. Official Atlantic video and Spotify track.",
+      "sources": [
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "label": "Official Linkfire hub (The Album Deluxe Edition, linked from Rockstar's post)",
+          "url": "https://gtavi-thealbum.lnk.to/deluxeedition"
+        },
+        {
+          "label": "Official Linkfire hub (this track, linked from the GTA VI music page)",
+          "url": "https://gtavi-thealbum.lnk.to/welcometoleonida"
+        },
+        {
+          "label": "Official Spotify track",
+          "url": "https://open.spotify.com/track/21YgHDxeSRBFnVwt2nkDML"
+        },
+        {
+          "label": "Atlantic Records YouTube (official video)",
+          "url": "https://www.youtube.com/watch?v=DYLKqWacTy0"
+        },
+        {
+          "label": "Apple Music track",
+          "url": "https://music.apple.com/us/album/welcome-to-leonida/6837496123?i=6837497996"
+        }
+      ]
+    },
+    {
       "id": "rs-real-dimez",
       "artists": [
         "Real Dimez"
@@ -1453,7 +3619,7 @@
       "appearance": "In-universe virtual duo described by Rockstar (Dazed / Music Ally)",
       "appearanceKey": "interview",
       "inUniverse": true,
-      "note": "In-game fictional artists, not a real-world recording act. No licensed real-world track is attached to this row.",
+      "note": "In-game fictional artists, described by Rockstar as a virtual duo. They now have a licensed track on The Album (Deluxe Edition): Cooties (Remix) with Sexyy Red, listed as track 45 on the official GTA VI music page.",
       "sources": [
         {
           "label": "Dazed interview",
@@ -1462,62 +3628,16 @@
         {
           "label": "Music Ally",
           "url": "https://musically.com/2026/08/28/music-features-prominently-in-grand-theft-auto-vi-extended-look/"
+        },
+        {
+          "label": "Rockstar Games on X, The Album Deluxe Edition post (primary for the track)",
+          "url": "https://x.com/RockstarGames/status/2124867612450386302"
+        },
+        {
+          "label": "Rockstar Games, GTA VI music page",
+          "url": "https://www.rockstargames.com/VI/music"
         }
       ]
-    },
-    {
-      "id": "ar-don-toliver",
-      "artists": [
-        "Don Toliver"
-      ],
-      "track": null,
-      "year": null,
-      "tier": "artist_reported",
-      "appearance": "Tagged by producer Hendrix Smoke on Instagram Story resharing Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); no Don Toliver primary post found",
-      "appearanceKey": "artist_claim",
-      "note": "Discovery via Hendrix Smoke story tags (@dontoliver). Story expired; keep aggregators as discovery until Don’s own IG/X permalink.",
-      "sources": [
-        {
-          "label": "TexFunz2 (story screenshot, discovery)",
-          "url": "https://x.com/TexFunz2/status/2099964919672115286"
-        },
-        {
-          "label": "GTAVice (discovery)",
-          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
-        },
-        {
-          "label": "GTA BOOM (discovery)",
-          "url": "https://www.gtaboom.com/travis-scott-future-artists-share-new-gta-6-artwork-5c10"
-        }
-      ],
-      "status": "needs_primary_source"
-    },
-    {
-      "id": "ar-kodak-black",
-      "artists": [
-        "Kodak Black"
-      ],
-      "track": null,
-      "year": null,
-      "tier": "artist_reported",
-      "appearance": "Tagged by producer Hendrix Smoke on Instagram Story resharing Travis Scott Phase 1 GTA VI artwork (15 Sep 2026); no Kodak Black primary post found",
-      "appearanceKey": "artist_claim",
-      "note": "Discovery via Hendrix Smoke story tags (@kodakblack). Story expired; aggregators discovery only.",
-      "sources": [
-        {
-          "label": "TexFunz2 (story screenshot, discovery)",
-          "url": "https://x.com/TexFunz2/status/2099964919672115286"
-        },
-        {
-          "label": "GTAVice (discovery)",
-          "url": "https://www.gtavice.net/news/travis-scott-posts-gta-6-artwork-as-more-artists-join-in"
-        },
-        {
-          "label": "iGrandTheftAuto (discovery)",
-          "url": "https://x.com/iGrandTheftAuto/status/2099959092450296053"
-        }
-      ],
-      "status": "needs_primary_source"
     },
     {
       "id": "ar-hendrix-smoke",
